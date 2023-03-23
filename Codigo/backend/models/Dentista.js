@@ -1,4 +1,4 @@
-const mongoose = requeire("mongoose")
+const mongoose = require("mongoose")
 const { Schema } = mongoose;
 
 const dentistaSchema = new Schema(
@@ -21,7 +21,7 @@ const dentistaSchema = new Schema(
 
 const Dentista = mongoose.model("Dentista", dentistaSchema)
 
-export default {
+module.exports = {
     Dentista,
     dentistaSchema
 }
