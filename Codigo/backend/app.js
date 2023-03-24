@@ -8,7 +8,7 @@ app.use(express.json())
 // DB Connection
 const conn = require("./db/conn")
 
-conn()
+conn() 
 
 // Routes
 const routes = require("./routes/router")
