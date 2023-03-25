@@ -3,13 +3,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 
 //Pages
-import FormPaciente from "./assets/pages/formPaciente";
+import FormPaciente from "./assets/pages/FormPaciente";
 
 export default function App() {
 
 
   return (
-    <div className="App">
+    
      <BrowserRouter>
       <Routes>
         
@@ -18,6 +18,6 @@ export default function App() {
       
       </Routes>
     </BrowserRouter>
-    </div>
+    
   )
 }
