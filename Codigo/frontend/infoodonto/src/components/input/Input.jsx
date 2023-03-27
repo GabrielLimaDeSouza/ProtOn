@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../input/input.css"
+import "./input.css"
 
 
 function Input(props) {
@@ -42,7 +42,7 @@ function Input(props) {
             {
 
                 isText() ?
-                    <div class="input-container">
+                    <div className="input-container">
                         <input placeholder={placeholderText} className="input-field" type="text" onFocus={removeLabel} onBlur={setPlaceholder} ></input>
                         <label htmlFor="input-field" className="input-label" >{props.placeholder}</label>
                         <span className="input-highlight"></span>
