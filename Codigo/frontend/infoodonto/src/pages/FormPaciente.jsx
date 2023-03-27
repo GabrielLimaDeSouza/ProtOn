@@ -1,4 +1,4 @@
-import "../../../css/FormPaciente.css"
+import "../css/FormPaciente.css"
 import Logo from "../img/logo.png"
 
 import Input from "../components/input/Input"
