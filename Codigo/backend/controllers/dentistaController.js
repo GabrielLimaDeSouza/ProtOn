@@ -1,9 +1,11 @@
 const { Dentista: DentistaModel } = require("../models/Dentista")
 
+const instituicaoController = require("./instituicaoController")
+
 const dentistaController = {
     create: async (req, res) => {
         try {
-            const { name, email, senha } = req.body
+            const { name, email, senha, instituicao } = req.body
 
             const dentista = {
                 name,
@@ -11,8 +13,12 @@ const dentistaController = {
                 senha
             }
 
+            instituicaoController.create(instituicao)
+
             const response = await DentistaModel.create(dentista);
-            res.status(201).json({ response, msg: "Dentista cadastrado com sucesso!"})
+
+            res
+            res.status(201).json({ response, msg: "Dentista cadastrado com sucesso!" })
         } catch (error) {
             console.log(error)
         }
@@ -28,7 +34,7 @@ const dentistaController = {
     },
     get: async (req, res)=> {
         try {
-            const id = req.params.id
+            const id = req.query.id
             const dentista = await DentistaModel.findById(id)
 
             if(!dentista) {
@@ -43,7 +49,7 @@ const dentistaController = {
     },
     delete: async (req, res) => {
         try {
-            const id = req.params.id
+            const id = req.query.id
             const dentista = await DentistaModel.findById(id)
 
             if(!dentista) {
@@ -60,7 +66,7 @@ const dentistaController = {
     },
     update: async (req, res) => {
         try {
-            const id = req.params.id
+            const id = req.query.id
             const { name, email, senha } = req.body
             
             const dentista = {

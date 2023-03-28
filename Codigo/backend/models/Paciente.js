@@ -1,9 +1,13 @@
 const mongoose = require("mongoose")
 const { Schema } = mongoose;
 
-const dentistaSchema = new Schema(
+const pacienteSchema = new Schema(
     {
         name: {
+            type: String,
+            required: true
+        },
+        cpf: {
             type: String,
             required: true
         },
@@ -15,23 +19,23 @@ const dentistaSchema = new Schema(
             type: String,
             required: true
         },
-        insituicao: {
-            nome: {
+        condicoes: [{
+            _id: {
                 type: String,
                 required: true
             },
-            cnpj: {
+            nome: {
                 type: String,
                 required: true
             }
-        }
+        }]
     },
     { timestemps: true }
 )
 
-const Dentista = mongoose.model("Dentista", dentistaSchema)
+const Paciente = mongoose.model("Paciente", pacienteSchema)
 
 module.exports = {
-    Dentista,
-    dentistaSchema
+    Paciente,
+    pacienteSchema
 }
