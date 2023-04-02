@@ -3,14 +3,20 @@ import "./input.css"
 
 
 function Input(props) {
-
+const [tags, setTags] = useState([])
     const [placeholderText, setPlaceholderText] = useState(props.placeholder)
-    const [tags, setTags] = useState([])
+    var options
+    
     const [sabor, setSabor] = useState("")
 
     function isText() {
         if (props.type == "text") {
             return true;
+        }
+    }
+    function notEmpyt(){
+        if(props.option != null){
+            return true
         }
     }
     function isOptions() {
@@ -31,19 +37,21 @@ function Input(props) {
 
 
     }
-    function handleKeyDown(e) {
+    function handleKeyDown(variavel) {
         let novaCondicao = document.getElementById("condicao").value
         setTags(tags => [...tags, { condicao: novaCondicao }])
         document.getElementById("condicao").value = ""
 
+
     }
     return (
-        <>
+        [
+            <>
             {
 
                 isText() ?
                     <div className="input-container">
-                        <input placeholder={placeholderText} className="input-field" type="text" onFocus={removeLabel} onBlur={setPlaceholder} ></input>
+                        <input placeholder={placeholderText} className="input-field" type="text" onFocus={removeLabel} onBlur={setPlaceholder} id={props.id}></input>
                         <label htmlFor="input-field" className="input-label" >{props.placeholder}</label>
                         <span className="input-highlight"></span>
                     </div>
@@ -55,7 +63,7 @@ function Input(props) {
                                     tags.map((tag, index) => {
                                         return (
                                             <div className="tag-item" >
-                                                <span className="text">{tag.condicao}</span>
+                                                <span className="text tag" >{tag.condicao}</span>
                                                 <span className="close" onClick={()=>{removeTag(index)}}>&times;</span>
                                             </div>
                                         )
@@ -65,10 +73,15 @@ function Input(props) {
                                 <input placeholder={placeholderText} className="input-field" type="text" onFocus={() => { removeLabel("condicao") }} onBlur={setPlaceholder} list="lista" id="condicao"></input>
                                 <span className="input-highlight" ></span>
                                 <datalist id="lista">
-                                    <option value="" >faixa etária:</option>
-                                    <option value="diabetes" onClick={() => { optionSelected(1) }}>diabetes</option>
-                                    <option value="hipertensão" onSelect={() => { optionSelected(1) }}>hipertensão</option>
-                                    <option value="alergia">alergia</option>
+                                    
+                                   {notEmpyt() &&
+                                   props.option.map((text, key)=>
+                                    <option key={key} value={text} />
+                                )
+                                }
+                                    
+                                    
+                                   
                                 </datalist>
 
                             </div>
@@ -80,6 +93,8 @@ function Input(props) {
 
             }
         </>
+        ]
+
     )
 }
 
