@@ -10,14 +10,17 @@ const dentistaController = {
             const dentista = {
                 name,
                 email,
-                senha
+                senha,
+                instituicao: {
+                    nome: instituicao.nome,
+                    cnpj: instituicao.cnpj
+                }
             }
 
             instituicaoController.create(instituicao)
 
             const response = await DentistaModel.create(dentista);
 
-            res
             res.status(201).json({ response, msg: "Dentista cadastrado com sucesso!" })
         } catch (error) {
             console.log(error)

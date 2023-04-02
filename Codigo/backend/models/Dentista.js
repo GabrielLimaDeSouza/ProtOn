@@ -15,7 +15,7 @@ const dentistaSchema = new Schema(
             type: String,
             required: true
         },
-        insituicao: {
+        instituicao: {
             nome: {
                 type: String,
                 required: true
