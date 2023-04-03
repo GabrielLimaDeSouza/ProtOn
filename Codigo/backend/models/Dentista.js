@@ -16,11 +16,11 @@ const dentistaSchema = new Schema(
             required: true
         },
         instituicao: {
-            nome: {
+            name: {
                 type: String,
                 required: true
             },
-            cnpj: {
+            tipo: {
                 type: String,
                 required: true
             }
