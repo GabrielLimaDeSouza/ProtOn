@@ -19,13 +19,13 @@ const pacienteController = {
             console.log(error)
         }
     },
-    get: async (req, res)=> {
+    get: async (req, res) => {
         try {
-            const id = req.query.id
+            const id = req.params.id
             const paciente = await PacienteModel.findById(id)
 
             if(!paciente) {
-                res.status(404).json({ msg: "Paciente não encontrado!" })
+                res.status(404).json({ msg: `Paciente ${id} não encontrado!` })
                 return
             }
 
@@ -33,6 +33,21 @@ const pacienteController = {
         } catch (error) {
             console.log(error)
         }
+    },
+    getByCpf: async (req, res) => {
+            try {
+                const cpf = req.params.cpf
+                const paciente = await PacienteModel.findOne({ cpf: cpf }).exec()
+    
+                if(!paciente) {
+                    res.status(404).json({ msg: `Paciente com cpf ${cpf} não encontrado!` })
+                    return
+                }
+    
+                res.status(201).json(paciente)
+            } catch (error) {
+                console.log(error)
+            }
     },
     getAll: async (req, res) => {
         try {
