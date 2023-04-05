@@ -9,6 +9,9 @@ const [tags, setTags] = useState([])
     
     const [sabor, setSabor] = useState("")
 
+    const [nome, setNome] = useState("")
+
+
     function isText() {
         if (props.type == "text") {
             return true;
