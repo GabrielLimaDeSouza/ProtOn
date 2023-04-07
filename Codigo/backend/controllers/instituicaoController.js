@@ -3,11 +3,13 @@ const { Instituicao: InstituicaoModel } = require("../models/Instituicao")
 const instituicaoController = {
     create: async (req, res) => {
         try {
-            const { name, cnpj } = req.body
+            const { name, email, senha, tipo } = req.body
 
             const instituicao = {
                 name,
-                cnpj
+                email,
+                senha,
+                tipo
             }
 
             const response = await InstituicaoModel.create(instituicao);
@@ -27,6 +29,15 @@ const instituicaoController = {
             }
 
             res.status(201).json(instituicao)
+        } catch (error) {
+            console.log(error)
+        }
+    },
+    getAll: async (req, res) => {
+        try {
+            const instituicoes = await InstituicaoModel.find()
+
+            res.status(201).json(instituicoes)
         } catch (error) {
             console.log(error)
         }
@@ -51,11 +62,13 @@ const instituicaoController = {
     update: async (req, res) => {
         try {
             const id = req.query.id
-            const { name, cnpj } = req.body
+            const { name, email, senha, tipo } = req.body
             
             const instituicao = {
                 name,
-                cnpj
+                email,
+                senha,
+                tipo
             }
 
             const updatedInstituicao = await InstituicaoModel.findByIdAndUpdate(id, instituicao)

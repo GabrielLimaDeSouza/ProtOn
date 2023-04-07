@@ -1,22 +1,17 @@
+import { React ,useState } from 'react'
+
 import Logo from "../img/logo.png"
-
-import { useState } from "react"
-
 import Input from "../components/input/Input"
-import InputOptions from "../components/input/InputOptions"
+import "../css/FormPaciente.css"
+import InputOptions from '../components/input/InputOptions'
+ 
+ const FormInstituicao = () => {
 
-const FormDentista = () => {
+    const listaTipos = ['Universidade', 'Clínica', 'Hospital']
 
-    const [instituicao, setInstituicao] = useState("");
-
-    function handleInstituicaoChange(valor) {
-      setInstituicao(valor);
-    }
-
-    function createDentista(input){
-        input.preventDefault();
-
-        fetch(`http://localhost:3000/api/dentista/`, {
+    function createInstituicao(e){
+        e.preventDefault()
+        fetch(`http://localhost:3000/api/instituicao/`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -26,40 +21,34 @@ const FormDentista = () => {
                 "email": document.getElementById("email").value,
                 "senha": document.getElementById("senha").value,
                 "instituicao": {
-                    "name": instituicao,
-                    "tipo": "Hospital"
+                  "name": "Universidade C",
+                  "tipo": "Universidade"
                 }
             })
           })
           .then(resp => resp.json())
           .then(alert("Dentista cadastrado!"))
           .catch(err => console.error(err))
-
     }
 
-    const instituicoes = ['Hospital Belo Horizonte', 'Hospital Madre Tereza', 'Hospital da Baleia']
-
-    return (
-
+   return (
         <>
             <div className="logo">
                 <img src={Logo} alt="Logo" />
             </div>
 
 
-            <form className="form input-container" onSubmit={createDentista}>
+            <form className="form input-container" onSubmit={createInstituicao}>
             <div className="uni"><Input type="text" placeholder="Nome" id="name"/></div>
                 <div className="uni"><Input type="text" placeholder="Email" id="email"/></div>
                 <div className="uni"><Input type="text" placeholder="Senha" id="senha"/></div>
-                <div className="uni"><InputOptions content={instituicoes} name="Instituição"/></div>
-                <div className="uni"><Input type="text" placeholder="Matrícula" onChange={handleInstituicaoChange} id="matricula"/></div>
+                <div className="uni"><InputOptions type="options" name="Tipo" content={listaTipos} /></div>
                 <div className="divButton">
                     <button type="submit" className="confirmar">Confirmar</button>
                 </div>
             </form>
         </>
-
-    )
-}
-  
-export default FormDentista; 
+   )
+ }
+ 
+ export default FormInstituicao
