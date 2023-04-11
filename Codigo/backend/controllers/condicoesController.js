@@ -7,7 +7,7 @@ const condicaoController = {
 
             console.log(req.body)
 
-            const [nome, preAtendimento, anestesicoLocal, medicamentos, implante] = req.body
+            const {nome, preAtendimento, anestesicoLocal, medicamentos, implante} = req.body
 
             
             const condicao = {
