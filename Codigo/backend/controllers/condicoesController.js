@@ -1,6 +1,29 @@
-const { Condicoes: CondicoesModel } = require("../models/Consdicoes")
+const { Condicao: CondicaoModel } = require("../models/Condicao")
 
-const pacienteController = {
+const condicaoController = {
+
+    create: async (req,res)=>{
+        try{
+
+            console.log(req.body)
+
+            const [nome, preAtendimento, anestesicoLocal, medicamentos, implante] = req.body
+
+            
+            const condicao = {
+                nome,
+                preAtendimento,
+                anestesicoLocal, 
+                medicamentos,
+                implante
+            }
+            console.log(condicao)
+            const response = await CondicaoModel.create(condicao);
+        }catch(error){
+            console.log(error)
+        }
+    },
+
     get: async (req, res)=> {
         try {
             const id = req.query.id
@@ -27,4 +50,4 @@ const pacienteController = {
     }
 }
 
-module.exports = pacienteController
+module.exports = condicaoController
