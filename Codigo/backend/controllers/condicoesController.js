@@ -1,33 +1,28 @@
 const { Condicao: CondicaoModel } = require("../models/Condicao")
 
 const condicaoController = {
-
-    create: async (req,res)=>{
+    create: async (req, res) => {
         try{
-
-            console.log(req.body)
-
-            const {nome, preAtendimento, anestesicoLocal, medicamentos, implante} = req.body
-
+            const { nome, preAtendimento, anestesicoLocal, medicamentos, implante } = req.body
             
             const condicao = {
                 nome,
                 preAtendimento,
-                anestesicoLocal, 
+                anestesicoLocal,
                 medicamentos,
                 implante
             }
-            console.log(condicao)
+
             const response = await CondicaoModel.create(condicao);
-        }catch(error){
+            res.status(200).json({ response, msg: "Condicao cadastrada com sucesso!" })
+        } catch(error) {
             console.log(error)
         }
     },
-
-    get: async (req, res)=> {
+    get: async (req, res) => {
         try {
             const id = req.query.id
-            const condicao = await CondicoesModel.findById(id)
+            const condicao = await CondicaoModel.findById(id)
 
             if(!condicao) {
                 res.status(404).json({ msg: "Condição não encontrada!" })
@@ -41,7 +36,7 @@ const condicaoController = {
     },
     getAll: async (req, res) => {
         try {
-            const condicoes = await CondicoesModel.find()
+            const condicoes = await CondicaoModel.find()
 
             res.status(201).json(condicoes)
         } catch (error) {

@@ -1,4 +1,5 @@
 const { Paciente: PacienteModel } = require("../models/paciente")
+const { Condicao: CondicaoModel } = require("../models/Condicao")
 
 const pacienteController = {
     create: async (req, res) => {
@@ -97,6 +98,16 @@ const pacienteController = {
 
             res.status(200).json({ paciente, msg: "Paciente atualizado com sucesso!" })
 
+        } catch (error) {
+            console.log(error)
+        }
+    },
+    getByPacienteCpf: async(req, res) => {
+        try {
+            const cpf = req.query.cpf
+            const condicoes = await PacienteModel.findOne({ cpf: cpf }).populate("condicoes").exec()
+
+            res.status(200).json(condicoes)
         } catch (error) {
             console.log(error)
         }

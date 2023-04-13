@@ -20,14 +20,8 @@ const pacienteSchema = new Schema(
             required: true
         },
         condicoes: [{
-            _id: {
-                type: String,
-                required: true
-            },
-            nome: {
-                type: String,
-                required: true
-            }
+            type: Schema.Types.ObjectId,
+            ref: 'Condicao'
         }]
     },
     { timestemps: true }

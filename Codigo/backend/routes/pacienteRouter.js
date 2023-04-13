@@ -19,5 +19,7 @@ router.route("/paciente").delete((req, res) => pacienteController.delete(req, re
 // UPDATE Paciente
 router.route("/paciente").put((req, res) => pacienteController.update(req, res))
 
+// GET Paciente com Condições BY CPF
+router.route("/paciente/condicao").get((req, res) => pacienteController.getByPacienteCpf(req, res))
 
 module.exports = router;

@@ -7,10 +7,22 @@ const condicaoSchema = new Schema(
             type: String,
             required: true
         },
-        preAtendimento: [{type: String}],
-        anestesicoLocal: [{type: String}],
-        medicamentos: [{type: String}],
-        implante: [{type: String}]
+        preAtendimento: [{
+            type: String,
+            required: true
+        }],
+        anestesicoLocal: [{
+            type: String,
+            required: true
+        }],
+        medicamentos: [{
+            type: String,
+            required: true
+        }],
+        implante: [{
+            type: String,
+            required: true
+        }]
     },
     { timestemps: true }
 )
