@@ -16,14 +16,8 @@ const dentistaSchema = new Schema(
             required: true
         },
         instituicao: {
-            name: {
-                type: String,
-                required: true
-            },
-            tipo: {
-                type: String,
-                required: true
-            }
+            type: Schema.Types.ObjectId,
+            ref: 'Instituicao'
         }
     },
     { timestemps: true }

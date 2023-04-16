@@ -1,5 +1,4 @@
-const { Paciente: PacienteModel } = require("../models/paciente")
-const { Condicao: CondicaoModel } = require("../models/Condicao")
+const { Paciente: PacienteModel } = require("../models/Paciente")
 
 const pacienteController = {
     create: async (req, res) => {

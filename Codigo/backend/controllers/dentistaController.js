@@ -11,10 +11,7 @@ const dentistaController = {
                 name,
                 email,
                 senha,
-                instituicao: {
-                    nome: instituicao.nome,
-                    cnpj: instituicao.cnpj
-                }
+                instituicao
             }
 
             instituicaoController.create(instituicao)
@@ -28,7 +25,7 @@ const dentistaController = {
     },
     getAll: async (req, res) => {
         try {
-            const dentistas = await DentistaModel.find()
+            const dentistas = await DentistaModel.find().populate("instituicao")
 
             res.status(201).json(dentistas)
         } catch (error) {
@@ -38,7 +35,7 @@ const dentistaController = {
     get: async (req, res)=> {
         try {
             const id = req.query.id
-            const dentista = await DentistaModel.findById(id)
+            const dentista = await DentistaModel.findById(id).populate("instituicao")
 
             if(!dentista) {
                 res.status(404).json({ msg: "Usuário não encontrado!" })
