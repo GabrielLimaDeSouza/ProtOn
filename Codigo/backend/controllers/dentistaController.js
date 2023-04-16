@@ -1,7 +1,5 @@
 const { Dentista: DentistaModel } = require("../models/Dentista")
 
-const instituicaoController = require("./instituicaoController")
-
 const dentistaController = {
     create: async (req, res) => {
         try {
@@ -13,8 +11,6 @@ const dentistaController = {
                 senha,
                 instituicao
             }
-
-            instituicaoController.create(instituicao)
 
             const response = await DentistaModel.create(dentista);
 
@@ -34,7 +30,7 @@ const dentistaController = {
     },
     get: async (req, res)=> {
         try {
-            const id = req.query.id
+            const id = req.params.id
             const dentista = await DentistaModel.findById(id).populate("instituicao")
 
             if(!dentista) {
