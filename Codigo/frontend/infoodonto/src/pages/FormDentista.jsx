@@ -1,20 +1,37 @@
 import Logo from "../img/logo.png"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 import Input from "../components/input/Input"
-import InputOptions from "../components/input/InputOptions"
 
 const FormDentista = () => {
 
-    const [instituicao, setInstituicao] = useState("");
+    const [instituicoes, setInstituicoes] = useState([])
+    const [instituicao, setInstituicao] = useState({})
+    const [tipo, setTipo] = useState("")
+
+    useEffect(() => {
+        fetch('http://localhost:3000/api/instituicao/', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then(resp => resp.json())
+          .then(data => setInstituicoes(data))
+          .catch(err => console.error(err))
+    }, [])
 
     function handleInstituicaoChange(valor) {
-      setInstituicao(valor);
+        setInstituicao(valor.target.value);
+        const instituicaoSelecionada = instituicoes.find(i => i.name === valor.target.value);
+        if (instituicaoSelecionada) {
+            setInstituicao(instituicaoSelecionada);
+        }
     }
 
     function createDentista(input){
         input.preventDefault();
+        console.log(instituicao)
 
         fetch(`http://localhost:3000/api/dentista/`, {
             method: 'POST',
@@ -26,8 +43,7 @@ const FormDentista = () => {
                 "email": document.getElementById("email").value,
                 "senha": document.getElementById("senha").value,
                 "instituicao": {
-                    "name": instituicao,
-                    "tipo": "Hospital"
+                    "_id": instituicao._id
                 }
             })
           })
@@ -36,8 +52,6 @@ const FormDentista = () => {
           .catch(err => console.error(err))
 
     }
-
-    const instituicoes = ['Hospital Belo Horizonte', 'Hospital Madre Tereza', 'Hospital da Baleia']
 
     return (
 
@@ -51,8 +65,16 @@ const FormDentista = () => {
             <div className="uni"><Input type="text" placeholder="Nome" id="name"/></div>
                 <div className="uni"><Input type="text" placeholder="Email" id="email"/></div>
                 <div className="uni"><Input type="text" placeholder="Senha" id="senha"/></div>
-                <div className="uni"><InputOptions content={instituicoes} name="Instituição"/></div>
-                <div className="uni"><Input type="text" placeholder="Matrícula" onChange={handleInstituicaoChange} id="matricula"/></div>
+                <div className="uni">
+                    <input placeholder="Instituição" className="input-field" type="text" list="lista" id="option" onInput={handleInstituicaoChange}></input>
+                    <span className="input-highlight"></span>
+                    <datalist id="lista">
+                        {instituicoes.map((instituicao)=> 
+                            <option key={instituicao._id} tipo={instituicao.tipo} value={instituicao.name}>{instituicao.name}</option>
+                        )}
+                    </datalist>
+                </div>
+                <div className="uni"><Input type="text" placeholder="Matrícula" id="matricula"/></div>
                 <div className="divButton">
                     <button type="submit" className="confirmar">Confirmar</button>
                 </div>
