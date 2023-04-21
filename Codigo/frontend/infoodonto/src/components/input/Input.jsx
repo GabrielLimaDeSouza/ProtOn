@@ -4,9 +4,7 @@ import "./input.css"
 
 function Input(props) {
 const [tags, setTags] = useState([])
-    const [placeholderText, setPlaceholderText] = useState(props.placeholder)
-    var options
-    
+    const [placeholderText, setPlaceholderText] = useState(props.placeholder)    
     const [sabor, setSabor] = useState("")
 
     const [nome, setNome] = useState("")
@@ -14,6 +12,11 @@ const [tags, setTags] = useState([])
 
     function isText() {
         if (props.type == "text") {
+            return true;
+        }
+    }
+    function isPassword(){
+        if(props.type == "password"){
             return true;
         }
     }
@@ -56,7 +59,13 @@ const [tags, setTags] = useState([])
         [
             <>
             {
-
+                isPassword() ?
+                <div className="input-container">
+                    <input placeholder={placeholderText} className="input-field" type="password" onFocus={removeLabel} onBlur={setPlaceholder} id={props.id}></input>
+                    <label htmlFor="input-field" className="input-label" >{props.placeholder}</label>
+                <span className="input-highlight"></span>
+                </div>
+                :
                 isText() ?
                     <div className="input-container">
                         <input placeholder={placeholderText} className="input-field" type="text" onFocus={removeLabel} onBlur={setPlaceholder} id={props.id}></input>

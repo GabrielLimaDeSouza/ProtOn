@@ -43,7 +43,7 @@ import InputOptions from '../components/input/InputOptions'
             <form className="form input-container" onSubmit={createInstituicao}>
             <div className="uni"><Input type="text" placeholder="Nome" id="name"/></div>
                 <div className="uni"><Input type="text" placeholder="Email" id="email"/></div>
-                <div className="uni"><Input type="text" placeholder="Senha" id="senha"/></div>
+                <div className="uni"><Input type="password" placeholder="Senha" id="senha"/></div>
                 <div className="uni"><InputOptions type="options" name="Tipo" onChange={handleTipoChange} content={listaTipos} /></div>
                 <div className="divButton">
                     <button type="submit" className="confirmar">Confirmar</button>

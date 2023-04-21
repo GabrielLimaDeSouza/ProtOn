@@ -64,7 +64,7 @@ const FormDentista = () => {
             <form className="form input-container" onSubmit={createDentista}>
             <div className="uni"><Input type="text" placeholder="Nome" id="name"/></div>
                 <div className="uni"><Input type="text" placeholder="Email" id="email"/></div>
-                <div className="uni"><Input type="text" placeholder="Senha" id="senha"/></div>
+                <div className="uni"><Input type="password" placeholder="Senha" id="senha"/></div>
                 <div className="uni">
                     <input placeholder="Instituição" className="input-field" type="text" list="lista" id="option" onInput={handleInstituicaoChange}></input>
                     <span className="input-highlight"></span>
