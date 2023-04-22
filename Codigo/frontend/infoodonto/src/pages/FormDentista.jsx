@@ -42,6 +42,7 @@ const FormDentista = () => {
                 "name": document.getElementById("name").value,
                 "email": document.getElementById("email").value,
                 "senha": document.getElementById("senha").value,
+                "matricula": document.getElementById("matricula").value,
                 "instituicao": {
                     "_id": instituicao._id
                 }

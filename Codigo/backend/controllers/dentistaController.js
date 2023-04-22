@@ -3,12 +3,13 @@ const { Dentista: DentistaModel } = require("../models/Dentista")
 const dentistaController = {
     create: async (req, res) => {
         try {
-            const { name, email, senha, instituicao } = req.body
+            const { name, email, senha, matricula, instituicao } = req.body
 
             const dentista = {
                 name,
                 email,
                 senha,
+                matricula,
                 instituicao
             }
 

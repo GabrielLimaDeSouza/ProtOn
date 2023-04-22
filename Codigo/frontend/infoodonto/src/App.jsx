@@ -6,6 +6,7 @@ import FormPaciente from "./pages/FormPaciente";
 import FormDentista from "./pages/FormDentista";
 import FormInstituicao from "./pages/FormInstituicao"
 import SearchPaciente from "./pages/SearchPaciente";
+import HomeInstituicao from "./pages/HomeInstituicao";
 export default function App() {
 
 
@@ -18,6 +19,8 @@ export default function App() {
           <Route exact path="/formDentista" element={<FormDentista/>} />
           <Route exact path="/formInstituicao" element={<FormInstituicao/>} />
           <Route exact path="/searchPaciente" element={<SearchPaciente/>}/>
+          <Route exact path="/homeInstituicao" element={<HomeInstituicao/>}/>
+
 
       </Routes>
     </BrowserRouter>
