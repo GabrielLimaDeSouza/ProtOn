@@ -26,17 +26,32 @@ export default function DenseTable() {
         }).then(resp => resp.json())
           .then(data => setDentistas(data))
           .catch(err => console.error(err))
-    }, [])
+    }, [dentistas])
 
     const rows = [];
 
     dentistas.forEach(dentista => {
-        rows.push(createData(dentista.name, dentista.matricula, dentista.email ))
-      });
+        rows.push(createData(dentista.name, dentista.matricula, dentista.email, dentista._id ))
+    });
     
-    function createData(name, email, matricula) {
-        return { name, email, matricula };
+    function createData(name, email, matricula, id) {
+        return { name, email, matricula, id };
     }
+
+    function deleteDentista(id){
+        fetch(`http://localhost:3000/api/dentista?id=${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(resp => {
+            if(resp.ok) {
+                setDentistas(dentistas.filter(dentista => dentista.id !== id))
+            }
+        }).catch(err => console.error(err))
+    }
+
+
 
     return (
     <div>
@@ -70,7 +85,7 @@ export default function DenseTable() {
                     <TableCell align="right">{row.email}</TableCell>
                     <TableCell align="right">{row.matricula}</TableCell>
                     <TableCell align="right"><button className={styles.buttonCrud}><EditIcon className={styles.icon}/></button></TableCell>
-                    <TableCell align="right"><button className={styles.buttonCrud}><DeleteIcon className={styles.icon}/></button></TableCell>
+                    <TableCell align="right"><button className={styles.buttonCrud} onClick={() => deleteDentista(row.id)}><DeleteIcon className={styles.icon}/></button></TableCell>
                 </TableRow>
                 ))}
             </TableBody>
