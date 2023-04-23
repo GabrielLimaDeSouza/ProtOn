@@ -5,9 +5,9 @@ import "./input.css"
 function Input(props) {
 const [tags, setTags] = useState([])
     const [placeholderText, setPlaceholderText] = useState(props.placeholder)    
-    const [sabor, setSabor] = useState("")
 
-    const [nome, setNome] = useState("")
+        
+    
 
 
     function isText() {
@@ -124,7 +124,7 @@ const [tags, setTags] = useState([])
         <div class="searchbar-center">
             <div class="searchbar-input-spacer"></div>
 
-            <input type="number" class="searchbar-input" maxlength="2048" name="q" autocapitalize="off" autocomplete="off" title="Search" role="combobox" placeholder="CPF: 00000000000"></input>
+            <input typeSearch={props.typeSearch} id={props.id} class="searchbar-input" maxlength="2048" name="q" autocapitalize="off" autocomplete="off" title="Search" role="combobox" placeholder={props.placeholder} onKeyUp={props.event}></input>
         </div>
 
         <div class="searchbar-right">
