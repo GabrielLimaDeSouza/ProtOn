@@ -1,3 +1,4 @@
+const { ObjectId } = require('mongodb')
 const { Dentista: DentistaModel } = require("../models/Dentista")
 
 const dentistaController = {
@@ -40,6 +41,21 @@ const dentistaController = {
             }
 
             res.status(201).json(dentista)
+        } catch (error) {
+            console.log(error)
+        }
+    },
+    getAllDentistasInstituicao: async (req, res) => {
+        try {
+            const _id = new ObjectId(req.query.id)
+            const dentistas = await DentistaModel.find({ 'instituicao': _id })
+
+            if(!dentistas) {
+                res.status(404).json({ msg: "Nenhum dentista encontrado!" })
+                return
+            }
+
+            res.status(201).json(dentistas)
         } catch (error) {
             console.log(error)
         }

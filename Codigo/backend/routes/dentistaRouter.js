@@ -10,6 +10,9 @@ router.route("/dentista").get((req, res) => dentistaController.getAll(req, res))
 // GET Dentista
 router.route("/dentista/:id").get((req, res) => dentistaController.get(req, res))
 
+// GET Dentistas com id Instituição
+router.route("/dentista/instituicao").get((req, res) => dentistaController.getAllDentistasInstituicao(req, res))
+
 // DELETE Dentista
 router.route("/dentista").delete((req, res) => dentistaController.delete(req, res))
 
@@ -17,4 +20,4 @@ router.route("/dentista").delete((req, res) => dentistaController.delete(req, re
 router.route("/dentista").put((req, res) => dentistaController.update(req, res))
 
 
-module.exports = router;
+module.exports = router
