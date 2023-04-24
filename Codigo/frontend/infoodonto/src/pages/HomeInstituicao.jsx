@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -9,13 +11,16 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Button } from '@mui/material';
+import { Button, getListItemSecondaryActionClassesUtilityClass } from '@mui/material';
 
 import styles from '../css/HomeInstituicao.module.css'
 import Logo from '../img/logo.png'
 
+
+
 export default function DenseTable() {
     const [dentistas, setDentistas] = useState([])
+    const [editMode, setEditMode] = useState(false);
 
     useEffect(() => {
         fetch('http://localhost:3000/api/dentista/', {
@@ -36,7 +41,7 @@ export default function DenseTable() {
     
     function createData(name, email, matricula, id) {
         return { name, email, matricula, id };
-    }
+    }  
 
     function deleteDentista(id){
         fetch(`http://localhost:3000/api/dentista?id=${id}`, {
@@ -84,7 +89,11 @@ export default function DenseTable() {
                     </TableCell>
                     <TableCell align="right">{row.email}</TableCell>
                     <TableCell align="right">{row.matricula}</TableCell>
-                    <TableCell align="right"><button className={styles.buttonCrud}><EditIcon className={styles.icon}/></button></TableCell>
+                    <TableCell align="right">
+                        <Link to={`/editDentista/${row.id}`} className={styles.buttonCrud}>
+                            <EditIcon className={styles.icon} />
+                        </Link>
+                    </TableCell>
                     <TableCell align="right"><button className={styles.buttonCrud} onClick={() => deleteDentista(row.id)}><DeleteIcon className={styles.icon}/></button></TableCell>
                 </TableRow>
                 ))}

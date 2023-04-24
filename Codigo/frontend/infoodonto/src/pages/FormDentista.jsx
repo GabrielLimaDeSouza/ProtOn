@@ -3,12 +3,12 @@ import Logo from "../img/logo.png"
 import { useState, useEffect } from "react"
 
 import Input from "../components/input/Input"
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const FormDentista = () => {
 
     const [instituicoes, setInstituicoes] = useState([])
     const [instituicao, setInstituicao] = useState({})
-    const [tipo, setTipo] = useState("")
 
     useEffect(() => {
         fetch('http://localhost:3000/api/instituicao/', {

@@ -7,6 +7,8 @@ import FormDentista from "./pages/FormDentista";
 import FormInstituicao from "./pages/FormInstituicao"
 import SearchPaciente from "./pages/SearchPaciente";
 import HomeInstituicao from "./pages/HomeInstituicao";
+import EditDentista from "./pages/EditDentista";
+
 export default function App() {
 
 
@@ -20,6 +22,7 @@ export default function App() {
           <Route exact path="/formInstituicao" element={<FormInstituicao/>} />
           <Route exact path="/searchPaciente" element={<SearchPaciente/>}/>
           <Route exact path="/homeInstituicao" element={<HomeInstituicao/>}/>
+          <Route exact path="/editDentista/:id" element={<EditDentista />} />
 
 
       </Routes>
