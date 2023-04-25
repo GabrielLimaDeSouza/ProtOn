@@ -124,7 +124,7 @@ const [tags, setTags] = useState([])
         <div class="searchbar-center">
             <div class="searchbar-input-spacer"></div>
 
-            <input typeSearch={props.typeSearch} id={props.id} class="searchbar-input" maxlength="2048" name="q" autocapitalize="off" autocomplete="off" title="Search" role="combobox" placeholder={props.placeholder} onKeyUp={props.event}></input>
+            <input typeSearch={props.typeSearch} id={props.id} class="searchbar-input" maxlength="2048" name="q" autocapitalize="off" autocomplete="false" title="Search" role="combobox" placeholder={props.placeholder} onKeyUp={props.event}></input>
         </div>
 
         <div class="searchbar-right">

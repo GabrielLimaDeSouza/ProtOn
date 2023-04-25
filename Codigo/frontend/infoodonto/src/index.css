@@ -1,0 +1,10 @@
+body{
+    background-image: url("../src/img/v960-ning-05.jpg");
+    background-repeat: no-repeat;
+  background-size:cover !important;
+  background-attachment: fixed;
+  z-index: 1;
+}
+html{
+    
+}
