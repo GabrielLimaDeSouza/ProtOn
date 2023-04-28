@@ -91,11 +91,11 @@ const SearchPaciente = () => {
 
     function handleClose(){
         setOpen1(false)
-      }
-      function handleClose2(){
-        console.log("tes54")
+    }
+
+    function handleClose2(){
         setOpen2(false)
-      }
+    }
       
     return (
         <>
@@ -114,7 +114,7 @@ const SearchPaciente = () => {
             </Alert>
           </Snackbar>:
           open2?
-          <Snackbar open={open2} autoHideDuration={1200} onClose={handleClose2}>
+          <Snackbar open={open2} autoHideDuration={2000} onClose={handleClose2}>
             <Alert onClose={handleClose2} severity="error" sx={{ width: '100%' }}>
               Paciente não foi encontrado!
             </Alert>
@@ -125,8 +125,15 @@ const SearchPaciente = () => {
                 pacienteExiste ?
 
                     <div className="drops">
- 
-                        <h1 >{paciente.name}</h1>
+                        <h1>{paciente.name}</h1>
+                        <div className="divCondicoes">
+                            <h1>Condições</h1>
+                            {
+                                paciente.condicoes.map((condicao) => (
+                                    <div>{condicao.nome}</div>
+                                ))
+                            }
+                        </div>
                         <div className="drop"> <Accordion>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}

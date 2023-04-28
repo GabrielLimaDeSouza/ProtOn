@@ -1,14 +1,35 @@
-import { React ,useState } from 'react'
+import {useState } from 'react'
+import React from 'react'
 
 import Logo from "../img/logo.png"
 import Input from "../components/input/Input"
 import "../css/FormPaciente.css"
 import InputOptions from '../components/input/InputOptions'
+import Snackbar from '@mui/material/Snackbar';
+
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
  
- const FormInstituicao = () => {
+const FormInstituicao = () => {
 
     const listaTipos = ['Universidade', 'Clínica', 'Hospital']
     const [tipo,setTipo] = useState("")
+    const [open, setOpen] = useState(false);
+        
+    const messageAdd= () => {
+      setOpen(true);
+    };
+  
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+          return;
+      }
+
+      setOpen(false);
+    };
 
     function handleTipoChange(valor){
       setTipo(valor)
@@ -29,7 +50,7 @@ import InputOptions from '../components/input/InputOptions'
             })
           })
           .then(resp => resp.json())
-          .then(alert("Instituição cadastrada!"))
+          .then(messageAdd())
           .catch(err => console.error(err))
     }
 
@@ -49,6 +70,11 @@ import InputOptions from '../components/input/InputOptions'
                     <button type="submit" className="confirmar">Confirmar</button>
                 </div>
             </form>
+            <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+              <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                  Instituição cadastrada com sucesso!
+              </Alert>
+          </Snackbar>
         </>
    )
  }

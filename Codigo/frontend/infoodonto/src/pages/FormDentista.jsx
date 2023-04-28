@@ -1,14 +1,34 @@
+import React from "react";
+
 import Logo from "../img/logo.png"
 
 import { useState, useEffect } from "react"
 
 import Input from "../components/input/Input"
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const FormDentista = () => {
 
     const [instituicoes, setInstituicoes] = useState([])
     const [instituicao, setInstituicao] = useState({})
+    const [open, setOpen] = useState(false);
+    
+    const messageAdd = () => {
+        setOpen(true);
+    };
+    
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
 
     useEffect(() => {
         fetch('http://localhost:3000/api/instituicao/', {
@@ -49,7 +69,7 @@ const FormDentista = () => {
             })
           })
           .then(resp => resp.json())
-          .then(alert("Dentista cadastrado!"))
+          .then(messageAdd())
           .catch(err => console.error(err))
 
     }
@@ -80,6 +100,11 @@ const FormDentista = () => {
                     <button type="submit" className="confirmar">Confirmar</button>
                 </div>
             </form>
+            <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                    Dentista cadastro com sucesso!
+                </Alert>
+            </Snackbar>
         </>
 
     )

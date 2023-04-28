@@ -1,3 +1,4 @@
+import React from "react";
 import Logo from "../img/logo.png"
 
 import '../css/EditDentista.css'
@@ -6,11 +7,11 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 
+
 const EditDentista = () => {
 
     const [dentista,setDentista] = useState({})
     const navigate = useNavigate();
-
     const { id } = useParams();
 
 
@@ -23,7 +24,7 @@ const EditDentista = () => {
             },
             body: JSON.stringify(dentista)
         }).then(() => {
-            alert("Dentista alterado com sucesso!")
+            navigate("/homeInstituicao")
         })
     }
 

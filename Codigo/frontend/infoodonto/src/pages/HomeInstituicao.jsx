@@ -11,7 +11,14 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Snackbar from '@mui/material/Snackbar';
 import { Button, getListItemSecondaryActionClassesUtilityClass } from '@mui/material';
+
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 import styles from '../css/HomeInstituicao.module.css'
 import Logo from '../img/logo.png'
@@ -21,6 +28,19 @@ import Logo from '../img/logo.png'
 export default function DenseTable() {
     const [dentistas, setDentistas] = useState([])
     const [editMode, setEditMode] = useState(false);
+    const [open, setOpen] = useState(false);
+    
+    const messageRemove = () => {
+        setOpen(true);
+    };
+    
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
 
     useEffect(() => {
         fetch('http://localhost:3000/api/dentista/', {
@@ -94,12 +114,20 @@ export default function DenseTable() {
                             <EditIcon className={styles.icon} />
                         </Link>
                     </TableCell>
-                    <TableCell align="right"><button className={styles.buttonCrud} onClick={() => deleteDentista(row.id)}><DeleteIcon className={styles.icon}/></button></TableCell>
+                    <TableCell align="right"><button className={styles.buttonCrud} onClick={() => {
+                        deleteDentista(row.id)
+                        messageRemove()
+                    }}><DeleteIcon className={styles.icon}/></button></TableCell>
                 </TableRow>
                 ))}
             </TableBody>
             </Table>
         </TableContainer>
+        <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                Dentista removido com sucesso!
+            </Alert>
+        </Snackbar>
     </div>
 
     );
