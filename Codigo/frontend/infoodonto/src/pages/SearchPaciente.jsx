@@ -128,11 +128,13 @@ const SearchPaciente = () => {
                         <h1>{paciente.name}</h1>
                         <div className="divCondicoes">
                             <h1>Condições</h1>
+                            <div className="containerCondicoes">
                             {
                                 paciente.condicoes.map((condicao) => (
-                                    <div>{condicao.nome}</div>
+                                    <div className="divCondicao">{condicao.nome}</div>
                                 ))
                             }
+                            </div>
                         </div>
                         <div className="drop"> <Accordion>
                             <AccordionSummary
