@@ -18,17 +18,34 @@ const FormInstituicao = () => {
     const listaTipos = ['Universidade', 'Clínica', 'Hospital']
     const [tipo,setTipo] = useState("")
     const [open, setOpen] = useState(false);
-        
-    const messageAdd= () => {
-      setOpen(true);
-    };
-  
+    const [openError, setOpenError] = useState(false);
+    const [openEmailError, setOpenEmailError] = useState(false)
+
+    function validarEmail(email) {
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      return regex.test(email)
+    }
+
     const handleClose = (event, reason) => {
       if (reason === 'clickaway') {
           return;
       }
 
-      setOpen(false);
+      setOpen(false)
+      setOpenEmailError(false)
+      setOpenError(false)
+    };
+
+    const messageAdd= () => {
+      setOpen(true);
+    };
+
+    const messageError= () => {
+      setOpenError(true);
+    };
+
+    const messageEmailError = () => {
+      setOpenEmailError(true);
     };
 
     function handleTipoChange(valor){
@@ -37,15 +54,30 @@ const FormInstituicao = () => {
 
     function createInstituicao(e){
         e.preventDefault()
+
+        const name = document.getElementById("name").value
+        const email = document.getElementById("email").value
+        const senha = document.getElementById("senha").value
+
+        if(!name || !email || !senha || !tipo){
+          messageError()
+          return
+        }
+
+        if (!validarEmail(email)) {
+          messageEmailError()
+          return
+        }
+
         fetch(`http://localhost:3000/api/instituicao/`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "name": document.getElementById("name").value,
-                "email": document.getElementById("email").value,
-                "senha": document.getElementById("senha").value,
+                "name": name,
+                "email": email,
+                "senha": senha,
                 "tipo": tipo
             })
           })
@@ -74,7 +106,17 @@ const FormInstituicao = () => {
               <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
                   Instituição cadastrada com sucesso!
               </Alert>
-          </Snackbar>
+            </Snackbar>
+            <Snackbar open={openError} autoHideDuration={2000} onClose={handleClose}>
+              <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                  Preencha todos os campos!
+              </Alert>
+            </Snackbar>
+            <Snackbar open={openEmailError} autoHideDuration={2000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                    Email inválido!
+                </Alert>
+            </Snackbar>
         </>
    )
  }

@@ -17,6 +17,8 @@ const FormDentista = () => {
     const [instituicoes, setInstituicoes] = useState([])
     const [instituicao, setInstituicao] = useState({})
     const [open, setOpen] = useState(false);
+    const [openError, setOpenError] = useState(false)
+    const [openEmailError, setOpenEmailError] = useState(false)
     
     const messageAdd = () => {
         setOpen(true);
@@ -27,9 +29,20 @@ const FormDentista = () => {
             return;
         }
 
-        setOpen(false);
+        setOpen(false)
+        setOpenEmailError(false)
+        setOpenError(false)
     };
 
+    const messageError = () => {
+        setOpenError(true);
+    };
+    
+
+    const messageEmailError = () => {
+        setOpenEmailError(true);
+    };
+    
     useEffect(() => {
         fetch('http://localhost:3000/api/instituicao/', {
           method: 'GET',
@@ -49,9 +62,27 @@ const FormDentista = () => {
         }
     }
 
+    function validarEmail(email) {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        return regex.test(email)
+    }
+
     function createDentista(input){
         input.preventDefault();
-        console.log(instituicao)
+        var name = document.getElementById("name").value
+        var email = document.getElementById("email").value
+        var senha = document.getElementById("senha").value
+        var matricula = document.getElementById("matricula").value
+
+        if(!name || !email || !senha || !matricula || !instituicao){
+            messageError()
+            return
+        }
+
+        if (!validarEmail(email)) {
+            messageEmailError()
+            return
+        }
 
         fetch(`http://localhost:3000/api/dentista/`, {
             method: 'POST',
@@ -59,10 +90,10 @@ const FormDentista = () => {
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "name": document.getElementById("name").value,
-                "email": document.getElementById("email").value,
-                "senha": document.getElementById("senha").value,
-                "matricula": document.getElementById("matricula").value,
+                "name": name,
+                "email": email,
+                "senha": senha,
+                "matricula": matricula,
                 "instituicao": {
                     "_id": instituicao._id
                 }
@@ -103,6 +134,16 @@ const FormDentista = () => {
             <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
                     Dentista cadastro com sucesso!
+                </Alert>
+            </Snackbar>
+            <Snackbar open={openError} autoHideDuration={2000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                    Preencha todos os campos!
+                </Alert>
+            </Snackbar>
+            <Snackbar open={openEmailError} autoHideDuration={2000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                    Email inválido!
                 </Alert>
             </Snackbar>
         </>

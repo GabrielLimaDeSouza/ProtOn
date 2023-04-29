@@ -27,7 +27,6 @@ import Logo from '../img/logo.png'
 
 export default function DenseTable() {
     const [dentistas, setDentistas] = useState([])
-    const [editMode, setEditMode] = useState(false);
     const [open, setOpen] = useState(false);
     
     const messageRemove = () => {
