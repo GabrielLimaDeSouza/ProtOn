@@ -1,18 +1,20 @@
 const { Instituicao: InstituicaoModel } = require("../models/Instituicao")
+const { Usuario: UsuarioModel } = require("../models/Usuario")
 
 const instituicaoController = {
     create: async (req, res) => {
         try {
             const { name, email, senha, tipo } = req.body
 
-            const instituicao = {
-                name,
+            const user = await InstituicaoModel.create({ name, tipo })
+
+            const usuarioInstituicao = {
                 email,
                 senha,
-                tipo
+                user: user._id
             }
 
-            const response = await InstituicaoModel.create(instituicao);
+            const response = await UsuarioModel.create(usuarioInstituicao)
             res.status(201).json({ response, msg: "Instituicao cadastrada com sucesso!" })
         } catch (error) {
             console.log(error)
@@ -53,6 +55,7 @@ const instituicaoController = {
             }
 
             const deletedInstituicao = await InstituicaoModel.findByIdAndDelete(id)
+            await UsuarioModel.findOneAndDelete({ user: id })
 
             res.status(200).json({ deletedInstituicao, msg: "Instituição excluida com sucesso!" })
         } catch (error) {
@@ -62,23 +65,19 @@ const instituicaoController = {
     update: async (req, res) => {
         try {
             const id = req.query.id
-            const { name, email, senha, tipo } = req.body
+            const { email, senha, tipo } = req.body
+
+            const updatedInstituicao = await InstituicaoModel.findByIdAndUpdate(id, { tipo })
             
-            const instituicao = {
-                name,
-                email,
-                senha,
-                tipo
-            }
-
-            const updatedInstituicao = await InstituicaoModel.findByIdAndUpdate(id, instituicao)
-
             if(!updatedInstituicao) {
                 res.status(404).json({ msg: "Instituição não encontrada!" })
                 return
             }
 
-            res.status(200).json({ instituicao, msg: "Instituição atualizada com sucesso!" })
+            const response = await UsuarioModel.findOneAndUpdate({ user: id }, { email, senha })
+            response.populate("Instituicao")
+
+            res.status(200).json({ response, msg: "Instituição atualizada com sucesso!" })
 
         } catch (error) {
             console.log(error)

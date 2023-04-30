@@ -1,19 +1,20 @@
 const { Paciente: PacienteModel } = require("../models/Paciente")
+const { Usuario: UsuarioModel } = require("../models/Usuario")
 
 const pacienteController = {
     create: async (req, res) => {
         try {
             const { name, cpf, email, senha, condicoes } = req.body
 
-            const paciente = {
-                name,
-                cpf,
+            const user = await PacienteModel.create({ name, cpf, condicoes })
+
+            const usuarioPaciente = {
                 email,
                 senha,
-                condicoes
+                user: user._id
             }
 
-            const response = await PacienteModel.create(paciente);
+            const response = await UsuarioModel.create(usuarioPaciente)
             res.status(201).json({ response, msg: "Paciente cadastrado com sucesso!" })
         } catch (error) {
             console.log(error)
@@ -69,6 +70,7 @@ const pacienteController = {
             }
 
             const deletedPaciente = await PacienteModel.findByIdAndDelete(id)
+            await UsuarioModel.findOneAndDelete({ user: id })
 
             res.status(200).json({ deletedPaciente, msg: "Paciente excluido com sucesso!" })
         } catch (error) {
@@ -83,19 +85,20 @@ const pacienteController = {
             const paciente = {
                 name,
                 cpf,
-                email,
-                senha,
                 condicoes
             }
 
             const updatedpaciente = await PacienteModel.findByIdAndUpdate(id, paciente)
-
+            
             if(!updatedpaciente) {
                 res.status(404).json({ msg: "Paciente não encontrado!" })
                 return
             }
 
-            res.status(200).json({ paciente, msg: "Paciente atualizado com sucesso!" })
+            const response = await UsuarioModel.findOneAndUpdate({ user: id }, { email, senha })
+            response.populate("Paciente")
+
+            res.status(200).json({ response, msg: "Paciente atualizado com sucesso!" })
 
         } catch (error) {
             console.log(error)
