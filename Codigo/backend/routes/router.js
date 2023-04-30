@@ -1,7 +1,5 @@
 const router = require("express").Router()
 
-const authenticationMiddleware = require("../middlewares/auth")
-
 // Dentista router
 const dentistaRouter = require("./dentistaRouter")
 
@@ -17,13 +15,7 @@ const condicaoRouter = require("./condicaoRouter")
 // Login router
 const loginRouter = require("./loginRouter")
 
-//! Rotas publicas
 router.use("/", loginRouter)
-
-//! Middleware
-router.use(authenticationMiddleware)
-
-//! Rotas privadas
 router.use("/", dentistaRouter)
 router.use("/", pacienteRouter)
 router.use("/", instituicaoRouter)
