@@ -1,6 +1,6 @@
 import Logo from "../img/logo.png"
 import Input from "../components/input/Input"
-import "../css/SearchPaciente.css"
+import styles from "../css/SearchPaciente.module.css"
 import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import Skeleton from '@mui/material/Skeleton';
@@ -100,10 +100,10 @@ const SearchPaciente = () => {
     return (
         <>
         
-            <div className="logo">
+            <div className={styles.logo}>
                 <img src={Logo} alt="Logo" />
             </div>
-            <div className="search-box">
+            <div className={styles.searchBox}>
                 <Input type="search" placeholder="CPF: 00000000000" typeSearch="number" id="busca" limiteChar="11" event={campoCompleto}></Input>
             </div>
         {
@@ -124,25 +124,25 @@ const SearchPaciente = () => {
             {
                 pacienteExiste ?
 
-                    <div className="drops">
+                    <div className={styles.drops}>
                         <h1>{paciente.name}</h1>
-                        <div className="divCondicoes">
+                        <div className={styles.divCondicoes}>
                             <h1>Condições</h1>
-                            <div className="containerCondicoes">
+                            <div className={styles.containerCondicoes}>
                             {
                                 paciente.condicoes.map((condicao) => (
-                                    <div className="divCondicao">{condicao.nome}</div>
+                                    <div className={styles.divCondicao}>{condicao.nome}</div>
                                 ))
                             }
                             </div>
                         </div>
-                        <div className="drop"> <Accordion>
+                        <div className={styles.drop}> <Accordion>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel1a-content"
                                 id="panel1a-header"
                                 sx={{ background: 'rgba(98, 168, 219, 0.41)' }}
-                                className="drop"
+                                className={styles.drop}
                             >
                                 <Typography>Pre-atendimento</Typography>
                             </AccordionSummary>
@@ -156,13 +156,13 @@ const SearchPaciente = () => {
                         </Accordion>
                         </div>
 
-                        <div className="drop"><Accordion>
+                        <div className={styles.drop}><Accordion>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel1a-content"
                                 id="panel1a-header"
                                 sx={{ background: 'rgba(98, 168, 219, 0.41)' }}
-                                className="drop"
+                                className={styles.drop}
                             >
                                 <Typography>Anestesico local</Typography>
                             </AccordionSummary>
@@ -175,13 +175,13 @@ const SearchPaciente = () => {
                             </AccordionDetails>
                         </Accordion></div>
 
-                        <div className="drop"><Accordion>
+                        <div className={styles.drop}><Accordion>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel1a-content"
                                 id="panel1a-header"
                                 sx={{ background: 'rgba(98, 168, 219, 0.41)' }}
-                                className="drop"
+                                className={styles.drop}
                             >
                                 <Typography>Medicamentos</Typography>
                             </AccordionSummary>
@@ -194,13 +194,13 @@ const SearchPaciente = () => {
                             </AccordionDetails>
                         </Accordion></div>
 
-                        <div className="drop"> <Accordion>
+                        <div className={styles.drop}> <Accordion>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel1a-content"
                                 id="panel1a-header"
                                 sx={{ background: 'rgba(98, 168, 219, 0.41)' }}
-                                className="drop"
+                                className={styles.drop}
                             >
                                 <Typography>Implante</Typography>
                             </AccordionSummary>
@@ -219,7 +219,7 @@ const SearchPaciente = () => {
 
                     : (
 
-                            <div className="loader-box">
+                            <div className={styles.loaderBox}>
                                 
                                
                             <Typography variant="h3" width={"70%"}><Skeleton animation="wave" /></Typography>

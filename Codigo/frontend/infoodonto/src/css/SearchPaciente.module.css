@@ -1,4 +1,4 @@
-.search-box {
+.searchBox {
   align-items: center;
   justify-content: center;
   padding-top: 60px;
@@ -12,7 +12,7 @@
   padding-top: 50px;
 }
 
-.loader-box {
+.loaderBox {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,7 +20,7 @@
   padding-top: 30px;
 }
 
-.loader-box * {
+.loaderBox * {
   margin-top: 3px;
 
 }
