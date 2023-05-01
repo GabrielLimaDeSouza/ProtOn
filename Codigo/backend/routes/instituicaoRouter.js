@@ -1,8 +1,12 @@
 const router = require("express").Router()
 const instituicaoController = require("../controllers/instituicaoController")
+const authenticationMiddleware = require("../middlewares/auth")
 
 // CREATE Instituicao
 router.route("/instituicao").post((req, res) => instituicaoController.create(req, res))
+
+//! Middleware
+router.use(authenticationMiddleware)
 
 // GET ALL Instituicao
 router.route("/instituicao").get((req, res) => instituicaoController.getAll(req, res))
