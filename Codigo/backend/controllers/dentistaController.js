@@ -69,14 +69,8 @@ const dentistaController = {
     delete: async (req, res) => {
         try {
             const id = req.query.id
-            const dentista = await DentistaModel.findById(id)
 
-            if(!dentista) {
-                res.status(404).json({ msg: "Usuário não encontrado!" })
-                return
-            }
-
-            await UsuarioModel.findOneAndUpdate({ user: id }, { email, senha })
+            await UsuarioModel.findOneAndDelete({ user: id })
             const deletedDentista = await DentistaModel.findByIdAndDelete(id)
 
             res.status(200).json({ deletedDentista, msg: "Usuário excluido com sucesso!" })

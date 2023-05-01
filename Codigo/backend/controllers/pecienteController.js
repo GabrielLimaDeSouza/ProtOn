@@ -62,12 +62,6 @@ const pacienteController = {
     delete: async (req, res) => {
         try {
             const id = req.query.id
-            const paciente = await PacienteModel.findById(id)
-
-            if(!paciente) {
-                res.status(404).json({ msg: "Paciente não encontrado!" })
-                return
-            }
 
             const deletedPaciente = await PacienteModel.findByIdAndDelete(id)
             await UsuarioModel.findOneAndDelete({ user: id })

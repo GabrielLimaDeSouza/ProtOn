@@ -47,12 +47,6 @@ const instituicaoController = {
     delete: async (req, res) => {
         try {
             const id = req.query.id
-            const instituicao = await InstituicaoModel.findById(id)
-
-            if(!instituicao) {
-                res.status(404).json({ msg: "Instituição não encontrada!" })
-                return
-            }
 
             const deletedInstituicao = await InstituicaoModel.findByIdAndDelete(id)
             await UsuarioModel.findOneAndDelete({ user: id })
