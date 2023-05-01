@@ -18,7 +18,7 @@ const loginRouter = require("./loginRouter")
 router.use("/", loginRouter)
 
 //! Middleware
-//router.use(authenticationMiddleware)
+router.use(authenticationMiddleware)
 
 //! Rotas privadas
 router.use("/", dentistaRouter)
