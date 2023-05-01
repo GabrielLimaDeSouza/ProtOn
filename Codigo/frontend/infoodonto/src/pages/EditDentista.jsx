@@ -1,7 +1,7 @@
 import React from "react";
 import Logo from "../img/logo.png"
 
-import '../css/EditDentista.css'
+import styles from '../css/EditDentista.module.css'
 
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -82,32 +82,32 @@ const EditDentista = () => {
 
     return (
         <>
-            <div className="logo">
+            <div className={styles.logo}>
                 <img src={Logo} alt="Logo" />
             </div>
 
 
             <form className="form input-container" onSubmit={editDentista}>
-                <div className="uni">
-                    <div className="divLabel">
+                <div className={styles.uni}>
+                    <div className={styles.divLabel}>
                         <label htmlFor="inputName" className="label">Nome</label>
                     </div>
-                    <input type="text" value={dentista.name} id="inputName" className="inputEdit" onChange={(event) => setDentista({ ...dentista, name: event.target.value })} />
+                    <input type="text" value={dentista.name} id="inputName" className={styles.inputEdit} onChange={(event) => setDentista({ ...dentista, name: event.target.value })} />
                 </div>
-                <div className="uni">
-                    <div className="divLabel">
+                <div className={styles.uni}>
+                    <div className={styles.divLabel}>
                         <label htmlFor="inputEmail" className="label" >Email</label>
                     </div>
-                    <input type="text" value={dentista.email} id="inputName" className="inputEdit" onChange={(event) => setDentista({ ...dentista, email: event.target.value })} />
+                    <input type="text" value={dentista.email} id="inputName" className={styles.inputEdit} onChange={(event) => setDentista({ ...dentista, email: event.target.value })} />
                 </div>
-                <div className="uni">
-                    <div className="divLabel">
+                <div className={styles.uni}>
+                    <div className={styles.divLabel}>
                         <label htmlFor="inputSenha" className="label" >Senha</label>
                     </div>
-                    <input type="text" value={dentista.senha} id="inputName" className="inputEdit" onChange={(event) => setDentista({ ...dentista, senha: event.target.value })} />
+                    <input type="text" value={dentista.senha} id="inputName" className={styles.inputEdit} onChange={(event) => setDentista({ ...dentista, senha: event.target.value })} />
                 </div>
-                <div className="divButton">
-                    <button type="submit" className="confirmar" onClick={editDentista}>Editar</button>
+                <div className={styles.divButton}>
+                    <button type="submit" className={styles.editar} onClick={editDentista}>Editar</button>
                 </div>
             </form>
             <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>

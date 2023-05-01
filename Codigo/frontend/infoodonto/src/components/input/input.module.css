@@ -28,6 +28,7 @@
   width: 80%;
   height: 28px;
   padding-left: 20px;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .inputText:focus{
