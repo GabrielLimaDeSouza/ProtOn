@@ -23,6 +23,7 @@ const SearchPaciente = () => {
     const [implante, setImplante] = useState([])
     const [open1, setOpen1] = useState()
     const [open2, setOpen2] = useState()
+    const [inputSearchValue, setInputSearchValue] = useState("")
     const url = 'http://localhost:3000'
 
     useEffect(() => {
@@ -96,6 +97,21 @@ const SearchPaciente = () => {
     function handleClose2(){
         setOpen2(false)
     }
+
+    function onKeyDown(e){
+        var tecla=(window.event)?event.keyCode:e.which;   
+        if((tecla>47 && tecla<58)) setInputSearchValue( inputSearchValue + tecla);
+        else{
+           if (tecla==8 || tecla==0) setInputSearchValue(inputSearchValue + tecla);
+           else {
+            e.preventDefault()
+           }  
+
+        }
+        
+        
+        
+    }
       
     return (
         <>
@@ -104,7 +120,7 @@ const SearchPaciente = () => {
                 <img src={Logo} alt="Logo" />
             </div>
             <div className={styles.searchBox}>
-                <Input type="search" placeholder="CPF: 00000000000" typeSearch="number" id="busca" limiteChar="11" event={campoCompleto}></Input>
+                <Input type="search" placeholder="CPF: 00000000000" typeSearch="number" id="busca" limiteChar="11"  onKeyDown={onKeyDown}></Input>
             </div>
         {
             open1?

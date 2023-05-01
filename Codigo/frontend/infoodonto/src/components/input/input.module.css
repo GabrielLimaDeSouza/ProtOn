@@ -1,5 +1,6 @@
 /* Input container */
 .inputContainer {
+ 
     position: relative;
     display: flex;
     flex-wrap: wrap;

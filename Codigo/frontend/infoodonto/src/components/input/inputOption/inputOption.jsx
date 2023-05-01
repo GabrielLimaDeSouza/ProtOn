@@ -3,6 +3,7 @@ import { useState } from "react"
 
 const InputOption =(props)=>{
 
+    console.log(props.currentCondicao)
     const [tags, setTags] = useState(props.currentCondicao)
 
 
@@ -14,27 +15,37 @@ const InputOption =(props)=>{
     }
 
     function handleKeyDown() {
-        let novaCondicao = document.getElementById("condicao").value
+        let novaCondicao = document.getElementById(props.id).value
         setTags(tags => [...tags, { condicao: novaCondicao }])
-        document.getElementById("condicao").value = ""
+        document.getElementById(props.id).value = ""
 
 
     }
 
     return(
-        <div>
+       <>
         <div className={styles.inputContainer}>
+            <div className={styles.tagContainer}>
             {
                 tags.map((tag, index) => {
                     return (
-                        <div className={styles.tagItem} >
-                            <span className={[ styles.tag]}>{tag.condicao}</span>
+                        
+                            
+                            <div className={styles.tagGroup}>
+                            <span className={styles.tag}>{tag.condicao}</span>
                             <span className={styles.close} onClick={()=>{removeTag(index)}}>&times;</span>
-                        </div>
+                            </div>
+                                
+                        
                     )
 
                 })
             }
+            </div>
+         
+            
+           
+            
             <input placeholder={props.placeholder} className={styles.inputOption} type="text" list="lista" id={props.id}></input>
         <span className={""} ></span>
             <datalist id="lista">
@@ -52,7 +63,7 @@ const InputOption =(props)=>{
         </div>
         <div className={styles.divButton}><button className={styles.adicionar} type='button' onClick={handleKeyDown}>Adicionar</button></div>
         
-    </div>
+        </>
     )
 }
 

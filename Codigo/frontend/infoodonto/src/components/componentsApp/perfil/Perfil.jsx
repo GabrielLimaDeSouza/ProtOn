@@ -4,14 +4,20 @@ import styles from "./Perfil.module.css"
 const Perfil = (props) => {
 
 
-    function onKeyDown(){
-        console.log("sd")
-    }
+
     return (
         <>
-        
+
             <div className={styles.divInputs}>
-            <Input type="search" placeholder="Exemplo" id="idTeste" limiteChar={11} onKeyDown={onKeyDown}></Input>
+                <div className={styles.divInput}><Input type="text" placeholder={props.currentName} id="updateName"></Input></div>
+                <div className={styles.divInput}>
+                    <Input type="text" placeholder={props.currentCpf} disabled={true} id="updateCpf"></Input>
+                </div>
+                <div className={styles.divInput}>
+                    <Input type="password" placeholder={props.currentPassword} id="updatePassword"></Input>
+                </div>
+                <div className={styles.divInput}><Input type="text" placeholder={props.currentEmail} id="updateEmail"></Input></div>
+                <div className={styles.divInput}><Input type="option" placeholder="Condição" id="updateCondicao" currentCondicao={props.currentCondicao}> </Input></div>
             </div>
 
         </>

@@ -1,12 +1,14 @@
 /* Input container */
 .inputContainer {
-    position: relative;
+
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+    align-items: center !important;
+    justify-content: center !important;
 
 }
+
 
 /*Input options*/
 .divButton{
@@ -14,6 +16,13 @@
     align-items: end;
     justify-content: end;
 }
+
+.tagContainer{
+    column-count: 2;
+
+}
+
+
 /*Botões*/
 .adicionar{
     margin-top: 20px;
@@ -41,12 +50,6 @@
     border: 0 none;
     outline: 0;
     box-shadow: 0 0 0 0;
-}
-.tagItem {
-    display: flex;
-    width: 50%;
-    align-items: center;
-    justify-content: center;
 }
 
 .close {

@@ -14,7 +14,7 @@ const HomePaciente = () => {
                 </div>
                 <div className={styles.center}>
                     <div className={styles.divCenter}>
-                         <Perfil currentName="carlos" currentCpf="12345678999" currentPassword="123" currentEmail="teste@teste" condicoes={["cond1", "cond2"]}/>
+                         <Perfil currentName="carlos" currentCpf="12345678999" currentPassword="123" currentEmail="teste@teste" currentCondicao={[{"condicao": "nada"}, {"condicao": "nada2"}]}/>
                     </div>
                 
                 </div>

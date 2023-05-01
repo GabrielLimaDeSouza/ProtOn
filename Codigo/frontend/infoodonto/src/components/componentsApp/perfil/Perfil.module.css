@@ -1,7 +1,8 @@
 .divInputs{
+    width: 90vw;
+}
+.divInput {
+    padding-top: 20px;
+  
+}
 
-}
-.divInputs * {
-    margin-top: 10px;
-    align-items: center;
-}
