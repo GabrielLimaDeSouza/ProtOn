@@ -6,7 +6,7 @@ const authenticationMiddleware = require("../middlewares/auth")
 router.route("/dentista").post((req, res) => dentistaController.create(req, res))
 
 //! Middleware
-router.use(authenticationMiddleware)
+//router.use(authenticationMiddleware)
 
 // GET ALL Dentista
 router.route("/dentista").get((req, res) => dentistaController.getAll(req, res))

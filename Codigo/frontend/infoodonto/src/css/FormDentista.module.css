@@ -1,0 +1,58 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:  100%;
+    padding-top: 50px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 60px;
+}
+
+.uni {
+    padding-top: 30px;
+}
+
+.drop {
+    border-radius: 60px;
+    opacity: 60%;
+    border: none;
+    max-width: 400px;
+    width: 80%;
+    height: 28px;
+    padding-left: 20px;
+}
+
+.drop:focus{
+    border: 0 none;
+    outline: 0;
+    box-shadow: 0 0 0 0;
+}
+
+.confirmar{
+    border-radius: 13.96px;
+    height: 39.9px;
+    width: 128px;
+    background-color: #95BFDE;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.divButton{
+    display: flex;
+    padding-top: 30px;
+    justify-content: center;
+}
