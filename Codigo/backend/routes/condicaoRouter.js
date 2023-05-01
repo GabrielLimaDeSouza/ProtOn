@@ -7,7 +7,7 @@ router.route("/condicao").post((req, res) => condicoesController.create(req, res
 
 
 //! Middleware
-router.use(authenticationMiddleware)
+//router.use(authenticationMiddleware)
 
 // GET Condicoes
 router.route("/condicao").get((req, res) => condicoesController.get(req, res))

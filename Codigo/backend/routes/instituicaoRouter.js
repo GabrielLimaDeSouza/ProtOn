@@ -6,7 +6,7 @@ const authenticationMiddleware = require("../middlewares/auth")
 router.route("/instituicao").post((req, res) => instituicaoController.create(req, res))
 
 //! Middleware
-router.use(authenticationMiddleware)
+//router.use(authenticationMiddleware)
 
 // GET ALL Instituicao
 router.route("/instituicao").get((req, res) => instituicaoController.getAll(req, res))
