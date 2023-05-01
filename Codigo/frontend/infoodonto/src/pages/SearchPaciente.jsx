@@ -99,8 +99,10 @@ const SearchPaciente = () => {
     }
 
     function onKeyDown(e){
+        
         var tecla=(window.event)?event.keyCode:e.which;   
-        if((tecla>47 && tecla<58)) setInputSearchValue( inputSearchValue + tecla);
+        console.log(tecla)
+        if((tecla>47 && tecla<58) || (tecla>95 && tecla <106)) setInputSearchValue( inputSearchValue + tecla);
         else{
            if (tecla==8 || tecla==0) setInputSearchValue(inputSearchValue + tecla);
            else {
