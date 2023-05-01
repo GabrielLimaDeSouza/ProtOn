@@ -17,6 +17,7 @@ const dentistaController = {
             const usuarioDentista = {
                 email,
                 senha,
+                type: 'dentista',
                 user: user._id
             }
             

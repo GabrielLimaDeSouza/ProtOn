@@ -11,6 +11,7 @@ const pacienteController = {
             const usuarioPaciente = {
                 email,
                 senha,
+                type: 'paciente',
                 user: user._id
             }
 
@@ -30,7 +31,9 @@ const pacienteController = {
                 return
             }
 
-            res.status(201).json(paciente)
+            const response = await paciente.populate("condicoes")
+
+            res.status(201).json(response)
         } catch (error) {
             console.log(error)
         }
@@ -44,8 +47,10 @@ const pacienteController = {
                     res.status(404).json({ msg: `Paciente com cpf ${cpf} não encontrado!` })
                     return
                 }
+
+                const response = await paciente.populate("condicoes")
     
-                res.status(201).json(paciente)
+                res.status(201).json(response)
             } catch (error) {
                 console.log(error)
             }

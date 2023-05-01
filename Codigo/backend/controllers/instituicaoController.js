@@ -11,6 +11,7 @@ const instituicaoController = {
             const usuarioInstituicao = {
                 email,
                 senha,
+                type: 'instituicao',
                 user: user._id
             }
 
