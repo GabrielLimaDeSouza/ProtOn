@@ -24,9 +24,16 @@
   border-radius: 60px;
   opacity: 60%;
   border: none;
-  width: 80vw;
+  max-width: 400px;
+  width: 80%;
   height: 28px;
   padding-left: 20px;
+}
+
+.inputText:focus{
+  border: 0 none;
+  outline: 0;
+  box-shadow: 0 0 0 0;
 }
 /* input search*/
 

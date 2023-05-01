@@ -6,6 +6,8 @@ import Input from "../components/input/Input"
 import InputOptions from '../components/input/InputOptions'
 import Snackbar from '@mui/material/Snackbar';
 
+import styles from '../css/FormDentista.module.css'
+
 import MuiAlert from '@mui/material/Alert';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -87,18 +89,18 @@ const FormInstituicao = () => {
 
    return (
         <>
-            <div className="logo">
+            <div className={styles.logo}>
                 <img src={Logo} alt="Logo" />
             </div>
 
 
-            <form className="form input-container" onSubmit={createInstituicao}>
-            <div className="uni"><Input type="text" placeholder="Nome" id="name"/></div>
-                <div className="uni"><Input type="text" placeholder="Email" id="email"/></div>
-                <div className="uni"><Input type="password" placeholder="Senha" id="senha"/></div>
-                <div className="uni"><InputOptions type="options" name="Tipo" onChange={handleTipoChange} content={listaTipos} /></div>
-                <div className="divButton">
-                    <button type="submit" className="confirmar">Confirmar</button>
+            <form className={styles.form} onSubmit={createInstituicao}>
+            <div className={styles.uni}><Input type="text" placeholder="Nome" id="name"/></div>
+                <div className={styles.uni}><Input type="text" placeholder="Email" id="email"/></div>
+                <div className={styles.uni}><Input type="password" placeholder="Senha" id="senha"/></div>
+                <div className={styles.uni}><InputOptions type="options" name="Tipo" onChange={handleTipoChange} content={listaTipos} /></div>
+                <div className={styles.divButton}>
+                    <button type="submit" className={styles.confirmar}>Confirmar</button>
                 </div>
             </form>
             <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
