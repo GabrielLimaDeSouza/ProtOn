@@ -1,0 +1,54 @@
+/* Input container */
+.inputContainer {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+}
+
+/*Input options*/
+.divButton{
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+/*Botões*/
+.adicionar{
+    margin-top: 20px;
+    margin-left: 60%;
+    border-radius: 13.96px;
+    height: 30px;
+    width: 87px;
+    background-color: #95BFDE;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.inputOption {
+    border-radius: 60px;
+    opacity: 60%;
+    border: none;
+    max-width: 400px;
+    width: 80%;
+    height: 28px;
+    padding-left: 20px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.inputOption:focus {
+    border: 0 none;
+    outline: 0;
+    box-shadow: 0 0 0 0;
+}
+.tagItem {
+    display: flex;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+}
+
+.close {
+    cursor: pointer;
+}

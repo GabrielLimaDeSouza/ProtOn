@@ -1,0 +1,25 @@
+
+    
+.btnTextTop {
+  background-color: #f5f6fa;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 20px;
+  
+  height: 42px;
+  
+  padding-left: 40px;
+  color: #8795a2;
+}
+    
+.btnBuscarTop {
+  width: 20px!important;
+  height: 22px;
+  background: url(http://www.devmedia.com.br/imagens/2013/buscar_grey.png) no-repeat;
+  cursor: pointer!important;
+  border: none;
+  transform: translateY(-50%);
+  padding: 0;
+  position: relative;
+  top: -43px;
+  left: 10px;
+}
