@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./input.css"
+import styles from "./input.module.css"
 
 
 function Input(props) {
@@ -38,7 +38,6 @@ const [tags, setTags] = useState([])
 
     function removeLabel() {
         setPlaceholderText(" ")
-
     }
     function setPlaceholder() {
         setPlaceholderText(props.placeholder)
@@ -48,7 +47,7 @@ const [tags, setTags] = useState([])
 
 
     }
-    function handleKeyDown(variavel) {
+    function handleKeyDown() {
         let novaCondicao = document.getElementById("condicao").value
         setTags(tags => [...tags, { condicao: novaCondicao }])
         document.getElementById("condicao").value = ""
@@ -60,35 +59,31 @@ const [tags, setTags] = useState([])
             <>
             {
                 isPassword() ?
-                <div className="input-container">
-                    <input placeholder={placeholderText} className="input-field" type="password" onFocus={removeLabel} onBlur={setPlaceholder} id={props.id}></input>
-                    <label htmlFor="input-field" className="input-label" >{props.placeholder}</label>
-                <span className="input-highlight"></span>
+                <div className={styles.inputContainer}>
+                    <input placeholder={placeholderText} className={styles.inputText} autocomplete="new-password" type="password" id={props.id}></input>
                 </div>
                 :
                 isText() ?
-                    <div className="input-container">
-                        <input placeholder={placeholderText} className="input-field" type="text" onFocus={removeLabel} onBlur={setPlaceholder} id={props.id}></input>
-                        <label htmlFor="input-field" className="input-label" >{props.placeholder}</label>
-                        <span className="input-highlight"></span>
+                    <div className={styles.inputContainer}>
+                        <input placeholder={placeholderText} className={styles.inputText} autocomplete="new-password" type="text" id={props.id}></input>
                     </div>
                     :
                     isOptions() ?
                         <div>
-                            <div className="input-container">
+                            <div className={styles.inputContainer}>
                                 {
                                     tags.map((tag, index) => {
                                         return (
-                                            <div className="tag-item" >
-                                                <span className="text tag" >{tag.condicao}</span>
-                                                <span className="close" onClick={()=>{removeTag(index)}}>&times;</span>
+                                            <div className={styles.tagItem} >
+                                                <span className={[styles.text, styles.tag]}>{tag.condicao}</span>
+                                                <span className={styles.close} onClick={()=>{removeTag(index)}}>&times;</span>
                                             </div>
                                         )
 
                                     })
                                 }
-                                <input placeholder={placeholderText} className="input-field" type="text" onFocus={() => { removeLabel("condicao") }} onBlur={setPlaceholder} list="lista" id="condicao"></input>
-                                <span className="input-highlight" ></span>
+                                <input placeholder={placeholderText} className={styles.inputText} type="text" list="lista" id="condicao"></input>
+                            <span className={""} ></span>
                                 <datalist id="lista">
                                     
                                    {notEmpyt() &&
@@ -102,17 +97,17 @@ const [tags, setTags] = useState([])
                                 </datalist>
 
                             </div>
-                            <button className="adicionar" type='button' onClick={handleKeyDown}>Adicionar</button>
+                            <button className={styles.adicionar} type='button' onClick={handleKeyDown}>Adicionar</button>
                         </div>
 
                         :
                         isSearch()?
                         
-                        <div class="searchbar">
-    <div class="searchbar-wrapper">
-        <div class="searchbar-left">
-            <div class="search-icon-wrapper">
-                <span class="search-icon searchbar-icon">
+                        <div class={styles.searchbar}>
+    <div class={styles.searchbarWrapper}>
+        <div class={styles.searchbarLeft}>
+            <div class={styles.searchIconWrapper}>
+                <span class={[styles.searchIcon, styles.searchbarIcon]}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
                         </path>
@@ -121,13 +116,13 @@ const [tags, setTags] = useState([])
             </div>
         </div>
 
-        <div class="searchbar-center">
-            <div class="searchbar-input-spacer"></div>
+        <div class={styles.searchbarCenter}>
+            <div class={styles.searchbarInputSpacer}></div>
 
-            <input typeSearch={props.typeSearch} id={props.id} class="searchbar-input" maxlength="2048" name="q" autocapitalize="off" autocomplete="false" title="Search" role="combobox" placeholder={props.placeholder} onKeyUp={props.event}></input>
+            <input typeSearch={props.typeSearch} id={props.id} class={styles.searchbarInput} maxlength="2048" name="q" autocapitalize="off" autocomplete="false" title="Search" role="combobox" placeholder={props.placeholder} onKeyUp={props.event}></input>
         </div>
 
-        <div class="searchbar-right">
+        <div class={styles.searchbarRight}>
            
         </div>
     </div>

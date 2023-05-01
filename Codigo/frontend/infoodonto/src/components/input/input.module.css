@@ -1,52 +1,10 @@
 /* Input container */
-.input-container {
+.inputContainer {
     position: relative;
   }
   
-  /* Input field */
-  .input-field {
-    display: block;
-   padding-top: 10px;
-    font-size: 16px;
-    border: none;
-    border-bottom: 2px solid #ccc;
-    outline: none;
-    background-color: transparent;
-  }
   
-  /* Input label */
-  .input-label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    font-size: 16px;
-    color: rgba(204, 204, 204, 0);
-    pointer-events: none;
-    transition: all 0.3s ease;
-  }
-  
-  /* Input highlight */
-  .input-highlight {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 2px;
-    width: 0;
-    background-color: #007bff;
-    transition: all 0.3s ease;
-  }
-  
-  /* Input field:focus styles */
-  .input-field:focus + .input-label {
-    top: -20px;
-    font-size: 14px;
-    color: #007bff;
-  }
-  
-  .input-field:focus + .input-label + .input-highlight {
-    width: 110%;
-  }
-  
+/*Botões*/
 .adicionar{
     margin-top: 20px;
     margin-left: 70%;
@@ -60,6 +18,15 @@
 }
 .close{
     cursor: pointer;
+}
+/*Input text*/
+.inputText{
+  border-radius: 60px;
+  opacity: 60%;
+  border: none;
+  width: 80vw;
+  height: 28px;
+  padding-left: 20px;
 }
 /* input search*/
 
@@ -84,13 +51,13 @@
   border-color: rgba(223,225,229,0);
 }
 
-.searchbar-wrapper {
+.searchbarWrapper {
   flex: 1;
   display: flex;
   padding: 5px 8px 0 14px;
 }
 
-.searchbar-left {
+.searchbarLeft {
   font-size: 14px;
   font-family: arial, sans-serif;
   color: #202124;
@@ -100,11 +67,11 @@
   margin-top: -5px;
 }
 
-.search-icon-wrapper {
+.searchIconWrapper {
   margin: auto;
 }
 
-.search-icon {
+.searchIcon {
   margin-top: 3px;
   color: #9aa0a6;
   height: 20px;
@@ -112,7 +79,7 @@
   width: 20px;
 }
 
-.searchbar-icon {
+.searchbarIcon {
   display: inline-block;
   fill: currentColor;
   height: 24px;
@@ -121,13 +88,13 @@
   width: 24px;
 }
 
-.searchbar-center {
+.searchbarCenter {
   display: flex;
   flex: 1;
   flex-wrap: wrap;
 }
 
-.searchbar-input-spacer {
+.searchbarInputSpacer {
   color: transparent;
   flex: 100%;
   white-space: pre;
@@ -135,7 +102,7 @@
   font-size: 16px;
 }
 
-.searchbar-input {
+.searchbarInput {
   background-color: transparent;
   border: none;
   margin: 0;
@@ -152,7 +119,7 @@
   width: 100%;
 }
 
-.searchbar-right {
+.searchbarRight {
   display: flex;
   flex: 0 0 auto;
   margin-top: -5px;
@@ -160,6 +127,6 @@
   flex-direction: row
 }
 
-.searchbar-clear-icon {
+.searchbarClearIcon {
   margin-right: 12px
 }

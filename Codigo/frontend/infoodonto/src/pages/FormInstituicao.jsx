@@ -3,7 +3,6 @@ import React from 'react'
 
 import Logo from "../img/logo.png"
 import Input from "../components/input/Input"
-import "../css/FormPaciente.css"
 import InputOptions from '../components/input/InputOptions'
 import Snackbar from '@mui/material/Snackbar';
 

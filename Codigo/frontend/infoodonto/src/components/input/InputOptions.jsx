@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './input.css'
+import styles from "./input.module.css"
 
 const InputOptions= (props) => {
 
@@ -12,9 +12,9 @@ const InputOptions= (props) => {
 
   return (
     <>
-    <div className='input-container'>
-        <input placeholder={props.name} value={valor} onChange={handleChange} className="input-field" type="text" list="lista" id="option"></input>
-        <span className="input-highlight"></span>
+    <div className={styles.input-container}>
+        <input placeholder={props.name} value={valor} onChange={handleChange} className={styles.input-field} type="text" list="lista" id="option"></input>
+        <span className={styles.input-highlight}></span>
         <datalist id="lista">
             {props.content.map((value)=> 
                 <option key={value} value={value}>{value}</option>

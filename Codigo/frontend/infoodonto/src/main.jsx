@@ -14,6 +14,7 @@ import FormInstituicao from "./pages/FormInstituicao"
 import SearchPaciente from "./pages/SearchPaciente"
 import HomeInstituicao from "./pages/HomeInstituicao"
 import EditDentista from "./pages/EditDentista"
+import HomePaciente from "./pages/HomePaciente"
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
       { path: "/formInstituicao", element: <FormInstituicao /> },
       { path: "/searchPaciente", element: <SearchPaciente /> },
       { path: "/homeInstituicao", element: <HomeInstituicao /> },
+      { path: "/homePaciente", element: <HomePaciente /> },
       { path: "/editDentista/:id", element: <EditDentista /> }
     ]
   }

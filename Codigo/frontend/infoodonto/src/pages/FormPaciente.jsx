@@ -1,6 +1,6 @@
 import Logo from "../img/logo.png"
 import Input from "../components/input/Input"
-import "../css/FormPaciente.css"
+import styles from "../css/FormPaciente.module.css"
 
 
 
@@ -46,16 +46,16 @@ const FormPaciente = () => {
             </div>
 
 
-            <div className="form">
-                <div className="uni"><Input type="text" placeholder="Nome" id="name"/></div>
-                <div className="uni"><Input type="text" placeholder="CPF" id="cpf"/></div>
-                <div className="uni"><Input type="text" placeholder="Email" id="email"/></div>
-                <div className="uni"><Input type="password" placeholder="Senha" id="senha"/></div>
-                <div className="uni"><Input type="options" placeholder="Condições" id="condicao" option={["diabete", "alergia"]}/></div>
+            <div className={styles.form}>
+                <div className={styles.uni}><Input type="text" placeholder="Nome" id="name"/></div>
+                <div className={styles.uni}><Input type="text" placeholder="CPF" id="cpf"/></div>
+                <div className={styles.uni}><Input type="text" placeholder="Email" id="email"/></div>
+                <div className={styles.uni}><Input type="password" placeholder="Senha" id="senha"/></div>
+                <div className={styles.uni}><Input type="options" placeholder="Condições" id="condicao" option={["diabete", "alergia"]}/></div>
             </div>
  
-            <div className="divButton">
-                <button className="confirmar" onClick={cadastrar}>Confirmar</button>
+            <div className={styles.divButton}>
+                <button className={styles.confirmar} onClick={cadastrar}>Confirmar</button>
             </div>
 
 
