@@ -3,7 +3,7 @@ import { useState } from "react"
 
 const InputOption =(props)=>{
 
-    console.log(props.currentCondicao)
+    
     const [tags, setTags] = useState(props.currentCondicao)
 
 

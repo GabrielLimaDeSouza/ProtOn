@@ -24,120 +24,114 @@ const SearchPaciente = () => {
     const [open1, setOpen1] = useState()
     const [open2, setOpen2] = useState()
     const [inputSearchValue, setInputSearchValue] = useState("")
+    let testeString = ""
     const url = 'http://localhost:3000'
 
+
     useEffect(() => {
-        if (cpf != null && cpf.length == 11 ) {
-            fetch(`${url}/api/paciente/condicao?cpf=${cpf}`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
+        fetch(`${url}/api/paciente/condicao?cpf=${cpf}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then(resp => resp.json())
+            .then(data => {
+                if (data) {
+                    setPaciente(data)
+                    setPacienteExiste(true)
+                    setOpen1(true);
+                } else {
+                    setPacienteExiste(false)
+                    setOpen2(true)
                 }
-            })
-                .then(resp => resp.json())
-                .then(data => {
+            }
 
-                    if (data) {
-                        
-                        setCpf(null)
-                        setPaciente(data)
-                        setPacienteExiste(true)
-                        setOpen1(true);
-                    }else{
-                        setPacienteExiste(false)
-                        console.log("teste212")
-                        setOpen2(true)
-                    }
-                }
-
-                )
-                .catch(err => console.log(err))
+            )
+            .catch(err => console.log(err))
 
 
-        }
-    }, [cpf]);
+    }
+        , [cpf]);
 
 
     useEffect(() => {
         if (paciente != null && Object.keys(paciente).length !== 0) {
             setPacienteExiste(true);
-            
+
             for (let i = 0; i < paciente.condicoes.length; i++) {
                 setPreAtendimento(preAtendimento.concat(paciente.condicoes[i].preAtendimento))
                 setAnestesicoLocal(anestesicoLocal.concat(paciente.condicoes[i].anestesicoLocal))
                 setMedicamentos(medicamentos.concat(paciente.condicoes[i].medicamentos))
                 setImplante(implante.concat(paciente.condicoes[i].implante))
-                if(pacienteExiste){
-            
-            
-        }
+                if (pacienteExiste) {
+
+
+                }
             }
         } else {
             setPacienteExiste(false);
-            
-            
+
+
         }
-        
-        
+
+
 
     }, [paciente])
 
     function campoCompleto() {
         let campo = document.getElementById("busca");
-        if (campo.value.length === 11) {
-            setCpf(campo.value);
-            campo.value = ""
-        }
+        setCpf(testeString);
+        setInputSearchValue("");
+        campo.value = ""
     }
 
-    function handleClose(){
+    function handleClose() {
         setOpen1(false)
     }
 
-    function handleClose2(){
+    function handleClose2() {
         setOpen2(false)
     }
 
-    function onKeyDown(e){
-        
-        var tecla=(window.event)?event.keyCode:e.which;   
-        console.log(tecla)
-        if((tecla>47 && tecla<58) || (tecla>95 && tecla <106)) setInputSearchValue( inputSearchValue + tecla);
-        else{
-           if (tecla==8 || tecla==0) setInputSearchValue(inputSearchValue + tecla);
-           else {
-            e.preventDefault()
-           }  
+    function onKeyDown(e) {
+        let campo = document.getElementById("busca")
 
+        if (/^-?\d+$/.test(e.nativeEvent.data)) {
+            testeString = testeString + e.nativeEvent.data;
+        } else {
+            campo.value = testeString
         }
-        
-        
-        
+        if (testeString.length == 11) {
+            campoCompleto()
+        }
+
+
     }
-      
+
     return (
         <>
-        
+
             <div className={styles.logo}>
                 <img src={Logo} alt="Logo" />
             </div>
             <div className={styles.searchBox}>
-                <Input type="search" placeholder="CPF: 00000000000" typeSearch="number" id="busca" limiteChar="11"  onKeyDown={onKeyDown}></Input>
+                <Input type="search" placeholder="CPF: 00000000000" typeSearch="number" id="busca" limiteChar="11" onKeyDown={onKeyDown}></Input>
             </div>
-        {
-            open1?
-            <Snackbar open={open1} autoHideDuration={1200} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-              Paciente encontrado com sucesso!
-            </Alert>
-          </Snackbar>:
-          open2?
-          <Snackbar open={open2} autoHideDuration={2000} onClose={handleClose2}>
-            <Alert onClose={handleClose2} severity="error" sx={{ width: '100%' }}>
-              Paciente não foi encontrado!
-            </Alert>
-          </Snackbar>:""
-        }
+            {
+                open1 ?
+                    <Snackbar open={open1} autoHideDuration={1200} onClose={handleClose}>
+                        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                            Paciente encontrado com sucesso!
+                        </Alert>
+                    </Snackbar> :
+                    open2 ?
+                        <Snackbar open={open2} autoHideDuration={2000} onClose={handleClose2}>
+                            <Alert onClose={handleClose2} severity="error" sx={{ width: '100%' }}>
+                                Paciente não foi encontrado!
+                            </Alert>
+                        </Snackbar> : ""
+            }
 
             {
                 pacienteExiste ?
@@ -147,11 +141,11 @@ const SearchPaciente = () => {
                         <div className={styles.divCondicoes}>
                             <h1>Condições</h1>
                             <div className={styles.containerCondicoes}>
-                            {
-                                paciente.condicoes.map((condicao) => (
-                                    <div className={styles.divCondicao}>{condicao.nome}</div>
-                                ))
-                            }
+                                {
+                                    paciente.condicoes.map((condicao) => (
+                                        <div className={styles.divCondicao}>{condicao.nome}</div>
+                                    ))
+                                }
                             </div>
                         </div>
                         <div className={styles.drop}> <Accordion>
@@ -237,9 +231,9 @@ const SearchPaciente = () => {
 
                     : (
 
-                            <div className={styles.loaderBox}>
-                                
-                               
+                        <div className={styles.loaderBox}>
+
+
                             <Typography variant="h3" width={"70%"}><Skeleton animation="wave" /></Typography>
 
                             <Skeleton animation="wave" height={"30px"} width={"90%"} />
