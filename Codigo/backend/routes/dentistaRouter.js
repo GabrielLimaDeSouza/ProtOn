@@ -9,10 +9,10 @@ router.route("/dentista").post((req, res) => dentistaController.create(req, res)
 //router.use(authenticationMiddleware)
 
 // GET ALL Dentista
-router.route("/dentista").get((req, res) => dentistaController.getAll(req, res))
+router.route("/dentistas").get((req, res) => dentistaController.getAll(req, res))
 
 // GET Dentista
-router.route("/dentista/:id").get((req, res) => dentistaController.get(req, res))
+router.route("/dentista").get((req, res) => dentistaController.get(req, res))
 
 // GET Dentistas com id Instituição
 router.route("/dentista/instituicao").get((req, res) => dentistaController.getAllDentistasInstituicao(req, res))

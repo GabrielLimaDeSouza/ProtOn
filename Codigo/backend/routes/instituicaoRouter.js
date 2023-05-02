@@ -9,7 +9,7 @@ router.route("/instituicao").post((req, res) => instituicaoController.create(req
 //router.use(authenticationMiddleware)
 
 // GET ALL Instituicao
-router.route("/instituicao").get((req, res) => instituicaoController.getAll(req, res))
+router.route("/instituicoes").get((req, res) => instituicaoController.getAll(req, res))
 
 // GET Instituicao
 router.route("/instituicao").get((req, res) => instituicaoController.get(req, res))

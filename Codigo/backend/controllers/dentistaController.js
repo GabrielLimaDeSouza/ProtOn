@@ -39,7 +39,7 @@ const dentistaController = {
     },
     get: async (req, res)=> {
         try {
-            const id = req.params.id
+            const id = req.query.id
             const dentista = await DentistaModel.findById(id).populate("instituicao")
 
             if(!dentista) {
@@ -92,7 +92,7 @@ const dentistaController = {
             }
 
             const response = await UsuarioModel.findOneAndUpdate({ user: id }, { email, senha })
-            response.populate("Dentista")
+            response.populate("user")
 
             res.status(200).json({ response, msg: "Usuário atualizado com sucesso!" })
 

@@ -95,7 +95,7 @@ const pacienteController = {
             }
 
             const response = await UsuarioModel.findOneAndUpdate({ user: id }, { email, senha })
-            response.populate("Paciente")
+            response.populate("user")
 
             res.status(200).json({ response, msg: "Paciente atualizado com sucesso!" })
 

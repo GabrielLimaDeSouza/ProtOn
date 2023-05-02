@@ -13,6 +13,6 @@ router.route("/condicao").post((req, res) => condicoesController.create(req, res
 router.route("/condicao").get((req, res) => condicoesController.get(req, res))
 
 // GET ALL Condicoes
-router.route("/condicao").get((req, res) => condicoesController.getAll(req, res))
+router.route("/condicoes").get((req, res) => condicoesController.getAll(req, res))
 
 module.exports = router;
