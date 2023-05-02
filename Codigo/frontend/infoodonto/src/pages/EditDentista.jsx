@@ -48,6 +48,7 @@ const EditDentista = () => {
     function editDentista(e){
         e.preventDefault();
         const valoresDentista = Object.values(dentista);
+        console.log(dentista)
         if (valoresDentista.some(valor => valor === "")) {
             messageError()
             return;

@@ -50,7 +50,7 @@ const Login = () => {
                                 <Button type="submit" id="login" className="submit">Entrar</Button>
                             </div>
                         </form>
-                        <p className={ styles.signUp }>Não possui conta? <Link className={ styles.link } to="/cadastro-paciente">Cadastrar</Link></p>
+                        <p className={ styles.signUp }>Não possui conta? <Link className={ styles.link } to="/formPaciente">Cadastrar</Link></p>
                     </div>
                 </div>
             </section>

@@ -3,7 +3,7 @@ import React from 'react'
 
 import Logo from "../img/logo.png"
 import Input from "../components/input/Input"
-import InputOptions from '../components/input/InputOptions'
+import InputOptions from '../components/input/option/InputOptions'
 import Snackbar from '@mui/material/Snackbar';
 
 import styles from '../css/FormDentista.module.css'

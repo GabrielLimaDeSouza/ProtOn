@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styles from '../../components/input/input.module.css'
+import styles from './Option.module.css'
 
 const InputOptions= (props) => {
 
@@ -12,8 +12,8 @@ const InputOptions= (props) => {
 
   return (
     <>
-    <div>
-        <input className={styles.inputText} placeholder={props.name} value={valor} onChange={handleChange}  type="text" list="lista" id="option"></input>
+    <div className={styles.divExterna}>
+        <input className={styles.inputOption} placeholder={props.name} value={valor} onChange={handleChange}  type="text" list="lista" id="option"></input>
         <span></span>
         <datalist id="lista">
             {props.content.map((value)=> 
