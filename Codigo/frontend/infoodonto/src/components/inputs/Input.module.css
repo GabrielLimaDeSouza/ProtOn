@@ -1,0 +1,8 @@
+div.inputComponent input {
+    border: none;
+    width: 100%;
+    height: 3rem;
+    padding: 0 20px;
+    border-radius: 5rem;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, .02);
+}

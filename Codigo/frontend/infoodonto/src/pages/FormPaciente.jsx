@@ -40,7 +40,7 @@ const FormPaciente = () => {
     }
     return (
 
-        <>
+        <div className={ styles.body }>
             <div className="logo">
                 <img src={Logo} alt="Logo" />
             </div>
@@ -60,7 +60,7 @@ const FormPaciente = () => {
 
 
 
-        </>
+        </div>
     )
 }
 

@@ -12,6 +12,10 @@ const usuarioSchema = new Schema(
             type: String,
             required: true
         },
+        type: {
+            type: String,
+            required: true
+        },
         user: [{
             type: Schema.Types.ObjectId,
             ref: 'Paciente'

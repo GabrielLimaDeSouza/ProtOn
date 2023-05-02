@@ -22,14 +22,14 @@ const loginController = {
                 exp: Math.floor(Date.now() / 1000) + LOGIN_EXPIRATION_TIME,
                 sub: user._id,
                 iss: 'proton',
-                data: {
+                user: {
                     _id: user._id,
                 },
             }
 
             const token = await Token.generate(JWTData)
 
-            res.status(201).json({ email, _id: user._id, token })
+            res.status(201).json({  user: {_id: user._id, email}, token })
         } catch (error) {
             console.log(error)
         }

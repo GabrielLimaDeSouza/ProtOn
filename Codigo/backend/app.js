@@ -10,7 +10,7 @@ const conn = require("./db/conn")
 
 conn() 
 
-// Routes
+//* Routes
 const routes = require("./routes/router")
 app.use("/api", routes)
 

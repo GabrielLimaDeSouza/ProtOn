@@ -11,6 +11,7 @@ const instituicaoController = {
             const usuarioInstituicao = {
                 email,
                 senha,
+                type: 'instituicao',
                 user: user._id
             }
 
@@ -69,7 +70,7 @@ const instituicaoController = {
             }
 
             const response = await UsuarioModel.findOneAndUpdate({ user: id }, { email, senha })
-            response.populate("Instituicao")
+            response.populate("user")
 
             res.status(200).json({ response, msg: "Instituição atualizada com sucesso!" })
 

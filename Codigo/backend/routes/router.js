@@ -12,15 +12,17 @@ const instituicaoRouter = require("./instituicaoRouter")
 // Condição router
 const condicaoRouter = require("./condicaoRouter")
 
+// Usuario router
+const usuarioRouter = require("./usuarioRouter")
+
 // Login router
 const loginRouter = require("./loginRouter")
 
-router.use("/", loginRouter)
-
-//! Rotas privadas
 router.use("/", dentistaRouter)
 router.use("/", pacienteRouter)
 router.use("/", instituicaoRouter)
 router.use("/", condicaoRouter)
+router.use("/", usuarioRouter)
+router.use("/", loginRouter)
 
 module.exports = router
