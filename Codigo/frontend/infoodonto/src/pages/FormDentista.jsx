@@ -46,7 +46,7 @@ const FormDentista = () => {
     };
     
     useEffect(() => {
-        fetch('http://localhost:3000/api/instituicao/', {
+        fetch('http://localhost:3000/api/instituicoes/', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
