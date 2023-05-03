@@ -7,10 +7,10 @@ const dentistaSchema = new Schema(
             type: String,
             required: true
         },
-        instituicao: {
+        pacientes: [{
             type: Schema.Types.ObjectId,
-            ref: 'Instituicao'
-        }
+            ref: 'Paciente'
+        }]
     },
     { timestemps: true }
 )
