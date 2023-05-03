@@ -14,16 +14,22 @@ import MuiAlert from '@mui/material/Alert';
 const MedicosVinculados = ()=>{
 
     const [open, setOpen] = useState(false);
-    let rows = [
+    const [rows, setRows] = useState([
         {"name" : "Paulo",
         "email" : "Paulo@test",
          "matricula": "00000",
          "instituicao": "Nenhuma"
         },
-    ]
+    ]);
 
-    function deleteDentista(){
-        console.log("apagou")
+
+    
+
+    function deleteDentista(id){
+        let index = rows.indexOf(id);
+        rows.splice(index, 1)
+        messageRemove()
+
     }
     const messageRemove = () => {
         setOpen(true);
@@ -55,7 +61,7 @@ const MedicosVinculados = ()=>{
                 </TableRow>
             </TableHead>
             <TableBody>
-                {rows.map((row) => (
+                {rows.map((row, index) => (
                 <TableRow
                     key={row._id}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -65,8 +71,7 @@ const MedicosVinculados = ()=>{
                     <TableCell align="right">{row.matricula}</TableCell>
                     <TableCell align="right">{row.instituicao}</TableCell>
                     <TableCell align="right"><button className={styles.buttonCrud} onClick={() => {
-                        deleteDentista(row.id)
-                        messageRemove()
+                        deleteDentista(index)
                     }}><DeleteIcon className={styles.icon}/></button></TableCell>
                 </TableRow>
                 ))}
