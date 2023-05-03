@@ -11,6 +11,9 @@ router.route("/instituicao").post((req, res) => instituicaoController.create(req
 // GET ALL Instituicao
 router.route("/instituicoes").get((req, res) => instituicaoController.getAll(req, res))
 
+// GET ALL Dentistas FROM Instituicao
+router.route("/instituicao/:id/dentistas").get((req, res) => instituicaoController.getAllDentistas(req, res))
+
 // GET Instituicao
 router.route("/instituicao").get((req, res) => instituicaoController.get(req, res))
 
