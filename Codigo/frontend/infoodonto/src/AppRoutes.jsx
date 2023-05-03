@@ -37,7 +37,7 @@ const AppRoutes = () => {
             <Route exact path="/formPaciente" element={ <FormPaciente /> }></Route>
             <Route exact path="/formDentista" element={ <FormDentista /> }></Route>
             <Route exact path="/formInstituicao" element={ <FormInstituicao /> }></Route>
-            <Route exact path="/searchPaciente" element={ <Private><SearchPaciente /></Private> }></Route>
+            <Route exact path="/searchPaciente" element={ <SearchPaciente /> }></Route>
             <Route exact path="/homeInstituicao" element={ <HomeInstituicao /> }></Route>
             <Route exact path="/homePaciente" element={ <HomePaciente /> }></Route>
             <Route exact path="/editDentista/:id" element={ <Private><EditDentista /></Private> }></Route>
