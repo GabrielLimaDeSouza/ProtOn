@@ -14,20 +14,10 @@ const usuarioSchema = new Schema(
         },
         type: {
             type: String,
+            enum: ['paciente', 'dentista', 'instituicao'],
             required: true
         },
-        user: [{
-            type: Schema.Types.ObjectId,
-            ref: 'Paciente'
-        },
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Insituicao'
-        },
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Dentista'
-        }]
+        user: Schema.Types.ObjectId
     },
     { timestemps: true }
 )
