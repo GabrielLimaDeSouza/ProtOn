@@ -3,6 +3,10 @@ const { Schema } = mongoose;
 
 const pacienteSchema = new Schema(
     {
+        name: {
+            type: String,
+            required: true
+        },
         cpf: {
             type: String,
             required: true
