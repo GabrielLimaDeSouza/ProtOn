@@ -9,8 +9,13 @@ const instituicaoSchema = new Schema(
         },
         tipo: {
             type: String,
+            enum: ['Universidade', 'Clinica', 'Hospital'],
             required: true
-        }
+        },
+        dentistas: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Dentista'
+        }]
     },
     { timestemps: true }
 )
