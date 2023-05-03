@@ -40,7 +40,7 @@ const loginController = {
                 const paciente = await UsuarioModel.findOne({ cpf: cpf }).exec()
     
                 if(!paciente) {
-                    res.status(404).json({ msg: `Paciente com cpf ${cpf} não encontrado!` })
+                    res.status(404).json({ msg: `Paciente com cpf ${ cpf } não encontrado!` })
                     return
                 }
     
