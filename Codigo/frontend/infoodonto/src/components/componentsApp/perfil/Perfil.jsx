@@ -14,7 +14,7 @@ const Perfil = (props) => {
                     <Input type="text" placeholder={props.currentCpf} disabled={true} id="updateCpf"></Input>
                 </div>
                 <div className={styles.divInput}>
-                    <Input type="password" placeholder={props.currentPassword} id="updatePassword"></Input>
+                    <Input type="password" placeholder={"Oculto"} id="updatePassword"></Input>
                 </div>
                 <div className={styles.divInput}><Input type="text" placeholder={props.currentEmail} id="updateEmail"></Input></div>
                 <div className={styles.divInput}><Input type="option" placeholder="Condição" id="updateCondicao" currentCondicao={props.currentCondicao}> </Input></div>

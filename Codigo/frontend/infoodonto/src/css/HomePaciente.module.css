@@ -70,6 +70,7 @@
 .navIcon{
     color: white;
     font-size: 20px;
+    cursor: pointer;
 }
 .navIconSelect{
     color: #4EA2CC;
