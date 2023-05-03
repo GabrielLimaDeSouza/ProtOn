@@ -1,17 +1,21 @@
 const { Usuario: UsuarioModel } = require("../models/Usuario")
 
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
 const usuarioController = {
     get: async (req, res) => {
         try {
-            const id = req.query.id
-            const user = await UsuarioModel.findById(id)
+            const _id = req.query.id
+            const user = await UsuarioModel.findOne({ user: _id })
 
             if(!user) {
-                res.status(404).json({ msg: `Usuario ${id} não encontrado!` })
+                res.status(404).json({ msg: `Usuario ${ _id } não encontrado!` })
                 return
             }
 
-            const data = await user.populate("user")
+            const data = await user.populate({ path: 'user', model: capitalizeFirstLetter(user.type) })
 
             res.status(201).json(data)
         } catch (error) {
