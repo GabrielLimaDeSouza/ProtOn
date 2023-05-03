@@ -1,5 +1,6 @@
 const { Instituicao: InstituicaoModel } = require("../models/Instituicao")
 const { Usuario: UsuarioModel } = require("../models/Usuario")
+const { Dentista: DentistaModel } = require("../models/Dentista")
 
 const instituicaoController = {
     create: async (req, res) => {
@@ -43,6 +44,26 @@ const instituicaoController = {
             res.status(201).json(instituicoes)
         } catch (error) {
             console.log(error)
+        }
+    },
+    getAllDentistas: async (req, res) => {
+        try {
+            const _id = req.params.id
+            const instituicao = await InstituicaoModel.findById(_id).populate('dentistas')
+
+            if (!instituicao) {
+                res.status(404).json({ msg: 'Nenhuma Instituição encontrada' })
+                return
+            }
+
+            const dentistas = await UsuarioModel.find({ user: { $in: instituicao.dentistas } })
+                .populate({ path: 'user', model: 'Dentista' })
+                .exec()
+
+            res.status(200).json(dentistas)
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({ msg: 'Erro interno do servidor' })
         }
     },
     delete: async (req, res) => {
