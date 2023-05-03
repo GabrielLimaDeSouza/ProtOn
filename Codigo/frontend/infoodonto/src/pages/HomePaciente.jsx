@@ -17,7 +17,21 @@ const HomePaciente = () => {
                 break;
             case 1:
                 setPaginaSelecionada(<MedicosVinculados/>), console.log("Set 1") ;
+                break;
             }
+                let icones = document.querySelectorAll("[id='icon']")
+           
+           for(let i=0; i<=icones.length; i++){
+            console.log(icones[i])
+            if(i == icon){
+                icones[i].classList.remove(styles.navIcon)
+                icones[i].classList.add(styles.navIconSelect)
+            }else{
+                icones[i].classList.remove(styles.navIconSelect)
+            icones[i].classList.add(styles.navIcon)
+            }
+           }
+           
     }
     return (
         <>
@@ -35,7 +49,7 @@ const HomePaciente = () => {
                 </div>
                 <div className={styles.bottom} >
                     
-                    <FaUserAlt id="icon" onClick={()=>{iconSelecionado(0)}} className={styles.navIcon}/>
+                    <FaUserAlt id="icon" onClick={()=>{iconSelecionado(0)}} className={styles.navIconSelect}/>
                     <FaUserMd id="icon" onClick={()=>{iconSelecionado(1)}} className={styles.navIcon}/>
                     <FaHistory id="icon" className={styles.navIcon}/>
                     <BsFillGearFill id="icon" className={styles.navIcon}/> 
