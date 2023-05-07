@@ -1,5 +1,5 @@
 const router = require("express").Router()
-const pacienteController = require("../controllers/pecienteController")
+const pacienteController = require("../controllers/pacienteController")
 const authenticationMiddleware = require("../middlewares/auth")
 
 // CREATE Paciente
@@ -9,7 +9,7 @@ router.route("/paciente").post((req, res) => pacienteController.create(req, res)
 //router.use(authenticationMiddleware)
 
 // GET Paciente
-router.route("/paciente/id/:id").get((req, res) => pacienteController.get(req, res))
+router.route("/paciente").get((req, res) => pacienteController.get(req, res))
 
 // GET ALL Paciente
 router.route("/pacientes").get((req, res) => pacienteController.getAll(req, res))
@@ -22,8 +22,5 @@ router.route("/paciente").delete((req, res) => pacienteController.delete(req, re
 
 // UPDATE Paciente
 router.route("/paciente").put((req, res) => pacienteController.update(req, res))
-
-// GET Paciente com Condições BY CPF
-router.route("/paciente/condicao").get((req, res) => pacienteController.getByPacienteCpf(req, res))
 
 module.exports = router
