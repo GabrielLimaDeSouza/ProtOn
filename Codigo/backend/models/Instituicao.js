@@ -10,12 +10,18 @@ const instituicaoSchema = new Schema(
         tipo: {
             type: String,
             enum: ['Universidade', 'Clinica', 'Hospital'],
-            required: true
+            default: 'Clinica',
+            required: true,
+            message: '{VALUE} is not supported'
         },
         dentistas: [{
             type: Schema.Types.ObjectId,
             ref: 'Dentista'
-        }]
+        }],
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: 'Usuario'
+        }
     },
     { timestemps: true }
 )

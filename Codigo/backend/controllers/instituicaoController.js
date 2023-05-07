@@ -1,23 +1,41 @@
+const dentistaController = require("./dentistaController")
 const { Instituicao: InstituicaoModel } = require("../models/Instituicao")
 const { Usuario: UsuarioModel } = require("../models/Usuario")
-const { Dentista: DentistaModel } = require("../models/Dentista")
 
 const instituicaoController = {
     create: async (req, res) => {
         try {
             const { name, email, senha, tipo } = req.body
 
-            const user = await InstituicaoModel.create({ name, tipo })
-
-            const usuarioInstituicao = {
+            const user = {
                 email,
                 senha,
                 type: 'instituicao',
-                user: user._id
             }
+            const responseUser = await UsuarioModel.create(user)
+            
+            const instituicaoObject = {
+                name,
+                tipo,
+                user: responseUser._id
+            }
+            const instituicao = await (await InstituicaoModel.create(instituicaoObject)).populate('user')
 
-            const response = await UsuarioModel.create(usuarioInstituicao)
-            res.status(201).json({ response, msg: "Instituicao cadastrada com sucesso!" })
+            res.status(201).json({ instituicao, msg: "Instituicao cadastrada com sucesso!" })
+        } catch (error) {
+            console.log(error)
+        }
+    },
+    createDentista: async (req, res) => {
+        try {
+            const _id = req.params.id
+            const instituicao = await InstituicaoModel.findById(_id)
+
+            const dentista = await dentistaController.create(req, res)
+            instituicao.dentistas.push(dentista._id)
+            instituicao.save()
+
+            res.status(201).json({ dentista, msg: "Dentista cadastrada com sucesso!" })
         } catch (error) {
             console.log(error)
         }
@@ -25,7 +43,7 @@ const instituicaoController = {
     get: async (req, res)=> {
         try {
             const id = req.query.id
-            const instituicao = await InstituicaoModel.findById(id)
+            const instituicao = await InstituicaoModel.findById(id).populate('user').populate('dentistas')
 
             if(!instituicao) {
                 res.status(404).json({ msg: "Instituição não encontrada!" })
@@ -39,7 +57,7 @@ const instituicaoController = {
     },
     getAll: async (req, res) => {
         try {
-            const instituicoes = await InstituicaoModel.find()
+            const instituicoes = await InstituicaoModel.find().populate('user').populate('dentistas')
 
             res.status(201).json(instituicoes)
         } catch (error) {
@@ -56,11 +74,7 @@ const instituicaoController = {
                 return
             }
 
-            const dentistas = await UsuarioModel.find({ user: { $in: instituicao.dentistas } })
-                .populate({ path: 'user', model: 'Dentista' })
-                .exec()
-
-            res.status(200).json(dentistas)
+            res.status(200).json(instituicao.dentistas)
         } catch (error) {
             console.log(error)
             res.status(500).json({ msg: 'Erro interno do servidor' })
@@ -71,7 +85,7 @@ const instituicaoController = {
             const id = req.query.id
 
             const deletedInstituicao = await InstituicaoModel.findByIdAndDelete(id)
-            await UsuarioModel.findOneAndDelete({ user: id })
+            await UsuarioModel.findByIdAndDelete(deletedInstituicao.user._id)
 
             res.status(200).json({ deletedInstituicao, msg: "Instituição excluida com sucesso!" })
         } catch (error) {
@@ -80,20 +94,21 @@ const instituicaoController = {
     },
     update: async (req, res) => {
         try {
-            const id = req.query.id
-            const { email, senha, tipo } = req.body
+            const _id = req.query.id
+            const { name, email, senha } = req.body
 
-            const updatedInstituicao = await InstituicaoModel.findByIdAndUpdate(id, { tipo })
+            const updatedInstituicao = await InstituicaoModel.findByIdAndUpdate(_id, { name })
             
             if(!updatedInstituicao) {
                 res.status(404).json({ msg: "Instituição não encontrada!" })
                 return
             }
 
-            const response = await UsuarioModel.findOneAndUpdate({ user: id }, { email, senha })
-            response.populate("user")
+            await UsuarioModel.findByIdAndUpdate(updatedInstituicao.user._id, { email, senha })
 
-            res.status(200).json({ response, msg: "Instituição atualizada com sucesso!" })
+            const instituicao = await updatedInstituicao.populate('user')
+
+            res.status(200).json({ instituicao, msg: "Instituição atualizada com sucesso!" })
 
         } catch (error) {
             console.log(error)
