@@ -44,7 +44,7 @@ export const LoginProvider = ({ children }) => {
             if(response.data.user.type == 'dentista') {
                 navigate('buscar-paciente')
             } else 
-                navigate(`/home-${ response.data.user.type }`)
+                navigate(`/homeInstituicao`)
         } catch(err) {
             console.error(err)
             const { status, data } = err.response

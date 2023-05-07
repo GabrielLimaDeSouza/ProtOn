@@ -9,8 +9,8 @@ const instituicaoSchema = new Schema(
         },
         tipo: {
             type: String,
-            enum: ['Universidade', 'Clinica', 'Hospital'],
-            default: 'Clinica',
+            enum: ['Universidade', 'Clínica', 'Hospital'],
+            default: 'Clínica',
             required: true,
             message: '{VALUE} is not supported'
         },
