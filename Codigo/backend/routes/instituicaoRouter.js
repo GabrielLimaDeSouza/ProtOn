@@ -5,6 +5,9 @@ const authenticationMiddleware = require("../middlewares/auth")
 // CREATE Instituicao
 router.route("/instituicao").post((req, res) => instituicaoController.create(req, res))
 
+// CREATE Dentista
+router.route("/instituicao/:id/dentista").post((req, res) => instituicaoController.createDentista(req, res))
+
 //! Middleware
 //router.use(authenticationMiddleware)
 
