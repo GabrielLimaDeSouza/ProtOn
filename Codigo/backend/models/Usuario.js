@@ -17,7 +17,6 @@ const usuarioSchema = new Schema(
             enum: ['paciente', 'dentista', 'instituicao'],
             required: true
         },
-        user: Schema.Types.ObjectId
     },
     { timestemps: true }
 )
