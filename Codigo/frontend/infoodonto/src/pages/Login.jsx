@@ -29,7 +29,7 @@ const Login = () => {
         <div className={ styles.body }>
             <section className="logo-login">
                 <div className={ styles.logo }>
-                    <img src="../../public/logo.svg" alt="ProtOn" />
+                    <img src="/logo.svg" alt="ProtOn" />
                 </div>
             </section>
 
