@@ -29,7 +29,7 @@ const SearchPaciente = () => {
 
 
     useEffect(() => {
-        fetch(`${url}/api/paciente/condicao?cpf=${cpf}`, {
+        fetch(`${url}/api/paciente/cpf/${cpf}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -37,6 +37,7 @@ const SearchPaciente = () => {
         })
             .then(resp => resp.json())
             .then(data => {
+                console.log(data)
                 if (data) {
                     setPaciente(data)
                     setPacienteExiste(true)
