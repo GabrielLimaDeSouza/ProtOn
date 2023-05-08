@@ -15,3 +15,7 @@ export const getUser = async id => {
 export const getCondicao = async()=>{
     return api.get(`/api/condicoes`)
 }
+
+export const deleteDentista = async id => {
+    return api.delete(`/api/dentista?id=${id}`)
+}

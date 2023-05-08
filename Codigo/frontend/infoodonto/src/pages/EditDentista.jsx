@@ -54,7 +54,7 @@ const EditDentista = () => {
             return;
         }
 
-        if(!validarEmail(dentista.email)){
+        if(!validarEmail(dentista.user.email)){
             messageEmailError()
             return
         }
@@ -71,7 +71,7 @@ const EditDentista = () => {
     }
 
     useEffect(()=> {
-        fetch(`http://localhost:3000/api/dentista/${id}`, {
+        fetch(`http://localhost:3000/api/dentista?id=${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -99,13 +99,13 @@ const EditDentista = () => {
                     <div className={styles.divLabel}>
                         <label htmlFor="inputEmail" className="label" >Email</label>
                     </div>
-                    <input type="text" value={dentista.email} id="inputName" className={styles.inputEdit} onChange={(event) => setDentista({ ...dentista, email: event.target.value })} />
+                    <input type="text" value={dentista.user?.email} id="inputEmail" className={styles.inputEdit} onChange={(event) => setDentista({ ...dentista, user: { ...dentista.user, email: event.target.value }, })} />
                 </div>
                 <div className={styles.uni}>
                     <div className={styles.divLabel}>
                         <label htmlFor="inputSenha" className="label" >Senha</label>
                     </div>
-                    <input type="text" value={dentista.senha} id="inputName" className={styles.inputEdit} onChange={(event) => setDentista({ ...dentista, senha: event.target.value })} />
+                    <input type="text" value={dentista.user?.senha} id="inputSenha" className={styles.inputEdit} onChange={(event) => setDentista({ ...dentista, user: { ...dentista.user, senha: event.target.value }, })} />
                 </div>
                 <div className={styles.divButton}>
                     <button type="submit" className={styles.editar} onClick={editDentista}>Editar</button>
