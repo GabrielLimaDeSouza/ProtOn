@@ -2,9 +2,6 @@ const router = require("express").Router()
 const dentistaController = require("../controllers/dentistaController")
 const authenticationMiddleware = require("../middlewares/auth")
 
-// CREATE Dentista
-router.route("/dentista").post((req, res) => dentistaController.create(req, res))
-
 //! Middleware
 //router.use(authenticationMiddleware)
 

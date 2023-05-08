@@ -38,14 +38,15 @@ export const LoginProvider = ({ children }) => {
     
             api.defaults.headers.Authorization = `Bearer ${ token }`
     
-            const user = await getUser(loggedUser._id)
-            setUser(user.data)
+            const response = await getUser(loggedUser._id)
+            setUser(response.data)
     
-            if(user.data.type == 'dentista') {
+            if(response.data.user.type == 'dentista') {
                 navigate('buscar-paciente')
             } else 
-                navigate(`/home-${ user.data.type }`)
+                navigate(`/homeInstituicao`)
         } catch(err) {
+            console.error(err)
             const { status, data } = err.response
             return { status, msg: data.msg }
         }

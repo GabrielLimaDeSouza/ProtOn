@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import {LoginContext} from '../context/LoginContext'
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -25,10 +26,25 @@ import Logo from '../img/logo.png'
 
 
 
-export default function DenseTable() {
+export default function HomeInstituicao() {
     const [dentistas, setDentistas] = useState([])
     const [open, setOpen] = useState(false);
-    
+    const {user} = useContext(LoginContext)
+    console.log(user)
+
+    useEffect(() => {
+        /*fetch(`http://localhost:3000/api/instituicao/${user._id}/dentistas`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then(resp => resp.json())
+          .then(data => setDentistas(data))
+          .catch(err => console.error(err))*/
+          setDentistas(user.dentistas)
+    }, [dentistas])
+
+        
     const messageRemove = () => {
         setOpen(true);
     };
@@ -40,17 +56,6 @@ export default function DenseTable() {
 
         setOpen(false);
     };
-
-    useEffect(() => {
-        fetch('http://localhost:3000/api/dentistas/', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }).then(resp => resp.json())
-          .then(data => setDentistas(data))
-          .catch(err => console.error(err))
-    }, [dentistas])
 
     const rows = [];
 

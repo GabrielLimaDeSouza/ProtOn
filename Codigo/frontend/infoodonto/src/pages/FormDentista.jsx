@@ -86,7 +86,7 @@ const FormDentista = () => {
             return
         }
 
-        fetch(`http://localhost:3000/api/dentista/`, {
+        fetch(`http://localhost:3000/api/instituicao/${instituicao._id}/dentista`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -95,16 +95,12 @@ const FormDentista = () => {
                 "name": name,
                 "email": email,
                 "senha": senha,
-                "matricula": matricula,
-                "instituicao": {
-                    "_id": instituicao._id
-                }
+                "matricula": matricula
             })
           })
           .then(resp => resp.json())
           .then(messageAdd())
           .catch(err => console.error(err))
-
     }
 
     return (

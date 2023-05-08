@@ -1,36 +1,34 @@
-const { ObjectId } = require('mongodb')
 const { Dentista: DentistaModel } = require("../models/Dentista")
 const { Usuario: UsuarioModel } = require("../models/Usuario")
 
 const dentistaController = {
     create: async (req, res) => {
         try {
-            const { name, email, senha, matricula, instituicao } = req.body
+            const { name, email, senha, matricula } = req.body
 
-            const dentista = {
-                name,
-                matricula,
-                instituicao
-            }
-            const user = await DentistaModel.create(dentista)
-
-            const usuarioDentista = {
+            const user = {
                 email,
                 senha,
                 type: 'dentista',
-                user: user._id
             }
+            const responseUser = await UsuarioModel.create(user)
             
-            const response = await UsuarioModel.create(usuarioDentista)
+            const dentistaObject = {
+                name,
+                matricula,
+                user: responseUser._id
+            }
+            const dentista = await (await DentistaModel.create(dentistaObject)).populate('user')
 
-            res.status(201).json({ response, msg: "Dentista cadastrado com sucesso!" })
+            return dentista
         } catch (error) {
             console.log(error)
+            throw new Error(error)
         }
     },
     getAll: async (req, res) => {
         try {
-            const dentistas = await DentistaModel.find().populate("instituicao")
+            const dentistas = await DentistaModel.find().populate('user')
 
             res.status(201).json(dentistas)
         } catch (error) {
@@ -40,7 +38,7 @@ const dentistaController = {
     get: async (req, res)=> {
         try {
             const id = req.query.id
-            const dentista = await DentistaModel.findById(id).populate("instituicao")
+            const dentista = await DentistaModel.findById(id).populate('user')
 
             if(!dentista) {
                 res.status(404).json({ msg: "Usuário não encontrado!" })
@@ -56,10 +54,10 @@ const dentistaController = {
         try {
             const id = req.query.id
 
-            await UsuarioModel.findOneAndDelete({ user: id })
-            const deletedDentista = await DentistaModel.findByIdAndDelete(id)
+            const dentista = await DentistaModel.findByIdAndDelete(id)
+            await UsuarioModel.findByIdAndDelete(dentista.user._id)
 
-            res.status(200).json({ deletedDentista, msg: "Usuário excluido com sucesso!" })
+            res.status(200).json({ dentista, msg: "Usuário excluido com sucesso!" })
         } catch (error) {
             console.log(error)
         }
@@ -76,10 +74,11 @@ const dentistaController = {
                 return
             }
 
-            const response = await UsuarioModel.findOneAndUpdate({ user: id }, { email, senha })
-            response.populate("user")
+            await UsuarioModel.findByIdAndUpdate(updatedDentista.user._id, { email, senha })
 
-            res.status(200).json({ response, msg: "Usuário atualizado com sucesso!" })
+            const dentista = await updatedDentista.populate("user")
+
+            res.status(200).json({ dentista, msg: "Usuário atualizado com sucesso!" })
 
         } catch (error) {
             console.log(error)
