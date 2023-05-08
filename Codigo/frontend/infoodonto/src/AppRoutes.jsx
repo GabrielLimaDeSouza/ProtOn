@@ -17,8 +17,6 @@ import HomePaciente from "./pages/HomePaciente"
 const AppRoutes = () => {
   const Private = ({ children }) => {
     const { authenticated, loading } = useContext(LoginContext)
-
-    console.log(authenticated);
    
     if(loading) {
       return <CircularProgress />
