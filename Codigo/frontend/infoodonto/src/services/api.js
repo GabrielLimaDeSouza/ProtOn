@@ -11,3 +11,7 @@ export const createSession = async (email, senha) => {
 export const getUser = async id => {
     return api.get(`/api/usuario?id=${ id }`)
 }
+
+export const getCondicao = async()=>{
+    return api.get(`/api/condicoes`)
+}

@@ -24,7 +24,7 @@ function Input(props) {
             case 'text': return (<InputText placeholder={props.placeholder} disabled={props.disabled} id={props.id} name={ props.name } />);
             case 'password': return(<InputPassword disabled={props.disabled} placeholder={props.placeholder} id={props.id}/>);
             case 'search' : return(<InputSearch placeholder={props.placeholder} typeSearch={props.typeSearch} id={props.id} onKeyDown={props.onKeyDown} limiteChar={props.limiteChar}/>)
-            case 'option' : return(<InputOption placeholder={props.placeholder} currentCondicao={props.currentCondicao} id={props.id}/>)
+            case 'option' : return(<InputOption placeholder={props.placeholder} currentCondicao={props.currentCondicao} id={props.id} option={props.option}/>)
             case 'email' : return(<InputEmail placeholder={ props.placeholder } disabled={ props.disabled }  id={ props.id } name={ props.name } />)
         }
     }

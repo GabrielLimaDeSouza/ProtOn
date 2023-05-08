@@ -31,6 +31,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0 auto;
+  text-align: center;
   flex-direction: column;
 }
 
@@ -52,7 +54,7 @@
   background-color: #7CC8FF;
   border-radius: 50px;
   text-align: center;
-  padding: 10px;
+  padding-top: 10px;
   color: white;
   font-family: 'Montserrat', sans-serif;
   font-weight:bolder;
@@ -61,6 +63,8 @@
 .containerCondicoes {
   display: flex;
   flex-direction: row;
-  gap: 20px;
   margin-bottom: 50px;
+}
+h2{
+  padding-top: 20px;
 }

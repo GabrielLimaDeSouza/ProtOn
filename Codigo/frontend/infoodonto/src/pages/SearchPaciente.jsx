@@ -41,6 +41,7 @@ const SearchPaciente = () => {
                     setPaciente(data)
                     setPacienteExiste(true)
                     setOpen1(true);
+                    console.log(data)
                 } else {
                     setPacienteExiste(false)
                     setOpen2(true)
@@ -139,7 +140,7 @@ const SearchPaciente = () => {
                     <div className={styles.drops}>
                         <h1>{paciente.name}</h1>
                         <div className={styles.divCondicoes}>
-                            <h1>Condições</h1>
+                            <h2>Condições</h2>
                             <div className={styles.containerCondicoes}>
                                 {
                                     paciente.condicoes.map((condicao) => (

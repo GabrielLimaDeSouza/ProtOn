@@ -5,15 +5,29 @@ import MedicosVinculados from "../components/componentsApp/medicosVinculados/med
 import { FaUserAlt, FaUserMd, FaHistory} from "react-icons/fa"
 import {BsFillGearFill} from "react-icons/bs"
 import { useState, useEffect } from "react";
+import { getCondicao } from '../services/api';
 const HomePaciente = () => {
 
-    const [paginaSelecionada, setPaginaSelecionada] = useState(<Perfil currentName="carlos" currentCpf="12345678999" currentEmail="teste@teste" currentCondicao={[{"condicao": "nada"}, {"condicao": "nada2"}]}/>)
+    const [condicoesPaciente, setCondicoesPaciente] = useState([]);
+const [paginaSelecionada, setPaginaSelecionada] = useState()
+    useEffect(() => {
+      const fetchData = async () => {
+        const { data } = await getCondicao();
+        const condicoes = data.map((item) => item.nome);
+        setCondicoesPaciente(condicoes);
+        setPaginaSelecionada(<Perfil currentName="carlos" currentCpf="12345678999" currentEmail="teste@teste" currentCondicao={["nada", "nada2"]} option={condicoes}/>)
+      };
+      fetchData();
+    }, []);
+   
+
+    
 
     function iconSelecionado(icon){
         console.log(icon)
         switch (icon) {
             case 0:
-                setPaginaSelecionada(<Perfil currentName="carlos" currentCpf="12345678999" currentEmail="teste@teste" currentCondicao={[{"condicao": "nada"}, {"condicao": "nada2"}]}/>) ;
+                setPaginaSelecionada(<Perfil currentName="carlos" currentCpf="12345678999" currentEmail="teste@teste" currentCondicao={["nada", "nada2"]} option={condicoesPaciente}/>) ;
                 break;
             case 1:
                 setPaginaSelecionada(<MedicosVinculados/>), console.log("Set 1") ;

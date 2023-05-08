@@ -1,54 +1,37 @@
-
-.body {
-
-    
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 100%;
-    max-width: 800px;
-    height: 100vh;
-    margin: 0 auto;
-    background-color: #fff;
-}
-
-
 .logo{
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width:  100%;
-    padding-top: 50px;
-}
-
-.form{
-    display: flex;
-    flex-direction: column;
     padding-top: 60px;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    margin: 0 auto;
+}
+
+.form{
+    padding-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
 }
 .uni{
-    padding-top: 30px;
+    padding-top: 20px;
+
 }
- 
-.oval {
-    width: 80px;
-    height: 30px;
-    background: white;
-    border-radius: 50%;
-  } 
-.confirmar{
-    border-radius: 13.96px;
-    height: 39.9px;
-    width: 128px;
-    background-color: #95BFDE;
-    color: white;
-    border: none;
-    cursor: pointer;
+.divInputs{
+    width: 80vw;
 }
 .divButton{
     display: flex;
-    padding-top: 30px;
+    align-items: center;
     justify-content: center;
+    margin: 0 auto;
+    padding-top: 60px;
+}
+.confirmar{
+    border-radius: 30px;
+    padding: 7px;
+    width: 150px;
+    color: white;
+    border: none;
+    background-color: #95BFDE;
 }
