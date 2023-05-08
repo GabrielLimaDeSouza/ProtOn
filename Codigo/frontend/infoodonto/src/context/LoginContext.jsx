@@ -40,11 +40,17 @@ export const LoginProvider = ({ children }) => {
     
             const response = await getUser(loggedUser._id)
             setUser(response.data)
-    
+            
+            if(response.data.user.type == 'paciente'){
+                navigate('homePaciente')
+            }
             if(response.data.user.type == 'dentista') {
-                navigate('buscar-paciente')
-            } else 
-                navigate(`/homeInstituicao`)
+                navigate('searchPaciente')
+            }
+            if(response.data.user.type == 'instituicao'){
+                navigate(`homeInstituicao`)   
+            }
+
         } catch(err) {
             console.error(err)
             const { status, data } = err.response

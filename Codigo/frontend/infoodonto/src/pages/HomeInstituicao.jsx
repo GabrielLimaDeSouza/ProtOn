@@ -1,4 +1,7 @@
 import * as React from 'react';
+
+import { deleteDentista } from '../services/api';
+
 import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import {LoginContext} from '../context/LoginContext'
@@ -30,21 +33,11 @@ export default function HomeInstituicao() {
     const [dentistas, setDentistas] = useState([])
     const [open, setOpen] = useState(false);
     const {user} = useContext(LoginContext)
-    console.log(user)
 
     useEffect(() => {
-        /*fetch(`http://localhost:3000/api/instituicao/${user._id}/dentistas`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }).then(resp => resp.json())
-          .then(data => setDentistas(data))
-          .catch(err => console.error(err))*/
           setDentistas(user.dentistas)
     }, [dentistas])
 
-        
     const messageRemove = () => {
         setOpen(true);
     };
@@ -60,27 +53,20 @@ export default function HomeInstituicao() {
     const rows = [];
 
     dentistas.forEach(dentista => {
-        rows.push(createData(dentista.name, dentista.matricula, dentista.email, dentista._id ))
+        rows.push(createData(dentista.name, dentista.matricula, dentista._id ))
     });
     
-    function createData(name, email, matricula, id) {
-        return { name, email, matricula, id };
+    function createData(name, matricula, id) {
+        return { name, matricula, id };
     }  
 
-    function deleteDentista(id){
-        fetch(`http://localhost:3000/api/dentista?id=${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(resp => {
-            if(resp.ok) {
-                setDentistas(dentistas.filter(dentista => dentista.id !== id))
-            }
-        }).catch(err => console.error(err))
+    function handleDelete(id){
+        deleteDentista(id).then(() => {
+            setDentistas(dentistas.filter(dentista => dentista._id !== id));
+        }).catch(error => {
+            console.log(error);
+        });
     }
-
-
 
     return (
     <div className={styles.body}>
@@ -97,9 +83,8 @@ export default function HomeInstituicao() {
                     <TableRow>
                     <TableCell>Nome</TableCell>
                     <TableCell align="right">Matrícula</TableCell>
-                    <TableCell align="right">Email</TableCell>
-                    <TableCell align="right"></TableCell>
-                    <TableCell align="right"></TableCell>
+                    <TableCell align="right" className={styles.tableCell}></TableCell>
+                    <TableCell align="right" className={styles.tableCell}></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -111,15 +96,14 @@ export default function HomeInstituicao() {
                         <TableCell component="th" scope="row">
                         {row.name}
                         </TableCell>
-                        <TableCell align="right">{row.email}</TableCell>
                         <TableCell align="right">{row.matricula}</TableCell>
-                        <TableCell align="right">
+                        <TableCell align="right" className={styles.tableCell}>
                             <Link to={`/editDentista/${row.id}`} className={styles.buttonCrud}>
                                 <EditIcon className={styles.icon} />
                             </Link>
                         </TableCell>
-                        <TableCell align="right"><button className={styles.buttonCrud} onClick={() => {
-                            deleteDentista(row.id)
+                        <TableCell align="right" className={styles.tableCell}><button className={styles.buttonCrud} onClick={() => {
+                            handleDelete(row.id)
                             messageRemove()
                         }}><DeleteIcon className={styles.icon}/></button></TableCell>
                     </TableRow>
