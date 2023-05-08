@@ -33,14 +33,15 @@ export default function HomeInstituicao() {
     console.log(user)
 
     useEffect(() => {
-        fetch(`http://localhost:3000/api/instituicao/${user._id}/dentistas`, {
+        /*fetch(`http://localhost:3000/api/instituicao/${user._id}/dentistas`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
           }
         }).then(resp => resp.json())
           .then(data => setDentistas(data))
-          .catch(err => console.error(err))
+          .catch(err => console.error(err))*/
+          setDentistas(user.dentistas)
     }, [dentistas])
 
         

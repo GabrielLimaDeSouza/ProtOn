@@ -17,6 +17,8 @@ import HomePaciente from "./pages/HomePaciente"
 const AppRoutes = () => {
   const Private = ({ children }) => {
     const { authenticated, loading } = useContext(LoginContext)
+
+    console.log(authenticated);
    
     if(loading) {
       return <CircularProgress />
@@ -38,7 +40,7 @@ const AppRoutes = () => {
             <Route exact path="/formDentista" element={ <FormDentista /> }></Route>
             <Route exact path="/formInstituicao" element={ <FormInstituicao /> }></Route>
             <Route exact path="/searchPaciente" element={ <SearchPaciente /> }></Route>
-            <Route exact path="/homeInstituicao" element={ <HomeInstituicao /> }></Route>
+            <Route exact path="/homeInstituicao" element={ <Private><HomeInstituicao /></Private> }></Route>
             <Route exact path="/homePaciente" element={ <HomePaciente /> }></Route>
             <Route exact path="/editDentista/:id" element={ <Private><EditDentista /></Private> }></Route>
         </Routes>
