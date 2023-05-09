@@ -4,21 +4,32 @@ import Perfil from "../components/componentsApp/perfil/perfil"
 import MedicosVinculados from "../components/componentsApp/medicosVinculados/medicosVinculados"
 import { FaUserAlt, FaUserMd, FaHistory} from "react-icons/fa"
 import {BsFillGearFill} from "react-icons/bs"
-import { useState, useEffect } from "react";
-import { getCondicao } from '../services/api';
+import { useState, useEffect, useContext } from "react";
+import { getCondicao, getUser } from '../services/api';
+import { LoginContext } from "../context/LoginContext"
 const HomePaciente = () => {
 
+    const {user} = useContext(LoginContext)
     const [condicoesPaciente, setCondicoesPaciente] = useState([]);
-const [paginaSelecionada, setPaginaSelecionada] = useState()
+    const [paginaSelecionada, setPaginaSelecionada] = useState()
+    const [logado, setLogado] = useState()
+
+
+
+console.log(user)
+
+
+
+
     useEffect(() => {
       const fetchData = async () => {
         const { data } = await getCondicao();
         const condicoes = data.map((item) => item.nome);
         setCondicoesPaciente(condicoes);
-        setPaginaSelecionada(<Perfil currentName="carlos" currentCpf="12345678999" currentEmail="teste@teste" currentCondicao={["nada", "nada2"]} option={condicoes}/>)
+        setPaginaSelecionada(<Perfil currentName={user.name} currentCpf={user.cpf} currentEmail={user.user.email} currentCondicao={user.condicoes} option={condicoes}/>)
       };
       fetchData();
-    }, []);
+    }, [user]);
    
 
     

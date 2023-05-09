@@ -1,4 +1,7 @@
 import styles from "./inputOption.module.css"
+import * as React from 'react';
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack'
 import { useState } from "react"
 
 const InputOption = (props) => {
@@ -9,9 +12,30 @@ const InputOption = (props) => {
     setTags(tags.filter((el, i) => i !== index))
   }
 
+  function verificaLista(params) {
+    let boolean = false
+    props.option.forEach(element => {
+      
+      if(element == params){
+        boolean = true
+      }
+    },
+    );
+    tags.forEach(element =>{
+      console.log(element == params)
+      if(element == params){
+        boolean = false
+      }
+    })
+    return boolean
+  }
   function handleKeyDown() {
+
     let novaCondicao = document.getElementById(props.id).value
-    setTags([...tags, novaCondicao])
+    if(novaCondicao != "" && verificaLista(novaCondicao)){
+      setTags([...tags, novaCondicao])
+      
+    }
     document.getElementById(props.id).value = ""
   }
 
@@ -23,15 +47,12 @@ const InputOption = (props) => {
             tags.map((tag, index) => {
               return (
                 <div className={styles.tagGroup} key={index}>
-                  <span className={styles.tag}>{tag}</span>
-                  <span
-                    className={styles.close}
-                    onClick={() => {
-                      removeTag(index)
-                    }}
-                  >
-                    &times;
-                  </span>
+                  <Chip
+                  className={styles.tag}
+  label={tag}
+  onDelete={()=>{ removeTag(index)}}
+/>
+
                 </div>
               )
             })

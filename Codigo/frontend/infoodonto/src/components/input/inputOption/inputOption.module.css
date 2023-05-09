@@ -19,16 +19,23 @@
 
 .tagContainer{
     display: flex;
-    column-count: 2;
-    align-items: center;
-    justify-content: center;
+    align-items: center !important;
+    justify-content: center !important;
     margin: 0 auto;
+    flex-wrap: wrap;
 
 }
+
 .tag{
-    font-size: 10px;
+    font-size: 10px !important;
+    width: 30vw !important;
+    flex: 1;
+    margin: 1px 3px !important;
 }
-
+.tagGroup{
+    display: flex;
+    align-items: center;
+}
 
 /*Botões*/
 .adicionar{
@@ -50,6 +57,7 @@
     width: 80%;
     height: 28px;
     padding-left: 20px;
+    margin-top: 10px;
     font-family: 'Montserrat', sans-serif;
 }
 
