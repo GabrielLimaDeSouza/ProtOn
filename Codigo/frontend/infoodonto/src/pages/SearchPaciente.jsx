@@ -137,10 +137,11 @@ const SearchPaciente = () => {
 
             {
                 pacienteExiste ?
-
-                    <div className={styles.drops}>
+                <>
+                    <div className={styles.name}>
                         <h1>{paciente.name}</h1>
-                        <div className={styles.divCondicoes}>
+                    </div>
+                    <div className={styles.divCondicoes}>
                             <h2>Condições</h2>
                             <div className={styles.containerCondicoes}>
                                 {
@@ -149,16 +150,17 @@ const SearchPaciente = () => {
                                     ))
                                 }
                             </div>
-                        </div>
+                    </div>
+                    <div className={styles.drops}>
                         <div className={styles.drop}> <Accordion>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel1a-content"
                                 id="panel1a-header"
-                                sx={{ background: 'rgba(98, 168, 219, 0.41)' }}
+                                sx={{ background: 'white' }}
                                 className={styles.drop}
                             >
-                                <Typography>Pre-atendimento</Typography>
+                                <Typography>Pré-atendimento</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
                                 <Typography>
@@ -175,10 +177,10 @@ const SearchPaciente = () => {
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel1a-content"
                                 id="panel1a-header"
-                                sx={{ background: 'rgba(98, 168, 219, 0.41)' }}
+                                sx={{ background: 'white' }}
                                 className={styles.drop}
                             >
-                                <Typography>Anestesico local</Typography>
+                                <Typography>Anestésico local</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
                                 <Typography>
@@ -194,7 +196,7 @@ const SearchPaciente = () => {
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel1a-content"
                                 id="panel1a-header"
-                                sx={{ background: 'rgba(98, 168, 219, 0.41)' }}
+                                sx={{ background: 'white' }}
                                 className={styles.drop}
                             >
                                 <Typography>Medicamentos</Typography>
@@ -213,7 +215,7 @@ const SearchPaciente = () => {
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel1a-content"
                                 id="panel1a-header"
-                                sx={{ background: 'rgba(98, 168, 219, 0.41)' }}
+                                sx={{ background: 'white'}}
                                 className={styles.drop}
                             >
                                 <Typography>Implante</Typography>
@@ -229,7 +231,7 @@ const SearchPaciente = () => {
 
 
                     </div>
-
+                </>
 
                     : (
 

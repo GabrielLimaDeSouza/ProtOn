@@ -27,17 +27,17 @@
 }
 
 .drops{
-  padding-top: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
   text-align: center;
   flex-direction: column;
 }
 
 .drop{
-  padding-bottom: 10px;  
+  padding-bottom: 10px;
+  width: 100%;
+  padding: 0 70px 10px 70px;
 }
 
 .drops h1 {
@@ -45,9 +45,27 @@
   font-size: 22px;
 }
 
-.divCondicoes h1 {
+.divCondicoes {
+  padding: 0 70px 0 70px;
+}
+
+.divCondicoes h2 {
   font-family: 'Montserrat', sans-serif;
   font-size: 17px;
+  color: rgb(59, 62, 65);
+}
+
+.name {
+  padding: 0 70px 0 70px;
+  display: flex;
+  justify-content: start !important;
+  font-size: 13px;
+}
+
+.name h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 23px;
+  color: rgb(59, 62, 65);
 }
 
 .divCondicao {
