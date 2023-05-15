@@ -1,6 +1,8 @@
 import React from "react";
 import Logo from "../img/logo.png"
 
+import { getDentista } from "../services/api";
+
 import styles from '../css/EditDentista.module.css'
 
 import { useParams, useNavigate } from "react-router-dom";
