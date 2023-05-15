@@ -12,7 +12,7 @@ const InputPassword=(props)=>{
 
     return(
         <div className={styles.inputContainer}>
-                    <input placeholder={props.placeholder} className={styles.inputPassword} autocomplete="new-password" type="password" disabled={disabled} id={props.id}></input>
+                    <input placeholder={props.placeholder} className={styles.inputPassword} autoComplete="new-password" type="password" disabled={disabled} id={props.id}></input>
                 </div>
     )
 }

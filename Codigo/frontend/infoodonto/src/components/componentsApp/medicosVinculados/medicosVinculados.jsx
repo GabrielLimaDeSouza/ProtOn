@@ -25,16 +25,16 @@ const MedicosVinculados = ()=>{
 
     
 
-    function deleteDentista(id){
+    
+    const messageRemove = () => {
+        setOpen(true);
+    };
+function deleteDentista(id){
         let index = rows.indexOf(id);
         rows.splice(index, 1)
         messageRemove()
 
     }
-    const messageRemove = () => {
-        setOpen(true);
-    };
-
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;

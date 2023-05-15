@@ -11,7 +11,7 @@ const InputText = (props) => {
       <input
         placeholder={ props.placeholder }
         className={ styles.inputText }
-        autocomplete="new-password"
+        autoComplete="new-password"
         type="text"
         disabled={ disabled }
         id={ props.id }

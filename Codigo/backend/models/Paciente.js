@@ -22,7 +22,11 @@ const pacienteSchema = new Schema(
         user: {
             type: Schema.Types.ObjectId,
             ref: 'Usuario'
-        }
+        },
+        solicitacoes: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Dentista'
+        }]
     },
     { timestemps: true }
 )

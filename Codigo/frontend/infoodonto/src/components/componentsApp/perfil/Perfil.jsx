@@ -6,11 +6,21 @@ const Perfil = (props) => {
 
 
     return (
-        <>
+        <> 
+    
+
+
+        
+
+
+
+
 
             <div className={styles.divInputs}>
+            <h1 className={styles.titulo}>Perfil</h1>
                 <div className={styles.divInput}><Input type="text" placeholder={props.currentName} id="updateName"></Input></div>
                 <div className={styles.divInput}>
+                
                     <Input type="text" placeholder={props.currentCpf} disabled={true} id="updateCpf"></Input>
                 </div>
                 <div className={styles.divInput}>

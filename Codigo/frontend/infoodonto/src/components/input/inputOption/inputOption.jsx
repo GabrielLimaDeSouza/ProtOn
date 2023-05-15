@@ -12,44 +12,50 @@ const InputOption = (props) => {
     setTags(tags.filter((el, i) => i !== index))
   }
 
+  
   function verificaLista(params) {
     let boolean = false
     props.option.forEach(element => {
-      
-      if(element == params){
-        boolean = true
+      if(element.nome == params){
+        boolean = element
       }
     },
     );
     tags.forEach(element =>{
-      console.log(element == params)
+      console.log(element.nome == params)
       if(element == params){
+       
         boolean = false
       }
     })
     return boolean
   }
-  function handleKeyDown() {
 
+
+  function handleKeyDown() {
+    
     let novaCondicao = document.getElementById(props.id).value
-    if(novaCondicao != "" && verificaLista(novaCondicao)){
-      setTags([...tags, novaCondicao])
+    
+    let verificado = verificaLista(novaCondicao)
+    if(novaCondicao != "" && verificado !=""){
+      setTags([...tags, verificado])
       
     }
     document.getElementById(props.id).value = ""
   }
-
   return (
     <>
       <div className={styles.inputContainer}>
         <div className={styles.tagContainer}>
           {jaPossui && tags.length > 0 ? (
             tags.map((tag, index) => {
+              console.log(tag)
               return (
-                <div className={styles.tagGroup} key={index}>
+                <div className={styles.tagGroup}  key={index}>
                   <Chip
                   className={styles.tag}
-  label={tag}
+  label={tag.nome}
+  id={tag._id}
   onDelete={()=>{ removeTag(index)}}
 />
 
@@ -71,7 +77,7 @@ const InputOption = (props) => {
         <span className=""></span>
         <datalist id="lista">
           {props.option.map((text, key) => (
-            <option key={key} value={text} />
+            <option key={key} value={text.nome} id={text._id}/>
           ))}
         </datalist>
       </div>

@@ -10,7 +10,7 @@ const FormPaciente = () => {
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await getCondicao();
-      const condicoes = data.map((item) => item.nome);
+      const condicoes = data.map((item) => item);
       setCondicoesPaciente(condicoes);
     };
     fetchData();
@@ -18,10 +18,11 @@ const FormPaciente = () => {
 
   function cadastrar() {
     let condicao = [];
-    document.querySelectorAll('.tag').forEach((e) => {
-      condicao.push({ _id: 1, nome: `${e.textContent}` });
+
+    document.querySelectorAll('.MuiChip-filled').forEach((e) => {
+      condicao.push(e.getAttribute("id"));
     });
-    console.log(condicao);
+
     fetch(`http://localhost:3000/api/paciente`, {
       method: 'POST',
       headers: {
@@ -42,32 +43,32 @@ const FormPaciente = () => {
         console.log(err);
       });
   }
-    return (
+  return (
 
-        <div className={ styles.body }>
-            <div className={styles.logo}>
-                <img src={Logo} alt="Logo" />
-            </div>
-
-
-            <div className={styles.form}>
-              <div className={styles.divInputs}>
-              <div className={styles.uni}><Input type="text" placeholder="Nome" id="name"/></div>
-                <div className={styles.uni}><Input type="text" placeholder="CPF" id="cpf"/></div>
-                <div className={styles.uni}><Input type="text" placeholder="Email" id="email"/></div>
-                <div className={styles.uni}><Input type="password" placeholder="Senha" id="senha"/></div>
-                <div className={styles.uni}><Input type="option" placeholder="Condição" id="condicao"  option={condicoesPaciente}> </Input></div>
-              </div>
-            </div>
- 
-            <div className={styles.divButton}>
-                <button className={styles.confirmar} onClick={cadastrar}>Confirmar</button>
-            </div>
+    <div className={styles.body}>
+      <div className={styles.logo}>
+        <img src={Logo} alt="Logo" />
+      </div>
 
 
-
+      <div className={styles.form}>
+        <div className={styles.divInputs}>
+          <div className={styles.uni}><Input type="text" placeholder="Nome" id="name" /></div>
+          <div className={styles.uni}><Input type="text" placeholder="CPF" id="cpf" /></div>
+          <div className={styles.uni}><Input type="text" placeholder="Email" id="email" /></div>
+          <div className={styles.uni}><Input type="password" placeholder="Senha" id="senha" /></div>
+          <div className={styles.uni}><Input type="option" placeholder="Condição" id="condicao" option={condicoesPaciente}> </Input></div>
         </div>
-    )
+      </div>
 
-    }
+      <div className={styles.divButton}>
+        <button className={styles.confirmar} onClick={cadastrar}>Confirmar</button>
+      </div>
+
+
+
+    </div>
+  )
+
+}
 export default FormPaciente;

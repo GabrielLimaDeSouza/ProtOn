@@ -4,12 +4,12 @@ const { Usuario: UsuarioModel } = require("../models/Usuario")
 const pacienteController = {
     create: async (req, res) => {
         try {
-            const { name, cpf, email, senha, condicoes } = req.body
+            const { name, cpf, email, senha, condicoes, solicitacoes, dentistas } = req.body
             
             const user = {
                 email,
                 senha,
-                type: 'paciente',
+                type: 'paciente'
             }
             const responseUser = await UsuarioModel.create(user)
 
@@ -80,9 +80,9 @@ const pacienteController = {
     update: async (req, res) => {
         try {
             const _id = req.query.id
-            const { name, email, senha, condicoes } = req.body
+            const { name, email, senha, condicoes, solicitacoes, dentistasPermitidos } = req.body
 
-            const updatedPaciente = await PacienteModel.findByIdAndUpdate(_id, { name, condicoes })
+            const updatedPaciente = await PacienteModel.findByIdAndUpdate(_id, { name, condicoes, solicitacoes, dentistasPermitidos })
             
             if(!updatedPaciente) {
                 res.status(404).json({ msg: "Paciente não encontrado!" })
