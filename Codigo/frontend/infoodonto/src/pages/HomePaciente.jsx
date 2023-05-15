@@ -31,7 +31,7 @@ const HomePaciente = () => {
     useEffect(() => {
         const fetchData = async () => {
             const { data } = await getCondicao();
-            const condicoes = data.map((item) => item.nome);
+            const condicoes = data.map((item) => item);
             setCondicoesPaciente(condicoes);
             setPaginaSelecionada(<Perfil currentName={user.name} currentCpf={user.cpf} currentEmail={user.user.email} currentCondicao={user.condicoes} option={condicoesPaciente} />)
             console.log(user)

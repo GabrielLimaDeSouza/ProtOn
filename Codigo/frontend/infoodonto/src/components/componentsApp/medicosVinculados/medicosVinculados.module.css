@@ -27,12 +27,25 @@
     color: rgb(250, 250, 250)
 }
 
-.icon {
+.iconConfirm {
     font-size: 20px !important;
-    color: rgb(80, 71, 71);
+    color: green;
+}
+.iconNotConfirm {
+    font-size: 23px !important;
+    color: red;
 }
 
 .divTable{
     width: 90vw;
     padding-top: 20px;
+}
+.titulo{
+    color: #62A8DB;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 20px;
+}
+.rowIcon{
+    display: flex;
 }

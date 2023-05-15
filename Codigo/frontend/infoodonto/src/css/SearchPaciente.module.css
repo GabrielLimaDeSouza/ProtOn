@@ -86,3 +86,16 @@
 h2{
   padding-top: 20px;
 }
+
+.divInvite{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.iconAdd{
+  font-size: 100px;
+  padding-right: 10px;
+  color: #7CC8FF;
+}

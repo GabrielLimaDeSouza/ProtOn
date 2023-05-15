@@ -11,9 +11,12 @@ import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import { BsCheckCircleFill } from "react-icons/bs";
+import { MdCancel } from "react-icons/md";
 const MedicosVinculados = ()=>{
 
-    const [open, setOpen] = useState(false);
+    const [openAceito, setOpenAceito] = useState(false);
+    const [openRecusado, setOpenRecusado] = useState(false);
     const [rows, setRows] = useState([
         {"name" : "Paulo",
         "email" : "Paulo@test",
@@ -26,13 +29,22 @@ const MedicosVinculados = ()=>{
     
 
     
-    const messageRemove = () => {
-        setOpen(true);
+    const messageRecusado = () => {
+        setOpenRecusado(true);
     };
-function deleteDentista(id){
+    const messageAdd = () => {
+        setOpenAceito(true);
+    };
+function recuseDentista(id){
         let index = rows.indexOf(id);
         rows.splice(index, 1)
-        messageRemove()
+        messageRecusado()
+
+    }
+    function addDentista(id){
+        let index = rows.indexOf(id);
+        rows.splice(index, 1)
+        messageAdd()
 
     }
     const handleClose = (event, reason) => {
@@ -49,7 +61,9 @@ function deleteDentista(id){
     return (
 
         <>
+        
         <div className={styles.divTable}>
+            <h1 className={styles.titulo}>Tabela de médicos</h1>
         <TableContainer component={Paper}>
             <Table className={styles.table} sx={{ minWidth: 350 }} size="small" aria-label="a dense table">
             <TableHead>
@@ -58,6 +72,7 @@ function deleteDentista(id){
                 <TableCell align="right">Matrícula</TableCell>
                 <TableCell align="right">Email</TableCell>
                 <TableCell align="right">Instituição</TableCell>
+
                 </TableRow>
             </TableHead>
             <TableBody>
@@ -67,21 +82,30 @@ function deleteDentista(id){
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                     <TableCell component="th" scope="row">{row.name}</TableCell>
-                    <TableCell align="right">{row.email}</TableCell>
                     <TableCell align="right">{row.matricula}</TableCell>
+                    <TableCell align="right">{row.email}</TableCell>
                     <TableCell align="right">{row.instituicao}</TableCell>
-                    <TableCell align="right"><button className={styles.buttonCrud} onClick={() => {
-                        deleteDentista(index)
-                    }}><DeleteIcon className={styles.icon}/></button></TableCell>
+                    <TableCell><button className={styles.buttonCrud} onClick={() => {
+                        recuseDentista(index)
+                    }}><MdCancel className={styles.iconNotConfirm}/></button>
+                    </TableCell>
+                    <TableCell><button className={styles.buttonCrud} onClick={() => {
+                        addDentista(index)
+                    }}><BsCheckCircleFill className={styles.iconConfirm}/></button></TableCell>
                 </TableRow>
                 ))}
             </TableBody>
             </Table>
         </TableContainer>
 
-        <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+        <Snackbar open={openAceito} autoHideDuration={2000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                Dentista removido com sucesso!
+                Dentista aceito com sucesso!
+            </Alert>
+        </Snackbar>
+        <Snackbar open={openRecusado} autoHideDuration={2000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                Dentista negado com sucesso!
             </Alert>
         </Snackbar>
         </div>

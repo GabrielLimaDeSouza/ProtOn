@@ -10,10 +10,11 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
-import Stack from '@mui/material/Stack';
+import { BsPersonFillAdd } from "react-icons/bs";
 import { useState, useEffect } from "react";
 
 const SearchPaciente = () => {
+    const [dentistaLogado, setDentistaLogado] = useState("646289e55ca7b525ef5a448e")
     const [paciente, setPaciente] = useState({});
     const [pacienteExiste, setPacienteExiste] = useState()
     const [cpf, setCpf] = useState("");
@@ -23,6 +24,7 @@ const SearchPaciente = () => {
     const [implante, setImplante] = useState([])
     const [open1, setOpen1] = useState()
     const [open2, setOpen2] = useState()
+    const [permitido, setPermitido] = useState()
     const [inputSearchValue, setInputSearchValue] = useState("")
     let testeString = ""
     const url = 'http://localhost:3000'
@@ -61,6 +63,13 @@ const SearchPaciente = () => {
         if (paciente != null && Object.keys(paciente).length !== 0) {
             setPacienteExiste(true);
 
+            setPermitido(false)
+            paciente.dentista.map(dentista => {
+                if (dentista == dentistaLogado) {
+                    setPermitido(true)
+                }
+            })
+            console.log(paciente)
             for (let i = 0; i < paciente.condicoes.length; i++) {
                 setPreAtendimento(preAtendimento.concat(paciente.condicoes[i].preAtendimento))
                 setAnestesicoLocal(anestesicoLocal.concat(paciente.condicoes[i].anestesicoLocal))
@@ -73,8 +82,6 @@ const SearchPaciente = () => {
             }
         } else {
             setPacienteExiste(false);
-
-
         }
 
 
@@ -137,102 +144,110 @@ const SearchPaciente = () => {
 
             {
                 pacienteExiste ?
-                <>
-                    <div className={styles.name}>
-                        <h1>{paciente.name}</h1>
-                    </div>
-                    <div className={styles.divCondicoes}>
-                            <h2>Condições</h2>
-                            <div className={styles.containerCondicoes}>
-                                {
-                                    paciente.condicoes.map((condicao) => (
-                                        <div className={styles.divCondicao}>{condicao.nome}</div>
-                                    ))
-                                }
+
+                    permitido ?
+                        <>
+                            <div className={styles.name}>
+                                <h1>{paciente.name}</h1>
                             </div>
-                    </div>
-                    <div className={styles.drops}>
-                        <div className={styles.drop}> <Accordion>
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel1a-content"
-                                id="panel1a-header"
-                                sx={{ background: 'white' }}
-                                className={styles.drop}
-                            >
-                                <Typography>Pré-atendimento</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <Typography>
-                                    {preAtendimento.map((pre) =>
-                                        <> <p>{pre}</p></>
-                                    )}
-                                </Typography>
-                            </AccordionDetails>
-                        </Accordion>
-                        </div>
+                            <div className={styles.divCondicoes}>
+                                <h2>Condições</h2>
+                                <div className={styles.containerCondicoes}>
+                                    {
+                                        paciente.condicoes.map((condicao) => (
+                                            <div className={styles.divCondicao}>{condicao.nome}</div>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+                            <div className={styles.drops}>
+                                <div className={styles.drop}> <Accordion>
+                                    <AccordionSummary
+                                        expandIcon={<ExpandMoreIcon />}
+                                        aria-controls="panel1a-content"
+                                        id="panel1a-header"
+                                        sx={{ background: 'white' }}
+                                        className={styles.drop}
+                                    >
+                                        <Typography>Pré-atendimento</Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        <Typography>
+                                            {preAtendimento.map((pre) =>
+                                                <> <p>{pre}</p></>
+                                            )}
+                                        </Typography>
+                                    </AccordionDetails>
+                                </Accordion>
+                                </div>
 
-                        <div className={styles.drop}><Accordion>
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel1a-content"
-                                id="panel1a-header"
-                                sx={{ background: 'white' }}
-                                className={styles.drop}
-                            >
-                                <Typography>Anestésico local</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <Typography>
-                                    {anestesicoLocal.map((ane) =>
-                                        <> <p>{ane}</p></>
-                                    )}
-                                </Typography>
-                            </AccordionDetails>
-                        </Accordion></div>
+                                <div className={styles.drop}><Accordion>
+                                    <AccordionSummary
+                                        expandIcon={<ExpandMoreIcon />}
+                                        aria-controls="panel1a-content"
+                                        id="panel1a-header"
+                                        sx={{ background: 'white' }}
+                                        className={styles.drop}
+                                    >
+                                        <Typography>Anestésico local</Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        <Typography>
+                                            {anestesicoLocal.map((ane) =>
+                                                <> <p>{ane}</p></>
+                                            )}
+                                        </Typography>
+                                    </AccordionDetails>
+                                </Accordion></div>
 
-                        <div className={styles.drop}><Accordion>
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel1a-content"
-                                id="panel1a-header"
-                                sx={{ background: 'white' }}
-                                className={styles.drop}
-                            >
-                                <Typography>Medicamentos</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <Typography>
-                                    {medicamentos.map((med) =>
-                                        <> <p>{med}</p></>
-                                    )}
-                                </Typography>
-                            </AccordionDetails>
-                        </Accordion></div>
+                                <div className={styles.drop}><Accordion>
+                                    <AccordionSummary
+                                        expandIcon={<ExpandMoreIcon />}
+                                        aria-controls="panel1a-content"
+                                        id="panel1a-header"
+                                        sx={{ background: 'white' }}
+                                        className={styles.drop}
+                                    >
+                                        <Typography>Medicamentos</Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        <Typography>
+                                            {medicamentos.map((med) =>
+                                                <> <p>{med}</p></>
+                                            )}
+                                        </Typography>
+                                    </AccordionDetails>
+                                </Accordion></div>
 
-                        <div className={styles.drop}> <Accordion>
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel1a-content"
-                                id="panel1a-header"
-                                sx={{ background: 'white'}}
-                                className={styles.drop}
-                            >
-                                <Typography>Implante</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <Typography>
-                                    {implante.map((imp) =>
-                                        <> <p>{imp}</p></>
-                                    )}
-                                </Typography>
-                            </AccordionDetails>
-                        </Accordion></div>
+                                <div className={styles.drop}> <Accordion>
+                                    <AccordionSummary
+                                        expandIcon={<ExpandMoreIcon />}
+                                        aria-controls="panel1a-content"
+                                        id="panel1a-header"
+                                        sx={{ background: 'white' }}
+                                        className={styles.drop}
+                                    >
+                                        <Typography>Implante</Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                        <Typography>
+                                            {implante.map((imp) =>
+                                                <> <p>{imp}</p></>
+                                            )}
+                                        </Typography>
+                                    </AccordionDetails>
+                                </Accordion></div>
 
 
-                    </div>
-                </>
+                            </div>
 
+                        </>
+                        : <>
+
+                            <div className={styles.divInvite}>
+                                <BsPersonFillAdd className={styles.iconAdd}/> Enviar solicitação para acessar os dados
+                            </div>
+                        </>
                     : (
 
                         <div className={styles.loaderBox}>
