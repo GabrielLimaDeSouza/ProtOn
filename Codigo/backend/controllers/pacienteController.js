@@ -19,7 +19,7 @@ const pacienteController = {
                 condicoes,
                 user: responseUser._id,
             }
-            const paciente = await (await (await PacienteModel.create(pacienteObject)).populate('user')).populate('condicoes')
+            const paciente = await (await PacienteModel.create(pacienteObject).populate('user')).populate('condicoes')
 
             res.status(201).json({ paciente, msg: "Paciente cadastrado com sucesso!" })
         } catch (error) {
@@ -103,7 +103,7 @@ const pacienteController = {
         try {
             const _id = req.params.id
 
-            const updatedPaciente = await PacienteModel.findById(_id).populate({ path: 'dentistas', select: 'name' })
+            const updatedPaciente = await (await PacienteModel.findById(_id).populate({ path: 'dentistas', select: 'name user' })).populate({ path: 'dentistas.user', select: 'email' })
             
             if(!updatedPaciente) {
                 res.status(404).json({ msg: "Paciente não encontrado!" })

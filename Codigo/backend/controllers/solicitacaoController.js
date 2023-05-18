@@ -4,9 +4,9 @@ const { Dentista: DentistaModel } = require('../models/Dentista')
 const solicitacaoController = {
     solicitacoes: async (req, res) => {
         try {
-            const cpf = req.cpf.id
+            const cpf = req.params.cpf
 
-            const paciente = await (await PacienteModel.find({ cpf }).populate({ path: 'solicitacoes', select: 'name user' })).populate({ path: 'solicitacoes.user', select: 'email' })
+            const paciente = await (await PacienteModel.findOne({ cpf }).populate({ path: 'solicitacoes', select: 'name user' })).populate({ path: 'solicitacoes.user', select: 'email' })
 
             if (!paciente) {
                 res.status(404).json({ msg: 'Paciente não encontrado!' })
@@ -23,7 +23,7 @@ const solicitacaoController = {
             const cpf = req.params.cpf
             const { dentista } = req.body
 
-            const updatedPaciente = await PacienteModel.find({ cpf })
+            const updatedPaciente = await PacienteModel.findOne({ cpf })
             if (!updatedPaciente) {
                 res.status(404).json({ msg: 'Paciente não encontrado!' })
                 return
@@ -64,7 +64,7 @@ const solicitacaoController = {
             const cpf = req.params.cpf
             const { dentista } = req.body
 
-            const updatedPaciente = await PacienteModel.find({ cpf })
+            const updatedPaciente = await PacienteModel.findOne({ cpf })
             if (!updatedPaciente) {
                 res.status(404).json({ msg: 'Paciente não encontrado!' })
                 return
@@ -108,7 +108,7 @@ const solicitacaoController = {
             const cpf = req.params.cpf
             const { dentista } = req.body
 
-            const updatedPaciente = await PacienteModel.find({ cpf })
+            const updatedPaciente = await PacienteModel.findOne({ cpf })
             if (!updatedPaciente) {
                 res.status(404).json({ msg: 'Paciente não encontrado!' })
                 return
