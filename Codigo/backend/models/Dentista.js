@@ -11,10 +11,6 @@ const dentistaSchema = new Schema(
             type: String,
             required: true
         },
-        pacientes: [{
-            type: Schema.Types.ObjectId,
-            ref: 'Paciente'
-        }],
         user: {
             type: Schema.Types.ObjectId,
             ref: 'Usuario'
