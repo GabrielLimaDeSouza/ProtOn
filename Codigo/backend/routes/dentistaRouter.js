@@ -19,7 +19,7 @@ router.route("/dentista").delete((req, res) => dentistaController.delete(req, re
 router.route("/dentista").put((req, res) => dentistaController.update(req, res))
 
 // ENVIAR Solicitação Dentista
-router.route('/dentista/enviar-solicitacao/:cpf').post((req, res) => solicitacaoController.enviarSolicitacao(req, res))
+router.route('/dentista/enviar-solicitacao/:cpf').put((req, res) => solicitacaoController.enviarSolicitacao(req, res))
 
 
 module.exports = router
