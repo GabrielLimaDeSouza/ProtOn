@@ -11,7 +11,7 @@ const pacienteSchema = new Schema(
             type: String,
             required: true
         },
-        dentista: [{
+        dentistas: [{
             type: Schema.Types.ObjectId,
             ref: 'Dentista'
         }],
