@@ -52,7 +52,6 @@ export const LoginProvider = ({ children }) => {
             }
 
         } catch(err) {
-            console.error(err)
             const { status, data } = err.response
             return { status, msg: data.msg }
         }
