@@ -20,7 +20,7 @@ const dentistaController = {
             }
             const dentista = await (await DentistaModel.create(dentistaObject)).populate('user')
 
-            return dentista
+            res.status(201).json(dentista)
         } catch (error) {
             console.log(error)
             throw new Error(error)
@@ -41,7 +41,7 @@ const dentistaController = {
             const dentista = await DentistaModel.findById(id).populate('user')
 
             if(!dentista) {
-                res.status(404).json({ msg: "Usuário não encontrado!" })
+                res.status(404).json({ msg: "Dentista não encontrado!" })
                 return
             }
 
@@ -57,7 +57,7 @@ const dentistaController = {
             const dentista = await DentistaModel.findByIdAndDelete(id)
             await UsuarioModel.findByIdAndDelete(dentista.user._id)
 
-            res.status(200).json({ dentista, msg: "Usuário excluido com sucesso!" })
+            res.status(200).json({ dentista, msg: "Dentista excluido com sucesso!" })
         } catch (error) {
             console.log(error)
         }
@@ -67,18 +67,18 @@ const dentistaController = {
             const id = req.query.id
             const { name, email, senha } = req.body
 
-            const updatedDentista = await DentistaModel.findByIdAndUpdate(id, { name })
+            const updatedDentista = await DentistaModel.findByIdAndUpdate(id, { name }, { new: true })
 
             if(!updatedDentista) {
-                res.status(404).json({ msg: "Usuário não encontrado!" })
+                res.status(404).json({ msg: "Dentista não encontrado!" })
                 return
             }
 
-            await UsuarioModel.findByIdAndUpdate(updatedDentista.user._id, { email, senha })
+            await UsuarioModel.findByIdAndUpdate(updatedDentista.user._id, { email, senha }, { new: true })
 
             const dentista = await updatedDentista.populate("user")
 
-            res.status(200).json({ dentista, msg: "Usuário atualizado com sucesso!" })
+            res.status(200).json({ dentista, msg: "Dentista atualizado com sucesso!" })
 
         } catch (error) {
             console.log(error)
