@@ -27,9 +27,6 @@ router.route('/paciente').delete((req, res) => pacienteController.delete(req, re
 // UPDATE Paciente
 router.route('/paciente').put((req, res) => pacienteController.update(req, res))
 
-// ENVIAR Solicitação Paciente
-router.route('/paciente/:cpf/solicitacoes').post((req, res) => solicitacaoController.enviarSolicitacao(req, res))
-
 // ACEITAR Solicitação Paciente
 router.route('/paciente/:cpf/solicitacoes').put((req, res) => solicitacaoController.aceitarSolicitacao(req, res))
 
