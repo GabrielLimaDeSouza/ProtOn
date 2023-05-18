@@ -4,9 +4,9 @@ const { Dentista: DentistaModel } = require('../models/Dentista')
 const solicitacaoController = {
     solicitacoes: async (req, res) => {
         try {
-            const _id = req.params.id
+            const cpf = req.cpf.id
 
-            const paciente = await (await PacienteModel.findById(_id).populate({ path: 'solicitacoes', select: 'name user' })).populate({ path: 'solicitacoes.user', select: 'email' })
+            const paciente = await (await PacienteModel.find({ cpf }).populate({ path: 'solicitacoes', select: 'name user' })).populate({ path: 'solicitacoes.user', select: 'email' })
 
             if (!paciente) {
                 res.status(404).json({ msg: 'Paciente não encontrado!' })
@@ -20,10 +20,10 @@ const solicitacaoController = {
     },
     enviarSolicitacao: async (req, res) => {
         try {
-            const _id = req.params.id
+            const cpf = req.params.cpf
             const { dentista } = req.body
 
-            const updatedPaciente = await PacienteModel.findById(_id)
+            const updatedPaciente = await PacienteModel.find({ cpf })
             if (!updatedPaciente) {
                 res.status(404).json({ msg: 'Paciente não encontrado!' })
                 return
@@ -61,10 +61,10 @@ const solicitacaoController = {
     },
     aceitarSolicitacao: async (req, res) => {
         try {
-            const _id = req.params.id
+            const cpf = req.params.cpf
             const { dentista } = req.body
 
-            const updatedPaciente = await PacienteModel.findById(_id)
+            const updatedPaciente = await PacienteModel.find({ cpf })
             if (!updatedPaciente) {
                 res.status(404).json({ msg: 'Paciente não encontrado!' })
                 return
@@ -105,10 +105,10 @@ const solicitacaoController = {
     },
     recusarSolicitacao: async (req, res) => {
         try {
-            const _id = req.params.id
+            const cpf = req.params.cpf
             const { dentista } = req.body
 
-            const updatedPaciente = await PacienteModel.findById(_id)
+            const updatedPaciente = await PacienteModel.find({ cpf })
             if (!updatedPaciente) {
                 res.status(404).json({ msg: 'Paciente não encontrado!' })
                 return

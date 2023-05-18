@@ -28,15 +28,15 @@ router.route('/paciente').delete((req, res) => pacienteController.delete(req, re
 router.route('/paciente').put((req, res) => pacienteController.update(req, res))
 
 // ENVIAR Solicitação Paciente
-router.route('/paciente/:id/solicitacoes').post((req, res) => solicitacaoController.enviarSolicitacao(req, res))
+router.route('/paciente/:cpf/solicitacoes').post((req, res) => solicitacaoController.enviarSolicitacao(req, res))
 
 // ACEITAR Solicitação Paciente
-router.route('/paciente/:id/solicitacoes').put((req, res) => solicitacaoController.aceitarSolicitacao(req, res))
+router.route('/paciente/:cpf/solicitacoes').put((req, res) => solicitacaoController.aceitarSolicitacao(req, res))
 
 // GET Solicitação Paciente
-router.route('/paciente/:id/solicitacoes').get((req, res) => solicitacaoController.solicitacoes(req, res))
+router.route('/paciente/:cpf/solicitacoes').get((req, res) => solicitacaoController.solicitacoes(req, res))
 
 // DELETE Solicitação Paciente
-router.route('/paciente/:id/solicitacoes').delete((req, res) => solicitacaoController.recusarSolicitacao(req, res))
+router.route('/paciente/:cpf/solicitacoes').delete((req, res) => solicitacaoController.recusarSolicitacao(req, res))
 
 module.exports = router
