@@ -35,17 +35,13 @@ const solicitacaoController = {
                 return
             }
 
-            const solicitacaoFound = updatedPaciente.solicitacoes.find(
-                (solicitacao) => solicitacao.toString() === dentista
-            )
+            const solicitacaoFound = updatedPaciente.solicitacoes.find(solicitacao => solicitacao.toString() === dentista)
             if (solicitacaoFound) {
                 res.status(404).json({ msg: 'Solicitação já enviada!' })
                 return
             }
 
-            const dentistaFound = updatedPaciente.dentistas.find(
-                (dentistaA) => dentistaA.toString() === dentista
-            )
+            const dentistaFound = updatedPaciente.dentistas.find(dentistaA => dentistaA.toString() === dentista)
             if (dentistaFound) {
                 res.status(404).json({ msg: 'Solicitação já aceita!' })
                 return
@@ -76,25 +72,20 @@ const solicitacaoController = {
                 return
             }
 
-            const solicitacaoFound = updatedPaciente.solicitacoes.find(
-                (solicitacao) => solicitacao.toString() === dentista
-            )
+            const solicitacaoFound = updatedPaciente.solicitacoes.find(solicitacao => solicitacao.toString() === dentista)
             if (!solicitacaoFound) {
                 res.status(404).json({ msg: 'Solicitação não encontrada!' })
                 return
             }
 
-            const dentistaFound = updatedPaciente.dentistas.find(
-                (dentistaA) => dentistaA.toString() === dentista
-            )
+            const dentistaFound = updatedPaciente.dentistas.find(dentistaA => dentistaA.toString() === dentista)
             if (dentistaFound) {
                 res.status(404).json({ msg: 'Solicitação de dentista já aceita!' })
                 return
             }
 
-            updatedPaciente.solicitacoes = updatedPaciente.solicitacoes.filter(
-                (solicitacao) => solicitacao.toString() !== dentista
-            )
+            updatedPaciente.solicitacoes = updatedPaciente.solicitacoes.filter(solicitacao => solicitacao.toString() !== dentista)
+
             updatedPaciente.dentistas.push(dentista)
             updatedPaciente.save()
 
@@ -120,17 +111,13 @@ const solicitacaoController = {
                 return
             }
 
-            const solicitacaoFound = updatedPaciente.solicitacoes.find(
-                (solicitacao) => solicitacao.toString() === dentista
-            )
+            const solicitacaoFound = updatedPaciente.solicitacoes.find(solicitacao => solicitacao.toString() === dentista)
             if (!solicitacaoFound) {
                 res.status(404).json({ msg: 'Solicitação não encontrada!' })
                 return
             }
 
-            updatedPaciente.solicitacoes = updatedPaciente.solicitacoes.filter(
-                (solicitacao) => solicitacao.toString() !== dentista
-            )
+            updatedPaciente.solicitacoes = updatedPaciente.solicitacoes.filter(solicitacao => solicitacao.toString() !== dentista)
 
             updatedPaciente.save()
 
