@@ -19,9 +19,9 @@ const pacienteController = {
                 condicoes,
                 user: responseUser._id,
             }
-            const paciente = await (await PacienteModel.create(pacienteObject).populate('user')).populate('condicoes')
+            const paciente = await PacienteModel.create(pacienteObject);
 
-            res.status(201).json({ paciente, msg: "Paciente cadastrado com sucesso!" })
+res.status(201).json({ paciente, msg: "Paciente cadastrado com sucesso!" });
         } catch (error) {
             console.log(error)
         }

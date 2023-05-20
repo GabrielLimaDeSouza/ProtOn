@@ -28,18 +28,19 @@ const instituicaoController = {
     },
     createDentista: async (req, res) => {
         try {
-            const _id = req.params.id
-            const instituicao = await InstituicaoModel.findById(_id)
-
-            const dentista = await dentistaController.create(req, res)
-            instituicao.dentistas.push(dentista._id)
-            instituicao.save()
-
-            res.status(201).json({ dentista, msg: "Dentista cadastrada com sucesso!" })
+          const _id = req.params.id;
+          const instituicao = await InstituicaoModel.findById(_id);
+          const instituicaoId = instituicao._id;
+          const dentista = await dentistaController.create(req, res, instituicaoId);
+          instituicao.dentistas.push(dentista._id);
+          await instituicao.save();
+          res.status(201).json({ dentista, msg: "Dentista cadastrada com sucesso!" });
         } catch (error) {
-            console.log(error)
+          console.log(error);
+          res.status(500).json({ error: "Ocorreu um erro ao criar o dentista." });
         }
-    },
+      },
+      
     get: async (req, res)=> {
         try {
             const id = req.query.id

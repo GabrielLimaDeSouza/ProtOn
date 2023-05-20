@@ -7,14 +7,6 @@ const Perfil = (props) => {
 
     return (
         <> 
-    
-
-
-        
-
-
-
-
 
             <div className={styles.divInputs}>
             <h1 className={styles.titulo}>Perfil</h1>

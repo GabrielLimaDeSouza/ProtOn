@@ -2,30 +2,34 @@ const { Dentista: DentistaModel } = require("../models/Dentista")
 const { Usuario: UsuarioModel } = require("../models/Usuario")
 
 const dentistaController = {
-    create: async (req, res) => {
+    create: async (req, res, instituicaoId) => {
         try {
-            const { name, email, senha, matricula } = req.body
-
-            const user = {
-                email,
-                senha,
-                type: 'dentista',
-            }
-            const responseUser = await UsuarioModel.create(user)
-            
-            const dentistaObject = {
-                name,
-                matricula,
-                user: responseUser._id
-            }
-            const dentista = await (await DentistaModel.create(dentistaObject)).populate('user')
-
-            res.status(201).json(dentista)
+          const { name, email, senha, matricula } = req.body;
+          const user = {
+            email,
+            senha,
+            type: 'dentista',
+          };
+          const responseUser = await UsuarioModel.create(user);
+      
+          const dentistaObject = {
+            name,
+            matricula,
+            instituicao: instituicaoId,
+            user: responseUser._id,
+          };
+          const dentista = await DentistaModel.create(dentistaObject);
+          
+          // Obter o usuário associado ao dentista
+          const userObject = await UsuarioModel.findById(responseUser._id);
+          dentista.user = userObject;
+          return dentista;
         } catch (error) {
-            console.log(error)
-            throw new Error(error)
+          console.log(error);
+          throw new Error("Ocorreu um erro ao criar o dentista.");
         }
-    },
+      },
+       
     getAll: async (req, res) => {
         try {
             const dentistas = await DentistaModel.find().populate('user')
@@ -38,7 +42,7 @@ const dentistaController = {
     get: async (req, res)=> {
         try {
             const id = req.query.id
-            const dentista = await DentistaModel.findById(id).populate('user')
+            const dentista = await DentistaModel.findById(id).populate('user').populate('instituicao')
 
             if(!dentista) {
                 res.status(404).json({ msg: "Dentista não encontrado!" })

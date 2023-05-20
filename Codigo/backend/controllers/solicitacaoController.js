@@ -22,7 +22,7 @@ const solicitacaoController = {
         try {
             const cpf = req.params.cpf
             const { dentista } = req.body
-
+            console.log(dentista)
             const updatedPaciente = await PacienteModel.findOne({ cpf })
             if (!updatedPaciente) {
                 res.status(404).json({ msg: 'Paciente não encontrado!' })
@@ -106,7 +106,7 @@ const solicitacaoController = {
     recusarSolicitacao: async (req, res) => {
         try {
             const cpf = req.params.cpf
-            const { dentista } = req.body
+            const dentista = req.params.id
 
             const updatedPaciente = await PacienteModel.findOne({ cpf })
             if (!updatedPaciente) {

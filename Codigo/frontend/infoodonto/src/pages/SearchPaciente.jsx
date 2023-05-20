@@ -12,9 +12,10 @@ import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import { BsPersonFillAdd } from "react-icons/bs";
 import { useState, useEffect } from "react";
+import { enviarSolicitacao } from "../services/api";
 
 const SearchPaciente = () => {
-    const [dentistaLogado, setDentistaLogado] = useState("646289e55ca7b525ef5a448e")
+    const [dentistaLogado, setDentistaLogado] = useState("646800775929dccf5db675ad")
     const [paciente, setPaciente] = useState({});
     const [pacienteExiste, setPacienteExiste] = useState()
     const [cpf, setCpf] = useState("");
@@ -24,6 +25,7 @@ const SearchPaciente = () => {
     const [implante, setImplante] = useState([])
     const [open1, setOpen1] = useState()
     const [open2, setOpen2] = useState()
+    const [open3, setOpen3] = useState()
     const [permitido, setPermitido] = useState()
     const [inputSearchValue, setInputSearchValue] = useState("")
     let testeString = ""
@@ -39,12 +41,11 @@ const SearchPaciente = () => {
         })
             .then(resp => resp.json())
             .then(data => {
-                console.log(data)
-                if (data) {
+                if (data && !data.msg) {
                     setPaciente(data)
                     setPacienteExiste(true)
                     setOpen1(true);
-                    console.log(data)
+
                 } else {
                     setPacienteExiste(false)
                     setOpen2(true)
@@ -64,21 +65,16 @@ const SearchPaciente = () => {
             setPacienteExiste(true);
 
             setPermitido(false)
-            paciente.dentista.map(dentista => {
+            paciente.dentistas.map(dentista => {
                 if (dentista == dentistaLogado) {
                     setPermitido(true)
                 }
             })
-            console.log(paciente)
             for (let i = 0; i < paciente.condicoes.length; i++) {
                 setPreAtendimento(preAtendimento.concat(paciente.condicoes[i].preAtendimento))
                 setAnestesicoLocal(anestesicoLocal.concat(paciente.condicoes[i].anestesicoLocal))
                 setMedicamentos(medicamentos.concat(paciente.condicoes[i].medicamentos))
                 setImplante(implante.concat(paciente.condicoes[i].implante))
-                if (pacienteExiste) {
-
-
-                }
             }
         } else {
             setPacienteExiste(false);
@@ -97,12 +93,9 @@ const SearchPaciente = () => {
 
     function handleClose() {
         setOpen1(false)
-    }
-
-    function handleClose2() {
         setOpen2(false)
+        setOpen3(false)
     }
-
     function onKeyDown(e) {
         let campo = document.getElementById("busca")
 
@@ -116,6 +109,13 @@ const SearchPaciente = () => {
         }
 
 
+    }
+
+    function solicitar(){
+        enviarSolicitacao(cpf, dentistaLogado).catch(
+            
+        )
+        setOpen3(true)
     }
 
     return (
@@ -135,11 +135,18 @@ const SearchPaciente = () => {
                         </Alert>
                     </Snackbar> :
                     open2 ?
-                        <Snackbar open={open2} autoHideDuration={2000} onClose={handleClose2}>
-                            <Alert onClose={handleClose2} severity="error" sx={{ width: '100%' }}>
+                        <Snackbar open={open2} autoHideDuration={2000} onClose={handleClose}>
+                            <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
                                 Paciente não foi encontrado!
                             </Alert>
-                        </Snackbar> : ""
+                        </Snackbar> : 
+                    open3 ?
+                    <Snackbar open={open3} autoHideDuration={2000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                        Solicitação enviada com sucesso!
+                    </Alert>
+                </Snackbar>
+                    : ""
             }
 
             {
@@ -245,7 +252,7 @@ const SearchPaciente = () => {
                         : <>
 
                             <div className={styles.divInvite}>
-                                <BsPersonFillAdd className={styles.iconAdd}/> Enviar solicitação para acessar os dados
+                                <BsPersonFillAdd className={styles.iconAdd} onClick={()=>{solicitar()}}/> Enviar solicitação para acessar os dados
                             </div>
                         </>
                     : (

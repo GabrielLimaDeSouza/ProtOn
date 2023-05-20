@@ -95,7 +95,8 @@ const FormDentista = () => {
                 "name": name,
                 "email": email,
                 "senha": senha,
-                "matricula": matricula
+                "matricula": matricula,
+                "instituicao": instituicao
             })
           })
           .then(resp => resp.json())

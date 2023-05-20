@@ -34,6 +34,6 @@ router.route('/paciente/:cpf/solicitacoes').put((req, res) => solicitacaoControl
 router.route('/paciente/:cpf/solicitacoes').get((req, res) => solicitacaoController.solicitacoes(req, res))
 
 // DELETE Solicitação Paciente
-router.route('/paciente/:cpf/solicitacoes').delete((req, res) => solicitacaoController.recusarSolicitacao(req, res))
+router.route('/paciente/:cpf/solicitacoes/:id').delete((req, res) => solicitacaoController.recusarSolicitacao(req, res))
 
 module.exports = router

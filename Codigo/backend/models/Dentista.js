@@ -11,6 +11,11 @@ const dentistaSchema = new Schema(
             type: String,
             required: true
         },
+        instituicao:{
+            type: Schema.Types.ObjectId,
+            ref: 'Instituicao'
+        }
+        ,
         user: {
             type: Schema.Types.ObjectId,
             ref: 'Usuario'

@@ -7,7 +7,6 @@ import { useState } from "react"
 const InputOption = (props) => {
   const [tags, setTags] = useState(props.currentCondicao || [])
   const [jaPossui, setJaPossui] = useState(tags != null)
-
   function removeTag(index) {
     setTags(tags.filter((el, i) => i !== index))
   }
@@ -22,7 +21,6 @@ const InputOption = (props) => {
     },
     );
     tags.forEach(element =>{
-      console.log(element.nome == params)
       if(element == params){
        
         boolean = false
@@ -49,7 +47,6 @@ const InputOption = (props) => {
         <div className={styles.tagContainer}>
           {jaPossui && tags.length > 0 ? (
             tags.map((tag, index) => {
-              console.log(tag)
               return (
                 <div className={styles.tagGroup}  key={index}>
                   <Chip

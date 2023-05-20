@@ -26,7 +26,7 @@ const HomePaciente = () => {
     const [paginaSelecionada, setPaginaSelecionada] = useState()
     const [logado, setLogado] = useState()
     const [anchorEl, setAnchorEl] = React.useState(null);
-
+    console.log(user)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -34,7 +34,7 @@ const HomePaciente = () => {
             const condicoes = data.map((item) => item);
             setCondicoesPaciente(condicoes);
             setPaginaSelecionada(<Perfil currentName={user.name} currentCpf={user.cpf} currentEmail={user.user.email} currentCondicao={user.condicoes} option={condicoesPaciente} />)
-            console.log(user)
+            
         };
         fetchData();
     }, [user]);
@@ -122,7 +122,7 @@ const HomePaciente = () => {
                 >
                     <MenuItem onClick={() => {
                         setPaginaSelecionada(<Perfil currentName={user.name} currentCpf={user.cpf} currentEmail={user.user.email} currentCondicao={user.condicoes} option={condicoesPaciente} />)
-                        setIconeMenu(<Avatar className={styles.icon}
+                        setIconeMenu(<BsFillPersonFill className={styles.icon}
                             onClick={handleClick}
                             size="small"
                             sx={{ ml: 2 }}
@@ -130,15 +130,14 @@ const HomePaciente = () => {
                             aria-haspopup="true"
                             aria-expanded={open ? 'true' : undefined}
                         >
-                            <Avatar sx={{ width: 32, height: 32 }}></Avatar>
-                        </Avatar>)
-                        console.log(condicoesPaciente)
+                            <BsFillPersonFill sx={{ width: 32, height: 32 }}></BsFillPersonFill>
+                        </BsFillPersonFill>)
                         setAnchorEl(null);
                     }}>
                         <Avatar /> Profile
                     </MenuItem>
                     <Divider />
-                    <MenuItem onClick={() => { setPaginaSelecionada(<MedicosVinculados />)
+                    <MenuItem onClick={() => {setPaginaSelecionada(<MedicosVinculados solicitacoes={user.solicitacoes} logado={user.cpf}/>)
                     setIconeMenu(<PersonAdd className={styles.icon}
                         onClick={handleClick}
                         size="small"

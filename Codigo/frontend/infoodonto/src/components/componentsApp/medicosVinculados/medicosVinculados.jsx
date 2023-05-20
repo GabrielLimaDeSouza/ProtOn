@@ -13,19 +13,25 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import { BsCheckCircleFill } from "react-icons/bs";
 import { MdCancel } from "react-icons/md";
-const MedicosVinculados = ()=>{
+import { getDentista } from "../../../services/api";
+import { aceitarSolicitacao } from "../../../services/api";
+import { recusarSolicitacao } from "../../../services/api";
+const MedicosVinculados = (props)=>{
 
     const [openAceito, setOpenAceito] = useState(false);
     const [openRecusado, setOpenRecusado] = useState(false);
-    const [rows, setRows] = useState([
-        {"name" : "Paulo",
-        "email" : "Paulo@test",
-         "matricula": "00000",
-         "instituicao": "Nenhuma"
-        },
-    ]);
+    const [rows, setRows] = useState([]);
 
-
+    useEffect(() => {
+        const fetchDentistas = async () => {
+          const promises = props.solicitacoes.map(id => getDentista(id));
+          const resolvedRows = await Promise.all(promises);
+          setRows(resolvedRows);
+        };
+      
+        fetchDentistas();
+      }, [props.solicitacoes]);
+    
     
 
     
@@ -36,12 +42,14 @@ const MedicosVinculados = ()=>{
         setOpenAceito(true);
     };
 function recuseDentista(id){
+    recusarSolicitacao(props.logado, id)
         let index = rows.indexOf(id);
         rows.splice(index, 1)
         messageRecusado()
 
     }
     function addDentista(id){
+        aceitarSolicitacao(props.logado, id)
         let index = rows.indexOf(id);
         rows.splice(index, 1)
         messageAdd()
@@ -52,14 +60,13 @@ function recuseDentista(id){
             return;
         }
 
-        setOpen(false);
+        setOpenRecusado(false);
     };
     const Alert = React.forwardRef(function Alert(props, ref) {
         return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
       });
       
     return (
-
         <>
         
         <div className={styles.divTable}>
@@ -78,19 +85,19 @@ function recuseDentista(id){
             <TableBody>
                 {rows.map((row, index) => (
                 <TableRow
-                    key={row._id}
+                    key={row.data._id}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
-                    <TableCell component="th" scope="row">{row.name}</TableCell>
-                    <TableCell align="right">{row.matricula}</TableCell>
-                    <TableCell align="right">{row.email}</TableCell>
-                    <TableCell align="right">{row.instituicao}</TableCell>
+                    <TableCell component="th" scope="row">{row.data.name}</TableCell>
+                    <TableCell align="right">{row.data.matricula}</TableCell>
+                    <TableCell align="right">{row.data.user.email}</TableCell>
+                    <TableCell align="right">{row.data.instituicao.name}</TableCell>
                     <TableCell><button className={styles.buttonCrud} onClick={() => {
-                        recuseDentista(index)
+                        recuseDentista(row.data._id)
                     }}><MdCancel className={styles.iconNotConfirm}/></button>
                     </TableCell>
                     <TableCell><button className={styles.buttonCrud} onClick={() => {
-                        addDentista(index)
+                        addDentista(row.data._id)
                     }}><BsCheckCircleFill className={styles.iconConfirm}/></button></TableCell>
                 </TableRow>
                 ))}
