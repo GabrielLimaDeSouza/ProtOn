@@ -57,7 +57,7 @@ const FormPaciente = () => {
           <div className={styles.uni}><Input type="text" placeholder="CPF" id="cpf" /></div>
           <div className={styles.uni}><Input type="text" placeholder="Email" id="email" /></div>
           <div className={styles.uni}><Input type="password" placeholder="Senha" id="senha" /></div>
-          <div className={styles.uni}><Input type="option" placeholder="Condição" id="condicao" option={condicoesPaciente}> </Input></div>
+          <div className={styles.uni}><Input type="option" placeholder="Selecione aqui as suas condições médicas" id="condicao" option={condicoesPaciente}> </Input></div>
         </div>
       </div>
 
