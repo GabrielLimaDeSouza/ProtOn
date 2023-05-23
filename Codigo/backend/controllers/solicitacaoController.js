@@ -6,7 +6,15 @@ const solicitacaoController = {
         try {
             const cpf = req.params.cpf
 
-            const paciente = await (await PacienteModel.findOne({ cpf }).populate({ path: 'solicitacoes', select: 'name user' })).populate({ path: 'solicitacoes.user', select: 'email' })
+            const paciente = await PacienteModel.findOne({ cpf })
+                .populate({
+                    path: 'solicitacoes',
+                    select: 'name user',
+                    populate: {
+                        path: 'user',
+                        select: 'email'
+                    }
+                })
 
             if (!paciente) {
                 res.status(404).json({ msg: 'Paciente não encontrado!' })
@@ -15,14 +23,15 @@ const solicitacaoController = {
 
             res.status(201).json(paciente.solicitacoes)
         } catch (error) {
-        console.log(error)
+            console.log(error)
+            res.status(500).json({ error: 'Erro interno do servidor' })
         }
     },
     enviarSolicitacao: async (req, res) => {
         try {
             const cpf = req.params.cpf
             const { dentista } = req.body
-            console.log(dentista)
+            
             const updatedPaciente = await PacienteModel.findOne({ cpf })
             if (!updatedPaciente) {
                 res.status(404).json({ msg: 'Paciente não encontrado!' })
@@ -52,7 +61,8 @@ const solicitacaoController = {
 
             res.status(201).json({ msg: 'Solicitação enviada' })
         } catch (error) {
-        console.log(error)
+            console.log(error)
+            res.status(500).json({ error: 'Erro interno do servidor' })
         }
     },
     aceitarSolicitacao: async (req, res) => {
@@ -92,6 +102,7 @@ const solicitacaoController = {
             res.status(201).json({ msg: 'Solicitação aceita' })
         } catch (error) {
             console.log(error)
+            res.status(500).json({ error: 'Erro interno do servidor' })
         }
     },
     recusarSolicitacao: async (req, res) => {
@@ -123,7 +134,8 @@ const solicitacaoController = {
 
             res.status(201).json({ msg: 'Solicitação recusada' })
         } catch (error) {
-        console.log(error)
+            console.log(error)
+            res.status(500).json({ error: 'Erro interno do servidor' })
         }
     },
 }

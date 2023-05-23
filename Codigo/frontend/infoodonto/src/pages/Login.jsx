@@ -9,8 +9,8 @@ import styles from "../css/Login.module.css"
 import { Link } from "react-router-dom"
 
 const Login = () => {
-    const [email, setEmail] = useState("")
-    const [senha, setSenha] = useState("")
+    const [email, setEmail] = useState('')
+    const [senha, setSenha] = useState('')
     const [error, setError] = useState(null)
 
     const { login } = useContext(LoginContext)
@@ -18,10 +18,10 @@ const Login = () => {
     const handleSubmit = async e => {
         e.preventDefault()
 
-        const { status, msg } = await login(email, senha)
+        const resp = await login(email, senha)
 
-        if(status !== 201) {
-            setError(msg)
+        if(resp.status !== 201) {
+            setError(resp.msg)
         }
     }
 

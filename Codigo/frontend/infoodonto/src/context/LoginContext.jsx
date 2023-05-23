@@ -40,16 +40,18 @@ export const LoginProvider = ({ children }) => {
     
             const response = await getUser(loggedUser._id)
             setUser(response.data)
-            
-            if(response.data.user.type == 'paciente'){
-                navigate('homePaciente')
-            }
-            if(response.data.user.type == 'dentista') {
-                navigate('searchPaciente')
-            }
-            if(response.data.user.type == 'instituicao'){
-                navigate(`homeInstituicao`)   
-            }
+
+            setTimeout(() => {
+                if(response.data.user.type == 'paciente'){
+                    navigate('homePaciente')
+                }
+                if(response.data.user.type == 'dentista') {
+                    navigate('searchPaciente')
+                }
+                if(response.data.user.type == 'instituicao'){
+                    navigate(`homeInstituicao`)   
+                }
+            }, 600);
 
         } catch(err) {
             const { status, data } = err.response

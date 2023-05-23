@@ -3,10 +3,6 @@ const { Dentista: DentistaModel } = require("../models/Dentista")
 const { Paciente: PacienteModel } = require("../models/Paciente")
 const { Instituicao: InstituicaoModel } = require("../models/Instituicao")
 
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-
 const usuarioController = {
     get: async (req, res) => {
         try {
@@ -14,7 +10,7 @@ const usuarioController = {
             const user = await UsuarioModel.findById(_id)
 
             if(!user) {
-                res.status(404).json({ msg: `Usuario ${ _id } não encontrado!` })
+                res.status(404).json({ msg: `Usuario não encontrado!` })
                 return
             }
 
@@ -22,19 +18,18 @@ const usuarioController = {
 
             switch (user.type) {
                 case 'dentista':
-                    userType = await DentistaModel.findOne({ user: user._id })
-                    data = await userType.populate('pacientes')
-                    break;
+                    data = await DentistaModel.findOne({ user: user._id })
+                    break
 
                 case 'paciente':
                     userType = await PacienteModel.findOne({ user: user._id })
                     data = await userType.populate('condicoes')
-                    break;
+                    break
 
                 case 'instituicao':
                     userType = await InstituicaoModel.findOne({ user: user._id })
                     data = await userType.populate('dentistas')
-                    break;
+                    break
 
                 default:
                     res.status(500).json({ msg: `Usuario ${ user.type } de ${ _id } não encontrado!` })
@@ -46,6 +41,7 @@ const usuarioController = {
             res.status(201).json(data)
         } catch (error) {
             console.log(error)
+            res.status(500).json({ error: 'Erro interno do servidor' })
         }
     },
     getAll: async (req, res) => {
@@ -55,6 +51,7 @@ const usuarioController = {
             res.status(201).json(users)
         } catch (error) {
             console.log(error)
+            res.status(500).json({ error: 'Erro interno do servidor' })
         }
     },
 }

@@ -19,7 +19,7 @@ router.route('/paciente/:id/dentistas').get((req, res) => pacienteController.den
 router.route('/pacientes').get((req, res) => pacienteController.getAll(req, res))
 
 // GET BY CPF Paciente
-router.route('/paciente/cpf/:cpf').get((req, res) => pacienteController.getByCpf(req, res))
+router.route('/paciente/cpf/:cpf').post((req, res) => pacienteController.getByCpf(req, res))
 
 // DELETE Paciente
 router.route('/paciente').delete((req, res) => pacienteController.delete(req, res))

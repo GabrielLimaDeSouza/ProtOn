@@ -5,14 +5,11 @@ const authenticationMiddleware = require("../middlewares/auth")
 // CREATE Instituicao
 router.route("/instituicao").post((req, res) => instituicaoController.create(req, res))
 
-// CREATE Dentista
-router.route("/instituicao/:id/dentista").post((req, res) => instituicaoController.createDentista(req, res))
-
 //! Middleware
 //router.use(authenticationMiddleware)
 
-// GET ALL Instituicao
-router.route("/instituicoes").get((req, res) => instituicaoController.getAll(req, res))
+// CREATE Dentista
+router.route("/instituicao/:id/dentista").post((req, res) => instituicaoController.createDentista(req, res))
 
 // GET ALL Dentistas FROM Instituicao
 router.route("/instituicao/:id/dentistas").get((req, res) => instituicaoController.getAllDentistas(req, res))
