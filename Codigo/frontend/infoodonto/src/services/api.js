@@ -25,11 +25,11 @@ export const deleteDentista = async id => {
 }
 
 export const enviarSolicitacao = async (cpf, dentista) => {
-    return await api.put(`/api/dentista/enviar-solicitacao/${cpf}`, { dentista });
-};
+    return await api.put(`/api/dentista/enviar-solicitacao/${cpf}`, { dentista })
+}
 export const aceitarSolicitacao = async (cpf, dentista) => {
-    return await api.put(`/api/paciente/${cpf}/solicitacoes`, { dentista });
-};
+    return await api.put(`/api/paciente/${cpf}/solicitacoes`, { dentista })
+}
 export const recusarSolicitacao = async (cpf, dentista) => {
-    return await api.delete(`/api/paciente/${cpf}/solicitacoes/${dentista}` );
-};
+    return await api.delete(`/api/paciente/${cpf}/solicitacoes/${dentista}`)
+}
