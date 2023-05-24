@@ -41,9 +41,9 @@ const dentistaController = {
     },
     get: async (req, res)=> {
         try {
-            const _id = req.query.id
+            const { id } = req.query
             const dentista = await DentistaModel
-                .findById(_id)
+                .findById(id)
                 .populate('user')
                 .populate('instituicao')
 
@@ -60,7 +60,7 @@ const dentistaController = {
     },
     delete: async (req, res) => {
         try {
-            const id = req.query.id
+            const { id } = req.query
 
             const dentista = await DentistaModel.findByIdAndDelete(id)
             await UsuarioModel.findByIdAndDelete(dentista.user._id)
@@ -73,7 +73,7 @@ const dentistaController = {
     },
     update: async (req, res) => {
         try {
-            const id = req.query.id
+            const { id } = req.query
             const { name, email, senha } = req.body
 
             const updatedDentista = await DentistaModel
