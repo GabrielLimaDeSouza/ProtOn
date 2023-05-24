@@ -53,6 +53,7 @@ const SearchPaciente = () => {
         })
         .then(data => {
             setPacienteExiste(true)
+            console.log(data);
             
             if(data) {
                 if (data && !data.msg) {
@@ -77,7 +78,7 @@ const SearchPaciente = () => {
         if (paciente != null && Object.keys(paciente).length !== 0) {
             setPacienteExiste(true)
 
-            paciente.condicoes.array.forEach(condicao => {
+            paciente.condicoes.map(condicao => {
                 setPreAtendimento(
                     preAtendimento.concat(condicao.preAtendimento)
                 )

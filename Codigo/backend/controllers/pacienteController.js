@@ -60,7 +60,7 @@ const pacienteController = {
                 return
             }
 
-            const acesso = paciente.dentistas.find(dentista1 => dentista1 === dentista)
+            const acesso = paciente.dentistas.find(dentista1 => dentista1 == dentista)
             if(!acesso) {
                 res.status(401).json({ msg: 'Dentista sem permição' })
                 return
