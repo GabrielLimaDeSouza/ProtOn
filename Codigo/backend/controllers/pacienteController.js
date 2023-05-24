@@ -1,5 +1,5 @@
-const { Paciente: PacienteModel } = require("../models/Paciente")
-const { Usuario: UsuarioModel } = require("../models/Usuario")
+const { Paciente: PacienteModel } = require('../models/Paciente')
+const { Usuario: UsuarioModel } = require('../models/Usuario')
 
 const pacienteController = {
     create: async (req, res) => {
@@ -21,7 +21,7 @@ const pacienteController = {
             }
             const paciente = await PacienteModel.create(pacienteObject)
 
-            res.status(201).json({ paciente, msg: "Paciente cadastrado com sucesso!" })
+            res.status(201).json({ paciente, msg: 'Paciente cadastrado com sucesso!' })
         } catch (error) {
             console.log(error)
             res.status(500).json({ error: 'Ocorreu um erro ao cadastrar o Paciente' })
@@ -29,14 +29,21 @@ const pacienteController = {
     },
     get: async (req, res) => {
         try {
-            const id = req.query.id
+            const { id } = req.query
             const paciente = await PacienteModel
                 .findById(id)
-                .populate('user')
-                .populate('condicoes')
+                .populate('user condicoes')
+                .populate({
+                    path: 'solicitacoes dentistas',
+                    select: 'name user',
+                    populate: {
+                        path: 'user',
+                        select: 'email',
+                    },
+                })
 
             if(!paciente) {
-                res.status(404).json({ msg: `Paciente ${id} não encontrado!` })
+                res.status(404).json({ msg: `Paciente não encontrado!` })
                 return
             }
 
@@ -48,7 +55,7 @@ const pacienteController = {
     },
     getByCpf: async (req, res) => {
         try {
-            const cpf = req.params.cpf
+            const { cpf } = req.params
             const { dentista } = req.body
 
             const paciente = await PacienteModel
@@ -86,12 +93,12 @@ const pacienteController = {
     },
     delete: async (req, res) => {
         try {
-            const id = req.query.id
+            const { id } = req.query
 
             const paciente = await PacienteModel.findByIdAndDelete(id)
             await UsuarioModel.findByIdAndDelete(paciente.user._id)
 
-            res.status(200).json({ paciente, msg: "Paciente excluido com sucesso!" })
+            res.status(200).json({ paciente, msg: 'Paciente excluido com sucesso!' })
         } catch (error) {
             console.log(error)
             res.status(500).json({ error: 'Ocorreu um erro ao apagar os dados do Paciente' })
@@ -99,17 +106,17 @@ const pacienteController = {
     },
     update: async (req, res) => {
         try {
-            const _id = req.query.id
+            const { id } = req.query
             const { name, email, senha, condicoes } = req.body
 
             const updatedPaciente = await PacienteModel
-                .findByIdAndUpdate(_id, {
+                .findByIdAndUpdate(id, {
                     name,
                     condicoes
                 }, { new: true })
             
             if(!updatedPaciente) {
-                res.status(404).json({ msg: "Paciente não encontrado!" })
+                res.status(404).json({ msg: 'Paciente não encontrado!' })
                 return
             }
 
@@ -123,7 +130,7 @@ const pacienteController = {
                 }
             })
 
-            res.status(200).json({ paciente, msg: "Paciente atualizado com sucesso!" })
+            res.status(200).json({ paciente, msg: 'Paciente atualizado com sucesso!' })
 
         } catch (error) {
             console.log(error)
@@ -132,10 +139,10 @@ const pacienteController = {
     },
     dentistas: async (req, res) => {
         try {
-            const _id = req.params.id
+            const { id } = req.params
 
             const paciente = await PacienteModel
-            .findById(_id)
+            .findById(id)
             .populate({
                 path: 'dentistas',
                 select: 'name user',
@@ -146,11 +153,40 @@ const pacienteController = {
             })
             
             if(!paciente) {
-                res.status(404).json({ msg: "Paciente não encontrado!" })
+                res.status(404).json({ msg: 'Paciente não encontrado!' })
                 return
             }
 
             res.status(200).json({ dentistas: paciente.dentistas })
+
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({ error: 'Erro interno do servidor' })
+        }
+    },
+    removerPermissao: async (req, res) => {
+        try {
+            const { cpf } = req.params
+            const { dentista } = req.body
+
+            const paciente = await PacienteModel.findOne({ cpf })
+            
+            if(!paciente) {
+                res.status(404).json({ msg: 'Paciente não encontrado!' })
+                return
+            }
+
+            const dentistA = paciente.dentistas.find(dentistA => dentistA.toString() === dentista)
+            if(!dentistA) {
+                res.status(404).json({ msg: 'Dentista não encontrado!' })
+                return
+            }
+
+            paciente.dentistas = paciente.dentistas
+                .filter(dentistA => dentistA.toString() !== dentista)
+            paciente.save()
+
+            res.status(200).json({ msg: 'Permissão removida com sucesso' })
 
         } catch (error) {
             console.log(error)
