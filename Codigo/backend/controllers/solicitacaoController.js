@@ -4,7 +4,7 @@ const { Dentista: DentistaModel } = require('../models/Dentista')
 const solicitacaoController = {
     solicitacoes: async (req, res) => {
         try {
-            const cpf = req.params.cpf
+            const { cpf } = req.params
 
             const paciente = await PacienteModel.findOne({ cpf })
                 .populate({
@@ -29,7 +29,7 @@ const solicitacaoController = {
     },
     enviarSolicitacao: async (req, res) => {
         try {
-            const cpf = req.params.cpf
+            const { cpf } = req.params
             const { dentista } = req.body
             
             const updatedPaciente = await PacienteModel.findOne({ cpf })
@@ -67,7 +67,7 @@ const solicitacaoController = {
     },
     aceitarSolicitacao: async (req, res) => {
         try {
-            const cpf = req.params.cpf
+            const { cpf } = req.params
             const { dentista } = req.body
 
             const updatedPaciente = await PacienteModel.findOne({ cpf })
@@ -107,8 +107,8 @@ const solicitacaoController = {
     },
     recusarSolicitacao: async (req, res) => {
         try {
-            const cpf = req.params.cpf
-            const dentista = req.params.id
+            const { cpf } = req.params
+            const { dentista } = req.body
 
             const updatedPaciente = await PacienteModel.findOne({ cpf })
             if (!updatedPaciente) {
@@ -128,7 +128,8 @@ const solicitacaoController = {
                 return
             }
 
-            updatedPaciente.solicitacoes = updatedPaciente.solicitacoes.filter(solicitacao => solicitacao.toString() !== dentista)
+            updatedPaciente.solicitacoes = updatedPaciente.solicitacoes
+                .filter(solicitacao => solicitacao.toString() !== dentista)
 
             updatedPaciente.save()
 
