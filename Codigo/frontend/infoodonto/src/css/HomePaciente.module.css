@@ -1,8 +1,5 @@
 
-.logo{
-    padding-bottom: 35px;
-    
-}
+
 .top{
     display: flex;
     align-items: center;
@@ -16,6 +13,13 @@
     align-items: center;
     padding-top: 20px;
     padding-right: 10px;
+}
+.divLogo{
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    padding-top: 40px;
 }
 .icon{
     width: 30px !important;

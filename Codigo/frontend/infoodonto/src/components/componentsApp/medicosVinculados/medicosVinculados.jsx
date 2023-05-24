@@ -14,19 +14,27 @@ import { BsCheckCircleFill } from 'react-icons/bs'
 import { MdCancel } from 'react-icons/md'
 import { getDentista, aceitarSolicitacao, recusarSolicitacao } from '../../../services/api'
 
-const MedicosVinculados = ({ solicitacoes, logado }) => {
+const MedicosVinculados = ({ solicitacoes, pacienteLogado }) => {
+  console.log("solicitar")
   const [openAceito, setOpenAceito] = useState(false)
   const [openRecusado, setOpenRecusado] = useState(false)
   const [rows, setRows] = useState([])
 
   useEffect(() => {
-    (async () => {
-      const promises = solicitacoes.map(id => getDentista(id))
-      const resolvedRows = await Promise.all(promises)
-      setRows(resolvedRows)
-    })
-  }, [solicitacoes])
+    const fetchData = async () => {
+      console.log(solicitacoes)
+      const promises = solicitacoes.map(async (id) => {
+        const response = await getDentista(id);
+        return response.data;
+      });
 
+      const fetchedRows = await Promise.all(promises);
+      setRows(fetchedRows);
+    };
+
+    fetchData();
+  }, [solicitacoes]);
+  console.log(rows)
   const messageRecusado = () => {
     setOpenRecusado(true)
   }
@@ -35,14 +43,15 @@ const MedicosVinculados = ({ solicitacoes, logado }) => {
   }
 
   const recuseDentista = id => {
-    recusarSolicitacao(logado, id)
+    recusarSolicitacao(pacienteLogado, id)
     let index = rows.indexOf(id)
     rows.splice(index, 1)
     messageRecusado()
   }
 
   const addDentista = id => {
-    aceitarSolicitacao(logado, id)
+    console.log(pacienteLogado)
+    aceitarSolicitacao(pacienteLogado, id)
     let index = rows.indexOf(id)
     rows.splice(index, 1)
     messageAdd()
@@ -64,6 +73,7 @@ const MedicosVinculados = ({ solicitacoes, logado }) => {
     <>
       <div className={ styles.divTable }>
         <h1 className={ styles.titulo }>Dentistas</h1>
+        <div className={styles.divTableBottom}>
         <TableContainer component={ Paper }>
           <Table
             className={ styles.table }
@@ -81,23 +91,24 @@ const MedicosVinculados = ({ solicitacoes, logado }) => {
             </TableHead>
             <TableBody>
               { rows.map(row => (
+                console.log(row),
                 <TableRow
-                  key={ row.data._id }
+                  key={ row.dentista._id }
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component='th' scope='row'>
-                    { row.data.name }
+                    { row.dentista.name}
                   </TableCell>
-                  <TableCell align='right'>{ row.data.matricula }</TableCell>
-                  <TableCell align='right'>{ row.data.user.email }</TableCell>
+                  <TableCell align='right'>{ row.dentista.matricula }</TableCell>
+                  <TableCell align='right'>{ row.dentista.user.email }</TableCell>
                   <TableCell align='right'>
-                    { row.data.instituicao.name }
+                    { row.dentista.instituicao.name }
                   </TableCell>
                   <TableCell>
                     <button
                       className={ styles.buttonCrud }
                       onClick={ () => {
-                        recuseDentista(row.data._id)
+                        recuseDentista(row.dentista._id)
                       }}
                     >
                       <MdCancel className={ styles.iconNotConfirm } />
@@ -107,7 +118,7 @@ const MedicosVinculados = ({ solicitacoes, logado }) => {
                     <button
                       className={ styles.buttonCrud }
                       onClick={ () => {
-                        addDentista(row.data._id)
+                        addDentista(row.dentista._id)
                       }}
                     >
                       <BsCheckCircleFill className={ styles.iconConfirm } />
@@ -118,6 +129,8 @@ const MedicosVinculados = ({ solicitacoes, logado }) => {
             </TableBody>
           </Table>
         </TableContainer>
+        </div>
+        
 
         <Snackbar
           open={ openAceito }

@@ -1,7 +1,7 @@
 import Input from '../../input/Input'
 import styles from './Perfil.module.css'
 
-const Perfil = ({ currentName, currentEmail, currentCpf, currentCondicao }) => {
+const Perfil = ({ currentName, currentEmail, currentCpf, currentCondicao, option }) => {
   return (
     <>
       <div className={ styles.divInputs }>
@@ -34,7 +34,7 @@ const Perfil = ({ currentName, currentEmail, currentCpf, currentCondicao }) => {
             placeholder='Condição'
             id='updateCondicao'
             currentCondicao={ currentCondicao }
-            option={ props.option }
+            option={ option }
           />
         </div>
       </div>

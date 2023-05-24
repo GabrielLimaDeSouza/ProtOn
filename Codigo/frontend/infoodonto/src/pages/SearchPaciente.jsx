@@ -53,7 +53,6 @@ const SearchPaciente = () => {
         })
         .then(data => {
             setPacienteExiste(true)
-            console.log(data);
             
             if(data) {
                 if (data && !data.msg) {
@@ -77,7 +76,7 @@ const SearchPaciente = () => {
     useEffect(() => {
         if (paciente != null && Object.keys(paciente).length !== 0) {
             setPacienteExiste(true)
-
+            console.log(paciente)
             paciente.condicoes.map(condicao => {
                 setPreAtendimento(
                     preAtendimento.concat(condicao.preAtendimento)
