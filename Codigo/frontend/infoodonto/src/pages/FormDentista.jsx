@@ -2,25 +2,51 @@ import React from "react";
 
 import Logo from "../img/logo.png"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 
 import Input from "../components/input/Input"
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
+import {AiOutlineArrowLeft} from 'react-icons/ai'
+
 import styles from '../css/FormDentista.module.css'
+import { useParams } from "react-router-dom";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 const FormDentista = () => {
-
-    const [instituicoes, setInstituicoes] = useState([])
+    
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [senha, setSenha] = useState("");
+    const [matricula, setMatricula] = useState("");
     const [instituicao, setInstituicao] = useState({})
     const [open, setOpen] = useState(false);
     const [openError, setOpenError] = useState(false)
     const [openEmailError, setOpenEmailError] = useState(false)
+
+    const {id} = useParams()
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response = await fetch(`http://localhost:3000/api/instituicao?id=${id}`);
+            if (response.ok) {
+              const data = await response.json();
+              setInstituicao(data)
+            } else {
+              console.error('Erro ao obter os dados da API:', response.status);
+            }
+          } catch (error) {
+            console.error('Erro na requisição:', error);
+          }
+        };
+      
+        fetchData();
+      }, []);
     
     const messageAdd = () => {
         setOpen(true);
@@ -44,39 +70,39 @@ const FormDentista = () => {
     const messageEmailError = () => {
         setOpenEmailError(true);
     };
-    
-    useEffect(() => {
-        fetch('http://localhost:3000/api/instituicoes/', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }).then(resp => resp.json())
-          .then(data => setInstituicoes(data))
-          .catch(err => console.error(err))
-    }, [])
-
-    function handleInstituicaoChange(valor) {
-        setInstituicao(valor.target.value);
-        const instituicaoSelecionada = instituicoes.find(i => i.name === valor.target.value);
-        if (instituicaoSelecionada) {
-            setInstituicao(instituicaoSelecionada);
-        }
-    }
 
     function validarEmail(email) {
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
         return regex.test(email)
     }
 
-    function createDentista(input){
-        input.preventDefault();
-        var name = document.getElementById("name").value
-        var email = document.getElementById("email").value
-        var senha = document.getElementById("senha").value
-        var matricula = document.getElementById("matricula").value
+    function limparCampos(){
+        setEmail("")
+        setName("")
+        setSenha("")
+        setMatricula("")
+    }
 
-        if(!name || !email || !senha || !matricula || !instituicao){
+    function handleNameChange(event) {
+        setName(event.target.value);
+    }
+    
+    function handleEmailChange(event) {
+        setEmail(event.target.value);
+    }
+    
+    function handleSenhaChange(event) {
+        setSenha(event.target.value);
+    }
+    
+    function handleMatriculaChange(event) {
+        setMatricula(event.target.value);
+    }
+
+    function createDentista(event){
+        event.preventDefault();
+
+        if(!name || !email || !senha || !matricula){
             messageError()
             return
         }
@@ -86,7 +112,7 @@ const FormDentista = () => {
             return
         }
 
-        fetch(`http://localhost:3000/api/instituicao/${instituicao._id}/dentista`, {
+        fetch(`http://localhost:3000/api/instituicao/${id}/dentista`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -96,35 +122,32 @@ const FormDentista = () => {
                 "email": email,
                 "senha": senha,
                 "matricula": matricula,
-                "instituicao": instituicao
+                "instituicao": id
             })
           })
           .then(resp => resp.json())
-          .then(messageAdd())
+          .then(()=>{
+            limparCampos()
+            messageAdd()
+          })
           .catch(err => console.error(err))
     }
 
     return (
 
         <div className={styles.container}>
+            <div className={styles.divArrow}>
+                <a href="/homeInstituicao"><AiOutlineArrowLeft className={styles.arrowBack} /></a>
+            </div>
             <div className={styles.logo}>
                 <img src={Logo} alt="Logo" />
             </div>
 
             <form className={styles.form} onSubmit={createDentista}>
-                <div className={styles.uni}><Input type="text" placeholder="Nome" id="name"/></div>
-                    <div className={styles.uni}><Input type="text" placeholder="Email" id="email"/></div>
-                    <div className={styles.uni}><Input type="password" placeholder="Senha" id="senha"/></div>
-                    <div className={styles.uni}>
-                        <input placeholder="Instituição" className={styles.drop} type="text" list="lista" id="option" onInput={handleInstituicaoChange}></input>
-                        <span className="input-highlight"></span>
-                        <datalist id="lista">
-                            {instituicoes.map((instituicao)=> 
-                                <option key={instituicao._id} tipo={instituicao.tipo} value={instituicao.name}>{instituicao.name}</option>
-                            )}
-                        </datalist>
-                </div>
-                <div className={styles.uni}><Input type="text" placeholder="Matrícula" id="matricula"/></div>
+                <div className={styles.uni}><Input type="text" placeholder="Nome" id="name" value={name} onInput={handleNameChange}/></div>
+                <div className={styles.uni}><Input type="text" placeholder="Email" id="email" value={email} onChange={handleEmailChange}/></div>
+                <div className={styles.uni}><Input type="password" placeholder="Senha" id="senha" value={senha} onChange={handleSenhaChange}/></div>
+                <div className={styles.uni}><Input type="text" placeholder="Matrícula" id="matricula" value={matricula} onChange={handleMatriculaChange}/></div>
                 <div className={styles.divButton}>
                     <button type="submit" className={styles.confirmar}>Confirmar</button>
                 </div>

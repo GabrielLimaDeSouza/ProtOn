@@ -4,6 +4,7 @@ import Logo from "../img/logo.png"
 import { getDentista } from "../services/api";
 
 import styles from '../css/EditDentista.module.css'
+import {AiOutlineArrowLeft} from 'react-icons/ai'
 
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -24,6 +25,25 @@ const EditDentista = () => {
     const [openEmailError, setOpenEmailError] = useState(false)
     const navigate = useNavigate();
     const { id } = useParams();
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response = await fetch(`http://localhost:3000/api/dentista?id=${id}`);
+            if (response.ok) {
+              const data = await response.json();
+                setDentista(data)
+            } else {
+              console.error('Erro ao obter os dados da API:', response.status);
+            }
+          } catch (error) {
+            console.error('Erro na requisição:', error);
+          }
+        };
+      
+        fetchData();
+      }, []);
 
     const messageError = () => {
         setOpen(true);
@@ -56,7 +76,7 @@ const EditDentista = () => {
             return;
         }
 
-        if(!validarEmail(dentista.user.email)){
+        if(!validarEmail(dentista.dentista.user.email)){
             messageEmailError()
             return
         }
@@ -66,48 +86,76 @@ const EditDentista = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(dentista)
+            body: JSON.stringify({
+                name: dentista.dentista.name,
+                email:  dentista.dentista.user.email,
+                senha:  dentista.dentista.user.senha
+            })
         }).then(() => {
             navigate("/homeInstituicao")
         })
     }
 
-    useEffect(()=> {
-        fetch(`http://localhost:3000/api/dentista?id=${id}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(resp => resp.json())
-        .then(data => setDentista(data))
-        .catch(err => console.log(err))
-    },[])
-
     return (
         <>
+            <div className={styles.divArrow}>
+                <a href="/homeInstituicao"><AiOutlineArrowLeft className={styles.arrowBack} /></a>
+            </div>
             <div className={styles.logo}>
                 <img src={Logo} alt="Logo" />
             </div>
-
-
             <form className="form input-container" onSubmit={editDentista}>
                 <div className={styles.uni}>
                     <div className={styles.divLabel}>
                         <label htmlFor="inputName" className="label">Nome</label>
                     </div>
-                    <input type="text" value={dentista.name} id="inputName" className={styles.inputEdit} onChange={(event) => setDentista({ ...dentista, name: event.target.value })} />
+                    <input type="text" value={dentista.dentista?.name} id="inputName" className={styles.inputEdit} onChange={(event) => setDentista({ ...dentista, dentista: { ...dentista.dentista, name: event.target.value } })}/>
                 </div>
                 <div className={styles.uni}>
                     <div className={styles.divLabel}>
                         <label htmlFor="inputEmail" className="label" >Email</label>
                     </div>
-                    <input type="text" value={dentista.user?.email} id="inputEmail" className={styles.inputEdit} onChange={(event) => setDentista({ ...dentista, user: { ...dentista.user, email: event.target.value }, })} />
+                    <input
+  type="text"
+  value={dentista.dentista?.user?.email}
+  id="inputEmail"
+  className={styles.inputEdit}
+  onChange={(event) =>
+    setDentista({
+      ...dentista,
+      dentista: {
+        ...dentista.dentista,
+        user: {
+          ...dentista.dentista.user,
+          email: event.target.value
+        }
+      }
+    })
+  }
+/>
                 </div>
                 <div className={styles.uni}>
                     <div className={styles.divLabel}>
                         <label htmlFor="inputSenha" className="label" >Senha</label>
                     </div>
-                    <input type="text" value={dentista.user?.senha} id="inputSenha" className={styles.inputEdit} onChange={(event) => setDentista({ ...dentista, user: { ...dentista.user, senha: event.target.value }, })} />
+                    <input
+  type="text"
+  value={dentista.dentista?.user?.senha}
+  id="inputSenha"
+  className={styles.inputEdit}
+  onChange={(event) =>
+    setDentista({
+      ...dentista,
+      dentista: {
+        ...dentista.dentista,
+        user: {
+          ...dentista.dentista.user,
+          senha: event.target.value
+        }
+      }
+    })
+  }
+/>
                 </div>
                 <div className={styles.divButton}>
                     <button type="submit" className={styles.editar} onClick={editDentista}>Editar</button>

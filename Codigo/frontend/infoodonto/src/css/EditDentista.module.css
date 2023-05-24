@@ -6,6 +6,14 @@
     padding-top: 50px;
 }
 
+.divArrow {
+    padding: 20px 0px 0px 20px;
+}
+
+.arrowBack {
+    font-size: 22px;
+}
+
 .editar {
     border-radius: 13.96px;
     height: 39.9px;

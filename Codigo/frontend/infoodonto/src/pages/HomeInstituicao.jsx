@@ -74,7 +74,7 @@ export default function HomeInstituicao() {
                 <img src={ Logo } alt='Logo' />
             </div>
             <div className={ styles.divButtonCreate }>
-                <Button variant='contained' href='/formDentista'>
+                <Button variant="contained" component={Link} to={`/formDentista/${user._id}`}>
                 Adicionar dentista
                 </Button>
             </div>

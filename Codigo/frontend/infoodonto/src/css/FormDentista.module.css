@@ -13,6 +13,15 @@
     padding-top: 50px;
 }
 
+.divArrow {
+    padding: 20px 0px 0px 20px;
+}
+
+.arrowBack {
+    font-size: 22px;
+}
+
+
 .form {
     display: flex;
     flex-direction: column;
