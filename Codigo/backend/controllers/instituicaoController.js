@@ -44,7 +44,7 @@ const instituicaoController = {
     get: async (req, res)=> {
         try {
             const _id = req.query.id
-            const instituicao = await UsuarioModel.findById(_id).populate('dentistas')
+            const instituicao = await InstituicaoModel.findById(_id).populate('dentistas')
 
             if(!instituicao) {
                 res.status(404).json({ msg: "Instituição não encontrada!" })

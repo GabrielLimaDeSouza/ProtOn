@@ -80,7 +80,7 @@ const dentistaController = {
                 .findByIdAndUpdate(id,
                     { name },
                     { new: true }
-                )
+                ).populate('user')
 
             if(!updatedDentista) {
                 res.status(404).json({ msg: "Dentista não encontrado!" })
@@ -92,7 +92,6 @@ const dentistaController = {
                     email,
                     senha
                 }, { new: true })
-                .populate("user")
 
             res.status(200).json({ dentista, msg: "Dentista atualizado com sucesso!" })
 
