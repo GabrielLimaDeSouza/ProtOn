@@ -21,7 +21,6 @@ const MobileHomePage = () => {
         <div className={styles.body}>
             <div className={styles.header}>
                 <img src={Tooth} alt="" />
-                <HiMenuAlt4 className={styles.iconMenu} />
             </div>
             <div className={styles.logo}>
                 <img src={Logo} alt="ProtOn" />

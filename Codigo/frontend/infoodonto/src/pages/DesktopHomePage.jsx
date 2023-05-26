@@ -9,7 +9,6 @@ import Logo from '../img/logo_sem_background.svg'
 import DentalCare from '../img/dental-care.png'
 
 // Icons
-import {HiMenuAlt4} from 'react-icons/hi'
 import {AiOutlineTwitter} from 'react-icons/ai'
 import {AiOutlineInstagram} from 'react-icons/ai'
 import {GrFacebookOption} from 'react-icons/gr'
@@ -24,7 +23,7 @@ const MobileHomePage = () => {
                 <img src={Tooth} alt="" className={styles.tooth}/>
                 <div className={styles.linksHeader}>
                   <a href="">Cadastrar</a>
-                  <a href="">Login</a>
+                  <a href="/login">Login</a>
                 </div>
             </div>
             <div className={styles.divContent}>
@@ -46,7 +45,7 @@ const MobileHomePage = () => {
                     <div className={styles.divButton}>
                       <button className={styles.button}>Cadastrar</button>
                       <p className={styles.pButton}>ou</p>
-                      <button className={styles.button}>Login</button>
+                      <button href="/login" className={styles.button}>Login</button>
                     </div>
                 </div>
                 <div className={styles.divBlank}>
