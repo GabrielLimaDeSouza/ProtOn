@@ -37,18 +37,20 @@ img {
     gap: 100px;
 }
 
-.linksHeader a {
-    font-size: 14px;
-    text-decoration: none;
-    color: #FFFFFF;
+.buttonLink {
+    font-size: 14px !important;
+    text-transform: capitalize !important;
+    font-family: 'Montserrat', sans-serif !important; 
+    color: #FFFFFF !important;
     cursor: pointer;
     transition: 0.5s;
 }
 
-.linksHeader a:hover {
-    transform: scale(1.05);
+.buttonLink:hover {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
 }
-
 
 .tooth {
     transition: 0.5s;
@@ -244,8 +246,8 @@ img {
 
 @media (min-height: 800px) {
 
-    .linksHeader a {
-        font-size: 15px;
+    .buttonLink {
+        font-size: 15px !important;
     }
 
     .icons {

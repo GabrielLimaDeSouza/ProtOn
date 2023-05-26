@@ -1,4 +1,10 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
+
+// Componentes 
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 // CSS
 import styles from '../css/HomePageDesktop.module.css'
@@ -14,7 +20,25 @@ import {AiOutlineInstagram} from 'react-icons/ai'
 import {GrFacebookOption} from 'react-icons/gr'
 import {BiMenuAltLeft} from 'react-icons/bi'
 
-const MobileHomePage = () => {
+const DesktopHomePage = () => {
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const navigate = useNavigate();
+
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+
+    const handleRedirectInstituicao = () => {
+      setAnchorEl(null);
+      navigate('/formInstituicao');
+    }
+
+    const handleRedirectPaciente = () => {
+      setAnchorEl(null);
+      navigate('/formPaciente');
+    }
 
     return (
     <>
@@ -22,8 +46,29 @@ const MobileHomePage = () => {
             <div className={styles.header}>
                 <img src={Tooth} alt="" className={styles.tooth}/>
                 <div className={styles.linksHeader}>
-                  <a href="">Cadastrar</a>
-                  <a href="/login">Login</a>
+                <Button
+                  className={styles.buttonLink}
+                  aria-controls={open ? 'demo-positioned-menu' : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? 'true' : undefined}
+                  onClick={handleClick}>Cadastrar
+                </Button>
+                  <Menu id="demo-positioned-menu" aria-labelledby="demo-positioned-button" anchorEl={anchorEl} open={open}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                  }}
+                  >
+                  <MenuItem onClick={handleRedirectPaciente}>Sou paciente</MenuItem>
+                  <MenuItem onClick={handleRedirectInstituicao}>Sou instituição</MenuItem>
+                </Menu>
+                <Button className={styles.buttonLink} onClick={() => {
+                  navigate("/login")
+                }}>Login</Button>
                 </div>
             </div>
             <div className={styles.divContent}>
@@ -87,4 +132,4 @@ const MobileHomePage = () => {
   )
 }
 
-export default MobileHomePage
+export default DesktopHomePage
