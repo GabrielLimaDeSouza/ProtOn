@@ -46,29 +46,29 @@ const DesktopHomePage = () => {
             <div className={styles.header}>
                 <img src={Tooth} alt="" className={styles.tooth}/>
                 <div className={styles.linksHeader}>
-                <Button
-                  className={styles.buttonLink}
-                  aria-controls={open ? 'demo-positioned-menu' : undefined}
-                  aria-haspopup="true"
-                  aria-expanded={open ? 'true' : undefined}
-                  onClick={handleClick}>Cadastrar
-                </Button>
-                  <Menu id="demo-positioned-menu" aria-labelledby="demo-positioned-button" anchorEl={anchorEl} open={open} onClose={() => setAnchorEl(null)}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                  }}
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                  }}
-                  >
-                  <MenuItem onClick={handleRedirectPaciente}>Sou paciente</MenuItem>
-                  <MenuItem onClick={handleRedirectInstituicao}>Sou instituição</MenuItem>
-                </Menu>
-                <Button className={styles.buttonLink} onClick={() => {
-                  navigate("/login")
-                }}>Login</Button>
+                  <Button
+                    className={styles.buttonLink}
+                    aria-controls={open ? 'demo-positioned-menu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
+                    onClick={handleClick}>Cadastrar
+                  </Button>
+                    <Menu id="demo-positioned-menu" aria-labelledby="demo-positioned-button" anchorEl={anchorEl} open={open} onClose={() => setAnchorEl(null)}
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'left',
+                    }}
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'left',
+                    }}
+                    >
+                    <MenuItem onClick={handleRedirectPaciente}>Sou paciente</MenuItem>
+                    <MenuItem onClick={handleRedirectInstituicao}>Sou instituição</MenuItem>
+                  </Menu>
+                  <Button className={styles.buttonLink} onClick={() => {
+                    navigate("/login")
+                  }}>Login</Button>
                 </div>
             </div>
             <div className={styles.divContent}>
@@ -88,9 +88,9 @@ const DesktopHomePage = () => {
                       <p className={styles.text}>O ProtOn auxilia na dinâmica e praticidade das consultas dos dentistas ao oferecer protocolos odontológicos de atendimento de acordo com as condições médicas do paciente</p>
                     </div>
                     <div className={styles.divButton}>
-                      <button className={styles.button}>Cadastrar</button>
+                      <a href="/"><button className={styles.button}>Cadastrar</button></a>
                       <p className={styles.pButton}>ou</p>
-                      <button href="/login" className={styles.button}>Login</button>
+                      <a href="/login"><button href="/login" className={styles.button}>Login</button></a>
                     </div>
                 </div>
                 <div className={styles.divBlank}>

@@ -50,6 +50,8 @@ img {
     outline: none !important;
     border: none !important;
     box-shadow: none !important;
+    background-color: inherit !important;
+    transform: scale(1.05);
 }
 
 .tooth {
@@ -161,7 +163,13 @@ img {
     padding: 1.8vh;
     width: 150px;
     height: 40%;
+    cursor: pointer;
     border-radius: 60px;
+    transition: 0.5s;
+}
+
+.button:hover {
+    transform: scale(1.05);
 }
 
 .pButton {

@@ -1,4 +1,10 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
+
+// Lib
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 // CSS
 import styles from '../css/HomePageMobile.module.css'
@@ -15,6 +21,23 @@ import {GrFacebookOption} from 'react-icons/gr'
 import {BiMenuAltLeft} from 'react-icons/bi'
 
 const MobileHomePage = () => {
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const navigate = useNavigate();
+
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+
+    const handleRedirectInstituicao = () => {
+      setAnchorEl(null);
+      navigate('/formInstituicao');
+    }
+
+    const handleRedirectPaciente = () => {
+      setAnchorEl(null);
+      navigate('/formPaciente');
+    }
 
     return (
     <>
@@ -38,9 +61,17 @@ const MobileHomePage = () => {
                     <p className={styles.text}>O ProtOn auxilia na dinâmica e praticidade das consultas dos dentistas ao oferecer protocolos odontológicos de atendimento de acordo com as condições do paciente</p>
                 </div>
                 <div className={styles.divButton}>
-                    <button className={styles.button}>Cadastrar</button>
+                    <Button
+                        className={styles.button}
+                        aria-controls={open ? 'demo-positioned-menu' : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? 'true' : undefined}
+                        onClick={handleClick}>Cadastrar
+                    </Button>
                     <p className={styles.pButton}>ou</p>
-                    <button className={styles.button}>Login</button>
+                    <Button className={styles.button} onClick={() => {
+                        navigate("/login")
+                    }}>Login</Button>
                 </div>
             </div>
         </div>
@@ -64,6 +95,19 @@ const MobileHomePage = () => {
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
             </div>
         </div>
+        <Menu id="demo-positioned-menu" aria-labelledby="demo-positioned-button" anchorEl={anchorEl} open={open} onClose={() => setAnchorEl(null)}
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'left',
+                    }}
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'left',
+                    }}
+                    >
+                    <MenuItem onClick={handleRedirectPaciente}>Sou paciente</MenuItem>
+                    <MenuItem onClick={handleRedirectInstituicao}>Sou instituição</MenuItem>
+        </Menu>
     </>
   )
 }

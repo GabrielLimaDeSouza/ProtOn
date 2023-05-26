@@ -105,13 +105,16 @@
 }
 
 .button {
-    border: none;
+    border: none !important;
     background-color: #F3F3F3 !important;
-    color: #20A0FD;
-    padding: 1.8vh;
-    width: 150px;
-    height: 40%;
-    border-radius: 60px;
+    color: #20A0FD !important;
+    padding: 1.8vh !important;
+    width: 150px !important;
+    height: 40% !important;
+    border-radius: 60px !important;
+    text-transform: capitalize !important;
+    font-size: 12px !important;
+    font-family: 'Montserrat', sans-serif !important;
 }
 
 .pButton {
