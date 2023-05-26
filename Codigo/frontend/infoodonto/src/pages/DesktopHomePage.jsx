@@ -53,7 +53,7 @@ const DesktopHomePage = () => {
                   aria-expanded={open ? 'true' : undefined}
                   onClick={handleClick}>Cadastrar
                 </Button>
-                  <Menu id="demo-positioned-menu" aria-labelledby="demo-positioned-button" anchorEl={anchorEl} open={open}
+                  <Menu id="demo-positioned-menu" aria-labelledby="demo-positioned-button" anchorEl={anchorEl} open={open} onClose={() => setAnchorEl(null)}
                   anchorOrigin={{
                     vertical: 'top',
                     horizontal: 'left',
