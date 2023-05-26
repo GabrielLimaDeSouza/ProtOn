@@ -10,6 +10,8 @@ import styles from '../css/FormDentista.module.css'
 
 import MuiAlert from '@mui/material/Alert';
 
+import {AiOutlineArrowLeft} from 'react-icons/ai'
+
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -89,6 +91,11 @@ const FormInstituicao = () => {
 
    return (
         <>
+
+            <div className="divArrow">
+              <a href="/"><AiOutlineArrowLeft className="arrowBack" /></a>
+            </div>
+
             <div className={styles.logo}>
                 <img src={Logo} alt="Logo" />
             </div>
@@ -100,7 +107,7 @@ const FormInstituicao = () => {
                 <div className={styles.uni}><Input type="password" placeholder="Senha" id="senha"/></div>
                 <div className={styles.uni}><InputOptions type="options" name="Tipo" onChange={handleTipoChange} content={listaTipos} /></div>
                 <div className={styles.divButton}>
-                    <button type="submit" className={styles.confirmar}>Confirmar</button>
+                    <button type="submit" className={styles.confirmar}>Cadastrar</button>
                 </div>
             </form>
             <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>

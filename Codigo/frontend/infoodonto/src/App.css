@@ -3,3 +3,16 @@
 * {
     font-family: 'Montserrat', sans-serif;
 }
+
+.divArrow {
+    padding: 20px 0px 0px 20px;
+}
+
+.arrowBack {
+    font-size: 22px;
+}
+
+.arrowBackWhite {
+    font-size: 22px;
+    color: white;
+}

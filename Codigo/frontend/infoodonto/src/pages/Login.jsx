@@ -5,6 +5,8 @@ import Input from "../components/inputs/Input"
 import Button from "../components/buttons/Button"
 import { Alert } from "@mui/material"
 
+import {AiOutlineArrowLeft} from 'react-icons/ai'
+
 import styles from "../css/Login.module.css"
 import { Link } from "react-router-dom"
 
@@ -27,6 +29,11 @@ const Login = () => {
 
     return (
         <div className={ styles.body }>
+
+            <div className="divArrow">
+              <a href="/"><AiOutlineArrowLeft className="arrowBackWhite" /></a>
+            </div>
+
             <section className="logo-login">
                 <div className={ styles.logo }>
                     <img src="/logo.svg" alt="ProtOn" />

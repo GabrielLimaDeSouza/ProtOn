@@ -4,6 +4,8 @@ import Input from '../components/input/Input';
 import styles from '../css/FormPaciente.module.css';
 import { getCondicao } from '../services/api';
 
+import {AiOutlineArrowLeft} from 'react-icons/ai'
+
 const FormPaciente = () => {
   const [condicoesPaciente, setCondicoesPaciente] = useState([]);
 
@@ -46,10 +48,14 @@ const FormPaciente = () => {
   return (
 
     <div className={styles.body}>
+
+      <div className="divArrow">
+        <a href="/"><AiOutlineArrowLeft className="arrowBack" /></a>
+      </div>
+
       <div className={styles.logo}>
         <img src={Logo} alt="Logo" />
       </div>
-
 
       <div className={styles.form}>
         <div className={styles.divInputs}>
@@ -62,7 +68,7 @@ const FormPaciente = () => {
       </div>
 
       <div className={styles.divButton}>
-        <button className={styles.confirmar} onClick={cadastrar}>Confirmar</button>
+        <button className={styles.confirmar} onClick={cadastrar}>Cadastrar</button>
       </div>
 
 
