@@ -5,6 +5,7 @@ import { CircularProgress } from "@mui/material"
 import { LoginContext, LoginProvider } from './context/LoginContext'
 
 //* Pages User
+import HomePage from "./pages/HomePage"
 import Login from "./pages/Login"
 import FormPaciente from "./pages/FormPaciente"
 import FormDentista from "./pages/FormDentista"
@@ -33,6 +34,7 @@ const AppRoutes = () => {
     <Router>
       <LoginProvider>
         <Routes>
+            <Route exact path="/" element={ <HomePage /> }></Route>
             <Route exact path="/login" element={ <Login /> }></Route>
             <Route exact path="/formPaciente" element={ <FormPaciente /> }></Route>
             <Route exact path="/formDentista/:id" element={ <FormDentista /> }></Route>

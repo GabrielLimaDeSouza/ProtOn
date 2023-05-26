@@ -1,0 +1,254 @@
+/* Estilos Body */
+
+.body {
+    height: 100vh;
+    background-color: #62A8DB !important
+}
+
+.divScroll {
+    height: 100vh;
+    background-color: #FAFAFA !important;
+    padding: 5vh 3vh;
+}
+
+/* Estilos Header */
+
+.header {
+    display: flex; 
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3vh 3vh 3vh 3vh;
+}
+
+.iconMenu {
+    color: white;
+    height: 20px;
+    width: 20px;
+}
+
+/* Estilos Logo */
+.logo {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 5vh;
+}
+
+.logo img {
+    width: 100px;
+}
+
+/* Estilos divContent */
+
+.divContent {
+    padding: 3vh;
+    margin-top: 5vh;
+}
+
+/* Estilos icons */
+
+.icons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.icon {
+    color: white;
+    font-size: 20px;
+}
+
+/* Estilos title */
+.whiteTitle {
+    color: white;
+    font-size: 28px;
+}
+
+.markedTitle {
+    color: #00538F;
+}
+
+.scrollTitle {
+    color: #676767;
+    font-size: 18px;
+}
+
+.scrollTitleSpan {
+    color: #20A0FD;
+}
+
+/* Estilos text */
+
+.divText {
+    margin-top: 5vh;
+}
+
+.text {
+    color: white;
+    font-size: 11px;
+    text-align: justify;
+}
+
+/* Estilos buttons */
+
+.divButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8vh;
+}
+
+.button {
+    border: none;
+    background-color: #F3F3F3 !important;
+    color: #20A0FD;
+    padding: 1.8vh;
+    width: 150px;
+    height: 40%;
+    border-radius: 60px;
+}
+
+.pButton {
+    color: white;
+    align-content: center;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+/* Estilos divInformations */
+
+.divInformations {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.divInformations p {
+    margin-top: 5px;
+    margin-bottom: 15px;
+    color: #676767;
+}
+
+.divInformations h3 {
+    color: #20A0FD;
+}
+
+/* Estilos divAboutUs */
+
+.divAboutUs {
+    display: flex;
+    flex-direction: column;
+}
+
+.divAboutUsTitle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.divAboutUs h3{
+    color: #20A0FD;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.divAboutUs p {
+    text-align: justify;
+    color: #676767;
+}
+
+.aboutUsIcon {
+    color: #20A0FD;
+    font-size: 25px;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+@media (min-width: 450px) {
+    .logo img {
+        width: 150px;
+    }
+
+    .text {
+        font-size: 14px;
+        margin-bottom: 150px;
+    }
+}
+
+@media (min-width: 600px) {
+    .text {
+        font-size: 18px;
+        margin-bottom: 150px;
+    }
+}
+
+@media (min-width: 900px) {
+
+    .divInformations {
+        margin-top: 50px;
+        margin-bottom: 30px;
+    }
+
+    .divInformations p {
+        font-size: 18px;
+    }
+    
+    .divInformations h3 {
+        font-size: 25px;
+    }
+
+    .divAboutUs p {
+        font-size: 18px;
+    }
+}
+
+@media (min-width: 1080px) {
+    .icon {
+        color: white;
+        font-size: 25px;
+    }
+    
+    .whiteTitle {
+        color: white;
+        font-size: 40px;
+    }
+
+    .text {
+        font-size: 22px;
+    }
+
+    .divInformations {
+        margin-top: 50px;
+        margin-bottom: 30px;
+    }
+
+    .divInformations p {
+        font-size: 18px;
+    }
+    
+    .divInformations h3 {
+        font-size: 30px;
+    }
+
+    .aboutUsIcon {
+        font-size: 30px;
+    }
+
+    .divAboutUs h3{
+        font-size: 22px;
+    }
+
+    .divAboutUs p {
+        font-size: 20px;
+    }
+}
+
+
