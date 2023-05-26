@@ -16,7 +16,7 @@ const instituicaoController = {
             const user = {
                 email,
                 senha,
-                type: 'Instituicao',
+                type: 'instituicao',
                 user: instituicao._id
             }
             const instituicaoUser = await UsuarioModel.create(user)
@@ -28,10 +28,10 @@ const instituicaoController = {
     },
     createDentista: async (req, res) => {
         try {
-            const _id = req.params.id
+            const { id } = req.params
             const dentista = await dentistaController.create(req, res)
             
-            const instituicao = await InstituicaoModel.findById(_id)
+            const instituicao = await InstituicaoModel.findById(id)
             instituicao.dentistas.push(dentista._id)
             await instituicao.save()
 
@@ -43,8 +43,15 @@ const instituicaoController = {
     },
     get: async (req, res)=> {
         try {
-            const _id = req.query.id
-            const instituicao = await InstituicaoModel.findById(_id).populate('dentistas')
+            const { id } = req.query
+            const instituicao = await InstituicaoModel
+                .findById(id)
+                .populate({
+                    path: 'dentistas',
+                    populate: {
+                        path: 'user',
+                    },
+                })
 
             if(!instituicao) {
                 res.status(404).json({ msg: "Instituição não encontrada!" })
@@ -59,7 +66,7 @@ const instituicaoController = {
     },
     getAllDentistas: async (req, res) => {
         try {
-            const _id = req.params.id
+            const { id } = req.params
             const instituicao = await InstituicaoModel.findById(_id).populate('dentistas')
 
             if (!instituicao) {
@@ -75,10 +82,10 @@ const instituicaoController = {
     },
     delete: async (req, res) => {
         try {
-            const _id = req.query.id
+            const { id } = req.query
 
-            const deletedInstituicao = await UsuarioModel.findByIdAndDelete(_id).populate('user')
-            await InstituicaoModel.findByIdAndDelete(deletedInstituicao.user._id)
+            const deletedInstituicao = await InstituicaoModel.findByIdAndDelete(_id).populate('user')
+            await UsuarioModel.findByIdAndDelete(deletedInstituicao.user._id)
 
             res.status(200).json({ deletedInstituicao, msg: "Instituição excluida com sucesso!" })
         } catch (error) {
@@ -88,17 +95,17 @@ const instituicaoController = {
     },
     update: async (req, res) => {
         try {
-            const _id = req.query.id
+            const { id } = req.query
             const { name, email, senha } = req.body
 
-            const updatedInstituicao = await InstituicaoModel.findByIdAndUpdate(_id, { name })
+            const updatedInstituicao = await InstituicaoModel.findByIdAndUpdate(_id, { name }, { new: true }).populate('user')
             
             if(!updatedInstituicao) {
                 res.status(404).json({ msg: "Instituição não encontrada!" })
                 return
             }
 
-            const instituicao = await UsuarioModel.findByIdAndUpdate(updatedInstituicao.user._id, { email, senha }, { new: true }).populate('user')
+            const instituicao = await UsuarioModel.findByIdAndUpdate(updatedInstituicao.user._id, { email, senha }, { new: true })
 
             res.status(200).json({ instituicao, msg: "Instituição atualizada com sucesso!" })
 
