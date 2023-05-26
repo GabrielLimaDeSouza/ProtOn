@@ -72,7 +72,7 @@ const MedicosVinculados = ({ solicitacoes, pacienteLogado }) => {
   return (
     <>
       <div className={ styles.divTable }>
-        <h1 className={ styles.titulo }>Dentistas</h1>
+        <h1 className={ styles.titulo }>Solicitações de Acesso</h1>
         <div className={styles.divTableBottom}>
         <TableContainer component={ Paper }>
           <Table
@@ -83,7 +83,7 @@ const MedicosVinculados = ({ solicitacoes, pacienteLogado }) => {
           >
             <TableHead>
               <TableRow>
-                <TableCell>Nome</TableCell>
+                <TableCell>Dentista</TableCell>
                 <TableCell align='right'>Matrícula</TableCell>
                 <TableCell align='right'>Email</TableCell>
                 <TableCell align='right'>Instituição</TableCell>

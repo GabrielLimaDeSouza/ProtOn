@@ -26,9 +26,13 @@
   background: url(http://www.devmedia.com.br/imagens/2013/buscar_grey.png) no-repeat;
   cursor: pointer!important;
   border: none;
-  transform: translateY(-50%);
   padding: 0;
   position: relative;
-  top: -35px;
+  top: -40px;
   left: 10px;
+  transition: 0.5s;
+}
+
+.btnBuscarTop:hover {
+  transform: scale(1.1);
 }

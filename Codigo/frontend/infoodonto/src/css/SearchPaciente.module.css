@@ -94,8 +94,15 @@ h2{
   padding-left: 10px;
   padding-right: 10px;
 }
+
 .iconAdd{
   font-size: 100px;
   padding-right: 10px;
   color: #7CC8FF;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.iconAdd:hover {
+  transform: scale(1.1);
 }

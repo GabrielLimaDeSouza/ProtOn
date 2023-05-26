@@ -176,7 +176,7 @@ const SearchPaciente = () => {
                         severity='error'
                         sx={{ width: '100%' }}
                     >
-                        Você não possui permição
+                        Você não possui permissão
                     </Alert>
                 </Snackbar>
             ) : '' }

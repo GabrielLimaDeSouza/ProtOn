@@ -32,7 +32,6 @@ const HomePaciente = () => {
       const condicoes = data.map(item => item);
 
       setCondicoesPaciente(condicoes);
-      console.log(user)
       setPaginaSelecionada(
         <Perfil
           currentName={user.name}
@@ -152,13 +151,13 @@ const HomePaciente = () => {
                 <ListItemIcon>
                   <PersonAddIcon fontSize='small' />
                 </ListItemIcon>
-                Adicionar Conta
+                Solicitações de acesso
               </MenuItem>
               <MenuItem>
                 <ListItemIcon>
                   <SettingsIcon fontSize='small' />
                 </ListItemIcon>
-                Configurações
+                Gerenciar dentistas
               </MenuItem>
               <Divider />
               <MenuItem>
@@ -171,7 +170,7 @@ const HomePaciente = () => {
 
             
           </div>
-<div className={styles.divLogo}><img src={Logo} alt='Logo' className={styles.logo} /></div>
+        <div className={styles.divLogo}><img src={Logo} alt='Logo' className={styles.logo} /></div>
           <div className={styles.main}>
             <div className={styles.titulo}>
               <h2>Olá, {user.name}!</h2>
