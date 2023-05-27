@@ -1,76 +1,76 @@
-import { useState, useEffect, createContext } from "react"
-import { useNavigate } from "react-router-dom"
+import { useState, useEffect, createContext } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { api, createSession, getUser } from '../services/api'
+import { api, createSession, getUser } from "../services/api";
 
-export const LoginContext = createContext()
+export const LoginContext = createContext();
 
 export const LoginProvider = ({ children }) => {
-    const navigate = useNavigate()
-    const [user, setUser] = useState(null)
-    const [loading, setLoading] = useState(true)
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const recoveredUser = localStorage.getItem("user")
-        const recoveredToken = localStorage.getItem("token")
+  useEffect(() => {
+    const recoveredUser = localStorage.getItem("user");
+    const recoveredToken = localStorage.getItem("token");
 
-        if(recoveredUser && recoveredToken) {
-            (async () => {
-                const { data } = await getUser(JSON.parse(recoveredUser)._id)
-                setUser(data)
-                setLoading(false)
-            })()
-            
-            api.defaults.headers.Authorization = `Bearer ${ recoveredToken }`
-        } else
-            setLoading(false)
-    }, [])
+    if (recoveredUser && recoveredToken) {
+      (async () => {
+        const { data } = await getUser(JSON.parse(recoveredUser)._id);
+        setUser(data);
+        setLoading(false);
+      })();
 
-    const login = async (email, senha) => {
-        try {
-            const { data } = await createSession(email, senha)
-    
-            const loggedUser = data.user
-            const token = data.token
-    
-            localStorage.setItem("user", JSON.stringify(loggedUser))
-            localStorage.setItem("token", token)
-    
-            api.defaults.headers.Authorization = `Bearer ${ token }`
-    
-            const response = await getUser(loggedUser._id)
-            setUser(response.data)
+      api.defaults.headers.Authorization = `Bearer ${recoveredToken}`;
+    } else setLoading(false);
+  }, []);
 
-            setTimeout(() => {
-                if(response.data.user.type == 'paciente'){
-                    navigate('homePaciente')
-                }
-                if(response.data.user.type == 'dentista') {
-                    navigate('searchPaciente')
-                }
-                if(response.data.user.type == 'instituicao'){
-                    navigate(`homeInstituicao`)   
-                }
-            }, 600);
+  const login = async (email, senha) => {
+    try {
+      const { data } = await createSession(email, senha);
 
-        } catch(err) {
-            const { status, data } = err.response
-            return { status, msg: data.msg }
+      const loggedUser = data.user;
+      const token = data.token;
+
+      localStorage.setItem("user", JSON.stringify(loggedUser));
+      localStorage.setItem("token", token);
+
+      api.defaults.headers.Authorization = `Bearer ${token}`;
+
+      const response = await getUser(loggedUser._id);
+      setUser(response.data);
+
+      setTimeout(() => {
+        if (response.data.user.type == "paciente") {
+          navigate("homePaciente");
         }
+        if (response.data.user.type == "dentista") {
+          navigate("searchPaciente");
+        }
+        if (response.data.user.type == "instituicao") {
+          navigate(`homeInstituicao`);
+        }
+      }, 600);
+    } catch (err) {
+      const { status, data } = err.response;
+      return { status, msg: data.msg };
     }
+  };
 
-    const logout = () => {
-        localStorage.removeItem("user")
-        localStorage.removeItem("token")
-        api.defaults.headers.Authorization = null
+  const logout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    api.defaults.headers.Authorization = null;
 
-        setUser(null)
-        navigate('/login')
-    }
+    setUser(null);
+    navigate("/");
+  };
 
-    return (
-        <LoginContext.Provider value={{ authenticated: !!user, user, loading, login, logout }}>
-            { children }
-        </LoginContext.Provider>
-    )
-}
+  return (
+    <LoginContext.Provider
+      value={{ authenticated: !!user, user, loading, login, logout }}
+    >
+      {children}
+    </LoginContext.Provider>
+  );
+};
