@@ -32,12 +32,13 @@
   justify-content: center;
   text-align: center;
   flex-direction: column;
+  width: 100vw;
 }
 
 .drop{
   padding-bottom: 10px;
-  width: 100%;
-  padding: 0 70px 10px 70px;
+  width: 80vw;
+
 }
 
 .drops h1 {
@@ -45,48 +46,34 @@
   font-size: 22px;
 }
 
-.divCondicoes {
-  padding: 0 70px 0 70px;
+
+
+p{
+  padding-top: 5px;
 }
 
-.divCondicoes h2 {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 17px;
-  color: rgb(59, 62, 65);
+.dadosPessoais{
+  padding-left: 30px;
 }
 
-.name {
-  padding: 0 70px 0 70px;
-  display: flex;
-  justify-content: start !important;
-  font-size: 13px;
+.nomePaciente{
+  font-size:xx-large;
 }
 
-.name h1 {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 23px;
-  color: rgb(59, 62, 65);
+.chip{
+  margin-top: 3px;
+  max-width: 130px !important;
+  overflow-x: scroll !important;
 }
-
-.divCondicao {
-  background-color: #7CC8FF;
-  border-radius: 50px;
-  text-align: center;
-  padding-top: 10px;
-  color: white;
-  font-family: 'Montserrat', sans-serif;
-  font-weight:bolder;
-}
-
 .containerCondicoes {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
   margin-bottom: 50px;
+  max-width: 80vw;
 }
 h2{
   padding-top: 20px;
 }
-
 .divInvite{
   display: flex;
   justify-content: center;

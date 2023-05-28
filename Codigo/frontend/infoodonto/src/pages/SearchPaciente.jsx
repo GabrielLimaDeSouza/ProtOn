@@ -11,13 +11,13 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import Alert from '@mui/material/Alert'
 import Snackbar from '@mui/material/Snackbar'
 import { BsPersonFillAdd } from 'react-icons/bs'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { enviarSolicitacao } from '../services/api'
-
+import Chip from '@mui/material/Chip';
+import { LoginContext } from '../context/LoginContext';
+import Stack from '@mui/material/Stack';
 const SearchPaciente = () => {
-    const [dentistaLogado, setDentistaLogado] = useState(
-        '646800775929dccf5db675ad'
-    )
+    const { user } = useContext(LoginContext);
     const [paciente, setPaciente] = useState({})
     const [pacienteExiste, setPacienteExiste] = useState()
     const [cpf, setCpf] = useState('')
@@ -30,10 +30,10 @@ const SearchPaciente = () => {
     const [open3, setOpen3] = useState()
     const [open4, setOpen4] = useState()
     const [permitido, setPermitido] = useState(false)
-    const [inputSearchValue, setInputSearchValue] = useState('')
+
     let testeString = ''
     const url = 'http://localhost:3000'
-
+console.log(user)
     useEffect(() => {
         fetch(`${ url }/api/paciente/cpf/${ cpf }`, {
             method: 'POST',
@@ -41,7 +41,7 @@ const SearchPaciente = () => {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                dentista: dentistaLogado
+                dentista: user._id
             })
         })
         .then(resp => {
@@ -76,7 +76,6 @@ const SearchPaciente = () => {
     useEffect(() => {
         if (paciente != null && Object.keys(paciente).length !== 0) {
             setPacienteExiste(true)
-            console.log(paciente)
             paciente.condicoes.map(condicao => {
                 setPreAtendimento(
                     preAtendimento.concat(condicao.preAtendimento)
@@ -96,8 +95,7 @@ const SearchPaciente = () => {
 
     const campoCompleto = () => {
         let campo = document.getElementById('busca')
-        setCpf(testeString)
-        setInputSearchValue('')
+        setCpf(campo.value)
         campo.value = ''
     }
 
@@ -111,19 +109,17 @@ const SearchPaciente = () => {
     const onKeyDown = e => {
         let campo = document.getElementById('busca')
 
-        if (/^-?\d+$/.test(e.nativeEvent.data)) {
-            testeString = testeString + e.nativeEvent.data
-        } else {
-            campo.value = testeString
-        }
+        
+            
+        
 
-        if (testeString.length == 11) {
+        if (campo.value.length == 11) {
             campoCompleto()
         }
     }
 
     const solicitar = () => {
-        enviarSolicitacao(cpf, dentistaLogado)
+        enviarSolicitacao(cpf, user._id)
             .then(() => setOpen3(true))
             .catch(err => console.log(err))
     }
@@ -143,6 +139,7 @@ const SearchPaciente = () => {
                     onKeyDown={ onKeyDown }
                 ></Input>
             </div>
+            
             { open1 ? (
                 <Snackbar open={ open1 } autoHideDuration={ 1200 } onClose={ handleClose }>
                     <Alert
@@ -184,20 +181,22 @@ const SearchPaciente = () => {
             { pacienteExiste ? (
                 permitido ? (
                     <>
-                        <div className={ styles.name }>
+                        <div className={styles.dadosPessoais}>
+                <p className={styles.nomePaciente}>{paciente.name}</p>
+                <p>Condições</p>
+                <div >
                             
-                        </div>
-                        <div className={ styles.divCondicoes }>
-                            <h2>Condições</h2>
                             <div className={ styles.containerCondicoes }>
                                 {paciente.condicoes.map(condicao => (
-                                <div className={ styles.divCondicao }>{ condicao.nome }</div>
+                                <Chip className={styles.chip} label={condicao.nome} />
                                 ))}
                             </div>
                         </div>
+            </div>
+                        
                         <div className={ styles.drops }>
                             <div className={ styles.drop }>
-                                { ' ' }
+                                
                                 <Accordion>
                                 <AccordionSummary
                                     expandIcon={ <ExpandMoreIcon /> }
