@@ -1,23 +1,23 @@
-import styles from '../css/HomePaciente.module.css';
-import Logo from '../img/logo.png';
-import Perfil from '../components/componentsApp/perfil/perfil';
-import MedicosVinculados from '../components/componentsApp/dentistasVinculados/dentistasVinculados';
-import DentistasAceitos from '../components/componentsApp/dentistasAceitos/dentistasAceitos';
-import { useState, useEffect, useContext } from 'react';
-import { getCondicao } from '../services/api';
-import { LoginContext } from '../context/LoginContext';
-import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import Divider from '@mui/material/Divider';
-import { BsFillPersonFill } from 'react-icons/bs';
-import Tooltip from '@mui/material/Tooltip';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import SettingsIcon from '@mui/icons-material/Settings';
-import LogoutIcon from '@mui/icons-material/Logout';
-import { CircularProgress } from '@mui/material';
+import styles from "../css/HomePaciente.module.css";
+import Logo from "../img/logo.png";
+import Perfil from "../components/componentsApp/perfil/perfil";
+import MedicosVinculados from "../components/componentsApp/dentistasVinculados/dentistasVinculados";
+import DentistasAceitos from "../components/componentsApp/dentistasAceitos/dentistasAceitos";
+import { useState, useEffect, useContext } from "react";
+import { getCondicao } from "../services/api";
+import { LoginContext } from "../context/LoginContext";
+import Box from "@mui/material/Box";
+import Avatar from "@mui/material/Avatar";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Divider from "@mui/material/Divider";
+import { BsFillPersonFill } from "react-icons/bs";
+import Tooltip from "@mui/material/Tooltip";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import SettingsIcon from "@mui/icons-material/Settings";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { CircularProgress } from "@mui/material";
 
 const HomePaciente = () => {
   const { user } = useContext(LoginContext);
@@ -25,11 +25,11 @@ const HomePaciente = () => {
   const [paginaSelecionada, setPaginaSelecionada] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  console.log(user)
+
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await getCondicao();
-      const condicoes = data.map(item => item);
+      const condicoes = data.map((item) => item);
 
       setCondicoesPaciente(condicoes);
       setPaginaSelecionada(
@@ -39,8 +39,8 @@ const HomePaciente = () => {
           currentCpf={user.cpf}
           currentEmail={user.user.email}
           currentCondicao={user.condicoes}
-          currentSenha = {user.senha}
-          option={condicoesPaciente}
+          currentSenha={user.senha}
+          option={condicoes}
         />
       );
 
@@ -52,7 +52,7 @@ const HomePaciente = () => {
 
   const open = Boolean(anchorEl);
 
-  const handleClick = event => {
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -61,11 +61,7 @@ const HomePaciente = () => {
   };
 
   const [IconeMenu, setIconeMenu] = useState(
-    <BsFillPersonFill
-      className={styles.icon}
-      onClick={handleClick}
-     
-    />
+    <BsFillPersonFill className={styles.icon} onClick={handleClick} />
   );
 
   return (
@@ -77,97 +73,112 @@ const HomePaciente = () => {
           <div className={styles.topo}>
             <Box
               sx={{
-                display: 'flex',
-                alignItems: 'center',
-                textAlign: 'center',
+                display: "flex",
+                alignItems: "center",
+                textAlign: "center",
               }}
             >
-              <Tooltip title='More'>{IconeMenu}</Tooltip>
+              <Tooltip title="More">{IconeMenu}</Tooltip>
             </Box>
 
             <Menu
               anchorEl={anchorEl}
-              id='account-menu'
+              id="account-menu"
               open={open}
               onClose={handleClose}
               onClick={handleClose}
               PaperProps={{
                 elevation: 0,
                 sx: {
-                  backgroundColor: '#62A8DB',
-                  overflow: 'visible',
-                  filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                  backgroundColor: "#62A8DB",
+                  overflow: "visible",
+                  filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
                   mt: 1.5,
-                  '& .MuiAvatar-root': {
+                  "& .MuiAvatar-root": {
                     width: 32,
                     height: 32,
                     ml: -0.5,
                     mr: 1,
                   },
-                  '&:before': {
+                  "&:before": {
                     content: '""',
-                    display: 'block',
-                    position: 'absolute',
+                    display: "block",
+                    position: "absolute",
                     top: 0,
                     right: 14,
                     width: 10,
                     height: 10,
-                    bgcolor: '#62A8DB',
-                    transform: 'translateY(-50%) rotate(45deg)',
+                    bgcolor: "#62A8DB",
+                    transform: "translateY(-50%) rotate(45deg)",
                     zIndex: 0,
                   },
                 },
               }}
-              transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-              anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+              transformOrigin={{ horizontal: "right", vertical: "top" }}
+              anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
             >
-              <MenuItem onClick={()=>{
-                setIconeMenu(
-                <BsFillPersonFill
-                  className={styles.icon}
-                  onClick={handleClick}
-                 
-                />)
-                setPaginaSelecionada(
-                  <Perfil
-                    currentName={user.name}
-                    currentCpf={user.cpf}
-                    currentEmail={user.user.email}
-                    currentCondicao={user.condicoes}
-                    option={condicoesPaciente}
-                  />
-                )
-              }}>
+              <MenuItem
+                onClick={() => {
+                  setIconeMenu(
+                    <BsFillPersonFill
+                      className={styles.icon}
+                      onClick={handleClick}
+                    />
+                  );
+                  setPaginaSelecionada(
+                    <Perfil
+                      currentName={user.name}
+                      currentCpf={user.cpf}
+                      currentEmail={user.user.email}
+                      currentCondicao={user.condicoes}
+                      option={condicoesPaciente}
+                    />
+                  );
+                }}
+              >
                 <Avatar />
                 Perfil
               </MenuItem>
-              <MenuItem onClick={()=>{
-                setIconeMenu(
-                  <PersonAddIcon
-                    className={styles.icon}
-                    onClick={handleClick}
-                   
-                  />),
-                setPaginaSelecionada(<MedicosVinculados pacienteLogado={user.cpf} solicitacoes={user.solicitacoes}/>)
-              }}>
+              <MenuItem
+                onClick={() => {
+                  setIconeMenu(
+                    <PersonAddIcon
+                      className={styles.icon}
+                      onClick={handleClick}
+                    />
+                  ),
+                    setPaginaSelecionada(
+                      <MedicosVinculados
+                        pacienteLogado={user.cpf}
+                        solicitacoes={user.solicitacoes}
+                      />
+                    );
+                }}
+              >
                 <ListItemIcon>
-                  <PersonAddIcon fontSize='small' />
+                  <PersonAddIcon fontSize="small" />
                 </ListItemIcon>
                 Solicitações de acesso
               </MenuItem>
 
-              <MenuItem onClick={()=>{
-                setIconeMenu(
-                  <SettingsIcon
-                    className={styles.icon}
-                    onClick={handleClick}
-                   
-                  />),
-                setPaginaSelecionada(<DentistasAceitos pacienteLogado={user.cpf} aceitos={user.dentistas}/>)
-              }}
+              <MenuItem
+                onClick={() => {
+                  setIconeMenu(
+                    <SettingsIcon
+                      className={styles.icon}
+                      onClick={handleClick}
+                    />
+                  ),
+                    setPaginaSelecionada(
+                      <DentistasAceitos
+                        pacienteLogado={user.cpf}
+                        aceitos={user.dentistas}
+                      />
+                    );
+                }}
               >
                 <ListItemIcon>
-                  <SettingsIcon fontSize='small' />
+                  <SettingsIcon fontSize="small" />
                 </ListItemIcon>
                 Gerenciar dentistas
               </MenuItem>
@@ -175,22 +186,16 @@ const HomePaciente = () => {
               <Divider />
               <MenuItem>
                 <ListItemIcon>
-                  <LogoutIcon fontSize='small' />
+                  <LogoutIcon fontSize="small" />
                 </ListItemIcon>
                 Sair
               </MenuItem>
             </Menu>
-
-            
           </div>
-        
-          <div className={styles.main}>
-           
 
+          <div className={styles.main}>
             <div className={styles.content}>{paginaSelecionada}</div>
           </div>
-
-
         </>
       )}
     </>
