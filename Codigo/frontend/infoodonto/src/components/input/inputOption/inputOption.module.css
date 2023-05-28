@@ -6,6 +6,7 @@
     flex-wrap: wrap;
     align-items: center !important;
     justify-content: center !important;
+    max-width: 400px;
 
 }
 
@@ -13,34 +14,37 @@
 /*Input options*/
 .divButton{
     display: flex;
-    align-items: end;
-    justify-content: end;
+    width: 100%;
+    align-items: end !important;
+    justify-content: flex-end !important;
 }
 
 .tagContainer{
-    display: flex;
+    display: inline-block;
     align-items: center !important;
     justify-content: center !important;
     margin: 0 auto;
     flex-wrap: wrap;
+    *display: inline; *zoom: 1;
 
 }
 
 .tag{
     font-size: 10px !important;
-    width: 30vw !important;
+    width: 50% !important;
     flex: 1;
     margin: 1px 3px !important;
 }
 .tagGroup{
     display: flex;
     align-items: center;
+
 }
 
 /*Botões*/
 .adicionar{
     margin-top: 20px;
-    margin-left: 60%;
+
     border-radius: 13.96px;
     height: 30px;
     width: 87px;

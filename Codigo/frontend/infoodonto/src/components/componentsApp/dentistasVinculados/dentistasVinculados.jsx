@@ -1,4 +1,4 @@
-import styles from './medicosVinculados.module.css'
+import styles from './dentistasVinculados.module.css'
 import { useState, useEffect, forwardRef } from 'react'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -15,14 +15,12 @@ import { MdCancel } from 'react-icons/md'
 import { getDentista, aceitarSolicitacao, recusarSolicitacao } from '../../../services/api'
 
 const MedicosVinculados = ({ solicitacoes, pacienteLogado }) => {
-  console.log("solicitar")
   const [openAceito, setOpenAceito] = useState(false)
   const [openRecusado, setOpenRecusado] = useState(false)
   const [rows, setRows] = useState([])
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log(solicitacoes)
       const promises = solicitacoes.map(async (id) => {
         const response = await getDentista(id);
         return response.data;
@@ -72,14 +70,15 @@ const MedicosVinculados = ({ solicitacoes, pacienteLogado }) => {
   return (
     <>
       <div className={ styles.divTable }>
-        <h1 className={ styles.titulo }>Solicitações de Acesso</h1>
+        <h1 className={ styles.titulo }>Solicitações <br /> de acesso</h1>
         <div className={styles.divTableBottom}>
-        <TableContainer component={ Paper }>
+        <TableContainer component={ Paper } className={styles.table}>
           <Table
             className={ styles.table }
-            sx={{ minWidth: 350 }}
+            sx={{ minWidth:650}}
             size='small'
             aria-label='a dense table'
+            overflow = 'hiden'
           >
             <TableHead>
               <TableRow>

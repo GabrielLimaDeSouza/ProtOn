@@ -4,12 +4,33 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    max-width: 400 px;
 }
 .titulo{
     color: #62A8DB;
 }
 .divInput {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
     padding-top: 20px;
-  
+    
+}
+.tituloInput{
+    color: #62A8DB;
+
+    padding-bottom: 10px;
 }
 
+.adicionar{
+    margin-top: 20px;
+    border-radius: 13.96px;
+    height: 30px;
+    width: 87px;
+    background-color: #95BFDE;
+    color: white;
+    border: none;
+    cursor: pointer;
+}

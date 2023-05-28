@@ -1,7 +1,8 @@
 import styles from '../css/HomePaciente.module.css';
 import Logo from '../img/logo.png';
 import Perfil from '../components/componentsApp/perfil/perfil';
-import MedicosVinculados from '../components/componentsApp/medicosVinculados/medicosVinculados';
+import MedicosVinculados from '../components/componentsApp/dentistasVinculados/dentistasVinculados';
+import DentistasAceitos from '../components/componentsApp/dentistasAceitos/dentistasAceitos';
 import { useState, useEffect, useContext } from 'react';
 import { getCondicao } from '../services/api';
 import { LoginContext } from '../context/LoginContext';
@@ -22,10 +23,9 @@ const HomePaciente = () => {
   const { user } = useContext(LoginContext);
   const [condicoesPaciente, setCondicoesPaciente] = useState(null);
   const [paginaSelecionada, setPaginaSelecionada] = useState(null);
-  const [logado, setLogado] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  
+  console.log(user)
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await getCondicao();
@@ -34,10 +34,12 @@ const HomePaciente = () => {
       setCondicoesPaciente(condicoes);
       setPaginaSelecionada(
         <Perfil
+          currentId={user._id}
           currentName={user.name}
           currentCpf={user.cpf}
           currentEmail={user.user.email}
           currentCondicao={user.condicoes}
+          currentSenha = {user.senha}
           option={condicoesPaciente}
         />
       );
@@ -153,12 +155,23 @@ const HomePaciente = () => {
                 </ListItemIcon>
                 Solicitações de acesso
               </MenuItem>
-              <MenuItem>
+
+              <MenuItem onClick={()=>{
+                setIconeMenu(
+                  <SettingsIcon
+                    className={styles.icon}
+                    onClick={handleClick}
+                   
+                  />),
+                setPaginaSelecionada(<DentistasAceitos pacienteLogado={user.cpf} aceitos={user.dentistas}/>)
+              }}
+              >
                 <ListItemIcon>
                   <SettingsIcon fontSize='small' />
                 </ListItemIcon>
                 Gerenciar dentistas
               </MenuItem>
+
               <Divider />
               <MenuItem>
                 <ListItemIcon>
@@ -170,14 +183,9 @@ const HomePaciente = () => {
 
             
           </div>
-        <div className={styles.divLogo}><img src={Logo} alt='Logo' className={styles.logo} /></div>
+        
           <div className={styles.main}>
-            <div className={styles.titulo}>
-              <h2>Olá, {user.name}!</h2>
-              <p>
-                Bem-vindo à plataforma de acompanhamento de condições de saúde.
-              </p>
-            </div>
+           
 
             <div className={styles.content}>{paginaSelecionada}</div>
           </div>

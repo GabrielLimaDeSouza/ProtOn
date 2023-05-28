@@ -37,5 +37,5 @@ export const recusarSolicitacao = async (cpf, dentista) => {
 }
 
 export const removerPermissao = async (cpf, dentista) => {
-    return await api.delete(`/api/paciente/${cpf}/dentistas`, { dentista })
+    return await api.delete(`/api/paciente/${cpf}/dentistas`, { data: { dentista } });
 }

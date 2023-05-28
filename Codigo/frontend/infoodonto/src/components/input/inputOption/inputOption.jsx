@@ -14,29 +14,40 @@ const InputOption = (props) => {
   
   function verificaLista(params) {
     let boolean = false
+    console.log(params)
     props.option.forEach(element => {
       if(element.nome == params){
-        boolean = element
+        console.log("Primeiro true")
+        boolean = true
       }
     },
     );
+    console.log(boolean)
+    console.log(tags)
     tags.forEach(element =>{
-      if(element == params){
-       
+      console.log("Elemente: " + element + " Param: " + params)
+      if(element.nome == params){
+        console.log("Segundo true")
         boolean = false
       }
     })
+    console.log(boolean)
     return boolean
+    
   }
 
 
   function handleKeyDown() {
     
-    let novaCondicao = document.getElementById(props.id).value
-    
-    let verificado = verificaLista(novaCondicao)
-    if(novaCondicao != "" && verificado !=""){
-      setTags([...tags, verificado])
+    var novaCondicao = document.getElementById(props.id).value
+    if(novaCondicao != "" && verificaLista(novaCondicao)){
+      props.option.forEach(element =>{
+        if(element.nome == novaCondicao){
+          novaCondicao = element
+        }
+      })
+      console.log(novaCondicao.nome)
+      setTags([...tags, novaCondicao])
       
     }
     document.getElementById(props.id).value = ""
@@ -77,6 +88,7 @@ const InputOption = (props) => {
             <option key={key} value={text.nome} id={text._id}/>
           ))}
         </datalist>
+        
       </div>
       <div className={styles.divButton}>
         <button

@@ -115,7 +115,7 @@ const pacienteController = {
     try {
       const { id } = req.query;
       const { name, email, senha, condicoes } = req.body;
-
+      
       const updatedPaciente = await PacienteModel.findByIdAndUpdate(
         id,
         {
@@ -136,10 +136,12 @@ const pacienteController = {
       });
 
       const paciente = await updatedPaciente.populate({
-        path: "user",
-        populate: {
-          path: "condicoes",
-        },
+        path: 'solicitacoes',
+                    select: 'name user',
+                    populate: {
+                        path: 'user',
+                        select: 'email'
+                    },
       });
 
       res
@@ -180,9 +182,8 @@ const pacienteController = {
     try {
       const { cpf } = req.params;
       const { dentista } = req.body;
-
+      
       const paciente = await PacienteModel.findOne({ cpf });
-
       if (!paciente) {
         res.status(404).json({ msg: "Paciente não encontrado!" });
         return;

@@ -22,9 +22,8 @@
 
 }
 
-.title {
-    font-family: Arial, Helvetica, sans-serif;
-    color: rgb(250, 250, 250)
+.titulo{
+    color: #62A8DB;
 }
 
 .iconConfirm {
@@ -38,19 +37,16 @@
 
 .divTable{
     display: flex;
-   width: 100vw;
+
    flex-direction: column;
    align-items: center;
    justify-content: center;
+   text-align: center;
    margin: 10px;
 }
 .divTableBottom{
-    display: flex;
-   width: 100vw;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
-   margin: 10px;
+    margin: 0 50px 0 50px;
+    width: 80vw;
 }
 .titulo{
     color: #62A8DB;
@@ -60,4 +56,7 @@
 }
 .rowIcon{
     display: flex;
+}
+.table{
+    width: 100% !important;
 }
