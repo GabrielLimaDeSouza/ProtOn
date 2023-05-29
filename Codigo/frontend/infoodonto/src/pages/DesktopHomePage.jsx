@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Componentes
+import Header from "../components/headers/Header";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { LoginContext } from "../context/LoginContext";
 
 // CSS
 import styles from "../css/HomePageDesktop.module.css";
 
 // SVG's
-import Tooth from "../assets/tooth.svg";
 import Logo from "../img/logo.svg";
 import DentalCare from "../img/dental-care.png";
 
@@ -21,10 +22,12 @@ import { GrFacebookOption } from "react-icons/gr";
 import { BiMenuAltLeft } from "react-icons/bi";
 
 const DesktopHomePage = () => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const { user } = useContext(LoginContext);
+
+  const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
 
-  const open = Boolean(anchorEl);
+  const open = !!anchorEl;
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -42,48 +45,7 @@ const DesktopHomePage = () => {
   return (
     <>
       <div className={styles.body}>
-        <div className={styles.header}>
-          <img src={Tooth} alt="" className={styles.tooth} />
-          <div className={styles.linksHeader}>
-            <Button
-              className={styles.buttonLink}
-              aria-controls={open ? "demo-positioned-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClick}
-            >
-              Cadastrar
-            </Button>
-            <Menu
-              id="demo-positioned-menu"
-              aria-labelledby="demo-positioned-button"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={() => setAnchorEl(null)}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-            >
-              <MenuItem onClick={handleRedirectPaciente}>Sou paciente</MenuItem>
-              <MenuItem onClick={handleRedirectInstituicao}>
-                Sou instituição
-              </MenuItem>
-            </Menu>
-            <Button
-              className={styles.buttonLink}
-              onClick={() => {
-                navigate("/login");
-              }}
-            >
-              Login
-            </Button>
-          </div>
-        </div>
+        <Header />
         <div className={styles.divContent}>
           <div className={styles.icons}>
             <AiOutlineInstagram className={styles.icon} />
@@ -111,15 +73,50 @@ const DesktopHomePage = () => {
               </p>
             </div>
             <div className={styles.divButton}>
-              <a href="/">
-                <button className={styles.button}>Cadastrar</button>
-              </a>
-              <p className={styles.pButton}>ou</p>
-              <a href="/login">
-                <button href="/login" className={styles.button}>
-                  Login
-                </button>
-              </a>
+              {!user && (
+                <>
+                  <Button
+                    className={styles.button}
+                    aria-controls={open ? "demo-positioned-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? "true" : undefined}
+                    onClick={handleClick}
+                  >
+                    Cadastrar
+                  </Button>
+                  <Menu
+                    id="demo-positioned-menu"
+                    aria-labelledby="demo-positioned-button"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={() => setAnchorEl(null)}
+                    anchorOrigin={{
+                      vertical: "top",
+                      horizontal: "left",
+                    }}
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "left",
+                    }}
+                  >
+                    <MenuItem onClick={handleRedirectPaciente}>
+                      Sou paciente
+                    </MenuItem>
+                    <MenuItem onClick={handleRedirectInstituicao}>
+                      Sou instituição
+                    </MenuItem>
+                  </Menu>
+                  <p className={styles.pButton}>ou</p>
+                  <Button
+                    className={styles.button}
+                    onClick={() => {
+                      navigate("/login");
+                    }}
+                  >
+                    Login
+                  </Button>
+                </>
+              )}
             </div>
           </div>
           <div className={styles.divBlank}></div>

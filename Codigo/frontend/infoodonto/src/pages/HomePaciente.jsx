@@ -1,5 +1,5 @@
 import styles from "../css/HomePaciente.module.css";
-import Logo from "../img/logo.png";
+import Tooth from "../assets/tooth.svg";
 import Perfil from "../components/componentsApp/perfil/perfil";
 import MedicosVinculados from "../components/componentsApp/dentistasVinculados/dentistasVinculados";
 import DentistasAceitos from "../components/componentsApp/dentistasAceitos/dentistasAceitos";
@@ -18,9 +18,10 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { CircularProgress } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const HomePaciente = () => {
-  const { user } = useContext(LoginContext);
+  const { user, logout } = useContext(LoginContext);
   const [condicoesPaciente, setCondicoesPaciente] = useState(null);
   const [paginaSelecionada, setPaginaSelecionada] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -71,15 +72,21 @@ const HomePaciente = () => {
       ) : (
         <>
           <div className={styles.topo}>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                textAlign: "center",
-              }}
-            >
-              <Tooltip title="More">{IconeMenu}</Tooltip>
-            </Box>
+            <div className={styles.header}>
+              <Link to="/">
+                <img src={Tooth} alt="" className={styles.tooth} />
+              </Link>
+
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  textAlign: "center",
+                }}
+              >
+                <Tooltip title="More">{IconeMenu}</Tooltip>
+              </Box>
+            </div>
 
             <Menu
               anchorEl={anchorEl}
@@ -184,7 +191,11 @@ const HomePaciente = () => {
               </MenuItem>
 
               <Divider />
-              <MenuItem>
+              <MenuItem
+                onClick={() => {
+                  logout;
+                }}
+              >
                 <ListItemIcon>
                   <LogoutIcon fontSize="small" />
                 </ListItemIcon>

@@ -41,15 +41,7 @@ export const LoginProvider = ({ children }) => {
       setUser(response.data);
 
       setTimeout(() => {
-        if (response.data.user.type == "paciente") {
-          navigate("homePaciente");
-        }
-        if (response.data.user.type == "dentista") {
-          navigate("searchPaciente");
-        }
-        if (response.data.user.type == "instituicao") {
-          navigate(`homeInstituicao`);
-        }
+        navigate("/");
       }, 600);
     } catch (err) {
       const { status, data } = err.response;
@@ -66,9 +58,20 @@ export const LoginProvider = ({ children }) => {
     navigate("/");
   };
 
+  const updateUser = (newUser) => {
+    setUser(newUser);
+  };
+
   return (
     <LoginContext.Provider
-      value={{ authenticated: !!user, user, loading, login, logout }}
+      value={{
+        authenticated: !!user,
+        user,
+        loading,
+        login,
+        logout,
+        updateUser,
+      }}
     >
       {children}
     </LoginContext.Provider>

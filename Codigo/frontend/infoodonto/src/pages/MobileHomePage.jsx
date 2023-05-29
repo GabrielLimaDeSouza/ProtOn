@@ -10,7 +10,6 @@ import MenuItem from "@mui/material/MenuItem";
 import styles from "../css/HomePageMobile.module.css";
 
 // SVG's
-import Tooth from "../assets/tooth.svg";
 import Logo from "../img/logo.svg";
 
 // Icons
@@ -18,6 +17,7 @@ import { AiOutlineTwitter } from "react-icons/ai";
 import { AiOutlineInstagram } from "react-icons/ai";
 import { GrFacebookOption } from "react-icons/gr";
 import { BiMenuAltLeft } from "react-icons/bi";
+import Header from "../components/headers/Header";
 
 const MobileHomePage = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -41,9 +41,7 @@ const MobileHomePage = () => {
   return (
     <>
       <div className={styles.body}>
-        <div className={styles.header}>
-          <img src={Tooth} alt="" />
-        </div>
+        <Header />
         <div className={styles.logo}>
           <img src={Logo} alt="ProtOn" />
         </div>

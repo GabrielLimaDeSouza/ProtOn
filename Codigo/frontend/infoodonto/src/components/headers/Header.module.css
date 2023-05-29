@@ -1,0 +1,56 @@
+.navHeader {
+  display: flex;
+  padding: 30px 10rem 5rem;
+  justify-content: space-between;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.linksHeader {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 2rem;
+}
+
+.buttonLink {
+  font-size: 14px !important;
+  text-transform: capitalize !important;
+  font-family: "Montserrat", sans-serif !important;
+  color: #ffffff !important;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.buttonLink:hover {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  background-color: inherit !important;
+  transform: scale(1.05);
+}
+
+.tooth {
+  transition: 0.5s;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.tooth:hover {
+  transform: scale(1.2);
+}
+
+@media (max-width: 600px) {
+  .navHeader {
+    padding: 30px 2rem 0;
+  }
+  .header {
+    padding: 0 2rem;
+  }
+}

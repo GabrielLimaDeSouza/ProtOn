@@ -7,15 +7,15 @@ const InputText = (props) => {
   }
 
   return (
-    <div className={ styles.inputContainer }>
+    <div className={styles.inputContainer}>
       <input
-        placeholder={ props.placeholder }
-        className={ styles.inputText }
+        placeholder={props.placeholder}
+        className={styles.inputText}
         autoComplete="new-password"
         type="text"
-        disabled={ disabled }
-        id={ props.id }
-        name={ props.name }
+        disabled={disabled}
+        id={props.id}
+        name={props.name}
       ></input>
     </div>
   );
