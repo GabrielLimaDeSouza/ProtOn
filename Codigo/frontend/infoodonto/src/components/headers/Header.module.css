@@ -54,3 +54,15 @@
     padding: 0 2rem;
   }
 }
+
+@media (max-width: 800px) {
+  .navHeader {
+    padding: 15px 0 0;
+  }
+  .linksHeader {
+    column-gap: 0;
+  }
+  .header {
+    padding: 0;
+  }
+}

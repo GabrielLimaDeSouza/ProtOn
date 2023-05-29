@@ -1,7 +1,7 @@
 /* Estilos Body */
 
 .body {
-  height: 110vh;
+  min-height: 110vh;
   background-color: #62a8db !important;
   border-radius: 0 0 20px 20px;
   padding: 0 2rem;
@@ -67,7 +67,7 @@
 /* Estilos title */
 .whiteTitle {
   color: white;
-  font-size: 40px;
+  font-size: 27px;
   font-weight: 800;
 }
 
@@ -121,8 +121,7 @@
 .pButton {
   color: white;
   align-content: center;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin: 0 10px;
 }
 
 /* Estilos divInformations */
@@ -174,6 +173,16 @@
 .aboutUsIcon {
   color: #20a0fd;
   font-size: 25px;
+}
+
+@media (min-width: 400px) {
+  .whiteTitle {
+    font-size: 40px;
+  }
+
+  .pButton {
+    margin: 0 20px;
+  }
 }
 
 @media (min-width: 450px) {
