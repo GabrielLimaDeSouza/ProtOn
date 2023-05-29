@@ -16,6 +16,7 @@ const InputText = (props) => {
         disabled={disabled}
         id={props.id}
         name={props.name}
+        value={props.value}
       ></input>
     </div>
   );

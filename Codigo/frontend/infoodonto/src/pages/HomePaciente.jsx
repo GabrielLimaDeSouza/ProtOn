@@ -28,7 +28,8 @@ const HomePaciente = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
+    console.log(user.user);
+    (async () => {
       const { data } = await getCondicao();
       const condicoes = data.map((item) => item);
 
@@ -40,16 +41,14 @@ const HomePaciente = () => {
           currentCpf={user.cpf}
           currentEmail={user.user.email}
           currentCondicao={user.condicoes}
-          currentSenha={user.senha}
+          currentSenha={user.user.senha}
           option={condicoes}
         />
       );
 
       setIsLoading(false);
-    };
-
-    fetchData();
-  }, [user]);
+    })();
+  }, []);
 
   const open = Boolean(anchorEl);
 
@@ -138,6 +137,7 @@ const HomePaciente = () => {
                       currentCpf={user.cpf}
                       currentEmail={user.user.email}
                       currentCondicao={user.condicoes}
+                      currentSenha={user.user.senha}
                       option={condicoesPaciente}
                     />
                   );

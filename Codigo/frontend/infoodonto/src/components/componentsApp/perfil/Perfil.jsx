@@ -1,42 +1,51 @@
-import Input from '../../input/Input'
-import styles from './Perfil.module.css'
-import { useState } from "react"
-const Perfil = ({ currentName, currentEmail, currentCpf, currentCondicao, option, currentId, currentSenha }) => {
+import { useContext, useState } from "react";
+import Input from "../../inputs/Input";
+import styles from "./Perfil.module.css";
+import { LoginContext } from "../../../context/LoginContext";
+import { useNavigate } from "react-router-dom";
+import InputOption from "../../input/inputOption/inputOption";
 
+const Perfil = ({
+  currentName,
+  currentEmail,
+  currentCpf,
+  currentCondicao,
+  option,
+  currentId,
+  currentSenha,
+}) => {
+  const { user, updateUser } = useContext(LoginContext);
+  const [userState, setUserState] = useState(user);
+  const [confirmSenha, setConfirmSenha] = useState();
 
-
+  const navigate = useNavigate();
 
   function atualizar() {
-    let novaCondicao = []
-    let name = currentName
-    let email = currentEmail
-    let senha = currentSenha
-    document.querySelectorAll('.MuiChip-filled').forEach((e) => {
-      novaCondicao.push({ "_id": e.getAttribute("id") });
-    });
-    if (document.getElementById('updateName').value != null) {
-      name = document.getElementById('updateName').value
+    const condicoes = userState.condicoes.map((condicao) => condicao._id);
+
+    if (confirmSenha && userState.user.senha !== confirmSenha) {
+      alert("As senhas não coincidem");
+      return;
     }
-    if (document.getElementById('updateEmail').value != null) {
-      email = document.getElementById('updateEmail').value
-    }
-    if (document.getElementById('updatePassword').value != null) {
-      senha = document.getElementById('updatePassword').value
-    }
+
     fetch(`http://localhost:3000/api/paciente?id=${currentId}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: name,
-        email: email,
-        senha: senha,
-        condicoes: novaCondicao,
+        name: userState.name,
+        email: userState.user.email,
+        senha: userState.user.senha,
+        condicoes,
       }),
     })
       .then(() => {
-        console.log('cadastrado com sucesso');
+        updateUser(userState);
+
+        setTimeout(() => {
+          navigate("/perfil");
+        }, 200);
       })
       .catch((err) => {
         console.log(err);
@@ -49,41 +58,75 @@ const Perfil = ({ currentName, currentEmail, currentCpf, currentCondicao, option
         <h1 className={styles.titulo}>Perfil:</h1>
 
         <div className={styles.divInput}>
-          <p className={styles.tituloInput}>Nome:</p>
-          <Input type='text' placeholder={currentName} id='updateName' />
+          <Input
+            type="text"
+            initialValue={currentName}
+            id="updateName"
+            label="Nome"
+            onChange={(name) => setUserState({ ...userState, name })}
+          />
         </div>
 
         <div className={styles.divInput}>
-        <p className={styles.tituloInput}>CPF:</p>
-          <Input type='text' placeholder={currentCpf} disabled={true} id='updateCpf' />
-        </div>
-        <div className={styles.divInput}>
-        <p className={styles.tituloInput}>Senha:</p>
-          <Input type='password' placeholder={'Senha'} id='updatePassword' />
-        </div>
-        <div className={styles.divInput}>
-        <p className={styles.tituloInput}>Confirmar senha:</p>
-          <Input type='password' placeholder={'Confirmar senha'} id='confirmUpdatePassword' />
-        </div>
-        <div className={styles.divInput}>
-        <p className={styles.tituloInput}>Email:</p>
           <Input
-            type='text'
-            placeholder={currentEmail}
-            id='updateEmail'
+            type="text"
+            initialValue={currentCpf}
+            id="updateCpf"
+            label="CPF"
+            disabled
           />
         </div>
         <div className={styles.divInput}>
-        <p className={styles.tituloInput}>Condições:</p>
           <Input
-            type='option'
-            placeholder='Condição'
-            id='updateCondicao'
+            type="text"
+            initialValue={currentEmail}
+            id="updateEmail"
+            label="Email"
+            onChange={(email) =>
+              setUserState({ ...userState, user: { ...userState.user, email } })
+            }
+          />
+        </div>
+        <div className={styles.divInput}>
+          <Input
+            type="password"
+            initialValue={currentSenha}
+            placeholder="Senha"
+            id="updatePassword"
+            label="Senha"
+            onChange={(senha) =>
+              setUserState({ ...userState, user: { ...userState.user, senha } })
+            }
+          />
+        </div>
+        <div className={styles.divInput}>
+          <Input
+            type="password"
+            placeholder="Confirmar senha"
+            id="confirmUpdatePassword"
+            label="Confirmar senha"
+            onChange={(confimSenha) => setConfirmSenha(confimSenha)}
+          />
+        </div>
+        <div className={styles.divInput}>
+          <p className={styles.tituloInput}>Condições:</p>
+          <InputOption
+            placeholder="Condição"
+            id="updateCondicao"
             currentCondicao={currentCondicao}
-            option={option} r
+            option={option}
+            onAddTag={(condicoes) =>
+              setUserState({
+                ...userState,
+                condicoes,
+              })
+            }
           />
         </div>
-        <button onClick={() => { atualizar() }}
+        <button
+          onClick={() => {
+            atualizar();
+          }}
           className={styles.adicionar}
           type="button"
         >
@@ -91,7 +134,7 @@ const Perfil = ({ currentName, currentEmail, currentCpf, currentCondicao, option
         </button>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Perfil
+export default Perfil;
