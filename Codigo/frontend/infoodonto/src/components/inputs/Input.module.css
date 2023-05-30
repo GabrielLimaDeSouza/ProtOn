@@ -26,3 +26,11 @@ span.children {
   right: 1rem;
   top: 1rem;
 }
+
+div.inputComponent input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+div.inputComponent input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}

@@ -1,7 +1,7 @@
 import { useRef } from "react";
 
 // eslint-disable-next-line react/prop-types
-const Form = ({ onSubmit, children }) => {
+const Form = ({ className, onSubmit, children }) => {
   const form = useRef(null);
 
   const handleSubmit = (e) => {
@@ -10,11 +10,7 @@ const Form = ({ onSubmit, children }) => {
   };
 
   return (
-    <form
-      ref={form}
-      className="form-component flex flex-column row-gap-3rem"
-      onSubmit={handleSubmit}
-    >
+    <form ref={form} className={className && className} onSubmit={handleSubmit}>
       {children}
     </form>
   );

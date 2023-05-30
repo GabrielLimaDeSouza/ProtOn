@@ -1,102 +1,150 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import Logo from "../../img/logo.png";
-import Input from "../../components/input/Input";
+//* CSS
 import styles from "../../css/FormPaciente.module.css";
-import { getCondicao } from "../../services/api";
 
-import { AiOutlineArrowLeft } from "react-icons/ai";
+//* React
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+//* Components
+import Input from "../../components/inputs/Input";
+import Button from "../../components/buttons/Button";
+import Condicoes from "../../components/condicoes/Condicoes";
+import Form from "../../components/forms/Form";
+import Header from "../../components/headers/Header";
+import { Alert } from "@mui/material";
+
+//* Icons
+import { BiShow, BiHide } from "react-icons/bi";
+
+//* API
+import { getCondicoes, createPaciente } from "../../services/api";
 
 const FormPaciente = () => {
-  const [condicoesPaciente, setCondicoesPaciente] = useState([]);
+  const [condicoes, setCondicoes] = useState(null);
+  const [condicoesPaciente, setCondicoesPaciente] = useState(null);
+  const [isHiddenPass, setIsHiddenPass] = useState(true);
+  const [alert, setAlert] = useState(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await getCondicao();
-      const condicoes = data.map((item) => item);
-      setCondicoesPaciente(condicoes);
-    };
-    fetchData();
+    (async () => {
+      const condicoesResp = await getCondicoes();
+      setCondicoes(condicoesResp.data);
+    })();
   }, []);
 
-  function cadastrar() {
-    let condicao = [];
+  const handleCreatePaciente = async (formData) => {
+    const paciente = Object.fromEntries(formData);
+    paciente.cpf = formatarCPF(paciente.cpf);
+    paciente.condicoes = condicoesPaciente;
 
-    document.querySelectorAll(".MuiChip-filled").forEach((e) => {
-      condicao.push(e.getAttribute("id"));
-    });
+    try {
+      const response = await createPaciente(paciente);
 
-    fetch(`http://localhost:3000/api/paciente`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: document.getElementById("name").value,
-        cpf: document.getElementById("cpf").value,
-        email: document.getElementById("email").value,
-        senha: document.getElementById("senha").value,
-        condicoes: condicao,
-      }),
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        alert(data.msg);
-
+      if (response.status === 201) {
+        setAlert({ severity: "success", msg: response.data.msg });
         setTimeout(() => {
           navigate("/login");
         }, 2000);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+      }
+    } catch (err) {
+      const { error } = err.response.data;
+      setAlert({ severity: "error", msg: error });
+    } finally {
+      setTimeout(() => {
+        setAlert(null);
+      }, 2000);
+    }
+  };
+
+  const formatarCPF = (cpf) => {
+    return cpf.replace(/\D/g, "");
+  };
+
   return (
-    <div className={styles.body}>
-      <div className="divArrow">
-        <a href="/">
-          <AiOutlineArrowLeft className="arrowBack" />
-        </a>
+    <>
+      <div className={styles.body}>
+        <Header colorized />
+        <section className="edit-dados">
+          <div className={styles.content}>
+            <div className={styles.divTitle}>
+              <h1 className={styles.title}>Criar nova conta</h1>
+              <p className={styles.descripton}>
+                Crie uma nova conta no Proton para obter uma melhor experiência
+                nas suas consultas com o dentista
+              </p>
+            </div>
+          </div>
+        </section>
+        <Form onSubmit={handleCreatePaciente}>
+          {alert && (
+            <Alert severity={alert.severity} onClose={() => setAlert(null)}>
+              {alert.msg}
+            </Alert>
+          )}
+          <div className={styles.formData}>
+            <section className={styles.section1}>
+              <section className={styles.sectionEdit}>
+                <h4 className={styles.titleSection}>Dados pessoais</h4>
+                <Input
+                  type="text"
+                  name="name"
+                  id="name"
+                  placeholder="Nome"
+                  required
+                />
+                <Input
+                  type="text"
+                  name="cpf"
+                  id="cpf"
+                  placeholder="CPF (Somente números)"
+                  maxLength="11"
+                  minLength="11"
+                  pattern="[0-9]+([,\.][0-9]+)?"
+                  title="Insira somente números"
+                  required
+                />
+              </section>
+              <section className={styles.sectionEdit}>
+                <h4 className={styles.titleSection}>Login</h4>
+                <Input
+                  type="text"
+                  name="email"
+                  id="email"
+                  placeholder="Email"
+                  required
+                />
+                <Input
+                  type={isHiddenPass ? "password" : "text"}
+                  placeholder="Senha"
+                  id="password"
+                  name="senha"
+                >
+                  <button
+                    type="button"
+                    className={styles.empty}
+                    onClick={() => setIsHiddenPass(!isHiddenPass)}
+                  >
+                    {isHiddenPass ? <BiShow /> : <BiHide />}
+                  </button>
+                </Input>
+              </section>
+            </section>
+            <section className={styles.sectionEdit}>
+              <h4 className={styles.titleSection}>Condições</h4>
+              <Condicoes options={condicoes} onChange={setCondicoesPaciente} />
+            </section>
+          </div>
+          <div>
+            <Button type="submit" className="submit blue-primary">
+              Atualizar
+            </Button>
+          </div>
+        </Form>
       </div>
-
-      <div className={styles.logo}>
-        <img src={Logo} alt="Logo" />
-      </div>
-
-      <div className={styles.form}>
-        <div className={styles.divInputs}>
-          <div className={styles.uni}>
-            <Input type="text" placeholder="Nome" id="name" />
-          </div>
-          <div className={styles.uni}>
-            <Input type="text" placeholder="CPF" id="cpf" />
-          </div>
-          <div className={styles.uni}>
-            <Input type="text" placeholder="Email" id="email" />
-          </div>
-          <div className={styles.uni}>
-            <Input type="password" placeholder="Senha" id="senha" />
-          </div>
-          <div className={styles.uni}>
-            <Input
-              type="option"
-              placeholder="Selecione aqui as suas condições médicas"
-              id="condicao"
-              option={condicoesPaciente}
-            >
-              {" "}
-            </Input>
-          </div>
-        </div>
-      </div>
-
-      <div className={styles.divButton}>
-        <button className={styles.confirmar} onClick={cadastrar}>
-          Cadastrar
-        </button>
-      </div>
-    </div>
+    </>
   );
 };
+
 export default FormPaciente;

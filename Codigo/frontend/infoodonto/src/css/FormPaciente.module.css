@@ -1,37 +1,81 @@
-.logo{
-    display: flex;
-    padding-top: 60px;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
+div.header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 2rem 10rem 5rem;
 }
 
-.form{
-    padding-top: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
+div.body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 5rem;
+  max-width: 80rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 5rem 4rem;
+  min-height: 100vh;
 }
-.uni{
-    padding-top: 20px;
 
+div.formData {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 3rem 5rem;
 }
-.divInputs{
-    width: 80vw;
+
+div.formData section {
+  width: 100%;
+  max-width: 30rem;
 }
-.divButton{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-    padding-top: 60px;
+
+section.section1 {
+  display: flex;
+  flex-direction: column;
+  row-gap: 3rem;
 }
-.confirmar{
-    border-radius: 30px;
-    padding: 7px;
-    width: 150px;
-    color: white;
-    border: none;
-    background-color: #95BFDE;
+
+h1.title {
+  margin: 0;
+  color: #20a0fd;
+}
+
+p.descripton {
+  margin-top: 5px;
+  color: #676767;
+  font-size: 15px;
+}
+
+section.sectionEdit {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+button.empty {
+  background: none;
+  border: none;
+  outline: none;
+}
+
+button.empty:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+@media (max-width: 700px) {
+  div.header {
+    padding: 0 2rem 5rem;
+  }
+  div.body {
+    padding: 0 2rem 4rem;
+  }
+}
+
+@media (max-width: 300px) {
+  div.body {
+    padding: 0 1rem 4rem;
+  }
 }

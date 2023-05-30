@@ -69,7 +69,11 @@ export default function HomeInstituicao() {
         <img src={Logo} alt="Logo" />
       </div>
       <div className={styles.divButtonCreate}>
-        <Button variant="contained" component={Link} to={"/formDentista"}>
+        <Button
+          variant="contained"
+          component={Link}
+          to={"/instituicao/dentistas/cadastrar"}
+        >
           Adicionar dentista
         </Button>
       </div>
@@ -108,7 +112,7 @@ export default function HomeInstituicao() {
 
                   <TableCell align="right" className={styles.tableCell}>
                     <Link
-                      to={`/editDentista/${dentista._id}`}
+                      to={`/instituicao/dentistas/${dentista._id}/editar`}
                       className={styles.buttonCrud}
                     >
                       <EditIcon className={styles.icon} />

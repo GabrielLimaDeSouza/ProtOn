@@ -4,7 +4,7 @@ const { Usuario: UsuarioModel } = require("../models/Usuario");
 const pacienteController = {
   create: async (req, res) => {
     try {
-      const { name, cpf, email, senha, condicoes } = req.body;
+      const { name, cpf, email, senha, condicoes } = req.body.paciente;
 
       const user = {
         email,

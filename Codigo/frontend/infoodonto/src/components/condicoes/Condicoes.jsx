@@ -2,8 +2,8 @@
 import styles from "./Condicoes.module.css";
 
 //* Components
-import Datalist from "../../../datalists/Datalist";
-import Button from "../../../buttons/Button";
+import Datalist from "../datalists/Datalist";
+import Button from "../buttons/Button";
 
 //* React
 import { useEffect, useState } from "react";
@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 
 const Condicoes = ({ condicoes, onChange, options }) => {
-  const [tags, setTags] = useState(condicoes ? condicoes : []);
+  const [tags, setTags] = useState(condicoes || []);
   const [currentTag, setCurrentTag] = useState(null);
 
   useEffect(() => {

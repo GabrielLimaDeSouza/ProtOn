@@ -78,7 +78,7 @@ const AppRoutes = () => {
         <Routes>
           <Route
             exact
-            path="/searchPaciente"
+            path="/denista/buscar-paciente"
             element={
               <Private permission="dentista">
                 <SearchPaciente />
@@ -98,7 +98,7 @@ const AppRoutes = () => {
 
           <Route
             exact
-            path="/formDentista"
+            path="/instituicao/dentistas/cadastrar"
             element={
               <Private permission="instituicao">
                 <FormDentista />
@@ -108,7 +108,7 @@ const AppRoutes = () => {
 
           <Route
             exact
-            path="/editDentista/:id"
+            path="/instituicao/dentistas/:id/editar"
             element={
               <Private permission="instituicao">
                 <EditDentista />
@@ -118,7 +118,7 @@ const AppRoutes = () => {
 
           <Route
             exact
-            path="/formPaciente"
+            path="/paciente/cadastrar"
             element={
               <NotLoggedUser>
                 <FormPaciente />
@@ -136,7 +136,7 @@ const AppRoutes = () => {
           />
           <Route
             exact
-            path="/formInstituicao"
+            path="/instituicao/cadastrar"
             element={
               <NotLoggedUser>
                 <FormInstituicao />

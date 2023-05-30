@@ -4,7 +4,7 @@ import Perfil from "../../components/componentsApp/perfil/perfil";
 import MedicosVinculados from "../../components/componentsApp/dentistasVinculados/dentistasVinculados";
 import DentistasAceitos from "../../components/componentsApp/dentistasAceitos/dentistasAceitos";
 import { useState, useEffect, useContext } from "react";
-import { getCondicao } from "../../services/api";
+import { getCondicoes } from "../../services/api";
 import { LoginContext } from "../../context/LoginContext";
 import Box from "@mui/material/Box";
 import Menu from "@mui/material/Menu";
@@ -30,7 +30,7 @@ const HomePaciente = () => {
 
   useEffect(() => {
     (async () => {
-      const { data } = await getCondicao();
+      const { data } = await getCondicoes();
       const condicoes = data.map((item) => item);
 
       setCondicoesPaciente(condicoes);

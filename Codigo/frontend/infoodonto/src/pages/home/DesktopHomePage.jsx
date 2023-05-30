@@ -34,12 +34,12 @@ const DesktopHomePage = () => {
 
   const handleRedirectInstituicao = () => {
     setAnchorEl(null);
-    navigate("/formInstituicao");
+    navigate("/instituicao/cadastrar");
   };
 
   const handleRedirectPaciente = () => {
     setAnchorEl(null);
-    navigate("/formPaciente");
+    navigate("/paciente/cadastrar");
   };
 
   return (

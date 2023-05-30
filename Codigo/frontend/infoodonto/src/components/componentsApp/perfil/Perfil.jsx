@@ -4,7 +4,7 @@ import Button from "../../buttons/Button";
 import styles from "./Perfil.module.css";
 import { LoginContext } from "../../../context/LoginContext";
 import { useNavigate } from "react-router-dom";
-import Condicoes from "./components/Condicoes";
+import Condicoes from "../../condicoes/Condicoes";
 import { BiShow, BiHide } from "react-icons/bi";
 
 const Perfil = ({
@@ -30,8 +30,6 @@ const Perfil = ({
       alert("As senhas não coincidem");
       return;
     }
-
-    console.log(userState);
 
     fetch(`http://localhost:3000/api/paciente?id=${currentId}`, {
       method: "PUT",

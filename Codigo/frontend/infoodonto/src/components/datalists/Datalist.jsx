@@ -9,18 +9,19 @@ const Datalist = ({ list, onChange, clear }) => {
     <div className={styles.datalist}>
       <Input
         type="text"
-        name="condicao"
-        id="condicao"
+        name="condicoes"
+        id="condicoes"
         placeholder="Adicionar Condição"
-        list="condicoes"
+        list="condicoesDatalist"
         onChange={onChange}
         initialValue={clear}
       />
 
-      <datalist id="condicoes">
-        {list.map((item, key) => (
-          <option key={key} value={item.nome} id={item._id} />
-        ))}
+      <datalist id="condicoesDatalist">
+        {list &&
+          list.map((item, key) => (
+            <option key={key} value={item.nome} id={item._id} />
+          ))}
       </datalist>
     </div>
   );
