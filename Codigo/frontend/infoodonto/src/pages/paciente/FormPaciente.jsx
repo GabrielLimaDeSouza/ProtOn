@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Logo from "../img/logo.png";
-import Input from "../components/input/Input";
-import styles from "../css/FormPaciente.module.css";
-import { getCondicao } from "../services/api";
+import Logo from "../../img/logo.png";
+import Input from "../../components/input/Input";
+import styles from "../../css/FormPaciente.module.css";
+import { getCondicao } from "../../services/api";
 
 import { AiOutlineArrowLeft } from "react-icons/ai";
 

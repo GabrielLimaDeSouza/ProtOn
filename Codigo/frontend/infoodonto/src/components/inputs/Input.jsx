@@ -12,6 +12,7 @@ const Input = ({
   required,
   disabled,
   label,
+  list,
 }) => {
   const [value, setValue] = useState("");
 
@@ -21,7 +22,7 @@ const Input = ({
   };
 
   useEffect(() => {
-    initialValue && setValue(initialValue);
+    setValue(initialValue || "");
   }, [initialValue]);
 
   return (
@@ -38,6 +39,7 @@ const Input = ({
         placeholder={placeholder && placeholder}
         required={required && required}
         disabled={disabled && disabled}
+        list={list && list}
       />
     </div>
   );

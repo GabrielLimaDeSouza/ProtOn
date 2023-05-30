@@ -1,50 +1,23 @@
-.header {
+div.main {
+  padding: 0 10rem 4rem;
+}
+
+div.header {
   display: flex;
   width: 100%;
   justify-content: space-between;
-  padding: 0 10rem 5rem;
-}
-.top {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 10%;
-}
-.topo {
-  display: flex;
-  width: 100vw;
-  justify-content: end;
-  align-items: center;
-  padding-top: 20px;
-  padding-right: 10px;
-}
-.divLogo {
-  display: flex;
-  width: 100vw;
-  justify-content: center;
-  align-items: center;
-  padding-top: 40px;
-  padding-bottom: 30px;
-}
-.icon {
-  width: 30px !important;
-  height: 30px !important;
-  color: #4ea2cc;
-}
-.center {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.navIcon {
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
+  padding: 2rem 10rem 5rem;
 }
 
-@media (max-width: 600px) {
-  .header {
-    padding: 0 2rem;
+img.tooth {
+  width: 25px;
+}
+
+@media (max-width: 700px) {
+  div.header {
+    padding: 2rem 2rem 05rem;
+  }
+  div.main {
+    padding: 0 2rem 4rem;
   }
 }

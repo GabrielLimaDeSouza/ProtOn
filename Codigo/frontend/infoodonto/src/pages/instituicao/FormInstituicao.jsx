@@ -1,12 +1,12 @@
 import { useState } from "react";
 import React from "react";
 
-import Logo from "../img/logo.png";
-import Input from "../components/input/Input";
-import InputOptions from "../components/input/option/InputOptions";
+import Logo from "../../img/logo.png";
+import Input from "../../components/input/Input";
+import InputOptions from "../../components/input/option/InputOptions";
 import Snackbar from "@mui/material/Snackbar";
 
-import styles from "../css/FormDentista.module.css";
+import styles from "../../css/FormDentista.module.css";
 
 import MuiAlert from "@mui/material/Alert";
 

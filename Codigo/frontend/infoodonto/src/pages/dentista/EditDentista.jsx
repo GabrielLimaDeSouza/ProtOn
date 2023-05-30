@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import Logo from "../img/logo.png";
+import Logo from "../../img/logo.png";
 
-import Input from "../components/inputs/Input";
-import Button from "../components/buttons/Button";
+import Input from "../../components/inputs/Input";
+import Button from "../../components/buttons/Button";
 
-import styles from "../css/EditDentista.module.css";
+import styles from "../../css/EditDentista.module.css";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 
 import { CircularProgress } from "@mui/material";
@@ -15,8 +15,8 @@ import { useEffect, useState } from "react";
 import Snackbar from "@mui/material/Snackbar";
 
 import MuiAlert from "@mui/material/Alert";
-import { LoginContext } from "../context/LoginContext";
-import Header from "../components/headers/Header";
+import { LoginContext } from "../../context/LoginContext";
+import Header from "../../components/headers/Header";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;

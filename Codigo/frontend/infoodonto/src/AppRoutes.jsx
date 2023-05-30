@@ -10,15 +10,15 @@ import { CircularProgress } from "@mui/material";
 import { LoginContext, LoginProvider } from "./context/LoginContext";
 
 //* Pages User
-import HomePage from "./pages/HomePage";
-import Login from "./pages/Login";
-import FormPaciente from "./pages/FormPaciente";
-import FormDentista from "./pages/FormDentista";
-import FormInstituicao from "./pages/FormInstituicao";
-import SearchPaciente from "./pages/SearchPaciente";
-import HomeInstituicao from "./pages/HomeInstituicao";
-import EditDentista from "./pages/EditDentista";
-import HomePaciente from "./pages/HomePaciente";
+import HomePage from "./pages/home/HomePage";
+import Login from "./pages/login/Login";
+import FormPaciente from "./pages/paciente/FormPaciente";
+import FormDentista from "./pages/dentista/FormDentista";
+import FormInstituicao from "./pages/instituicao/FormInstituicao";
+import SearchPaciente from "./pages/dentista/SearchPaciente";
+import HomeInstituicao from "./pages/instituicao/HomeInstituicao";
+import EditDentista from "./pages/dentista/EditDentista";
+import HomePaciente from "./pages/paciente/HomePaciente";
 
 const AppRoutes = () => {
   const Perfil = () => {

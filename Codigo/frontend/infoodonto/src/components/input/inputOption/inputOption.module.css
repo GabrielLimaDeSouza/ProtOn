@@ -1,76 +1,72 @@
 /* Input container */
 .inputContainer {
-
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center !important;
-    justify-content: center !important;
-    max-width: 400px;
-
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center !important;
+  justify-content: center !important;
+  max-width: 400px;
 }
-
 
 /*Input options*/
-.divButton{
-    display: flex;
-    width: 100%;
-    align-items: end !important;
-    justify-content: flex-end !important;
+.divButton {
+  display: flex;
+  width: 100%;
+  align-items: end !important;
+  justify-content: flex-end !important;
 }
 
-.tagContainer{
-    display: inline-block;
-    align-items: center !important;
-    justify-content: center !important;
-    margin: 0 auto;
-    flex-wrap: wrap;
-    *display: inline; *zoom: 1;
-
+.tagContainer {
+  display: inline-block;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  display: inline;
+  zoom: 1;
 }
 
-.tag{
-    font-size: 10px !important;
-    width: 50% !important;
-    flex: 1;
-    margin: 1px 3px !important;
+.tag {
+  font-size: 10px !important;
+  width: 50% !important;
+  flex: 1;
+  margin: 1px 3px !important;
 }
-.tagGroup{
-    display: flex;
-    align-items: center;
-
+.tagGroup {
+  display: flex;
+  align-items: center;
 }
 
 /*Botões*/
-.adicionar{
-    margin-top: 20px;
+.adicionar {
+  margin-top: 20px;
 
-    border-radius: 13.96px;
-    height: 30px;
-    width: 87px;
-    background-color: #95BFDE;
-    color: white;
-    border: none;
-    cursor: pointer;
+  border-radius: 13.96px;
+  height: 30px;
+  width: 87px;
+  background-color: #95bfde;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 .inputOption {
-    border-radius: 60px;
-    opacity: 60%;
-    border: none;
-    max-width: 400px;
-    width: 80%;
-    height: 28px;
-    padding-left: 20px;
-    margin-top: 10px;
-    font-family: 'Montserrat', sans-serif;
+  border-radius: 60px;
+  opacity: 60%;
+  border: none;
+  max-width: 400px;
+  width: 80%;
+  height: 28px;
+  padding-left: 20px;
+  margin-top: 10px;
+  font-family: "Montserrat", sans-serif;
 }
 
 .inputOption:focus {
-    border: 0 none;
-    outline: 0;
-    box-shadow: 0 0 0 0;
+  border: 0 none;
+  outline: 0;
+  box-shadow: 0 0 0 0;
 }
 
 .close {
-    cursor: pointer;
+  cursor: pointer;
 }

@@ -1,7 +1,6 @@
 import styles from "./inputOption.module.css";
 import * as React from "react";
 import Chip from "@mui/material/Chip";
-import Stack from "@mui/material/Stack";
 import { useState } from "react";
 
 const InputOption = ({
@@ -57,6 +56,29 @@ const InputOption = ({
   return (
     <>
       <div className={styles.inputContainer}>
+        <div className={styles.inputCondition}>
+          <input
+            placeholder={placeholder}
+            className={styles.inputOption}
+            type="text"
+            list="lista"
+            id={id}
+          />
+          <datalist id="lista">
+            {option.map((text, key) => (
+              <option key={key} value={text.nome} id={text._id} />
+            ))}
+          </datalist>
+        </div>
+
+        <button
+          className={styles.adicionar}
+          type="button"
+          onClick={handleKeyDown}
+        >
+          Adicionar
+        </button>
+
         <div className={styles.tagContainer}>
           {jaPossui && tags.length > 0 ? (
             tags.map((tag, index) => {
@@ -77,29 +99,6 @@ const InputOption = ({
             <></>
           )}
         </div>
-
-        <input
-          placeholder={placeholder}
-          className={styles.inputOption}
-          type="text"
-          list="lista"
-          id={id}
-        />
-        <span className=""></span>
-        <datalist id="lista">
-          {option.map((text, key) => (
-            <option key={key} value={text.nome} id={text._id} />
-          ))}
-        </datalist>
-      </div>
-      <div className={styles.divButton}>
-        <button
-          className={styles.adicionar}
-          type="button"
-          onClick={handleKeyDown}
-        >
-          Adicionar
-        </button>
       </div>
     </>
   );

@@ -1,6 +1,6 @@
-import Logo from "../img/logo.png";
-import Input from "../components/input/Input";
-import styles from "../css/SearchPaciente.module.css";
+import Logo from "../../img/logo.png";
+import Input from "../../components/input/Input";
+import styles from "../../css/SearchPaciente.module.css";
 import * as React from "react";
 import Typography from "@mui/material/Typography";
 import Skeleton from "@mui/material/Skeleton";
@@ -12,10 +12,10 @@ import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import { BsPersonFillAdd } from "react-icons/bs";
 import { useState, useEffect, useContext } from "react";
-import { enviarSolicitacao } from "../services/api";
+import { enviarSolicitacao } from "../../services/api";
 import Chip from "@mui/material/Chip";
-import { LoginContext } from "../context/LoginContext";
-import Header from "../components/headers/Header";
+import { LoginContext } from "../../context/LoginContext";
+import Header from "../../components/headers/Header";
 
 const SearchPaciente = () => {
   const { user } = useContext(LoginContext);

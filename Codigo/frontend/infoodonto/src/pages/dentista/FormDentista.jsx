@@ -1,19 +1,19 @@
 import React from "react";
 
-import Logo from "../img/logo.png";
+import Logo from "../../img/logo.png";
 
 import { useState, useContext } from "react";
 
-import Input from "../components/inputs/Input";
+import Input from "../../components/inputs/Input";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 
 import { AiOutlineArrowLeft } from "react-icons/ai";
 
-import styles from "../css/FormDentista.module.css";
+import styles from "../../css/FormDentista.module.css";
 import { useNavigate } from "react-router-dom";
-import { LoginContext } from "../context/LoginContext";
-import Header from "../components/headers/Header";
+import { LoginContext } from "../../context/LoginContext";
+import Header from "../../components/headers/Header";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;

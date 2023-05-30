@@ -1,9 +1,9 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { LoginContext } from "../context/LoginContext";
+import { LoginContext } from "../../context/LoginContext";
 
-import Input from "../components/inputs/Input";
-import Button from "../components/buttons/Button";
+import Input from "../../components/inputs/Input";
+import Button from "../../components/buttons/Button";
 import ButtonMUI from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -11,7 +11,7 @@ import { Alert } from "@mui/material";
 
 import { AiOutlineArrowLeft } from "react-icons/ai";
 
-import styles from "../css/Login.module.css";
+import styles from "../../css/Login.module.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");

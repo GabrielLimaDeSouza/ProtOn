@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import { deleteDentista } from "../services/api";
+import { deleteDentista } from "../../services/api";
 
 import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { LoginContext } from "../context/LoginContext";
+import { LoginContext } from "../../context/LoginContext";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -24,9 +24,9 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-import styles from "../css/HomeInstituicao.module.css";
-import Logo from "../img/logo.png";
-import Header from "../components/headers/Header";
+import styles from "../../css/HomeInstituicao.module.css";
+import Logo from "../../img/logo.png";
+import Header from "../../components/headers/Header";
 
 export default function HomeInstituicao() {
   const [dentistas, setDentistas] = useState([]);

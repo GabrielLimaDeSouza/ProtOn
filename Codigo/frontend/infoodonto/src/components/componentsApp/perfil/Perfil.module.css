@@ -1,36 +1,46 @@
-.divInputs{
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    max-width: 400 px;
-}
-.titulo{
-    color: #62A8DB;
-}
-.divInput {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    padding-top: 20px;
-    
-}
-.tituloInput{
-    color: #62A8DB;
-
-    padding-bottom: 10px;
+div.body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 5rem;
+  max-width: 70rem;
+  width: 100%;
+  margin: 0 auto;
 }
 
-.adicionar{
-    margin-top: 20px;
-    border-radius: 13.96px;
-    height: 30px;
-    width: 87px;
-    background-color: #95BFDE;
-    color: white;
-    border: none;
-    cursor: pointer;
+div.formData {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 3rem 5rem;
+}
+
+div.formData section {
+  width: 100%;
+  max-width: 30rem;
+}
+
+section.section1 {
+  display: flex;
+  flex-direction: column;
+  row-gap: 3rem;
+}
+
+h1.title {
+  margin: 0;
+  color: #20a0fd;
+}
+
+p.descripton {
+  margin-top: 5px;
+  color: #676767;
+  font-size: 15px;
+}
+
+section.sectionEdit {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
 }

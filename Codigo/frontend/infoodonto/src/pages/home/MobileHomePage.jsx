@@ -7,17 +7,17 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
 // CSS
-import styles from "../css/HomePageMobile.module.css";
+import styles from "../../css/HomePageMobile.module.css";
 
 // SVG's
-import Logo from "../img/logo.svg";
+import Logo from "../../img/logo.svg";
 
 // Icons
 import { AiOutlineTwitter } from "react-icons/ai";
 import { AiOutlineInstagram } from "react-icons/ai";
 import { GrFacebookOption } from "react-icons/gr";
 import { BiMenuAltLeft } from "react-icons/bi";
-import Header from "../components/headers/Header";
+import Header from "../../components/headers/Header";
 
 const MobileHomePage = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);

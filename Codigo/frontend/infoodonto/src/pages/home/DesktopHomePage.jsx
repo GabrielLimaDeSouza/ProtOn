@@ -2,18 +2,18 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Componentes
-import Header from "../components/headers/Header";
+import Header from "../../components/headers/Header";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { LoginContext } from "../context/LoginContext";
+import { LoginContext } from "../../context/LoginContext";
 
 // CSS
-import styles from "../css/HomePageDesktop.module.css";
+import styles from "../../css/HomePageDesktop.module.css";
 
 // SVG's
-import Logo from "../img/logo.svg";
-import DentalCare from "../img/dental-care.png";
+import Logo from "../../img/logo.svg";
+import DentalCare from "../../img/dental-care.png";
 
 // Icons
 import { AiOutlineTwitter } from "react-icons/ai";
