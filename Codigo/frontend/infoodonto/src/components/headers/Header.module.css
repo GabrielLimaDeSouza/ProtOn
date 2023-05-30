@@ -20,26 +20,32 @@
 }
 
 .buttonLink {
-  font-size: 14px !important;
-  text-transform: capitalize !important;
-  font-family: "Montserrat", sans-serif !important;
-  color: #ffffff !important;
-  cursor: pointer;
-  transition: 0.5s;
-}
-
-.buttonLink:hover {
   outline: none !important;
   border: none !important;
   box-shadow: none !important;
   background-color: inherit !important;
+  text-transform: capitalize !important;
+  color: #fafafa !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  transition: all 0.2s;
+}
+
+.buttonLink:hover {
   transform: scale(1.05);
+}
+
+.colorized,
+.colorized:hover {
+  color: #20a0fd !important;
 }
 
 .tooth {
   transition: 0.5s;
   cursor: pointer;
   text-decoration: none;
+  width: 25px;
 }
 
 .tooth:hover {
@@ -60,9 +66,12 @@
     padding: 15px 0 0;
   }
   .linksHeader {
-    column-gap: 0;
+    column-gap: 0.5rem;
   }
   .header {
     padding: 0;
+  }
+  .buttonLink {
+    font-size: 0.8rem !important;
   }
 }

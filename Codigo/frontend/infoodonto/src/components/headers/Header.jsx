@@ -3,14 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { LoginContext } from "../../context/LoginContext";
 import Tooth from "../../assets/tooth.svg";
+import ToothColorized from "../../img/logo-colorized.svg";
 
-import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
+import Button from "../buttons/Button";
+import ButtonMenu from "./components/ButtonMenu";
 import MenuItem from "@mui/material/MenuItem";
 
 import styles from "./Header.module.css";
 
-const Header = () => {
+const Header = ({ colorized }) => {
   const { user, logout } = useContext(LoginContext);
   const [tipoUser, setTipoUser] = useState(null);
 
@@ -20,29 +21,25 @@ const Header = () => {
     } else return;
   }, [user]);
 
-  const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
 
-  const open = !!anchorEl;
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
   const handleRedirectInstituicao = () => {
-    setAnchorEl(null);
-    navigate("/formInstituicao");
+    navigate("/instituicao/cadastrar");
   };
 
   const handleRedirectPaciente = () => {
-    setAnchorEl(null);
-    navigate("/formPaciente");
+    navigate("/paciente/cadastrar");
   };
 
   return (
     <nav className={styles.navHeader}>
       <div className={styles.header}>
         <Link to="/">
-          <img src={Tooth} alt="" className={styles.tooth} />
+          <img
+            src={colorized ? ToothColorized : Tooth}
+            alt="ProtOn"
+            className={styles.tooth}
+          />
         </Link>
       </div>
 
@@ -52,9 +49,11 @@ const Header = () => {
             {tipoUser === "dentista" ? (
               <div className="itens-header">
                 <Button
-                  className={styles.buttonLink}
+                  className={`${styles.buttonLink} ${
+                    colorized && styles.colorized
+                  }`}
                   onClick={() => {
-                    navigate("/searchPaciente");
+                    navigate("/buscar-paciente");
                   }}
                 >
                   Buscar Paciente
@@ -62,7 +61,9 @@ const Header = () => {
               </div>
             ) : (
               <Button
-                className={styles.buttonLink}
+                className={`${styles.buttonLink} ${
+                  colorized && styles.colorized
+                }`}
                 onClick={() => {
                   navigate("/perfil");
                 }}
@@ -76,37 +77,22 @@ const Header = () => {
           </div>
         ) : (
           <div className={styles.linksHeader}>
-            <Button
-              className={styles.buttonLink}
-              aria-controls={open ? "demo-positioned-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClick}
-            >
-              Cadastrar
-            </Button>
-            <Menu
-              id="demo-positioned-menu"
-              aria-labelledby="demo-positioned-button"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={() => setAnchorEl(null)}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
+            <ButtonMenu
+              className={`${styles.buttonLink} ${
+                colorized && styles.colorized
+              }`}
+              text="Cadastrar"
             >
               <MenuItem onClick={handleRedirectPaciente}>Sou paciente</MenuItem>
               <MenuItem onClick={handleRedirectInstituicao}>
                 Sou instituição
               </MenuItem>
-            </Menu>
+            </ButtonMenu>
+
             <Button
-              className={styles.buttonLink}
+              className={`${styles.buttonLink} ${
+                colorized && styles.colorized
+              }`}
               onClick={() => {
                 navigate("/login");
               }}
