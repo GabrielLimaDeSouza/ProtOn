@@ -8,7 +8,7 @@ div.header {
 div.body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   row-gap: 5rem;
   max-width: 80rem;
   width: 100%;
@@ -24,6 +24,12 @@ div.formData {
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 3rem 5rem;
+}
+
+form.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
 }
 
 div.formData section {

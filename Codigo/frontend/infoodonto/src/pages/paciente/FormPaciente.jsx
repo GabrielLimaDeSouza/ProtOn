@@ -66,18 +66,18 @@ const FormPaciente = () => {
     <>
       <div className={styles.body}>
         <Header colorized />
-        <section className="edit-dados">
+        <section className="create-account">
           <div className={styles.content}>
             <div className={styles.divTitle}>
               <h1 className={styles.title}>Criar nova conta</h1>
               <p className={styles.descripton}>
-                Crie uma nova conta no Proton para obter uma melhor experiência
+                Crie uma nova conta no ProtOn para obter uma melhor experiência
                 nas suas consultas com o dentista
               </p>
             </div>
           </div>
         </section>
-        <Form onSubmit={handleCreatePaciente}>
+        <Form className={styles.form} onSubmit={handleCreatePaciente}>
           {alert && (
             <Alert severity={alert.severity} onClose={() => setAlert(null)}>
               {alert.msg}
@@ -120,6 +120,7 @@ const FormPaciente = () => {
                   placeholder="Senha"
                   id="password"
                   name="senha"
+                  required
                 >
                   <button
                     type="button"
@@ -138,7 +139,7 @@ const FormPaciente = () => {
           </div>
           <div>
             <Button type="submit" className="submit blue-primary">
-              Atualizar
+              Criar Conta
             </Button>
           </div>
         </Form>

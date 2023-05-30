@@ -10,7 +10,7 @@ const Form = ({ className, onSubmit, children }) => {
   };
 
   return (
-    <form ref={form} className={className && className} onSubmit={handleSubmit}>
+    <form ref={form} className={className} onSubmit={handleSubmit}>
       {children}
     </form>
   );

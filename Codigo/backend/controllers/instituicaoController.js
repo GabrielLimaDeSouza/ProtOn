@@ -5,7 +5,7 @@ const { Usuario: UsuarioModel } = require("../models/Usuario");
 const instituicaoController = {
   create: async (req, res) => {
     try {
-      const { name, email, senha, tipo } = req.body;
+      const { name, email, senha, tipo } = req.body.instituicao;
 
       const instituicaoObject = {
         name,

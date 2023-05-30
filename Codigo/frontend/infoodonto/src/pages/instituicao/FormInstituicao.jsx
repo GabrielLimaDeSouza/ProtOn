@@ -1,147 +1,131 @@
-import { useState } from "react";
-import React from "react";
+//* CSS
+import styles from "../../css/FormPaciente.module.css";
 
-import Logo from "../../img/logo.png";
-import Input from "../../components/input/Input";
-import InputOptions from "../../components/input/option/InputOptions";
-import Snackbar from "@mui/material/Snackbar";
-
-import styles from "../../css/FormDentista.module.css";
-
-import MuiAlert from "@mui/material/Alert";
-
-import { AiOutlineArrowLeft } from "react-icons/ai";
+//* React
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
+//* Components
+import Input from "../../components/inputs/Input";
+import Select from "../../components/selects/Select";
+import Button from "../../components/buttons/Button";
+import Form from "../../components/forms/Form";
+import Header from "../../components/headers/Header";
+import { Alert } from "@mui/material";
+
+//* Icons
+import { BiShow, BiHide } from "react-icons/bi";
+
+//* API
+import { createInstituicao } from "../../services/api";
 
 const FormInstituicao = () => {
-  const listaTipos = ["Universidade", "Clínica", "Hospital"];
-  const [tipo, setTipo] = useState("");
-  const [open, setOpen] = useState(false);
-  const [openError, setOpenError] = useState(false);
-  const [openEmailError, setOpenEmailError] = useState(false);
+  const [isHiddenPass, setIsHiddenPass] = useState(true);
+  const [alert, setAlert] = useState(null);
+
   const navigate = useNavigate();
 
-  function validarEmail(email) {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  }
+  const handleCreateInstituicao = async (formData) => {
+    const instituicao = Object.fromEntries(formData);
 
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
+    if (instituicao.tipo === "0") {
+      setAlert({ severity: "error", msg: "Selecione um tipo" });
       return;
     }
+    console.log(instituicao);
 
-    setOpen(false);
-    setOpenEmailError(false);
-    setOpenError(false);
-  };
+    try {
+      const response = await createInstituicao(instituicao);
 
-  const messageError = () => {
-    setOpenError(true);
-  };
-
-  const messageEmailError = () => {
-    setOpenEmailError(true);
-  };
-
-  function handleTipoChange(valor) {
-    setTipo(valor);
-  }
-
-  function createInstituicao(e) {
-    e.preventDefault();
-
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const senha = document.getElementById("senha").value;
-
-    if (!name || !email || !senha || !tipo) {
-      messageError();
-      return;
-    }
-
-    if (!validarEmail(email)) {
-      messageEmailError();
-      return;
-    }
-
-    fetch(`http://localhost:3000/api/instituicao/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        senha: senha,
-        tipo: tipo,
-      }),
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        alert(data.msg);
-
+      if (response.status === 201) {
+        setAlert({ severity: "success", msg: response.data.msg });
         setTimeout(() => {
           navigate("/login");
         }, 2000);
-      })
-      .catch((err) => console.error(err));
-  }
+      }
+    } catch (err) {
+      const { error } = err.response.data;
+      setAlert({ severity: "error", msg: error });
+    } finally {
+      setTimeout(() => {
+        setAlert(null);
+      }, 5000);
+    }
+  };
 
   return (
     <>
-      <div className="divArrow">
-        <a href="/">
-          <AiOutlineArrowLeft className="arrowBack" />
-        </a>
+      <div className={styles.body}>
+        <Header colorized />
+        <section className="create-account">
+          <div className={styles.content}>
+            <div className={styles.divTitle}>
+              <h1 className={styles.title}>Criar nova conta</h1>
+              <p className={styles.descripton}>
+                Crie uma nova conta no ProtOn para tornar as consultas de seus
+                dentistas mais dinâmicas
+              </p>
+            </div>
+          </div>
+        </section>
+        <Form className={styles.form} onSubmit={handleCreateInstituicao}>
+          {alert && (
+            <Alert severity={alert.severity} onClose={() => setAlert(null)}>
+              {alert.msg}
+            </Alert>
+          )}
+          <div className={styles.formData}>
+            <section className={styles.section1}>
+              <section className={styles.sectionEdit}>
+                <h4 className={styles.titleSection}>Dados pessoais</h4>
+                <Input
+                  type="text"
+                  name="name"
+                  id="name"
+                  placeholder="Nome"
+                  required
+                />
+                <Select
+                  id="selectTipo"
+                  name="tipo"
+                  options={["Clinica", "Hospital", "Universidade"]}
+                  required
+                />
+              </section>
+              <section className={styles.sectionEdit}>
+                <h4 className={styles.titleSection}>Login</h4>
+                <Input
+                  type="text"
+                  name="email"
+                  id="email"
+                  placeholder="Email"
+                  required
+                />
+                <Input
+                  type={isHiddenPass ? "password" : "text"}
+                  placeholder="Senha"
+                  id="password"
+                  name="senha"
+                  required
+                >
+                  <button
+                    type="button"
+                    className={styles.empty}
+                    onClick={() => setIsHiddenPass(!isHiddenPass)}
+                  >
+                    {isHiddenPass ? <BiShow /> : <BiHide />}
+                  </button>
+                </Input>
+              </section>
+            </section>
+          </div>
+          <div>
+            <Button type="submit" className="submit blue-primary">
+              Criar Conta
+            </Button>
+          </div>
+        </Form>
       </div>
-
-      <div className={styles.logo}>
-        <img src={Logo} alt="Logo" />
-      </div>
-
-      <form className={styles.form} onSubmit={createInstituicao}>
-        <div className={styles.uni}>
-          <Input type="text" placeholder="Nome" id="name" />
-        </div>
-        <div className={styles.uni}>
-          <Input type="text" placeholder="Email" id="email" />
-        </div>
-        <div className={styles.uni}>
-          <Input type="password" placeholder="Senha" id="senha" />
-        </div>
-        <div className={styles.uni}>
-          <InputOptions
-            type="options"
-            name="Tipo"
-            onChange={handleTipoChange}
-            content={listaTipos}
-          />
-        </div>
-        <div className={styles.divButton}>
-          <button type="submit" className={styles.confirmar}>
-            Cadastrar
-          </button>
-        </div>
-      </form>
-      <Snackbar open={openError} autoHideDuration={2000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
-          Preencha todos os campos!
-        </Alert>
-      </Snackbar>
-      <Snackbar
-        open={openEmailError}
-        autoHideDuration={2000}
-        onClose={handleClose}
-      >
-        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
-          Email inválido!
-        </Alert>
-      </Snackbar>
     </>
   );
 };
