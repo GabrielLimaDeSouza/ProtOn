@@ -1,3 +1,7 @@
+div.inputComponent {
+  position: relative;
+}
+
 div.inputComponent input {
   border: none;
   width: 100%;
@@ -15,4 +19,10 @@ div.inputComponent input:disabled {
   border-radius: 5rem;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.02);
   background-color: #ececec;
+}
+
+span.children {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
 }

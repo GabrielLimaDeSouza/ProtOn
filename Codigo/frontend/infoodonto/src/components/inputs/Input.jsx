@@ -13,6 +13,7 @@ const Input = ({
   disabled,
   label,
   list,
+  children,
 }) => {
   const [value, setValue] = useState("");
 
@@ -41,6 +42,7 @@ const Input = ({
         disabled={disabled && disabled}
         list={list && list}
       />
+      {children && <span className={styles.children}>{children}</span>}
     </div>
   );
 };

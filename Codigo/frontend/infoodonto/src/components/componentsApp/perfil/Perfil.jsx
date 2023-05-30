@@ -5,6 +5,7 @@ import styles from "./Perfil.module.css";
 import { LoginContext } from "../../../context/LoginContext";
 import { useNavigate } from "react-router-dom";
 import Condicoes from "./components/Condicoes";
+import { BiShow, BiHide } from "react-icons/bi";
 
 const Perfil = ({
   currentName,
@@ -17,6 +18,8 @@ const Perfil = ({
   const { user, updateUser } = useContext(LoginContext);
   const [userState, setUserState] = useState(user);
   const [confirmSenha, setConfirmSenha] = useState();
+  const [isHiddenPass, setIsHiddenPass] = useState(true);
+  const [isHiddenConfirmPass, setIsHiddenConfirmPass] = useState(true);
 
   const navigate = useNavigate();
 
@@ -61,8 +64,6 @@ const Perfil = ({
 
     setUserState({ ...userState, user: { ...userState.user, senha } });
   };
-
-  const handleChangeVisibilityPass = () => {};
 
   return (
     <>
@@ -111,17 +112,33 @@ const Perfil = ({
                 }
               />
               <Input
-                type="password"
+                type={isHiddenPass ? "password" : "text"}
                 placeholder="Senha"
                 id="updatePassword"
                 onChange={handleChangePass}
-              />
+              >
+                <button
+                  type="button"
+                  className={styles.empty}
+                  onClick={() => setIsHiddenPass(!isHiddenPass)}
+                >
+                  {isHiddenPass ? <BiShow /> : <BiHide />}
+                </button>
+              </Input>
               <Input
-                type="password"
+                type={isHiddenConfirmPass ? "password" : "text"}
                 placeholder="Confirmar senha"
                 id="confirmUpdatePassword"
                 onChange={(confimSenha) => setConfirmSenha(confimSenha)}
-              />
+              >
+                <button
+                  type="button"
+                  className={styles.empty}
+                  onClick={() => setIsHiddenConfirmPass(!isHiddenConfirmPass)}
+                >
+                  {isHiddenConfirmPass ? <BiShow /> : <BiHide />}
+                </button>
+              </Input>
             </section>
           </section>
           <section className={styles.sectionEdit}>

@@ -44,3 +44,14 @@ section.sectionEdit {
   flex-direction: column;
   row-gap: 1rem;
 }
+
+button.empty {
+  background: none;
+  border: none;
+  outline: none;
+}
+
+button.empty:hover {
+  transform: none;
+  box-shadow: none;
+}
