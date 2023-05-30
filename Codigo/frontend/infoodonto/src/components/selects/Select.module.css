@@ -1,0 +1,38 @@
+div.selectComponent {
+  position: relative;
+}
+
+div.selectComponent > select {
+  border: none;
+  width: 100%;
+  height: 3rem;
+  padding: 0 20px;
+  border-radius: 5rem;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.02);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+div.selectComponent > select:hover {
+  outline: none;
+  border: none;
+}
+
+div.selectComponent > select option {
+  font-size: 15px;
+  font-weight: 300;
+  padding: 0.1rem 0.5rem;
+}
+
+span.arrow {
+  position: absolute;
+  right: 1.5rem;
+  top: 1rem;
+  transition: all 0.15s;
+}
+
+span.open {
+  top: 0.75rem;
+  transform: rotate(-180deg);
+}

@@ -1,7 +1,11 @@
-/* eslint-disable react/prop-types */
+//* CSS
 import styles from "./Select.module.css";
 
-import { useEffect, useState } from "react";
+//* React
+import { useEffect, useState, useRef } from "react";
+
+//* Icons
+import { BsChevronUp } from "react-icons/bs";
 
 const Select = ({
   id,
@@ -16,7 +20,10 @@ const Select = ({
   const [value, setValue] = useState("");
   const [optionsValues, setOptionsValues] = useState();
 
+  const arrow = useRef(null);
+
   const handleChange = ({ target }) => {
+    handleOnBlur();
     setValue(target.value);
     onChange && onChange(target.value);
   };
@@ -43,8 +50,14 @@ const Select = ({
     );
 
     setValue(initialValue);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options, initialValue]);
+
+  const handleOnBlur = () => {
+    arrow.current.classList.remove(styles.open);
+  };
+  const handleOnClick = () => {
+    arrow.current.classList.toggle(styles.open);
+  };
 
   return (
     <div className={styles.selectComponent}>
@@ -52,16 +65,21 @@ const Select = ({
 
       <select
         id={id}
-        className={className ? styles[className] : ""}
+        className={className && styles[className]}
         onChange={handleChange}
         value={value}
         name={name}
         key={value}
         required={required && required}
+        onClick={handleOnClick}
+        onBlur={handleOnBlur}
       >
         <option value="0">Selecione uma opção</option>
         {optionsValues}
       </select>
+      <span ref={arrow} className={styles.arrow}>
+        <BsChevronUp />
+      </span>
     </div>
   );
 };
