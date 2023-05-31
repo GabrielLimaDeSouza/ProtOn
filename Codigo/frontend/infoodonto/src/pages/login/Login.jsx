@@ -28,12 +28,12 @@ const Login = () => {
 
   const handleRedirectInstituicao = () => {
     setAnchorEl(null);
-    navigate("/formInstituicao");
+    navigate("/instituicao/cadastrar");
   };
 
   const handleRedirectPaciente = () => {
     setAnchorEl(null);
-    navigate("/formPaciente");
+    navigate("/paciente/cadastrar");
   };
 
   const { login } = useContext(LoginContext);
