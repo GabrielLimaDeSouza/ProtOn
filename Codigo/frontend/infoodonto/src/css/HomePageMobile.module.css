@@ -1,33 +1,19 @@
 /* Estilos Body */
 
+.header {
+  background-color: #62a8db;
+}
+
 .body {
-  min-height: 110vh;
-  background-color: #62a8db !important;
+  background-color: #62a8db;
   border-radius: 0 0 20px 20px;
-  padding: 0 2rem;
+  padding: 7rem 2rem 10rem;
 }
 
 .divScroll {
   min-height: 100vh;
-  background-color: #fafafa !important;
+  background-color: #fafafa;
   padding: 7rem 2rem;
-}
-
-/* Estilos Header */
-
-.header {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2rem 0;
-}
-
-.iconMenu {
-  color: white;
-  height: 20px;
-  width: 20px;
 }
 
 /* Estilos Logo */
@@ -36,7 +22,6 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 5vh;
 }
 
 .logo img {
@@ -46,7 +31,7 @@
 /* Estilos divContent */
 
 .divContent {
-  margin-top: 6rem;
+  margin-top: 5rem;
 }
 
 /* Estilos icons */

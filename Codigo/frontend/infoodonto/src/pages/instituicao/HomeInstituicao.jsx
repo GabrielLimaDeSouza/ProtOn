@@ -63,85 +63,97 @@ export default function HomeInstituicao() {
   }
 
   return (
-    <div className={styles.body}>
-      <Header />
-      <div className={styles.logo}>
-        <img src={Logo} alt="Logo" />
+    <div className={styles.main}>
+      <div className={styles.header}>
+        <Header colorized />
       </div>
-      <div className={styles.divButtonCreate}>
-        <Button
-          variant="contained"
-          component={Link}
-          to={"/instituicao/dentistas/cadastrar"}
-        >
-          Adicionar dentista
-        </Button>
-      </div>
-      <div className={styles.tableContainer}>
-        <TableContainer component={Paper} className={styles.table}>
-          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Nome</TableCell>
+      <div className={styles.body}>
+        <div className={styles.logo}>
+          <img src={Logo} alt="Logo" />
+        </div>
+        <div className={styles.divButtonCreate}>
+          <Button
+            variant="contained"
+            component={Link}
+            to={"/instituicao/dentistas/cadastrar"}
+          >
+            Adicionar dentista
+          </Button>
+        </div>
+        <div className={styles.tableContainer}>
+          <TableContainer component={Paper} className={styles.table}>
+            <Table
+              sx={{ minWidth: 650 }}
+              size="small"
+              aria-label="a dense table"
+            >
+              <TableHead>
+                <TableRow>
+                  <TableCell>Nome</TableCell>
 
-                <TableCell align="right">Matrícula</TableCell>
+                  <TableCell align="right">Matrícula</TableCell>
 
-                <TableCell
-                  align="right"
-                  className={styles.tableCell}
-                ></TableCell>
+                  <TableCell
+                    align="right"
+                    className={styles.tableCell}
+                  ></TableCell>
 
-                <TableCell
-                  align="right"
-                  className={styles.tableCell}
-                ></TableCell>
-              </TableRow>
-            </TableHead>
-
-            <TableBody>
-              {dentistas.map((dentista) => (
-                <TableRow
-                  key={dentista._id}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    {dentista.name}
-                  </TableCell>
-
-                  <TableCell align="right">{dentista.matricula}</TableCell>
-
-                  <TableCell align="right" className={styles.tableCell}>
-                    <Link
-                      to={`/instituicao/dentistas/${dentista._id}/editar`}
-                      className={styles.buttonCrud}
-                    >
-                      <EditIcon className={styles.icon} />
-                    </Link>
-                  </TableCell>
-
-                  <TableCell align="right" className={styles.tableCell}>
-                    <button
-                      className={styles.buttonCrud}
-                      onClick={() => {
-                        handleDelete(dentista._id);
-                        messageRemove();
-                      }}
-                    >
-                      <DeleteIcon className={styles.icon} />
-                    </button>
-                  </TableCell>
+                  <TableCell
+                    align="right"
+                    className={styles.tableCell}
+                  ></TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </div>
+              </TableHead>
 
-      <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
-          Dentista removido com sucesso!
-        </Alert>
-      </Snackbar>
+              <TableBody>
+                {dentistas.map((dentista) => (
+                  <TableRow
+                    key={dentista._id}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {dentista.name}
+                    </TableCell>
+
+                    <TableCell align="right">{dentista.matricula}</TableCell>
+
+                    <TableCell align="right" className={styles.tableCell}>
+                      <Link
+                        to={`/instituicao/dentistas/${dentista._id}/editar`}
+                        className={styles.buttonCrud}
+                      >
+                        <EditIcon className={styles.icon} />
+                      </Link>
+                    </TableCell>
+
+                    <TableCell align="right" className={styles.tableCell}>
+                      <button
+                        className={styles.buttonCrud}
+                        onClick={() => {
+                          handleDelete(dentista._id);
+                          messageRemove();
+                        }}
+                      >
+                        <DeleteIcon className={styles.icon} />
+                      </button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
+
+        <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+          <Alert
+            onClose={handleClose}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            Dentista removido com sucesso!
+          </Alert>
+        </Snackbar>
+      </div>
     </div>
   );
 }

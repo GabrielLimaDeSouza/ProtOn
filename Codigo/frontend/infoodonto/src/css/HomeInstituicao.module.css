@@ -1,33 +1,32 @@
 .logo {
-    padding: 30px 0 0 0;
-    display: flex;
-    justify-content: center;
+  padding: 30px 0 0 0;
+  display: flex;
+  justify-content: center;
 }
 
-.table{
-    width: 100% !important;
-    table-layout: fixed !important;
+.table {
+  width: 100% !important;
+  table-layout: fixed !important;
 }
 
 .tableContainer {
-    margin: 0 50px 0 50px;
+  margin: 0 50px 0 50px;
 }
 
-
 .divButtonCreate {
-    display: flex;
-    justify-content: end;
-    margin-top: 20px;
-    margin-right: 50px;
-    margin-bottom: 50px;
+  display: flex;
+  justify-content: end;
+  margin-top: 20px;
+  margin-right: 50px;
+  margin-bottom: 50px;
 }
 
 .buttonCrud {
-    background-color: white;
-    border: none;
-    color: black;
+  background-color: white;
+  border: none;
+  color: black;
 }
 
 .icon:hover {
-    animation: none !important;
+  animation: none !important;
 }
