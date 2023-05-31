@@ -56,6 +56,12 @@ export const createDentista = async (dentista) => {
   });
 };
 
+export const updateDentista = async (dentista) => {
+  return api.put(`/api/dentista?id=${dentista._id}`, {
+    dentista,
+  });
+};
+
 //* Rotas Detista
 export const getDentista = async (id) => {
   return api.get(`/api/dentista?id=${id}`);
