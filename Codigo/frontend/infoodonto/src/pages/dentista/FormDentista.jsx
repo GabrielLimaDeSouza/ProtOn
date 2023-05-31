@@ -1,197 +1,138 @@
-import React from "react";
+//* CSS
+import styles from "../../css/FormPaciente.module.css";
 
-import Logo from "../../img/logo.png";
-
-import { useState, useContext } from "react";
-
-import Input from "../../components/inputs/Input";
-import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
-
-import { AiOutlineArrowLeft } from "react-icons/ai";
-
-import styles from "../../css/FormDentista.module.css";
+//* React
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { LoginContext } from "../../context/LoginContext";
+
+//* Components
+import Input from "../../components/inputs/Input";
+import Button from "../../components/buttons/Button";
+import Form from "../../components/forms/Form";
 import Header from "../../components/headers/Header";
+import { Alert } from "@mui/material";
 
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
+//* Icons
+import { BiShow, BiHide } from "react-icons/bi";
 
-const FormDentista = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
-  const [matricula, setMatricula] = useState("");
-  const [open, setOpen] = useState(false);
-  const [openError, setOpenError] = useState(false);
-  const [openEmailError, setOpenEmailError] = useState(false);
-  const navigate = useNavigate();
+//* API
+import { createDentista } from "../../services/api";
 
+//* Context
+import { LoginContext } from "../../context/LoginContext";
+
+const FormInstituicao = () => {
+  const [isHiddenPass, setIsHiddenPass] = useState(true);
+  const [alert, setAlert] = useState(null);
   const { user, updateUser } = useContext(LoginContext);
 
-  const messageAdd = () => {
-    setOpen(true);
-  };
+  const navigate = useNavigate();
 
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
+  const handleCreateDentista = async (formData) => {
+    const dentista = Object.fromEntries(formData);
+    dentista.instituicao = user._id;
 
-    setOpen(false);
-    setOpenEmailError(false);
-    setOpenError(false);
-  };
+    try {
+      const response = await createDentista(dentista);
 
-  const messageError = () => {
-    setOpenError(true);
-  };
-
-  const messageEmailError = () => {
-    setOpenEmailError(true);
-  };
-
-  function validarEmail(email) {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  }
-
-  function handleNameChange(name) {
-    setName(name);
-  }
-
-  function handleEmailChange(email) {
-    setEmail(email);
-  }
-
-  function handleSenhaChange(senha) {
-    setSenha(senha);
-  }
-
-  function handleMatriculaChange(matricula) {
-    setMatricula(matricula);
-  }
-
-  function createDentista(event) {
-    event.preventDefault();
-
-    if (!name || !email || !senha || !matricula) {
-      messageError();
-      return;
-    }
-
-    if (!validarEmail(email)) {
-      messageEmailError();
-      return;
-    }
-
-    fetch(`http://localhost:3000/api/instituicao/${user._id}/dentista`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        senha,
-        matricula,
-        instituicao: user._id,
-      }),
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        console.log(user);
-
-        user.dentistas.push(data.dentista);
+      if (response.status === 201) {
+        const { dentista, msg } = response.data;
+        setAlert({ severity: "success", msg });
+        user.dentistas.push(dentista);
         updateUser(user);
-
-        messageAdd();
         setTimeout(() => {
-          navigate("/perfil");
+          navigate("/login");
         }, 2000);
-      })
-      .catch((err) => console.error(err));
-  }
+      }
+    } catch (err) {
+      const { error } = err.response.data;
+      setAlert({ severity: "error", msg: error });
+    } finally {
+      setTimeout(() => {
+        setAlert(null);
+      }, 5000);
+    }
+  };
 
   return (
-    <div className={styles.container}>
-      <Header />
-      <div className={styles.divArrow}>
-        <a href="/perfil">
-          <AiOutlineArrowLeft className={styles.arrowBack} />
-        </a>
+    <>
+      <div className={styles.main}>
+        <div className={styles.header}>
+          <Header colorized />
+        </div>
+        <div className={styles.body}>
+          <section className="create-account">
+            <div className={styles.content}>
+              <div className={styles.divTitle}>
+                <h1 className={styles.title}>Criar nova conta</h1>
+                <p className={styles.descripton}>
+                  Adicione dentistas para que eles possam buscar por protocolos
+                  odontologicos
+                </p>
+              </div>
+            </div>
+          </section>
+          <Form className={styles.form} onSubmit={handleCreateDentista}>
+            {alert && (
+              <Alert severity={alert.severity} onClose={() => setAlert(null)}>
+                {alert.msg}
+              </Alert>
+            )}
+            <div className={styles.formData}>
+              <section className={styles.section1}>
+                <section className={styles.sectionEdit}>
+                  <h4 className={styles.titleSection}>Dados do Dentista</h4>
+                  <Input
+                    type="text"
+                    name="name"
+                    id="name"
+                    placeholder="Nome"
+                    required
+                  />
+                  <Input
+                    type="text"
+                    name="matricula"
+                    id="matricula"
+                    placeholder="Matricula"
+                    required
+                  />
+                </section>
+                <section className={styles.sectionEdit}>
+                  <h4 className={styles.titleSection}>Login</h4>
+                  <Input
+                    type="text"
+                    name="email"
+                    id="email"
+                    placeholder="Email"
+                    required
+                  />
+                  <Input
+                    type={isHiddenPass ? "password" : "text"}
+                    placeholder="Senha"
+                    id="password"
+                    name="senha"
+                  >
+                    <button
+                      type="button"
+                      className={styles.empty}
+                      onClick={() => setIsHiddenPass(!isHiddenPass)}
+                    >
+                      {isHiddenPass ? <BiShow /> : <BiHide />}
+                    </button>
+                  </Input>
+                </section>
+                <div>
+                  <Button type="submit" className="submit blue-primary">
+                    Criar Conta
+                  </Button>
+                </div>
+              </section>
+            </div>
+          </Form>
+        </div>
       </div>
-      <div className={styles.logo}>
-        <img src={Logo} alt="Logo" />
-      </div>
-
-      <form className={styles.form} onSubmit={createDentista}>
-        <div className={styles.uni}>
-          <Input
-            type="text"
-            name="name"
-            placeholder="Nome"
-            id="name"
-            onChange={handleNameChange}
-          />
-        </div>
-        <div className={styles.uni}>
-          <Input
-            type="text"
-            name="email"
-            placeholder="Email"
-            id="email"
-            onChange={handleEmailChange}
-          />
-        </div>
-        <div className={styles.uni}>
-          <Input
-            type="password"
-            name="senha"
-            placeholder="Senha"
-            id="senha"
-            onChange={handleSenhaChange}
-          />
-        </div>
-        <div className={styles.uni}>
-          <Input
-            type="number"
-            name="matricula"
-            placeholder="Matrícula"
-            id="matricula"
-            onChange={handleMatriculaChange}
-          />
-        </div>
-        <div className={styles.divButton}>
-          <button type="submit" className={styles.confirmar}>
-            Confirmar
-          </button>
-        </div>
-      </form>
-
-      <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
-          Dentista cadastro com sucesso!
-        </Alert>
-      </Snackbar>
-      <Snackbar open={openError} autoHideDuration={2000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
-          Preencha todos os campos!
-        </Alert>
-      </Snackbar>
-      <Snackbar
-        open={openEmailError}
-        autoHideDuration={2000}
-        onClose={handleClose}
-      >
-        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
-          Email inválido!
-        </Alert>
-      </Snackbar>
-    </div>
+    </>
   );
 };
 
-export default FormDentista;
+export default FormInstituicao;

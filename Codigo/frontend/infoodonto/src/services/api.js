@@ -50,6 +50,12 @@ export const createInstituicao = async (instituicao) => {
   });
 };
 
+export const createDentista = async (dentista) => {
+  return api.post(`/api/instituicao/${dentista.instituicao}/dentista`, {
+    dentista,
+  });
+};
+
 //* Rotas Detista
 export const getDentista = async (id) => {
   return api.get(`/api/dentista?id=${id}`);
