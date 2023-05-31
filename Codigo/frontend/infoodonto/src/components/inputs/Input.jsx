@@ -21,6 +21,8 @@ const Input = ({
   minLength,
   pattern,
   title,
+  min,
+  max,
 }) => {
   const [value, setValue] = useState("");
 
@@ -52,6 +54,8 @@ const Input = ({
         minLength={minLength && minLength}
         pattern={pattern && pattern}
         title={title && title}
+        max={max && max}
+        min={min && min}
       />
       {children && <span className={styles.children}>{children}</span>}
     </div>
