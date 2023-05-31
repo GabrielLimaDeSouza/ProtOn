@@ -7,23 +7,21 @@ const instituicaoController = {
     try {
       const { name, email, senha, tipo } = req.body.instituicao;
 
-      const instituicaoObject = {
-        name,
-        tipo,
-      };
-      const instituicao = await InstituicaoModel.create(instituicaoObject);
-
       const user = {
         email,
         senha,
         type: "instituicao",
-        user: instituicao._id,
       };
       const instituicaoUser = await UsuarioModel.create(user);
 
-      res
-        .status(201)
-        .json({ instituicaoUser, msg: "Instituicao cadastrada com sucesso!" });
+      const instituicaoObject = {
+        name,
+        tipo,
+        user: instituicaoUser._id,
+      };
+      await InstituicaoModel.create(instituicaoObject);
+
+      res.status(201).json({ msg: "Instituicao cadastrada com sucesso!" });
     } catch (error) {
       res
         .status(500)
