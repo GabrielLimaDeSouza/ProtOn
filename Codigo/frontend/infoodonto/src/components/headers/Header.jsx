@@ -71,7 +71,12 @@ const Header = ({ colorized }) => {
                 Perfil
               </Button>
             )}
-            <Button className={styles.buttonLink} onClick={() => logout()}>
+            <Button
+              className={`${styles.buttonLink} ${
+                colorized && styles.colorized
+              }`}
+              onClick={() => logout()}
+            >
               Logout
             </Button>
           </div>
