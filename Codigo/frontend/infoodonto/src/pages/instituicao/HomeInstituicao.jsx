@@ -1,159 +1,129 @@
-import * as React from "react";
+//* CSS
+import styles from "../../css/HomeInstituicao.module.css";
 
-import { deleteDentista } from "../../services/api";
-
+//* React
 import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
+
+//* Material UI
+import { CircularProgress } from "@mui/material";
+import { Alert } from "@mui/material";
+
+//* API
+import { deleteDentista } from "../../services/api";
+
+//* Components
 import { LoginContext } from "../../context/LoginContext";
-
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import Snackbar from "@mui/material/Snackbar";
-import { Button } from "@mui/material";
-
-import MuiAlert from "@mui/material/Alert";
-
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
-
-import styles from "../../css/HomeInstituicao.module.css";
-import Logo from "../../img/logo.png";
 import Header from "../../components/headers/Header";
+import Button from "../../components/buttons/Button";
+import TableDesktop from "../../components/tables/desktop/TableDesktop";
+import MobileTable from "../../components/tables/mobile/MobileTable";
 
-export default function HomeInstituicao() {
+const HomeInstituicao = () => {
+  const mobileView = useMediaQuery({ maxWidth: 1100 });
+
   const [dentistas, setDentistas] = useState([]);
-  const [open, setOpen] = useState(false);
+  const [header, setHeader] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [alert, setAlert] = useState(null);
   const { user, updateUser } = useContext(LoginContext);
 
   useEffect(() => {
     setDentistas(user.dentistas);
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 600);
   }, []);
 
-  const messageRemove = () => {
-    setOpen(true);
-  };
+  useEffect(() => {
+    setHeader(["Nome", "Email", "Matricula", ""]);
+  }, [dentistas]);
 
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
+  const handleDelete = async (id) => {
+    try {
+      const response = await deleteDentista(id);
 
-    setOpen(false);
-  };
+      if (response.status === 201) {
+        const { msg } = response.data;
 
-  function handleDelete(id) {
-    console.log(dentistas);
-    deleteDentista(id)
-      .then(() => {
-        setDentistas(dentistas.filter((dentista) => dentista._id !== id));
-        user.dentistas = dentistas;
+        user.dentistas = dentistas.filter((_dentista) => _dentista._id !== id);
         updateUser(user);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
 
-  return (
+        setAlert({ severity: "success", msg });
+      }
+    } catch (err) {
+      const { error } = err.response.data;
+      setAlert({ severity: "error", msg: error });
+    } finally {
+      setTimeout(() => {
+        setAlert(null);
+      }, 5000);
+    }
+  };
+
+  return isLoading ? (
+    <CircularProgress />
+  ) : (
     <div className={styles.main}>
       <div className={styles.header}>
         <Header colorized />
       </div>
+
       <div className={styles.body}>
-        <div className={styles.logo}>
-          <img src={Logo} alt="Logo" />
-        </div>
-        <div className={styles.divButtonCreate}>
-          <Button
-            variant="contained"
-            component={Link}
-            to={"/instituicao/dentistas/cadastrar"}
-          >
-            Adicionar dentista
-          </Button>
-        </div>
-        <div className={styles.tableContainer}>
-          <TableContainer component={Paper} className={styles.table}>
-            <Table
-              sx={{ minWidth: 650 }}
-              size="small"
-              aria-label="a dense table"
-            >
-              <TableHead>
-                <TableRow>
-                  <TableCell>Nome</TableCell>
+        <section className="add-dentista">
+          <div className={styles.content}>
+            <div className={styles.divTitle}>
+              <h1 className={styles.title}>Criar nova conta</h1>
+              <p className={styles.descripton}>
+                Adicione dentistas para que eles possam buscar por protocolos
+                odontologicos
+              </p>
+            </div>
+          </div>
+        </section>
 
-                  <TableCell align="right">Matrícula</TableCell>
+        <section className={styles.dentistaMenagement}>
+          {alert && (
+            <Alert severity={alert.severity} onClose={() => setAlert(null)}>
+              {alert.msg}
+            </Alert>
+          )}
+          <div className={styles.btnAddDentista}>
+            <Link to={"/instituicao/dentistas/cadastrar"}>
+              <Button
+                type="button"
+                id="add-dentista"
+                className="add blue-primary"
+              >
+                Adicionar dentista
+              </Button>
+            </Link>
+          </div>
 
-                  <TableCell
-                    align="right"
-                    className={styles.tableCell}
-                  ></TableCell>
-
-                  <TableCell
-                    align="right"
-                    className={styles.tableCell}
-                  ></TableCell>
-                </TableRow>
-              </TableHead>
-
-              <TableBody>
-                {dentistas.map((dentista) => (
-                  <TableRow
-                    key={dentista._id}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      {dentista.name}
-                    </TableCell>
-
-                    <TableCell align="right">{dentista.matricula}</TableCell>
-
-                    <TableCell align="right" className={styles.tableCell}>
-                      <Link
-                        to={`/instituicao/dentistas/${dentista._id}/editar`}
-                        className={styles.buttonCrud}
-                      >
-                        <EditIcon className={styles.icon} />
-                      </Link>
-                    </TableCell>
-
-                    <TableCell align="right" className={styles.tableCell}>
-                      <button
-                        className={styles.buttonCrud}
-                        onClick={() => {
-                          handleDelete(dentista._id);
-                          messageRemove();
-                        }}
-                      >
-                        <DeleteIcon className={styles.icon} />
-                      </button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </div>
-
-        <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
-          <Alert
-            onClose={handleClose}
-            severity="success"
-            sx={{ width: "100%" }}
-          >
-            Dentista removido com sucesso!
-          </Alert>
-        </Snackbar>
+          <div className={styles.tableContainer}>
+            {mobileView ? (
+              <MobileTable
+                rows={dentistas}
+                to={{ route: `/instituicao/dentistas/:id/editar`, key: "_id" }}
+                onClick={handleDelete}
+                edit
+              />
+            ) : (
+              <TableDesktop
+                header={header}
+                rows={dentistas}
+                to={{ route: `/instituicao/dentistas/:id/editar`, key: "_id" }}
+                onClick={handleDelete}
+                edit
+              />
+            )}
+          </div>
+        </section>
       </div>
     </div>
   );
-}
+};
+
+export default HomeInstituicao;
