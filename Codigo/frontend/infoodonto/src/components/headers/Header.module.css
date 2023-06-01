@@ -1,6 +1,6 @@
 .navHeader {
   display: flex;
-  padding: 30px 10rem 5rem;
+  padding: 30px 0 5rem;
   justify-content: space-between;
   align-items: center;
 }
@@ -55,7 +55,7 @@
 
 @media (max-width: 800px) {
   .navHeader {
-    padding: 15px 20px 0;
+    padding: 2rem 2rem 5rem;
   }
   .linksHeader {
     column-gap: 1rem;

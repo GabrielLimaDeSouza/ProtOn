@@ -1,15 +1,21 @@
+//* CSS
+import styles from "./Header.module.css";
+
+//* React
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { LoginContext } from "../../context/LoginContext";
+//* Logo
 import Tooth from "../../assets/tooth.svg";
 import ToothColorized from "../../img/logo-colorized.svg";
 
+//* Components
+import { LoginContext } from "../../context/LoginContext";
 import Button from "../buttons/Button";
 import ButtonMenu from "./components/ButtonMenu";
-import MenuItem from "@mui/material/MenuItem";
 
-import styles from "./Header.module.css";
+//* Material UI
+import MenuItem from "@mui/material/MenuItem";
 
 const Header = ({ colorized }) => {
   const { user, logout } = useContext(LoginContext);
@@ -53,7 +59,7 @@ const Header = ({ colorized }) => {
                     colorized && styles.colorized
                   }`}
                   onClick={() => {
-                    navigate("/buscar-paciente");
+                    navigate("/denista/buscar-paciente");
                   }}
                 >
                   Buscar Paciente

@@ -1,18 +1,19 @@
+//* CSS
+import styles from "../../css/HomePageMobile.module.css";
+
+//* React
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-// Lib
+//* Material UI
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
-// CSS
-import styles from "../../css/HomePageMobile.module.css";
-
-// SVG's
+//* SVG's
 import Logo from "../../img/logo.svg";
 
-// Icons
+//* Icons
 import { AiOutlineTwitter } from "react-icons/ai";
 import { AiOutlineInstagram } from "react-icons/ai";
 import { GrFacebookOption } from "react-icons/gr";
