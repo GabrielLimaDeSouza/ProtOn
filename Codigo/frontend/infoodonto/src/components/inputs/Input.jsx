@@ -4,11 +4,13 @@ import styles from "./Input.module.css";
 //* React
 import { useEffect, useState } from "react";
 
+//* Icons
+import { BsSearch } from "react-icons/bs";
+
 const Input = ({
   type,
   name,
   id,
-  className,
   initialValue,
   onChange,
   placeholder,
@@ -39,10 +41,16 @@ const Input = ({
     <div className={styles.inputComponent}>
       {label && <label htmlFor={id}>{label}</label>}
 
+      {type === "search" && (
+        <span className={styles.search}>
+          <BsSearch color="#20A0FD" />
+        </span>
+      )}
+
       <input
         type={type}
         id={id}
-        className={className ? className : ""}
+        className={type === "search" ? styles.search : ""}
         onChange={handleChange}
         value={value}
         name={name}

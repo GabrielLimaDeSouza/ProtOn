@@ -65,14 +65,18 @@ const pacienteController = {
       const { cpf } = req.params;
       const { dentista } = req.body;
 
-      const paciente = await PacienteModel.findOne({ cpf }).populate(
-        "user condicoes"
-      );
+      const paciente = await PacienteModel.findOne({ cpf })
+        .select("name cpf condicoes user dentistas")
+        .populate("condicoes")
+        .populate({
+          path: "user",
+          select: "email",
+        });
 
       if (!paciente) {
         res
           .status(404)
-          .json({ msg: `Paciente com cpf ${cpf} não encontrado!` });
+          .json({ error: `Paciente com cpf ${cpf} não encontrado!` });
         return;
       }
 
@@ -80,7 +84,7 @@ const pacienteController = {
         (dentista1) => dentista1.toString() === dentista
       );
       if (!acesso) {
-        res.status(401).json({ msg: "Dentista sem permissão" });
+        res.status(401).json({ error: "Dentista sem permissão" });
         return;
       }
 

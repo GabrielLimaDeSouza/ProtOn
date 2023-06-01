@@ -11,6 +11,16 @@ div.inputComponent input {
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.02);
 }
 
+span.search {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+}
+
+input.search {
+  padding: 0 3.2rem !important;
+}
+
 div.inputComponent input:disabled {
   border: none;
   width: 100%;

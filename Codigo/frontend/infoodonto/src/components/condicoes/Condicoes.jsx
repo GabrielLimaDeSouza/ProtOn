@@ -11,12 +11,12 @@ import { useEffect, useState } from "react";
 //*Icons
 import { IoClose } from "react-icons/io5";
 
-const Condicoes = ({ condicoes, onChange, options }) => {
+const Condicoes = ({ condicoes, onChange, options, edit }) => {
   const [tags, setTags] = useState(condicoes || []);
   const [currentTag, setCurrentTag] = useState(null);
 
   useEffect(() => {
-    onChange(tags);
+    edit && onChange(tags);
   }, [tags]);
 
   const handleAddTag = () => {
@@ -44,29 +44,37 @@ const Condicoes = ({ condicoes, onChange, options }) => {
     return (
       <div className={styles.tag}>
         <span>{tag.nome}</span>
-        <Button
-          type="button"
-          className="close"
-          onClick={() => handleDeleteTag(tag._id)}
-        >
-          <IoClose size="15px" />
-        </Button>
+        {edit && (
+          <Button
+            type="button"
+            className="close"
+            onClick={() => handleDeleteTag(tag._id)}
+          >
+            <IoClose size="15px" />
+          </Button>
+        )}
       </div>
     );
   };
 
   return (
     <div className={styles.condicoes}>
-      <div className={styles.datalist}>
-        <Datalist list={options} onChange={setCurrentTag} clear={currentTag} />
-        <Button
-          type="button"
-          className="add blue-primary"
-          onClick={handleAddTag}
-        >
-          Adicionar
-        </Button>
-      </div>
+      {edit && (
+        <div className={styles.datalist}>
+          <Datalist
+            list={options}
+            onChange={setCurrentTag}
+            clear={currentTag}
+          />
+          <Button
+            type="button"
+            className="add blue-primary"
+            onClick={handleAddTag}
+          >
+            Adicionar
+          </Button>
+        </div>
+      )}
       <div className={styles.tags}>
         {tags.map((tag) => (
           <Tag tag={tag} />

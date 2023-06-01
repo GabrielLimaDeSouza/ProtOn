@@ -140,6 +140,7 @@ const FormPaciente = () => {
                 <Condicoes
                   options={condicoes}
                   onChange={setCondicoesPaciente}
+                  edit
                 />
               </section>
             </div>

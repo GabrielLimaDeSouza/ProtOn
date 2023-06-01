@@ -1,0 +1,67 @@
+section.result {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem 5rem;
+  position: relative;
+}
+
+/* Informações do Paciente */
+div.user {
+  max-width: 15rem;
+  color: #676767;
+  max-height: 6rem;
+  position: sticky;
+  top: 5rem;
+}
+
+h3.name {
+  color: #20a0fd;
+  font-size: 25px;
+}
+
+p.email {
+  margin-top: 1rem;
+}
+
+/* Protocolos */
+div.protocols {
+  max-width: 50rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+h3.condicoesTitle {
+  color: #20a0fd;
+  font-size: 20px;
+}
+
+h3.titleContent {
+  color: #676767;
+  font-size: 25px;
+  margin-bottom: 2rem;
+}
+
+section.protocols {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+}
+
+section.protocols h4 {
+  margin-bottom: 0.7rem;
+  font-size: 17px;
+  color: #20a0fd;
+}
+
+section.protocols li {
+  color: #676767;
+  margin-left: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 1450px) {
+  div.user {
+    position: static;
+  }
+}

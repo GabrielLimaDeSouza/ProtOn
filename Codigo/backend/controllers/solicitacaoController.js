@@ -1,144 +1,156 @@
-const { Paciente: PacienteModel } = require('../models/Paciente')
-const { Dentista: DentistaModel } = require('../models/Dentista')
+const { Paciente: PacienteModel } = require("../models/Paciente");
+const { Dentista: DentistaModel } = require("../models/Dentista");
 
 const solicitacaoController = {
-    solicitacoes: async (req, res) => {
-        try {
-            const { cpf } = req.params
+  solicitacoes: async (req, res) => {
+    try {
+      const { cpf } = req.params;
 
-            const paciente = await PacienteModel.findOne({ cpf })
-                .populate({
-                    path: 'solicitacoes',
-                    select: 'name user',
-                    populate: {
-                        path: 'user',
-                        select: 'email'
-                    }
-                })
+      const paciente = await PacienteModel.findOne({ cpf }).populate({
+        path: "solicitacoes",
+        select: "name user",
+        populate: {
+          path: "user",
+          select: "email",
+        },
+      });
 
-            if (!paciente) {
-                res.status(404).json({ msg: 'Paciente não encontrado!' })
-                return
-            }
+      if (!paciente) {
+        res.status(404).json({ msg: "Paciente não encontrado!" });
+        return;
+      }
 
-            res.status(201).json(paciente.solicitacoes)
-        } catch (error) {
-            console.log(error)
-            res.status(500).json({ error: 'Erro interno do servidor' })
-        }
-    },
-    enviarSolicitacao: async (req, res) => {
-        try {
-            const { cpf } = req.params
-            const { dentista } = req.body
-            
-            const updatedPaciente = await PacienteModel.findOne({ cpf })
-            if (!updatedPaciente) {
-                res.status(404).json({ msg: 'Paciente não encontrado!' })
-                return
-            }
+      res.status(201).json(paciente.solicitacoes);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: "Erro interno do servidor" });
+    }
+  },
+  enviarSolicitacao: async (req, res) => {
+    try {
+      const { cpf } = req.params;
+      const { dentista } = req.body;
 
-            const dentistaObj = await DentistaModel.findById(dentista)
-            if (!dentistaObj) {
-                res.status(404).json({ msg: 'Dentista não encontrado!' })
-                return
-            }
+      const updatedPaciente = await PacienteModel.findOne({ cpf });
+      if (!updatedPaciente) {
+        res.status(404).json({ error: "Paciente não encontrado!" });
+        return;
+      }
 
-            const solicitacaoFound = updatedPaciente.solicitacoes.find(solicitacao => solicitacao.toString() === dentista)
-            if (solicitacaoFound) {
-                res.status(404).json({ msg: 'Solicitação já enviada!' })
-                return
-            }
+      const dentistaObj = await DentistaModel.findById(dentista);
+      if (!dentistaObj) {
+        res.status(404).json({ error: "Dentista não encontrado!" });
+        return;
+      }
 
-            const dentistaFound = updatedPaciente.dentistas.find(dentistaA => dentistaA.toString() === dentista)
-            if (dentistaFound) {
-                res.status(404).json({ msg: 'Solicitação já aceita!' })
-                return
-            }
+      const solicitacaoFound = updatedPaciente.solicitacoes.find(
+        (solicitacao) => solicitacao.toString() === dentista
+      );
+      if (solicitacaoFound) {
+        res.status(404).json({ error: "Solicitação já enviada!" });
+        return;
+      }
 
-            updatedPaciente.solicitacoes.push(dentista)
-            updatedPaciente.save()
+      const dentistaFound = updatedPaciente.dentistas.find(
+        (dentistaA) => dentistaA.toString() === dentista
+      );
+      if (dentistaFound) {
+        res.status(404).json({ error: "Solicitação já aceita!" });
+        return;
+      }
 
-            res.status(201).json({ msg: 'Solicitação enviada' })
-        } catch (error) {
-            console.log(error)
-            res.status(500).json({ error: 'Erro interno do servidor' })
-        }
-    },
-    aceitarSolicitacao: async (req, res) => {
-        try {
-            const { cpf } = req.params
-            const { dentista } = req.body
+      updatedPaciente.solicitacoes.push(dentista);
+      updatedPaciente.save();
 
-            const updatedPaciente = await PacienteModel.findOne({ cpf })
-            if (!updatedPaciente) {
-                res.status(404).json({ msg: 'Paciente não encontrado!' })
-                return
-            }
+      res.status(201).json({ msg: "Solicitação enviada" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: "Erro interno do servidor" });
+    }
+  },
+  aceitarSolicitacao: async (req, res) => {
+    try {
+      const { cpf } = req.params;
+      const { dentista } = req.body;
 
-            const dentistaObj = await DentistaModel.findById(dentista)
-            if (!dentistaObj) {
-                res.status(404).json({ msg: 'Dentista não encontrado!' })
-                return
-            }
+      const updatedPaciente = await PacienteModel.findOne({ cpf });
+      if (!updatedPaciente) {
+        res.status(404).json({ error: "Paciente não encontrado!" });
+        return;
+      }
 
-            const solicitacaoFound = updatedPaciente.solicitacoes.find(solicitacao => solicitacao.toString() === dentista)
-            if (!solicitacaoFound) {
-                res.status(404).json({ msg: 'Solicitação não encontrada!' })
-                return
-            }
+      const dentistaObj = await DentistaModel.findById(dentista);
+      if (!dentistaObj) {
+        res.status(404).json({ error: "Dentista não encontrado!" });
+        return;
+      }
 
-            const dentistaFound = updatedPaciente.dentistas.find(dentistaA => dentistaA.toString() === dentista)
-            if (dentistaFound) {
-                res.status(404).json({ msg: 'Solicitação de dentista já aceita!' })
-                return
-            }
+      const solicitacaoFound = updatedPaciente.solicitacoes.find(
+        (solicitacao) => solicitacao.toString() === dentista
+      );
+      if (!solicitacaoFound) {
+        res.status(404).json({ error: "Solicitação não encontrada!" });
+        return;
+      }
 
-            updatedPaciente.solicitacoes = updatedPaciente.solicitacoes.filter(solicitacao => solicitacao.toString() !== dentista)
+      const dentistaFound = updatedPaciente.dentistas.find(
+        (dentistaA) => dentistaA.toString() === dentista
+      );
+      if (dentistaFound) {
+        res.status(404).json({ error: "Solicitação de dentista já aceita!" });
+        return;
+      }
 
-            updatedPaciente.dentistas.push(dentista)
-            updatedPaciente.save()
+      updatedPaciente.solicitacoes = updatedPaciente.solicitacoes.filter(
+        (solicitacao) => solicitacao.toString() !== dentista
+      );
 
-            res.status(201).json({ msg: 'Solicitação aceita' })
-        } catch (error) {
-            console.log(error)
-            res.status(500).json({ error: 'Erro interno do servidor' })
-        }
-    },
-    recusarSolicitacao: async (req, res) => {
-        try {
-            const { cpf } = req.params
-            const { dentista } = req.body
+      updatedPaciente.dentistas.push(dentista);
+      updatedPaciente.save();
 
-            const updatedPaciente = await PacienteModel.findOne({ cpf })
-            if (!updatedPaciente) {
-                res.status(404).json({ msg: 'Paciente não encontrado!' })
-                return
-            }
+      res.status(201).json({ msg: "Solicitação aceita" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: "Erro interno do servidor" });
+    }
+  },
+  recusarSolicitacao: async (req, res) => {
+    try {
+      const { cpf } = req.params;
+      const { dentista } = req.body;
 
-            const dentistaObj = await DentistaModel.findById(dentista)
-            if (!dentistaObj) {
-                res.status(404).json({ msg: 'Dentista não encontrado!' })
-                return
-            }
+      const updatedPaciente = await PacienteModel.findOne({ cpf });
+      if (!updatedPaciente) {
+        res.status(404).json({ error: "Paciente não encontrado!" });
+        return;
+      }
 
-            const solicitacaoFound = updatedPaciente.solicitacoes.find(solicitacao => solicitacao.toString() === dentista)
-            if (!solicitacaoFound) {
-                res.status(404).json({ msg: 'Solicitação não encontrada!' })
-                return
-            }
+      const dentistaObj = await DentistaModel.findById(dentista);
+      if (!dentistaObj) {
+        res.status(404).json({ error: "Dentista não encontrado!" });
+        return;
+      }
 
-            updatedPaciente.solicitacoes = updatedPaciente.solicitacoes
-                .filter(solicitacao => solicitacao.toString() !== dentista)
+      const solicitacaoFound = updatedPaciente.solicitacoes.find(
+        (solicitacao) => solicitacao.toString() === dentista
+      );
+      if (!solicitacaoFound) {
+        res.status(404).json({ error: "Solicitação não encontrada!" });
+        return;
+      }
 
-            updatedPaciente.save()
+      updatedPaciente.solicitacoes = updatedPaciente.solicitacoes.filter(
+        (solicitacao) => solicitacao.toString() !== dentista
+      );
 
-            res.status(201).json({ msg: 'Solicitação recusada' })
-        } catch (error) {
-            console.log(error)
-            res.status(500).json({ error: 'Erro interno do servidor' })
-        }
-    },
-}
+      updatedPaciente.save();
 
-module.exports = solicitacaoController
+      res.status(201).json({ msg: "Solicitação recusada" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: "Erro interno do servidor" });
+    }
+  },
+};
+
+module.exports = solicitacaoController;

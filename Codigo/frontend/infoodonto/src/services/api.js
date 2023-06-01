@@ -24,15 +24,17 @@ export const createPaciente = async (paciente) => {
   });
 };
 
+export const buscarPaciente = async (cpf, dentista) => {
+  return api.post(`/api/paciente/cpf/${cpf}`, {
+    dentista,
+  });
+};
+
 //* Rotas Solicitacao Paciente
 export const removerPermissao = async (cpf, dentista) => {
   return await api.delete(`/api/paciente/${cpf}/dentistas`, {
     data: { dentista },
   });
-};
-
-export const enviarSolicitacao = async (cpf, dentista) => {
-  return await api.put(`/api/dentista/enviar-solicitacao/${cpf}`, { dentista });
 };
 
 export const aceitarSolicitacao = async (cpf, dentista) => {
@@ -69,4 +71,8 @@ export const getDentista = async (id) => {
 
 export const deleteDentista = async (id) => {
   return api.delete(`/api/dentista?id=${id}`);
+};
+
+export const enviarSolicitacao = async (cpf, dentista) => {
+  return await api.put(`/api/dentista/enviar-solicitacao/${cpf}`, { dentista });
 };

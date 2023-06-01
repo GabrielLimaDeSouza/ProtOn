@@ -1,0 +1,7 @@
+.solicitacao {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 11rem;
+  font-size: 15px;
+}

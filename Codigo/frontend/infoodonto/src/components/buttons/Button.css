@@ -95,6 +95,22 @@ button[type="button"].add {
   max-width: 10rem;
 }
 
+button[type="button"].tabs {
+  background-color: #d9d9d9;
+  padding: 0.5rem 1rem;
+  border-radius: 100rem;
+  font-size: 13px;
+  display: flex;
+  column-gap: 0.5rem;
+  align-items: center;
+  border: none;
+}
+
+button[type="button"].tabs.active {
+  background-color: #20a0fd !important;
+  color: #fff;
+}
+
 @media (max-width: 810px) {
   button[type="submit"].submit {
     max-width: none;

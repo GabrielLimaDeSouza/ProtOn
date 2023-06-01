@@ -122,6 +122,7 @@ const DesktopHomePage = () => {
           <div className={styles.divBlank}></div>
         </div>
       </div>
+
       <div className={styles.divScroll}>
         <div className={styles.scrollTitle}>
           <h2>

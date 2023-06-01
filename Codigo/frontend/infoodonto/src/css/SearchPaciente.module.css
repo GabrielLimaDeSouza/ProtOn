@@ -1,95 +1,74 @@
-.searchBox {
-  display: flex;
- text-align: center;
- justify-content: center;
-  padding-top: 20px;
+div.main {
+  padding: 0 10rem;
 }
-
-.logo {
+div.body {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  row-gap: 5rem;
+  max-width: 80rem;
   width: 100%;
-  padding-top: 50px;
+  margin: 0 auto;
+  padding: 0 0 4rem;
+  min-height: 100vh;
 }
 
-.loaderBox {
+section.section1 {
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
-  padding-top: 30px;
+  row-gap: 3rem;
 }
 
-.loaderBox * {
-  margin-top: 3px;
-
+h1.title {
+  margin: 0;
+  color: #20a0fd;
 }
 
-.drops{
+p.descripton {
+  margin-top: 5px;
+  color: #676767;
+  font-size: 15px;
+}
+
+section.buscarPaciente {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
   flex-direction: column;
-  width: 100vw;
+  row-gap: 8rem;
 }
 
-.drop{
-  padding-bottom: 10px;
-  width: 80vw;
-
-}
-
-.drops h1 {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 22px;
-}
-
-
-
-p{
-  padding-top: 5px;
-}
-
-.dadosPessoais{
-  padding-left: 30px;
-}
-
-.nomePaciente{
-  font-size:xx-large;
-}
-
-.chip{
-  margin-top: 3px;
-  max-width: 130px !important;
-  overflow-x: scroll !important;
-}
-.containerCondicoes {
+form.formSearch {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 50px;
-  max-width: 80vw;
-}
-h2{
-  padding-top: 20px;
-}
-.divInvite{
-  display: flex;
-  justify-content: center;
   align-items: center;
-  padding-left: 10px;
-  padding-right: 10px;
+  gap: 1rem 3rem;
+  max-width: 50rem;
 }
 
-.iconAdd{
-  font-size: 100px;
-  padding-right: 10px;
-  color: #7CC8FF;
-  cursor: pointer;
-  transition: 0.5s;
+form.formSearch > div:first-child {
+  width: 100%;
+  max-width: 39rem;
 }
 
-.iconAdd:hover {
-  transform: scale(1.1);
+@media (max-width: 840px) {
+  div.header {
+    padding: 0 0 5rem;
+  }
+
+  div.main {
+    padding: 0;
+  }
+
+  div.body {
+    padding: 0 2rem 4rem;
+  }
+
+  form.formSearch {
+    column-gap: 1rem;
+  }
+}
+
+@media (max-width: 300px) {
+  div.body {
+    padding: 0 1rem 4rem;
+  }
 }

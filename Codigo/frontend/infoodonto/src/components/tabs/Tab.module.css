@@ -1,0 +1,12 @@
+div.body {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4rem;
+  position: relative;
+}
+
+section.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}

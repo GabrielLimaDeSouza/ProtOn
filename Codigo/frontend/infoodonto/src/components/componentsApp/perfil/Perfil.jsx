@@ -150,6 +150,7 @@ const Perfil = ({
                   condicoes,
                 })
               }
+              edit
             />
           </section>
         </div>
