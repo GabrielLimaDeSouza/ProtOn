@@ -67,10 +67,12 @@ const FormInstituicao = () => {
       const response = await updateDentista(newDentista);
 
       if (response.status === 201) {
-        console.log(response.data);
         const { msg } = response.data;
+
         setAlert({ severity: "success", msg });
-        updateUser(currentDentista);
+        user.dentistas = dentistas;
+        updateUser(user);
+
         setTimeout(() => {
           navigate("/perfil");
         }, 2000);
@@ -97,7 +99,7 @@ const FormInstituicao = () => {
               <div className={styles.divTitle}>
                 <h1 className={styles.title}>Editar dentista</h1>
                 <p className={styles.descripton}>
-                  Mantenha os dados {currentDentista?.name} |{" "}
+                  Mantenha os dados de {currentDentista?.name} |{" "}
                   {currentDentista?.matricula} sempre atualizados
                 </p>
               </div>
