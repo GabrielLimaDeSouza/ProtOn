@@ -1,3 +1,7 @@
+div.main {
+  padding: 0 10rem;
+}
+
 div.body {
   display: flex;
   flex-direction: column;
@@ -62,6 +66,12 @@ button.empty {
 button.empty:hover {
   transform: none;
   box-shadow: none;
+}
+
+@media (max-width: 840px) {
+  div.main {
+    padding: 0;
+  }
 }
 
 @media (max-width: 700px) {

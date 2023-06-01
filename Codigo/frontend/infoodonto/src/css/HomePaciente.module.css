@@ -18,6 +18,9 @@ img.tooth {
     padding: 2rem 2rem 05rem;
   }
   div.main {
-    padding: 0 2rem 4rem;
+    padding: 0 0 4rem;
+  }
+  div.content {
+    padding: 0 2rem;
   }
 }
