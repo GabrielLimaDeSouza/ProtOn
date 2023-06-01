@@ -40,8 +40,9 @@ const FormInstituicao = () => {
         setAlert({ severity: "success", msg });
         user.dentistas.push(dentista);
         updateUser(user);
+
         setTimeout(() => {
-          navigate("/login");
+          navigate("/perfil");
         }, 2000);
       }
     } catch (err) {
