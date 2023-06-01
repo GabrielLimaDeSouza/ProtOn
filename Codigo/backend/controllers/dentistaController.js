@@ -3,6 +3,8 @@ const { Usuario: UsuarioModel } = require("../models/Usuario");
 
 const dentistaController = {
   create: async (req, res) => {
+    var dentistaUser = null;
+
     try {
       const { name, email, senha, matricula, instituicao } = req.body.dentista;
 
@@ -11,7 +13,7 @@ const dentistaController = {
         senha,
         type: "dentista",
       };
-      const dentistaUser = await UsuarioModel.create(user);
+      dentistaUser = await UsuarioModel.create(user);
 
       const dentistaObject = {
         name,
@@ -24,6 +26,9 @@ const dentistaController = {
       return dentista.populate("user");
     } catch (error) {
       console.log(error);
+
+      await UsuarioModel.findByIdAndDelete(dentistaUser._id);
+
       res
         .status(500)
         .json({ error: "Ocorreu um erro ao cadastrar o Dentista" });
@@ -65,9 +70,9 @@ const dentistaController = {
       const { id } = req.query;
 
       const dentista = await DentistaModel.findByIdAndDelete(id);
-      await UsuarioModel.findByIdAndDelete(dentista.user._id);
+      await UsuarioModel.findByIdAndDelete(dentista.user);
 
-      res.status(200).json({ dentista, msg: "Dentista excluido com sucesso!" });
+      res.status(201).json({ dentista, msg: "Dentista excluido com sucesso!" });
     } catch (error) {
       console.log(error);
       res
@@ -101,7 +106,7 @@ const dentistaController = {
       );
 
       res
-        .status(200)
+        .status(201)
         .json({ dentista, msg: "Dentista atualizado com sucesso!" });
     } catch (error) {
       console.log(error);

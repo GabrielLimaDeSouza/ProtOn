@@ -3,6 +3,8 @@ const { Usuario: UsuarioModel } = require("../models/Usuario");
 
 const pacienteController = {
   create: async (req, res) => {
+    var pacienteUser = null;
+
     try {
       const { name, cpf, email, senha, condicoes } = req.body.paciente;
 
@@ -11,13 +13,13 @@ const pacienteController = {
         senha,
         type: "paciente",
       };
-      const responseUser = await UsuarioModel.create(user);
+      const pacienteUser = await UsuarioModel.create(user);
 
       const pacienteObject = {
         name,
         cpf,
         condicoes,
-        user: responseUser._id,
+        user: pacienteUser._id,
       };
       const paciente = await PacienteModel.create(pacienteObject);
 
@@ -26,6 +28,8 @@ const pacienteController = {
         .json({ paciente, msg: "Paciente cadastrado com sucesso!" });
     } catch (error) {
       console.log(error);
+      await PacienteModel.findByIdAndDelete(pacienteUser._id);
+
       res
         .status(500)
         .json({ error: "Ocorreu um erro ao cadastrar o Paciente" });

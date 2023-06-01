@@ -4,6 +4,8 @@ const { Usuario: UsuarioModel } = require("../models/Usuario");
 
 const instituicaoController = {
   create: async (req, res) => {
+    var instituicaoUser = null;
+
     try {
       const { name, email, senha, tipo } = req.body.instituicao;
 
@@ -12,7 +14,7 @@ const instituicaoController = {
         senha,
         type: "instituicao",
       };
-      const instituicaoUser = await UsuarioModel.create(user);
+      instituicaoUser = await UsuarioModel.create(user);
 
       const instituicaoObject = {
         name,
@@ -23,6 +25,9 @@ const instituicaoController = {
 
       res.status(201).json({ msg: "Instituicao cadastrada com sucesso!" });
     } catch (error) {
+      console.log(error);
+      await UsuarioModel.findByIdAndDelete(instituicaoUser._id);
+
       res
         .status(500)
         .json({ error: "Ocorreu um erro ao cadastrar a instituição!" });
