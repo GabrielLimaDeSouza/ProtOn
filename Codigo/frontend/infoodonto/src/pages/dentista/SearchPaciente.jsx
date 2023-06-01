@@ -27,7 +27,6 @@ const SearchPaciente = () => {
 
   const handleSearchPaciente = async (formData) => {
     const { cpf } = Object.fromEntries(formData);
-    setSendSolicitation(null);
 
     try {
       const { status, data } = await buscarPaciente(cpf, user._id);
@@ -45,7 +44,7 @@ const SearchPaciente = () => {
     } finally {
       setTimeout(() => {
         setAlert(null);
-      }, 2000);
+      }, 3000);
     }
   };
 
@@ -90,13 +89,13 @@ const SearchPaciente = () => {
               </div>
             </Form>
           </div>
-
           {alert && (
-            <Alert severity={alert.severity} onClose={() => setAlert(null)}>
-              {alert.msg}
-            </Alert>
+            <div className={styles.alert}>
+              <Alert severity={alert.severity} onClose={() => setAlert(null)}>
+                {alert.msg}
+              </Alert>
+            </div>
           )}
-
           <div className={styles.results}>
             {paciente ? (
               <Result paciente={paciente} />

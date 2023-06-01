@@ -1,6 +1,7 @@
 div.main {
   padding: 0 10rem;
 }
+
 div.body {
   display: flex;
   flex-direction: column;
@@ -34,6 +35,7 @@ section.buscarPaciente {
   display: flex;
   flex-direction: column;
   row-gap: 8rem;
+  position: relative;
 }
 
 form.formSearch {
@@ -47,6 +49,13 @@ form.formSearch {
 form.formSearch > div:first-child {
   width: 100%;
   max-width: 39rem;
+}
+
+div.alert {
+  position: absolute;
+  top: 5rem;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
 @media (max-width: 840px) {
