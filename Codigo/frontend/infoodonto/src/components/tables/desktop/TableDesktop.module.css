@@ -1,0 +1,52 @@
+table.table {
+  width: 100%;
+}
+
+thead.header {
+  font-weight: 600;
+  color: #676767;
+  height: 3rem;
+}
+
+tbody.body {
+  height: 3rem;
+  border-collapse: collapse;
+}
+
+tbody.body > tr {
+  height: 4rem;
+}
+
+tbody.body > tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+td {
+  padding: 0 1rem;
+  border-radius: 0.5rem;
+}
+tr.tr > td:first-child {
+  color: #20a0fd;
+}
+
+td.name {
+  min-width: 10rem;
+}
+td.email {
+  min-width: 10rem;
+}
+td.matricula {
+  max-width: 3rem;
+}
+
+td.edit {
+  width: 6rem;
+}
+td.edit > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+td.edit > div svg {
+  width: 1.3rem;
+}
