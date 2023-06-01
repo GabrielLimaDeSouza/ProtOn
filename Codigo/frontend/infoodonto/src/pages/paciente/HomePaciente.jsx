@@ -65,7 +65,7 @@ const HomePaciente = () => {
   );
 
   return (
-    <>
+    <div className={styles.main}>
       {isLoading ? (
         <CircularProgress />
       ) : (
@@ -207,12 +207,10 @@ const HomePaciente = () => {
             </MenuItem>
           </Menu>
 
-          <div className={styles.main}>
-            <div className={styles.content}>{paginaSelecionada}</div>
-          </div>
+          <div className={styles.content}>{paginaSelecionada}</div>
         </>
       )}
-    </>
+    </div>
   );
 };
 
