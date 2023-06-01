@@ -1,6 +1,7 @@
 button:hover {
   transform: translateY(-3px);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
 }
 
 button[type="submit"].submit {
@@ -64,6 +65,18 @@ button.blue-primary {
 button.black {
   background: #1b1b1b;
   color: #fff;
+}
+
+button.red {
+  color: #ff3e3e;
+}
+
+button.empty,
+&:hover {
+  border: none;
+  background: none;
+  transform: none;
+  box-shadow: none;
 }
 
 button[type="button"].close {
