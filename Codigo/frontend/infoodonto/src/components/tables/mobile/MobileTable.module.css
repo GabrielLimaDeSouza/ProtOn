@@ -1,0 +1,41 @@
+section.content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+}
+
+div.body {
+  background-color: #fff;
+  border-radius: 0.6rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+div.infos {
+  display: inherit;
+  flex-direction: column;
+  row-gap: 2rem;
+}
+
+div.infos > div {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+}
+h3.name {
+  color: #20a0fd;
+}
+
+span.matricula {
+  font-size: 0.9rem;
+}
+
+div.edit {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 4rem;
+}
