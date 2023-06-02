@@ -72,7 +72,7 @@ button.red {
 }
 
 button.empty,
-&:hover {
+button.empty:hover {
   border: none;
   background: none;
   transform: none;

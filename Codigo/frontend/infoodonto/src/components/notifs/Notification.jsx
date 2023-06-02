@@ -26,7 +26,7 @@ export const Notification = ({ notifs, onClickAccept, onClickReject }) => {
         ) : (
           <BsBell color="#FFD600" size="1.3rem" />
         )}
-        {!isOpen && notifs.length && (
+        {!isOpen && notifs.length > 0 && (
           <span className={styles.numNotifs}>{notifs.length}</span>
         )}
       </Button>
