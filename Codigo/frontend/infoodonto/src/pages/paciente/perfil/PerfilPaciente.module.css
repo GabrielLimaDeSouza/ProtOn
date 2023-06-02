@@ -1,3 +1,7 @@
+div.main {
+  padding: 0 10rem;
+}
+
 div.body {
   display: flex;
   flex-direction: column;
@@ -15,6 +19,12 @@ div.formData {
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 3rem 5rem;
+}
+
+form.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
 }
 
 div.formData section {
@@ -54,4 +64,25 @@ button.empty {
 button.empty:hover {
   transform: none;
   box-shadow: none;
+}
+
+@media (max-width: 840px) {
+  div.main {
+    padding: 0;
+  }
+}
+
+@media (max-width: 700px) {
+  div.header {
+    padding: 0 0 5rem;
+  }
+  div.body {
+    padding: 0 2rem 4rem;
+  }
+}
+
+@media (max-width: 300px) {
+  div.body {
+    padding: 0 1rem 4rem;
+  }
 }

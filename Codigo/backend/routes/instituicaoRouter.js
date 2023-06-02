@@ -15,6 +15,11 @@ router
   .route("/instituicao/:id/dentista")
   .post((req, res) => instituicaoController.createDentista(req, res));
 
+// DELETE Dentista
+router
+  .route("/instituicao/:id/dentista/:dentista")
+  .delete((req, res) => instituicaoController.deleteDentista(req, res));
+
 // GET ALL Dentistas FROM Instituicao
 router
   .route("/instituicao/:id/dentistas")

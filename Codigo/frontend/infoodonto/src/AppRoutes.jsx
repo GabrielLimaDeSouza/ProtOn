@@ -18,7 +18,8 @@ import FormInstituicao from "./pages/instituicao/FormInstituicao";
 import SearchPaciente from "./pages/dentista/SearchPaciente";
 import HomeInstituicao from "./pages/instituicao/HomeInstituicao";
 import EditDentista from "./pages/dentista/EditDentista";
-import HomePaciente from "./pages/paciente/HomePaciente";
+import PerfilPaciente from "./pages/paciente/perfil/PerfilPaciente";
+import DentistasPermitidos from "./pages/paciente/permissoes/DentistasPermitidos";
 
 const AppRoutes = () => {
   const Perfil = () => {
@@ -30,7 +31,7 @@ const AppRoutes = () => {
 
     switch (user.user.type) {
       case "paciente":
-        return <HomePaciente />;
+        return <PerfilPaciente />;
 
       case "instituicao":
         return <HomeInstituicao />;
@@ -92,6 +93,16 @@ const AppRoutes = () => {
             element={
               <Private permission="paciente instituicao">
                 <Perfil />
+              </Private>
+            }
+          />
+
+          <Route
+            exact
+            path="/perfil/dentistas"
+            element={
+              <Private permission="paciente">
+                <DentistasPermitidos />
               </Private>
             }
           />

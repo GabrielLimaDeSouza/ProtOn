@@ -1,5 +1,5 @@
 div.main {
-  padding: 0 10rem;
+  padding: 0 5rem 10rem;
 }
 
 div.body {
@@ -7,37 +7,22 @@ div.body {
   flex-direction: column;
   justify-content: flex-start;
   row-gap: 5rem;
-  max-width: 80rem;
+  max-width: 90rem;
   width: 100%;
   margin: 0 auto;
   padding: 0 5rem 4rem;
-  min-height: 100vh;
-}
-
-div.formData {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 3rem 5rem;
-}
-
-form.form {
-  display: flex;
-  flex-direction: column;
-  row-gap: 2rem;
-}
-
-div.formData section {
-  width: 100%;
-  max-width: 30rem;
 }
 
 section.section1 {
   display: flex;
   flex-direction: column;
   row-gap: 3rem;
+}
+
+div.notifs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 h1.title {
@@ -51,10 +36,15 @@ p.descripton {
   font-size: 15px;
 }
 
-section.sectionEdit {
+section.dentistaMenagement {
   display: flex;
   flex-direction: column;
-  row-gap: 1rem;
+  row-gap: 3rem;
+}
+
+div.btnAddDentista {
+  display: flex;
+  justify-content: flex-end;
 }
 
 @media (max-width: 840px) {

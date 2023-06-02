@@ -29,9 +29,7 @@ const dentistaController = {
 
       await UsuarioModel.findByIdAndDelete(dentistaUser._id);
 
-      res
-        .status(500)
-        .json({ error: "Ocorreu um erro ao cadastrar o Dentista" });
+      throw new Error();
     }
   },
   getAll: async (req, res) => {
@@ -65,19 +63,25 @@ const dentistaController = {
       res.status(500).json({ error: "Erro interno do servidor" });
     }
   },
-  delete: async (req, res) => {
+  delete: async (req) => {
+    var msg = null;
     try {
-      const { id } = req.query;
+      const { dentista } = req.params;
+      console.log(dentista);
 
-      const dentista = await DentistaModel.findByIdAndDelete(id);
-      await UsuarioModel.findByIdAndDelete(dentista.user);
+      const dentistaResp = await DentistaModel.findByIdAndDelete(dentista);
 
-      res.status(201).json({ dentista, msg: "Dentista excluido com sucesso!" });
+      if (!dentistaResp) {
+        msg = "Dentista não encontrado!";
+        throw new Error();
+      }
+
+      await UsuarioModel.findByIdAndDelete(dentistaResp.user);
+
+      return dentistaResp;
     } catch (error) {
       console.log(error);
-      res
-        .status(500)
-        .json({ error: "Ocorreu um erro ao apagar os dados do Dentista" });
+      throw new Error(msg || "Erro interno do servidor");
     }
   },
   update: async (req, res) => {

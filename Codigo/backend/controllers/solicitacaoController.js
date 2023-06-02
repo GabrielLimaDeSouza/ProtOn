@@ -6,14 +6,26 @@ const solicitacaoController = {
     try {
       const { cpf } = req.params;
 
-      const paciente = await PacienteModel.findOne({ cpf }).populate({
+      var paciente = await PacienteModel.findOne({ cpf }).populate({
         path: "solicitacoes",
-        select: "name user",
-        populate: {
-          path: "user",
-          select: "email",
-        },
+        select: "name user instituicao",
+        populate: [
+          {
+            path: "user",
+            select: "email",
+          },
+          {
+            path: "instituicao",
+            select: "name user tipo",
+            populate: {
+              path: "user",
+              select: "email",
+            },
+          },
+        ],
       });
+
+      console.log(paciente);
 
       if (!paciente) {
         res.status(404).json({ msg: "Paciente não encontrado!" });
@@ -70,22 +82,21 @@ const solicitacaoController = {
   },
   aceitarSolicitacao: async (req, res) => {
     try {
-      const { cpf } = req.params;
-      const { dentista } = req.body;
+      const { cpf, dentista } = req.params;
 
-      const updatedPaciente = await PacienteModel.findOne({ cpf });
-      if (!updatedPaciente) {
+      const paciente = await PacienteModel.findOne({ cpf });
+      if (!paciente) {
         res.status(404).json({ error: "Paciente não encontrado!" });
         return;
       }
 
-      const dentistaObj = await DentistaModel.findById(dentista);
-      if (!dentistaObj) {
+      const _dentista = await DentistaModel.findById(dentista);
+      if (!_dentista) {
         res.status(404).json({ error: "Dentista não encontrado!" });
         return;
       }
 
-      const solicitacaoFound = updatedPaciente.solicitacoes.find(
+      const solicitacaoFound = paciente.solicitacoes.find(
         (solicitacao) => solicitacao.toString() === dentista
       );
       if (!solicitacaoFound) {
@@ -93,7 +104,7 @@ const solicitacaoController = {
         return;
       }
 
-      const dentistaFound = updatedPaciente.dentistas.find(
+      const dentistaFound = paciente.dentistas.find(
         (dentistaA) => dentistaA.toString() === dentista
       );
       if (dentistaFound) {
@@ -101,12 +112,12 @@ const solicitacaoController = {
         return;
       }
 
-      updatedPaciente.solicitacoes = updatedPaciente.solicitacoes.filter(
+      paciente.solicitacoes = paciente.solicitacoes.filter(
         (solicitacao) => solicitacao.toString() !== dentista
       );
 
-      updatedPaciente.dentistas.push(dentista);
-      updatedPaciente.save();
+      paciente.dentistas.push(dentista);
+      paciente.save();
 
       res.status(201).json({ msg: "Solicitação aceita" });
     } catch (error) {
@@ -116,11 +127,10 @@ const solicitacaoController = {
   },
   recusarSolicitacao: async (req, res) => {
     try {
-      const { cpf } = req.params;
-      const { dentista } = req.body;
+      const { cpf, dentista } = req.params;
 
-      const updatedPaciente = await PacienteModel.findOne({ cpf });
-      if (!updatedPaciente) {
+      const paciente = await PacienteModel.findOne({ cpf });
+      if (!paciente) {
         res.status(404).json({ error: "Paciente não encontrado!" });
         return;
       }
@@ -131,7 +141,7 @@ const solicitacaoController = {
         return;
       }
 
-      const solicitacaoFound = updatedPaciente.solicitacoes.find(
+      const solicitacaoFound = paciente.solicitacoes.find(
         (solicitacao) => solicitacao.toString() === dentista
       );
       if (!solicitacaoFound) {
@@ -139,11 +149,11 @@ const solicitacaoController = {
         return;
       }
 
-      updatedPaciente.solicitacoes = updatedPaciente.solicitacoes.filter(
+      paciente.solicitacoes = paciente.solicitacoes.filter(
         (solicitacao) => solicitacao.toString() !== dentista
       );
 
-      updatedPaciente.save();
+      paciente.save();
 
       res.status(201).json({ msg: "Solicitação recusada" });
     } catch (error) {

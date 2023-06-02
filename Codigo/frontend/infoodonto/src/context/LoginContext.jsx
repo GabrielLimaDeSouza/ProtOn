@@ -59,7 +59,7 @@ export const LoginProvider = ({ children }) => {
   };
 
   const updateUser = (newUser) => {
-    setUser(newUser);
+    if (newUser) setUser(newUser);
   };
 
   return (

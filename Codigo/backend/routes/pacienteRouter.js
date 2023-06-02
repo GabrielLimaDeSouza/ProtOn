@@ -41,7 +41,7 @@ router
 
 // ACEITAR Solicitação Paciente
 router
-  .route("/paciente/:cpf/solicitacoes")
+  .route("/paciente/:cpf/solicitacoes/:dentista")
   .put((req, res) => solicitacaoController.aceitarSolicitacao(req, res));
 
 // GET Solicitação Paciente
@@ -51,12 +51,12 @@ router
 
 // DELETE Solicitação Paciente
 router
-  .route("/paciente/:cpf/solicitacoes")
+  .route("/paciente/:cpf/solicitacoes/:dentista")
   .delete((req, res) => solicitacaoController.recusarSolicitacao(req, res));
 
 // DELETE Permisão Dentista
 router
-  .route("/paciente/:cpf/dentistas")
+  .route("/paciente/:cpf/remover-dentista/:id")
   .delete((req, res) => pacienteController.removerPermissao(req, res));
 
 module.exports = router;

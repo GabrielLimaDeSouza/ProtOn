@@ -24,6 +24,12 @@ export const createPaciente = async (paciente) => {
   });
 };
 
+export const updatePaciente = async (id, paciente) => {
+  return api.put(`/api/paciente?id=${id}`, {
+    paciente,
+  });
+};
+
 export const buscarPaciente = async (cpf, dentista) => {
   return api.post(`/api/paciente/cpf/${cpf}`, {
     dentista,
@@ -31,18 +37,20 @@ export const buscarPaciente = async (cpf, dentista) => {
 };
 
 //* Rotas Solicitacao Paciente
+export const getSolicitacao = async (cpf) => {
+  return await api.get(`/api/paciente/${cpf}/solicitacoes`);
+};
+
 export const removerPermissao = async (cpf, dentista) => {
-  return await api.delete(`/api/paciente/${cpf}/dentistas`, {
-    data: { dentista },
-  });
+  return await api.delete(`/api/paciente/${cpf}/remover-dentista/${dentista}`);
 };
 
 export const aceitarSolicitacao = async (cpf, dentista) => {
-  return await api.put(`/api/paciente/${cpf}/solicitacoes`, { dentista });
+  return await api.put(`/api/paciente/${cpf}/solicitacoes/${dentista}`);
 };
 
 export const recusarSolicitacao = async (cpf, dentista) => {
-  return await api.delete(`/api/paciente/${cpf}/solicitacoes`, { dentista });
+  return await api.delete(`/api/paciente/${cpf}/solicitacoes/${dentista}`);
 };
 
 //* Rotas Instituicao
@@ -69,8 +77,8 @@ export const getDentista = async (id) => {
   return api.get(`/api/dentista?id=${id}`);
 };
 
-export const deleteDentista = async (id) => {
-  return api.delete(`/api/dentista?id=${id}`);
+export const deleteDentista = async (instituicao, dentista) => {
+  return api.delete(`/instituicao/${instituicao}/dentista/${dentista}`);
 };
 
 export const enviarSolicitacao = async (cpf, dentista) => {

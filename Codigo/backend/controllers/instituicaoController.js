@@ -52,6 +52,27 @@ const instituicaoController = {
         .json({ error: "Ocorreu um erro ao cadastrar o Dentista!" });
     }
   },
+  deleteDentista: async (req, res) => {
+    try {
+      const { id, dentista } = req.params;
+
+      const dentistaResp = await dentistaController.delete(req, res);
+
+      const instituicao = await InstituicaoModel.findById(id);
+      instituicao.dentistas.filter(
+        (_dentista) => _dentista._id.toString() !== dentista
+      );
+      await instituicao.save();
+
+      res.status(201).json({
+        dentista: dentistaResp,
+        msg: "Dentista excluido com sucesso!",
+      });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err.message });
+    }
+  },
   get: async (req, res) => {
     try {
       const { id } = req.query;

@@ -28,7 +28,7 @@ const pacienteController = {
         .json({ paciente, msg: "Paciente cadastrado com sucesso!" });
     } catch (error) {
       console.log(error);
-      await PacienteModel.findByIdAndDelete(pacienteUser._id);
+      if (pacienteUser) await UsuarioModel.findByIdAndDelete(pacienteUser._id);
 
       res
         .status(500)
@@ -111,7 +111,7 @@ const pacienteController = {
       const paciente = await PacienteModel.findByIdAndDelete(id);
       await UsuarioModel.findByIdAndDelete(paciente.user._id);
 
-      res.status(200).json({ paciente, msg: "Paciente excluido com sucesso!" });
+      res.status(201).json({ paciente, msg: "Paciente excluido com sucesso!" });
     } catch (error) {
       console.log(error);
       res
@@ -122,7 +122,7 @@ const pacienteController = {
   update: async (req, res) => {
     try {
       const { id } = req.query;
-      const { name, email, senha, condicoes } = req.body;
+      const { name, email, senha, condicoes } = req.body.paciente;
 
       const updatedPaciente = await PacienteModel.findByIdAndUpdate(
         id,
@@ -138,23 +138,20 @@ const pacienteController = {
         return;
       }
 
-      await UsuarioModel.findByIdAndUpdate(updatedPaciente.user._id, {
-        email,
-        senha,
-      });
+      const updateUser = await UsuarioModel.findByIdAndUpdate(
+        updatedPaciente.user._id,
+        {
+          email,
+          senha,
+        }
+      );
 
-      const paciente = await updatedPaciente.populate({
-        path: "solicitacoes",
-        select: "name user",
-        populate: {
-          path: "user",
-          select: "email",
-        },
-      });
+      if (!updateUser) {
+        res.status(404).json({ msg: "Paciente não encontrado!" });
+        return;
+      }
 
-      res
-        .status(200)
-        .json({ paciente, msg: "Paciente atualizado com sucesso!" });
+      res.status(201).json({ msg: "Paciente atualizado com sucesso!" });
     } catch (error) {
       console.log(error);
       res
@@ -180,7 +177,7 @@ const pacienteController = {
         return;
       }
 
-      res.status(200).json({ dentistas: paciente.dentistas });
+      res.status(201).json({ dentistas: paciente.dentistas });
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: "Erro interno do servidor" });
@@ -188,8 +185,9 @@ const pacienteController = {
   },
   removerPermissao: async (req, res) => {
     try {
-      const { cpf } = req.params;
-      const { dentista } = req.body;
+      const { cpf, id } = req.params;
+
+      console.log(cpf, id);
 
       const paciente = await PacienteModel.findOne({ cpf });
       if (!paciente) {
@@ -198,7 +196,7 @@ const pacienteController = {
       }
 
       const dentistA = paciente.dentistas.find(
-        (dentistA) => dentistA.toString() === dentista
+        (dentistA) => dentistA.toString() === id
       );
       if (!dentistA) {
         res.status(404).json({ msg: "Dentista não encontrado!" });
@@ -206,11 +204,11 @@ const pacienteController = {
       }
 
       paciente.dentistas = paciente.dentistas.filter(
-        (dentistA) => dentistA.toString() !== dentista
+        (dentistA) => dentistA.toString() !== id
       );
       paciente.save();
 
-      res.status(200).json({ msg: "Permissão removida com sucesso" });
+      res.status(201).json({ msg: "Permissão removida com sucesso" });
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: "Erro interno do servidor" });

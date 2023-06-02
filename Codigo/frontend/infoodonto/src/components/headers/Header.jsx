@@ -66,16 +66,30 @@ const Header = ({ colorized }) => {
                 </Button>
               </div>
             ) : (
-              <Button
-                className={`${styles.buttonLink} ${
-                  colorized && styles.colorized
-                }`}
-                onClick={() => {
-                  navigate("/perfil");
-                }}
-              >
-                Perfil
-              </Button>
+              <>
+                {tipoUser === "paciente" && (
+                  <Button
+                    className={`${styles.buttonLink} ${
+                      colorized && styles.colorized
+                    }`}
+                    onClick={() => {
+                      navigate("/perfil/dentistas");
+                    }}
+                  >
+                    Dentistas
+                  </Button>
+                )}
+                <Button
+                  className={`${styles.buttonLink} ${
+                    colorized && styles.colorized
+                  }`}
+                  onClick={() => {
+                    navigate("/perfil");
+                  }}
+                >
+                  Perfil
+                </Button>
+              </>
             )}
             <Button
               className={`${styles.buttonLink} ${

@@ -19,21 +19,41 @@ const usuarioController = {
       switch (user.type) {
         case "dentista":
           data = await DentistaModel.findOne({ user: user._id }).populate(
-            "instituicao user"
+            "instituicao"
           );
           break;
 
         case "paciente":
           userType = await PacienteModel.findOne({ user: user._id });
-          data = await userType.populate(
-            "dentistas solicitacoes user condicoes"
-          );
+
+          data = await userType.populate({
+            path: "dentistas solicitacoes",
+            select: "name user instituicao",
+            populate: [
+              {
+                path: "instituicao",
+                select: "name tipo user email",
+                populate: {
+                  path: "user",
+                  select: "email",
+                },
+              },
+              { path: "user", select: "email" },
+            ],
+          });
+
+          data = await data.populate({
+            path: "condicoes",
+            select: "-createdAt -updatedAt",
+          });
+
           break;
 
         case "instituicao":
           userType = await InstituicaoModel.findOne({
             user: user._id,
-          }).populate("user");
+          });
+
           data = await userType.populate({
             path: "dentistas",
             populate: {
@@ -50,7 +70,10 @@ const usuarioController = {
           return;
       }
 
-      data = await data.populate("user");
+      data = await data.populate({
+        path: "user",
+        select: "-createdAt -updatedAt",
+      });
 
       res.status(201).json(data);
     } catch (error) {

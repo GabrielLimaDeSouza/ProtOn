@@ -43,7 +43,7 @@ const HomeInstituicao = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await deleteDentista(id);
+      const response = await deleteDentista(user._id, id);
 
       if (response.status === 201) {
         const { msg } = response.data;
@@ -108,7 +108,7 @@ const HomeInstituicao = () => {
                 rows={dentistas}
                 to={{ route: `/instituicao/dentistas/:id/editar`, key: "_id" }}
                 onClick={handleDelete}
-                edit
+                instituicao
               />
             ) : (
               <TableDesktop
@@ -116,7 +116,7 @@ const HomeInstituicao = () => {
                 rows={dentistas}
                 to={{ route: `/instituicao/dentistas/:id/editar`, key: "_id" }}
                 onClick={handleDelete}
-                edit
+                instituicao
               />
             )}
           </div>

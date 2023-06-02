@@ -1,3 +1,7 @@
+div.noData {
+  text-align: center;
+}
+
 table.table {
   width: 100%;
 }
@@ -46,7 +50,4 @@ td.edit > div {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-td.edit > div svg {
-  width: 1.3rem;
 }
