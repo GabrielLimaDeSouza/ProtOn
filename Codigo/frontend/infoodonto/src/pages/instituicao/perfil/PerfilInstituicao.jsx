@@ -1,50 +1,39 @@
 //* CSS
-import styles from "./PerfilPaciente.module.css";
+import styles from "../../../css/FormPaciente.module.css";
 
 //* React
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 
 //* Components
-import Condicoes from "../../../components/condicoes/Condicoes";
 import Input from "../../../components/inputs/Input";
 import Button from "../../../components/buttons/Button";
-import Header from "../../../components/headers/Header";
 import Form from "../../../components/forms/Form";
+import Header from "../../../components/headers/Header";
 import { LoginContext } from "../../../context/LoginContext";
 
 //* Material UI
 import { Alert } from "@mui/material";
 
-//* API
-import {
-  getCondicoes,
-  updatePaciente,
-  deletePaciente,
-} from "../../../services/api";
-
 //* Icons
 import { BiShow, BiHide } from "react-icons/bi";
 
-const PerfilPaciente = () => {
-  const { user, updateUser, logout } = useContext(LoginContext);
-  const [confirmSenha, setConfirmSenha] = useState();
-  const [condicoes, setCondicoes] = useState(user.condicoes);
-  const [condicoesOptions, setCondicoesOptions] = useState();
-  const [isHiddenPass, setIsHiddenPass] = useState(true);
+//* API
+import { updateInstituicao, deleteInstituicao } from "../../../services/api";
+
+const PerfilInstituicao = () => {
   const [isHiddenConfirmPass, setIsHiddenConfirmPass] = useState(true);
+  const [isHiddenPass, setIsHiddenPass] = useState(true);
+  const [confirmPass, setConfirmPass] = useState(true);
   const [alert, setAlert] = useState(null);
+  const { user, updateUser, logout } = useContext(LoginContext);
 
-  useEffect(() => {
-    (async () => {
-      const condicoesResp = await getCondicoes();
-      setCondicoesOptions(condicoesResp.data);
-    })();
-  }, []);
+  const handleUpdateInstituicao = async (formData) => {
+    const instituicao = Object.fromEntries(formData);
 
-  const handleUpdateUser = async (formData) => {
-    const paciente = Object.fromEntries(formData);
-
-    if ((confirmSenha || paciente.senha) && paciente.senha !== confirmSenha) {
+    if (
+      (confirmPass || instituicao.senha) &&
+      instituicao.senha !== confirmPass
+    ) {
       setAlert({ severity: "error", msg: "As senhas não coincidem" });
 
       setTimeout(() => {
@@ -54,21 +43,17 @@ const PerfilPaciente = () => {
       return;
     }
 
-    if (paciente.senha === "") {
-      paciente.senha = user.user.senha;
+    if (instituicao.senha === "") {
+      instituicao.senha = user.user.senha;
     }
 
-    paciente.condicoes = condicoes;
-
     try {
-      const response = await updatePaciente(user._id, paciente);
+      const response = await updateInstituicao(user._id, instituicao);
 
       if (response.status === 201) {
-        user.name = paciente.name;
-        user.user.email = paciente.email;
-        user.user.senha = paciente.senha;
-        user.condicoes = condicoes;
-
+        user.name = instituicao.name;
+        user.user.email = instituicao.email;
+        user.user.senha = instituicao.senha;
         updateUser(user);
 
         setAlert({ severity: "success", msg: response.data.msg });
@@ -79,13 +64,13 @@ const PerfilPaciente = () => {
     } finally {
       setTimeout(() => {
         setAlert(null);
-      }, 3000);
+      }, 5000);
     }
   };
 
   const handleDeleteAccount = async () => {
     try {
-      const response = await deletePaciente(user._id);
+      const response = await deleteInstituicao(user._id);
 
       if (response.status === 201) {
         setAlert({ severity: "success", msg: response.data.msg });
@@ -109,101 +94,87 @@ const PerfilPaciente = () => {
       <div className={styles.header}>
         <Header colorized />
       </div>
-
       <div className={styles.body}>
-        <section className="edit-dados">
+        <section className="update-account">
           <div className={styles.content}>
             <div className={styles.divTitle}>
               <h1 className={styles.title}>Editar dados</h1>
               <p className={styles.descripton}>
-                Mantenha seus dados pessoais sempre atualizados
+                Mantenha seus dados sempre atualizados
               </p>
             </div>
           </div>
         </section>
-
-        <Form className={styles.form} onSubmit={handleUpdateUser}>
+        <Form className={styles.form} onSubmit={handleUpdateInstituicao}>
           {alert && (
             <Alert severity={alert.severity} onClose={() => setAlert(null)}>
               {alert.msg}
             </Alert>
           )}
-
           <div className={styles.formData}>
             <section className={styles.section1}>
               <section className={styles.sectionEdit}>
-                <h4 className={styles.titleSection}>Dados pessoais</h4>
+                <h4 className={styles.titleSection}>Dados institucionais</h4>
                 <Input
                   type="text"
-                  initialValue={user?.name}
                   name="name"
-                  id="updateName"
+                  id="name"
                   placeholder="Nome"
+                  initialValue={user?.name}
+                  required
                 />
-
                 <Input
                   type="text"
-                  initialValue={user?.cpf}
-                  name="cpf"
-                  id="updateCpf"
-                  placeholder="CPF"
+                  id="selectTipo"
+                  name="tipo"
+                  initialValue={user?.tipo}
                   disabled
                 />
               </section>
-
               <section className={styles.sectionEdit}>
                 <h4 className={styles.titleSection}>Login</h4>
                 <Input
                   type="text"
-                  initialValue={user?.user.email}
                   name="email"
-                  id="updateEmail"
+                  id="email"
                   placeholder="Email"
+                  initialValue={user?.user.email}
+                  required
                 />
-
                 <Input
                   type={isHiddenPass ? "password" : "text"}
-                  name="senha"
                   placeholder="Senha"
-                  id="updatePassword"
+                  id="password"
+                  name="senha"
+                  required
                 >
-                  <button
+                  <Button
                     type="button"
-                    className={styles.empty}
+                    className="empty"
+                    id="btn-hidden-pass"
                     onClick={() => setIsHiddenPass(!isHiddenPass)}
                   >
                     {isHiddenPass ? <BiShow /> : <BiHide />}
-                  </button>
+                  </Button>
                 </Input>
-
                 <Input
                   type={isHiddenConfirmPass ? "password" : "text"}
                   placeholder="Confirmar senha"
                   id="confirmUpdatePassword"
-                  onChange={setConfirmSenha}
+                  onChange={setConfirmPass}
                 >
-                  <button
+                  <Button
                     type="button"
                     className="empty"
+                    id="btn-hidden-cfmPass"
                     onClick={() => setIsHiddenConfirmPass(!isHiddenConfirmPass)}
                   >
                     {isHiddenConfirmPass ? <BiShow /> : <BiHide />}
-                  </button>
+                  </Button>
                 </Input>
               </section>
             </section>
-
-            <section className={styles.sectionEdit}>
-              <h4 className={styles.titleSection}>Condições</h4>
-              <Condicoes
-                condicoes={user.condicoes}
-                options={condicoesOptions}
-                onChange={(condicoes) => setCondicoes(condicoes)}
-                edit
-              />
-            </section>
           </div>
-
           <div className={styles.hudBtn}>
             <Button
               type="button"
@@ -222,4 +193,4 @@ const PerfilPaciente = () => {
   );
 };
 
-export default PerfilPaciente;
+export default PerfilInstituicao;

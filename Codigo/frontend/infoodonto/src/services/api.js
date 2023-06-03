@@ -1,8 +1,10 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://protonbackend.onrender.com",
+  baseURL: "http://localhost:3000",
 });
+
+// https://protonbackend.onrender.com
 
 //* Rota Login
 export const createSession = async (email, senha) => {
@@ -36,6 +38,10 @@ export const buscarPaciente = async (cpf, dentista) => {
   });
 };
 
+export const deletePaciente = async (id) => {
+  return api.delete(`/api/paciente?id=${id}`);
+};
+
 //* Rotas Solicitacao Paciente
 export const getSolicitacao = async (cpf) => {
   return await api.get(`/api/paciente/${cpf}/solicitacoes`);
@@ -58,6 +64,16 @@ export const createInstituicao = async (instituicao) => {
   return api.post(`/api/instituicao`, {
     instituicao,
   });
+};
+
+export const updateInstituicao = async (id, instituicao) => {
+  return api.put(`/api/instituicao?id=${id}`, {
+    instituicao,
+  });
+};
+
+export const deleteInstituicao = async (id) => {
+  return api.put(`/api/instituicao?id=${id}`);
 };
 
 export const createDentista = async (dentista) => {

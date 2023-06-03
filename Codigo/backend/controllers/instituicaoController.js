@@ -121,9 +121,9 @@ const instituicaoController = {
       ).populate("user");
       await UsuarioModel.findByIdAndDelete(deletedInstituicao.user._id);
 
-      res
-        .status(200)
-        .json({ deletedInstituicao, msg: "Instituição excluida com sucesso!" });
+      await dentistaController.deleteAll(req, res);
+
+      res.status(200).json({ msg: "Instituição excluida com sucesso!" });
     } catch (error) {
       console.log(error);
       res
