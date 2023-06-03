@@ -16,9 +16,10 @@ import FormPaciente from "./pages/paciente/FormPaciente";
 import FormDentista from "./pages/dentista/FormDentista";
 import FormInstituicao from "./pages/instituicao/FormInstituicao";
 import SearchPaciente from "./pages/dentista/SearchPaciente";
-import HomeInstituicao from "./pages/instituicao/HomeInstituicao";
+import GerenciarDentistas from "./pages/instituicao/GerenciarDentistas";
 import EditDentista from "./pages/dentista/EditDentista";
 import PerfilPaciente from "./pages/paciente/perfil/PerfilPaciente";
+import PerfilInstituicao from "./pages/instituicao/perfil/PerfilInstituicao";
 import DentistasPermitidos from "./pages/paciente/permissoes/DentistasPermitidos";
 
 const AppRoutes = () => {
@@ -34,7 +35,7 @@ const AppRoutes = () => {
         return <PerfilPaciente />;
 
       case "instituicao":
-        return <HomeInstituicao />;
+        return <PerfilInstituicao />;
 
       default:
         return <Navigate to="/" />;
@@ -99,7 +100,7 @@ const AppRoutes = () => {
 
           <Route
             exact
-            path="/perfil/dentistas"
+            path="/perfil/permissoes"
             element={
               <Private permission="paciente">
                 <DentistasPermitidos />
@@ -109,7 +110,7 @@ const AppRoutes = () => {
 
           <Route
             exact
-            path="/instituicao/dentistas/cadastrar"
+            path="/perfil/dentistas/cadastrar"
             element={
               <Private permission="instituicao">
                 <FormDentista />
@@ -119,7 +120,17 @@ const AppRoutes = () => {
 
           <Route
             exact
-            path="/instituicao/dentistas/:id/editar"
+            path="/perfil/dentistas"
+            element={
+              <Private permission="instituicao">
+                <GerenciarDentistas />
+              </Private>
+            }
+          />
+
+          <Route
+            exact
+            path="/perfil/dentistas/:id/editar"
             element={
               <Private permission="instituicao">
                 <EditDentista />

@@ -40,6 +40,7 @@ button[type="button"] {
 
 button.delete {
   background: #ff3e3e;
+  color: #fff;
   border: none;
   border-radius: 10rem;
   height: 3rem;

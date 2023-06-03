@@ -1,0 +1,4 @@
+div.body {
+  display: flex;
+  column-gap: 2rem;
+}

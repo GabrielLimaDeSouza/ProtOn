@@ -1,0 +1,17 @@
+div.body {
+  position: relative;
+}
+
+div.contentMenu {
+  position: absolute;
+  right: 0;
+  width: 14rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  justify-content: center;
+  align-items: flex-end;
+  background-color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 15px;
+}

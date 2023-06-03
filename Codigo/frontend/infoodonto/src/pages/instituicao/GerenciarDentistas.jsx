@@ -20,7 +20,7 @@ import Button from "../../components/buttons/Button";
 import TableDesktop from "../../components/tables/desktop/TableDesktop";
 import MobileTable from "../../components/tables/mobile/MobileTable";
 
-const HomeInstituicao = () => {
+const GerenciarDentistas = () => {
   const mobileView = useMediaQuery({ maxWidth: 1100 });
 
   const [dentistas, setDentistas] = useState([]);
@@ -91,7 +91,7 @@ const HomeInstituicao = () => {
             </Alert>
           )}
           <div className={styles.btnAddDentista}>
-            <Link to={"/instituicao/dentistas/cadastrar"}>
+            <Link to={"/perfil/dentistas/cadastrar"}>
               <Button
                 type="button"
                 id="add-dentista"
@@ -106,7 +106,7 @@ const HomeInstituicao = () => {
             {mobileView ? (
               <MobileTable
                 rows={dentistas}
-                to={{ route: `/instituicao/dentistas/:id/editar`, key: "_id" }}
+                to={{ route: `/perfil/dentistas/:id/editar`, key: "_id" }}
                 onClick={handleDelete}
                 instituicao
               />
@@ -114,7 +114,7 @@ const HomeInstituicao = () => {
               <TableDesktop
                 header={header}
                 rows={dentistas}
-                to={{ route: `/instituicao/dentistas/:id/editar`, key: "_id" }}
+                to={{ route: `/perfil/dentistas/:id/editar`, key: "_id" }}
                 onClick={handleDelete}
                 instituicao
               />
@@ -126,4 +126,4 @@ const HomeInstituicao = () => {
   );
 };
 
-export default HomeInstituicao;
+export default GerenciarDentistas;
