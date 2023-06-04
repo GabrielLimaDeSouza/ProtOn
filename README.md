@@ -1,6 +1,6 @@
 # InfoOdonto
 
-[Escreva um ou dois  parágrafo resumindo o objetivo do seu projeto.]
+A area de odontologia requer como qualquer outra área da saúde, segurança ao paciente, pois envolve intervenções que podem afetar diretamente a sua saúde. O presente trabalho tem como objetivo auxiliar os profissionais da área no atendimento aos pacientes, por meio da criação de um sistema de recomendação de protocolos odontológicos, voltado as condições individuais de cada paciente.
 
 ## Alunos integrantes da equipe
 
@@ -14,20 +14,40 @@
 * Soraia Lúcia da Silva
 * Lucila Ishitani
 
-## Histórias de usuários
+## Link para o projeto hospedado
 
-* UC1 - Eu, como instituição, desejo cadastrar meu dados com o objetivo de ingressar no sistema
-* UC2 - Eu, como instituição, desejo possuir um login com o objetivo de ter maior segurança dos meus dados
-* UC3 - Eu, como instituição, desejo cadastrar um denstista afiliado para que o mesmo possa acessar o sistema
-* UC4 - Eu, como instituição, desejo remover um destista afiliado com o objetivo de desligar um ex funcionário
-* UC5 - Eu, como instituição, desejo visualizar a listas de dentistas filiados a mim com o objetivo de geri-los de forma mais eficiente
-* UC6 - Eu, como instituição, desejo alterar os dados do dentista afiliado com o objetivo de mante-los atualizados
-* UC7 - Eu, como paciente, desejo cadastrar meus dados pessoais com objetivo de ser atendido de forma mais rápida e segura
-* UC8 - Eu, como dentista, desejo visualizar os dados do paciente com objetivo de consultá-los
-* UC9 - Eu, como dentista, desejo buscar um paciente com objetivo de acha-lo de forma mais rápida
-* UC10 - Eu, como dentista, desejo consultar as recomendações com objetivo de receber os procedimentos recomendados
-* UC11 - Eu, como dentista, desejo realizar um login com objetivo de ter maior segurança dos dados
+https://protonodontologia.onrender.com/
 
 ## Instruções de utilização
 
-[Assim que a primeira versão do sistema estiver disponível, deverá complementar com as instruções de utilização. Descreva como instalar eventuais dependências e como executar a aplicação.]
+Passo a passo para instalar o projeto localmente e executá-lo:
+
+Passo 1: Clonar o repositório:
+
+`$ git clone https://github.com/ICEI-PUC-Minas-PPLES-TI/plf-es-2023-1-ti4-0648100-odontologia.git`
+
+Passo 2: Acessar a pasta do frontend:
+
+`$ cd plf-es-2023-1-ti4-0648100-odontologia\Codigo\frontend\infoodonto`
+ 
+Passo 3: Instalar as dependências do frontend:
+
+`$ npm i`
+
+Passo 4: Inicializar o frontend:
+
+`$ npm run dev`
+
+Passo 5: Acessar a pasta do backend:
+
+`$ cd plf-es-2023-1-ti4-0648100-odontologia\Codigo\backend`
+ 
+Passo 6: Instalar as dependências do backend:
+
+`$ npm i`
+
+Passo 7: Inicializar a o servidor backend:
+
+`$ npm start`
+
+Após esses passos o frontend estará rodando em http://localhost:5173
