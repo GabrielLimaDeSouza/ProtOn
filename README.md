@@ -1,5 +1,7 @@
 # InfoOdonto
 
+![logo](https://github.com/ICEI-PUC-Minas-PPLES-TI/plf-es-2023-1-ti4-0648100-odontologia/assets/90854484/18ba0e1b-7496-4f88-9535-869d4f71f75d)
+
 A area de odontologia requer como qualquer outra área da saúde, segurança ao paciente, pois envolve intervenções que podem afetar diretamente a sua saúde. O presente trabalho tem como objetivo auxiliar os profissionais da área no atendimento aos pacientes, por meio da criação de um sistema de recomendação de protocolos odontológicos, voltado as condições individuais de cada paciente.
 
 ## Alunos integrantes da equipe
@@ -50,4 +52,4 @@ Passo 7: Inicializar a o servidor backend:
 
 `$ npm start`
 
-Após esses passos o frontend estará rodando em http://localhost:5173
+Após esses passos o projeto estará rodando em http://localhost:5173
