@@ -1,4 +1,4 @@
-# InfoOdonto
+# ProtOn
 
 ![logo](https://github.com/ICEI-PUC-Minas-PPLES-TI/plf-es-2023-1-ti4-0648100-odontologia/assets/90854484/18ba0e1b-7496-4f88-9535-869d4f71f75d)
 
