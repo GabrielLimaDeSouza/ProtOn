@@ -61,35 +61,29 @@ const Headers = ({ user, logout, colorized, mobile }) => {
   };
 
   const HeaderNotLogged = () => {
-    const cadastrar = (
-      <>
-        <Link
-          className={`${styles.itemLink} ${styles.colorized}`}
-          to="/paciente/cadastrar"
-        >
-          Sou Paciente
-        </Link>
-        <Link
-          className={`${styles.itemLink} ${styles.colorized}`}
-          to="/instituicao/cadastrar"
-        >
-          Sou Instituicao
-        </Link>
-      </>
-    );
-
     return (
       <>
         {mobile ? (
-          { cadastrar }
+          <>
+            <Link
+              className={`${styles.itemLink} ${styles.colorized}`}
+              to="/paciente/cadastrar"
+            >
+              Sou Paciente
+            </Link>
+            <Link
+              className={`${styles.itemLink} ${styles.colorized}`}
+              to="/instituicao/cadastrar"
+            >
+              Sou Instituicao
+            </Link>
+          </>
         ) : (
           <MultipleMenu
             label="Cadastrar"
             className="empty menu"
             colorized={colorized && styles.colorized}
-          >
-            {cadastrar}
-          </MultipleMenu>
+          />
         )}
         <Link
           className={`${styles.itemLink} ${colorized && styles.colorized}`}

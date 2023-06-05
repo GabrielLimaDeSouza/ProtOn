@@ -23,17 +23,6 @@ import { BiMenuAltLeft } from "react-icons/bi";
 const DesktopHomePage = () => {
   const { user } = useContext(LoginContext);
 
-  const cadastrar = (
-    <>
-      <Link className={styles.button} to="/paciente/cadastrar">
-        Sou Paciente
-      </Link>
-      <Link className={styles.button} to="/instituicao/cadastrar">
-        Sou Instituicao
-      </Link>
-    </>
-  );
-
   return (
     <>
       <div className={styles.body}>
@@ -71,9 +60,7 @@ const DesktopHomePage = () => {
                     label="Cadastrar"
                     className="action blue-primary-reverse home"
                     colorized
-                  >
-                    {cadastrar}
-                  </MultipleMenu>
+                  />
 
                   <p className={styles.pButton}>ou</p>
 

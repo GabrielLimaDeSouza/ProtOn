@@ -44,11 +44,10 @@ form.form {
 
 p.signUp {
   font-size: 13px;
-}
-
-.link {
-  color: #20a0fd;
-  text-decoration: none;
+  display: flex;
+  column-gap: 0.7rem;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (max-width: 800px) {

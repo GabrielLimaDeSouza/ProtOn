@@ -1,50 +1,38 @@
-import { useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { LoginContext } from "../../context/LoginContext";
-
-import Input from "../../components/inputs/Input";
-import Button from "../../components/buttons/Button";
-import ButtonMUI from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import { Alert } from "@mui/material";
-
-import { AiOutlineArrowLeft } from "react-icons/ai";
-
+//* CSS
 import styles from "../../css/Login.module.css";
 
+//* React
+import { useState, useContext } from "react";
+import { Link } from "react-router-dom";
+import { LoginContext } from "../../context/LoginContext";
+
+//* Components
+import Input from "../../components/inputs/Input";
+import Button from "../../components/buttons/Button";
+import MultipleMenu from "../../components/headers/components/cadastrar/MultipleMenu";
+import Form from "../../components/forms/Form";
+
+//* Meterial UI
+import { Alert } from "@mui/material";
+
+//* Icons
+import { AiOutlineArrowLeft } from "react-icons/ai";
+
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
-  const [error, setError] = useState(null);
-
-  const [anchorEl, setAnchorEl] = useState(null);
-  const navigate = useNavigate();
-
-  const open = !!anchorEl;
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleRedirectInstituicao = () => {
-    setAnchorEl(null);
-    navigate("/instituicao/cadastrar");
-  };
-
-  const handleRedirectPaciente = () => {
-    setAnchorEl(null);
-    navigate("/paciente/cadastrar");
-  };
+  const [alert, setAlert] = useState(null);
 
   const { login } = useContext(LoginContext);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleSubmit = async (formData) => {
+    const { email, senha } = Object.fromEntries(formData);
     const resp = await login(email, senha);
 
     if (resp.status !== 201) {
-      setError(resp.msg);
+      setAlert(resp.msg);
+
+      setTimeout(() => {
+        setAlert(null);
+      }, 4000);
     }
   };
 
@@ -69,22 +57,19 @@ const Login = () => {
             </p>
           </div>
           <div className={styles.divForm}>
-            {error && <Alert severity="error">{error}</Alert>}
+            {alert && (
+              <Alert severity="error" onClose={() => setAlert(null)}>
+                {alert}
+              </Alert>
+            )}
 
-            <form className={styles.form} onSubmit={handleSubmit}>
-              <Input
-                type="email"
-                placeholder="Email"
-                id="email"
-                name="email"
-                onChange={setEmail}
-              />
+            <Form className={styles.form} onSubmit={handleSubmit}>
+              <Input type="email" placeholder="Email" id="email" name="email" />
               <Input
                 type="password"
                 placeholder="Senha"
                 id="senha"
                 name="senha"
-                onChange={setSenha}
               />
 
               <div>
@@ -96,40 +81,10 @@ const Login = () => {
                   Entrar
                 </Button>
               </div>
-            </form>
+            </Form>
             <p className={styles.signUp}>
-              Não possui conta?{" "}
-              <ButtonMUI
-                className={styles.buttonLink}
-                aria-controls={open ? "demo-positioned-menu" : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? "true" : undefined}
-                onClick={handleClick}
-              >
-                Cadastrar
-              </ButtonMUI>
-              <Menu
-                id="demo-positioned-menu"
-                aria-labelledby="demo-positioned-button"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={() => setAnchorEl(null)}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-              >
-                <MenuItem onClick={handleRedirectPaciente}>
-                  Sou paciente
-                </MenuItem>
-                <MenuItem onClick={handleRedirectInstituicao}>
-                  Sou instituição
-                </MenuItem>
-              </Menu>
+              Não possui conta?
+              <MultipleMenu label="Cadastrar" className="empty" colorized />
             </p>
           </div>
         </div>
