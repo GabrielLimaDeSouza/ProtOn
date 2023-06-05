@@ -31,7 +31,8 @@
 /* Estilos divContent */
 
 .divContent {
-  margin-top: 5rem;
+  margin: 5rem auto 0;
+  max-width: 30rem;
 }
 
 /* Estilos icons */

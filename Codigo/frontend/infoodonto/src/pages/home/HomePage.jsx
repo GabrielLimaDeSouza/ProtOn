@@ -4,7 +4,7 @@ import MobileHomePage from "./MobileHomePage";
 import DesktopHomePage from "./DesktopHomePage";
 
 const HomePage = () => {
-  const isDesktop = useMediaQuery({ minWidth: 1279 });
+  const isDesktop = useMediaQuery({ minWidth: 840 });
 
   return isDesktop ? <DesktopHomePage /> : <MobileHomePage />;
 };
