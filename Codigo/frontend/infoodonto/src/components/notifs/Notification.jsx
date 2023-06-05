@@ -65,9 +65,11 @@ export const Notification = ({ notifs, onClickAccept, onClickReject }) => {
               </div>
             ))
           ) : (
-            <span>
-              <em>Você não possui solicitações</em>
-            </span>
+            <div className={styles.noNotifs}>
+              <span>
+                <em>Você não possui solicitações</em>
+              </span>
+            </div>
           )}
         </div>
       )}

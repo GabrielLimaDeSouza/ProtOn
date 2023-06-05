@@ -167,13 +167,13 @@ const PerfilPaciente = () => {
                   placeholder="Senha"
                   id="updatePassword"
                 >
-                  <button
+                  <Button
                     type="button"
-                    className={styles.empty}
+                    className="empty"
                     onClick={() => setIsHiddenPass(!isHiddenPass)}
                   >
                     {isHiddenPass ? <BiShow /> : <BiHide />}
-                  </button>
+                  </Button>
                 </Input>
 
                 <Input
@@ -182,13 +182,13 @@ const PerfilPaciente = () => {
                   id="confirmUpdatePassword"
                   onChange={setConfirmSenha}
                 >
-                  <button
+                  <Button
                     type="button"
                     className="empty"
                     onClick={() => setIsHiddenConfirmPass(!isHiddenConfirmPass)}
                   >
                     {isHiddenConfirmPass ? <BiShow /> : <BiHide />}
-                  </button>
+                  </Button>
                 </Input>
               </section>
             </section>
@@ -207,12 +207,12 @@ const PerfilPaciente = () => {
           <div className={styles.hudBtn}>
             <Button
               type="button"
-              className="delete"
+              className="action delete"
               onClick={handleDeleteAccount}
             >
               Apagar conta
             </Button>
-            <Button type="submit" className="submit blue-primary">
+            <Button type="submit" className="action submit blue-primary">
               Atualizar
             </Button>
           </div>

@@ -20,11 +20,10 @@ const Header = ({ colorized }) => {
   const [tipoUser, setTipoUser] = useState(null);
 
   useEffect(() => {
-    console.log(user);
-    if (user) setTipoUser(user.user.type);
+    setTipoUser(user?.user.type || null);
   }, [user]);
 
-  const mobileView = useMediaQuery({ maxWidth: 800 });
+  const mobileView = useMediaQuery({ maxWidth: 840 });
 
   return (
     <nav className={styles.navHeader}>

@@ -125,13 +125,13 @@ const FormPaciente = () => {
                   name="senha"
                   required
                 >
-                  <button
+                  <Button
                     type="button"
                     className="empty"
                     onClick={() => setIsHiddenPass(!isHiddenPass)}
                   >
                     {isHiddenPass ? <BiShow /> : <BiHide />}
-                  </button>
+                  </Button>
                 </Input>
               </section>
             </section>
@@ -145,7 +145,7 @@ const FormPaciente = () => {
             </section>
           </div>
           <div>
-            <Button type="submit" className="submit blue-primary">
+            <Button type="submit" className="action submit blue-primary">
               Criar Conta
             </Button>
           </div>

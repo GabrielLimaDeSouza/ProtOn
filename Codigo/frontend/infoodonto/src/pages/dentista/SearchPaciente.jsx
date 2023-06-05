@@ -83,7 +83,7 @@ const SearchPaciente = () => {
                 />
               </div>
               <div>
-                <Button type="submit" className="submit">
+                <Button type="submit" className="action blue-primary submit">
                   Buscar
                 </Button>
               </div>

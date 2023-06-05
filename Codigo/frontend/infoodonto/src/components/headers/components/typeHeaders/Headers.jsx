@@ -79,7 +79,6 @@ const Headers = ({ user, logout, colorized }) => {
       </>
     );
   };
-  console.log(user);
 
   return user ? (
     <>
@@ -91,7 +90,12 @@ const Headers = ({ user, logout, colorized }) => {
         <HeaderDentista />
       )}
 
-      <Button type="button" className="empty" id="btn-logout" onClick={logout}>
+      <Button
+        type="button"
+        className="empty"
+        id="btn-logout"
+        onClick={() => logout()}
+      >
         <Link
           className={`${styles.itemLink} ${colorized && styles.colorized}`}
           to="/"

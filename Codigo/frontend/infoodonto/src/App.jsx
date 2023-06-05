@@ -1,14 +1,15 @@
-import AppRoutes from "./AppRoutes"
-
 //* CSS
-import './App.css'
+import "./App.css";
+
+//* Components
+import AppRoutes from "./AppRoutes";
 
 function App() {
   return (
     <div className="App">
-        <AppRoutes />
+      <AppRoutes />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

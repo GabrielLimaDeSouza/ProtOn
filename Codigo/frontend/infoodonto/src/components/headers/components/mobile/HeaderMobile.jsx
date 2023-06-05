@@ -11,25 +11,22 @@ import Button from "../../../buttons/Button";
 //* Icons
 import { IoMenuOutline } from "react-icons/io5";
 
-const HeaderMobile = ({ colorized, user }) => {
+const HeaderMobile = ({ colorized, user, logout }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuMobile = useRef(null);
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutSide, true);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutSide, true);
+    };
   }, []);
 
   const handleClickOutSide = ({ target }) => {
-    console.log(menuMobile.current);
-    console.log(target);
-
-    if (!menuMobile.current.contains(target)) {
+    if (menuMobile.current && !menuMobile.current.contains(target)) {
       setIsOpen(false);
     }
-  };
-
-  const handleOpenMenu = () => {
-    setIsOpen(!isOpen);
   };
 
   return (
@@ -38,14 +35,14 @@ const HeaderMobile = ({ colorized, user }) => {
         type="button"
         className="empty"
         id="btn-menu-mobile"
-        onClick={handleOpenMenu}
+        onClick={() => setIsOpen(!isOpen)}
       >
         <IoMenuOutline color={colorized ? "#20A0FD" : "#fff"} size="1.5rem" />
       </Button>
 
       {isOpen && (
         <div className={styles.contentMenu}>
-          <Headers user={user} colorized />
+          <Headers user={user} logout={logout} colorized />
         </div>
       )}
     </div>

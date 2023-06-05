@@ -6,7 +6,6 @@ import { useState, useEffect, useContext } from "react";
 import { useMediaQuery } from "react-responsive";
 
 //* Material UI
-import { CircularProgress } from "@mui/material";
 import { Alert } from "@mui/material";
 
 //* API
@@ -29,17 +28,12 @@ const DentistasPermitidos = () => {
   const [dentistas, setDentistas] = useState([]);
   const [solicitacoes, setSolicitacoes] = useState([]);
   const [header, setHeader] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [alert, setAlert] = useState(null);
   const { user, updateUser } = useContext(LoginContext);
 
   useEffect(() => {
     setDentistas(user.dentistas);
     setSolicitacoes(user.solicitacoes);
-
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 600);
   }, []);
 
   useEffect(() => {
@@ -109,9 +103,7 @@ const DentistasPermitidos = () => {
     }
   };
 
-  return isLoading ? (
-    <CircularProgress />
-  ) : (
+  return (
     <div className={styles.main}>
       <div className={styles.header}>
         <Header colorized />

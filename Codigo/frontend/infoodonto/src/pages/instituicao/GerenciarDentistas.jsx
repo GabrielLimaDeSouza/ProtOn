@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 
 //* Material UI
-import { CircularProgress } from "@mui/material";
 import { Alert } from "@mui/material";
 
 //* API
@@ -25,16 +24,11 @@ const GerenciarDentistas = () => {
 
   const [dentistas, setDentistas] = useState([]);
   const [header, setHeader] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [alert, setAlert] = useState(null);
   const { user, updateUser } = useContext(LoginContext);
 
   useEffect(() => {
     setDentistas(user.dentistas);
-
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 600);
   }, []);
 
   useEffect(() => {
@@ -63,14 +57,11 @@ const GerenciarDentistas = () => {
     }
   };
 
-  return isLoading ? (
-    <CircularProgress />
-  ) : (
+  return (
     <div className={styles.main}>
       <div className={styles.header}>
         <Header colorized />
       </div>
-
       <div className={styles.body}>
         <section className="add-dentista">
           <div className={styles.content}>

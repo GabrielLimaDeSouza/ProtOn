@@ -148,13 +148,13 @@ const FormInstituicao = () => {
                     id="password"
                     name="senha"
                   >
-                    <button
+                    <Button
                       type="button"
-                      className={styles.empty}
+                      className="empty"
                       onClick={() => setIsHiddenPass(!isHiddenPass)}
                     >
                       {isHiddenPass ? <BiShow /> : <BiHide />}
-                    </button>
+                    </Button>
                   </Input>
                   <Input
                     type={isHiddenConfirmPass ? "password" : "text"}
@@ -162,19 +162,19 @@ const FormInstituicao = () => {
                     id="confirmUpdatePassword"
                     onChange={(confimPass) => setConfirmPass(confimPass)}
                   >
-                    <button
+                    <Button
                       type="button"
-                      className={styles.empty}
+                      className="empty"
                       onClick={() =>
                         setIsHiddenConfirmPass(!isHiddenConfirmPass)
                       }
                     >
                       {isHiddenConfirmPass ? <BiShow /> : <BiHide />}
-                    </button>
+                    </Button>
                   </Input>
                 </section>
                 <div>
-                  <Button type="submit" className="submit blue-primary">
+                  <Button type="submit" className="action submit blue-primary">
                     Atualizar
                   </Button>
                 </div>

@@ -25,4 +25,11 @@ div.tag {
   display: flex;
   column-gap: 0.5rem;
   align-items: center;
+  max-width: 100%;
+}
+
+div.tag > span {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }

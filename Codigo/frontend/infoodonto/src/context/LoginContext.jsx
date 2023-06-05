@@ -43,6 +43,8 @@ export const LoginProvider = ({ children }) => {
       setTimeout(() => {
         navigate("/");
       }, 600);
+
+      return response;
     } catch (err) {
       const { status, data } = err.response;
       return { status, msg: data.msg };

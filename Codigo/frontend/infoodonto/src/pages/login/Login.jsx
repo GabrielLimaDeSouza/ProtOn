@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LoginContext } from "../../context/LoginContext";
 
 import Input from "../../components/inputs/Input";
@@ -51,9 +51,9 @@ const Login = () => {
   return (
     <div className={styles.body}>
       <div className="divArrow">
-        <a href="/">
+        <Link to="/">
           <AiOutlineArrowLeft className="arrowBackWhite" />
-        </a>
+        </Link>
       </div>
       <section className="logo-login">
         <div className={styles.logo}>
@@ -88,7 +88,11 @@ const Login = () => {
               />
 
               <div>
-                <Button type="submit" id="login" className="submit">
+                <Button
+                  type="submit"
+                  id="login"
+                  className="action blue-primary submit"
+                >
                   Entrar
                 </Button>
               </div>

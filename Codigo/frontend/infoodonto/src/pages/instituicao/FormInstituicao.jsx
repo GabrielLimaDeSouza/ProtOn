@@ -110,19 +110,19 @@ const FormInstituicao = () => {
                   name="senha"
                   required
                 >
-                  <button
+                  <Button
                     type="button"
-                    className={styles.empty}
+                    className="empty"
                     onClick={() => setIsHiddenPass(!isHiddenPass)}
                   >
                     {isHiddenPass ? <BiShow /> : <BiHide />}
-                  </button>
+                  </Button>
                 </Input>
               </section>
             </section>
           </div>
           <div>
-            <Button type="submit" className="submit blue-primary">
+            <Button type="submit" className="action submit blue-primary">
               Criar Conta
             </Button>
           </div>

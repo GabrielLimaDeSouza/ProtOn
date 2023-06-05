@@ -1,3 +1,4 @@
+//* React
 import { useContext } from "react";
 import {
   BrowserRouter as Router,
@@ -7,7 +8,9 @@ import {
 } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 
+//* Components
 import { LoginContext, LoginProvider } from "./context/LoginContext";
+import Header from "./components/headers/Header";
 
 //* Pages User
 import HomePage from "./pages/home/HomePage";
@@ -80,7 +83,7 @@ const AppRoutes = () => {
         <Routes>
           <Route
             exact
-            path="/denista/buscar-paciente"
+            path="/dentista/buscar-paciente"
             element={
               <Private permission="dentista">
                 <SearchPaciente />

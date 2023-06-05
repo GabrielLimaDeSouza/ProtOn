@@ -65,7 +65,7 @@ const FormInstituicao = () => {
           <section className="create-account">
             <div className={styles.content}>
               <div className={styles.divTitle}>
-                <h1 className={styles.title}>Criar nova conta</h1>
+                <h1 className={styles.title}>Cadastrar novo dentista</h1>
                 <p className={styles.descripton}>
                   Adicione dentistas para que eles possam buscar por protocolos
                   odontologicos
@@ -113,17 +113,17 @@ const FormInstituicao = () => {
                     id="password"
                     name="senha"
                   >
-                    <button
+                    <Button
                       type="button"
-                      className={styles.empty}
+                      className="empty"
                       onClick={() => setIsHiddenPass(!isHiddenPass)}
                     >
                       {isHiddenPass ? <BiShow /> : <BiHide />}
-                    </button>
+                    </Button>
                   </Input>
                 </section>
                 <div>
-                  <Button type="submit" className="submit blue-primary">
+                  <Button type="submit" className="action submit blue-primary">
                     Criar Conta
                   </Button>
                 </div>

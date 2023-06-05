@@ -178,12 +178,12 @@ const PerfilInstituicao = () => {
           <div className={styles.hudBtn}>
             <Button
               type="button"
-              className="delete"
+              className="action delete"
               onClick={handleDeleteAccount}
             >
               Apagar conta
             </Button>
-            <Button type="submit" className="submit blue-primary">
+            <Button type="submit" className="action submit blue-primary">
               Atualizar
             </Button>
           </div>

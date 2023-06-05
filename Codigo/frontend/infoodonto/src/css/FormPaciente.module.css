@@ -57,6 +57,14 @@ section.sectionEdit {
   row-gap: 1rem;
 }
 
+div.hudBtn {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
 @media (max-width: 840px) {
   div.main {
     padding: 0;
@@ -75,5 +83,8 @@ section.sectionEdit {
 @media (max-width: 300px) {
   div.body {
     padding: 0 1rem 4rem;
+  }
+  div.hudBtn {
+    flex-direction: column-reverse;
   }
 }
