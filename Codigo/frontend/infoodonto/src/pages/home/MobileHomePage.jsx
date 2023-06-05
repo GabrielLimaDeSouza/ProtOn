@@ -2,13 +2,14 @@
 import styles from "../../css/HomePageMobile.module.css";
 
 //* React
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
 
-//* Material UI
-import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
+//* Components
+import Header from "../../components/headers/Header";
+import MultipleMenu from "../../components/headers/components/cadastrar/MultipleMenu";
+import Button from "../../components/buttons/Button";
+import { LoginContext } from "../../context/LoginContext";
 
 //* SVG's
 import Logo from "../../img/logo.svg";
@@ -18,26 +19,20 @@ import { AiOutlineTwitter } from "react-icons/ai";
 import { AiOutlineInstagram } from "react-icons/ai";
 import { GrFacebookOption } from "react-icons/gr";
 import { BiMenuAltLeft } from "react-icons/bi";
-import Header from "../../components/headers/Header";
 
 const MobileHomePage = () => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const navigate = useNavigate();
+  const { user } = useContext(LoginContext);
 
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleRedirectInstituicao = () => {
-    setAnchorEl(null);
-    navigate("/instituicao/cadastrar");
-  };
-
-  const handleRedirectPaciente = () => {
-    setAnchorEl(null);
-    navigate("/paciente/cadastrar");
-  };
+  const cadastrar = (
+    <>
+      <Link className={styles.button} to="/paciente/cadastrar">
+        Sou Paciente
+      </Link>
+      <Link className={styles.button} to="/instituicao/cadastrar">
+        Sou Instituicao
+      </Link>
+    </>
+  );
 
   return (
     <>
@@ -71,24 +66,25 @@ const MobileHomePage = () => {
               </p>
             </div>
             <div className={styles.divButton}>
-              <Button
-                className={styles.button}
-                aria-controls={open ? "demo-positioned-menu" : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? "true" : undefined}
-                onClick={handleClick}
-              >
-                Cadastrar
-              </Button>
-              <p className={styles.pButton}>ou</p>
-              <Button
-                className={styles.button}
-                onClick={() => {
-                  navigate("/login");
-                }}
-              >
-                Login
-              </Button>
+              {!user && (
+                <>
+                  <MultipleMenu
+                    label="Cadastrar"
+                    className="action blue-primary-reverse home"
+                    colorized
+                  >
+                    {cadastrar}
+                  </MultipleMenu>
+
+                  <p className={styles.pButton}>ou</p>
+
+                  <Button type="button" className="action blue-primary-reverse">
+                    <Link className={styles.button} to="/login">
+                      Login
+                    </Link>
+                  </Button>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -127,24 +123,6 @@ const MobileHomePage = () => {
           </div>
         </div>
       </div>
-      <Menu
-        id="demo-positioned-menu"
-        aria-labelledby="demo-positioned-button"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={() => setAnchorEl(null)}
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "left",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "left",
-        }}
-      >
-        <MenuItem onClick={handleRedirectPaciente}>Sou paciente</MenuItem>
-        <MenuItem onClick={handleRedirectInstituicao}>Sou instituição</MenuItem>
-      </Menu>
     </>
   );
 };

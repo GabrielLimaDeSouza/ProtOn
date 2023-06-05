@@ -143,19 +143,20 @@ const AppRoutes = () => {
 
           <Route
             exact
-            path="/paciente/cadastrar"
-            element={
-              <NotLoggedUser>
-                <FormPaciente />
-              </NotLoggedUser>
-            }
-          />
-          <Route
-            exact
             path="/login"
             element={
               <NotLoggedUser>
                 <Login />
+              </NotLoggedUser>
+            }
+          />
+
+          <Route
+            exact
+            path="/paciente/cadastrar"
+            element={
+              <NotLoggedUser>
+                <FormPaciente />
               </NotLoggedUser>
             }
           />

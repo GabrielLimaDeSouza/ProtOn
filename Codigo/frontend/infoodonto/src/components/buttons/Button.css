@@ -17,10 +17,15 @@ button.action {
 
 button.blue-primary {
   color: #fff;
-  background-color: #20a0fd;
+  background-color: #62a8db;
 }
 button.blue-primary:hover {
-  color: #20a0fd;
+  color: #62a8db;
+  background-color: #fff;
+}
+
+button.blue-primary-reverse {
+  color: #62a8db;
   background-color: #fff;
 }
 
@@ -35,6 +40,22 @@ button.delete:hover {
 
 button.red {
   color: #ff3e3e;
+}
+
+button.white {
+  color: #fff;
+}
+
+button.blue {
+  color: #62a8db;
+}
+
+button.menu {
+  font-size: 0.9rem;
+}
+
+button.home {
+  font-size: 1rem;
 }
 
 button.empty,

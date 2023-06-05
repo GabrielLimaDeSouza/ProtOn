@@ -6,8 +6,9 @@ import { Link } from "react-router-dom";
 
 //* Components
 import Button from "../../../buttons/Button";
+import MultipleMenu from "../cadastrar/MultipleMenu";
 
-const Headers = ({ user, logout, colorized }) => {
+const Headers = ({ user, logout, colorized, mobile }) => {
   const HeaderInstituicao = () => {
     return (
       <>
@@ -60,16 +61,36 @@ const Headers = ({ user, logout, colorized }) => {
   };
 
   const HeaderNotLogged = () => {
-    return (
+    const cadastrar = (
       <>
         <Link
-          className={`${styles.itemLink} ${colorized && styles.colorized} ${
-            colorized && styles.colorized
-          }`}
-          to="/cadastrar"
+          className={`${styles.itemLink} ${styles.colorized}`}
+          to="/paciente/cadastrar"
         >
-          Cadastrar
+          Sou Paciente
         </Link>
+        <Link
+          className={`${styles.itemLink} ${styles.colorized}`}
+          to="/instituicao/cadastrar"
+        >
+          Sou Instituicao
+        </Link>
+      </>
+    );
+
+    return (
+      <>
+        {mobile ? (
+          { cadastrar }
+        ) : (
+          <MultipleMenu
+            label="Cadastrar"
+            className="empty menu"
+            colorized={colorized && styles.colorized}
+          >
+            {cadastrar}
+          </MultipleMenu>
+        )}
         <Link
           className={`${styles.itemLink} ${colorized && styles.colorized}`}
           to="/login"

@@ -86,21 +86,16 @@
 
 .divButton {
   display: flex;
-  flex-direction: row;
+  flex-direction: column-reverse;
   justify-content: center;
   align-items: center;
-  margin-top: 8vh;
+  margin-top: 3rem;
+  gap: 1rem;
 }
 
 .button {
-  border: none !important;
-  background-color: #f3f3f3 !important;
-  color: #20a0fd !important;
-  padding: 0.5rem 2.5rem !important;
-  border-radius: 60px !important;
-  text-transform: capitalize !important;
-  font-size: 15px !important;
-  font-family: "Montserrat", sans-serif !important;
+  text-decoration: none;
+  color: #62a8db;
 }
 
 .pButton {
@@ -160,9 +155,13 @@
   font-size: 25px;
 }
 
-@media (min-width: 400px) {
+@media (min-width: 380px) {
   .whiteTitle {
     font-size: 40px;
+  }
+
+  .divButton {
+    flex-direction: row;
   }
 
   .pButton {

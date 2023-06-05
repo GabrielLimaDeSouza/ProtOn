@@ -113,15 +113,8 @@ img {
 }
 
 .button {
-  border: none;
-  background-color: #f3f3f3 !important;
-  color: #20a0fd;
-  padding: 1.8vh;
-  width: 150px;
-  height: 40%;
-  cursor: pointer;
-  border-radius: 60px;
-  transition: 0.5s;
+  text-decoration: none;
+  color: #62a8db;
 }
 
 .button:hover {

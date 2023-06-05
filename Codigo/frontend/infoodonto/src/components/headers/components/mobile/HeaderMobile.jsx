@@ -17,10 +17,6 @@ const HeaderMobile = ({ colorized, user, logout }) => {
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutSide, true);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutSide, true);
-    };
   }, []);
 
   const handleClickOutSide = ({ target }) => {
@@ -42,7 +38,7 @@ const HeaderMobile = ({ colorized, user, logout }) => {
 
       {isOpen && (
         <div className={styles.contentMenu}>
-          <Headers user={user} logout={logout} colorized />
+          <Headers user={user} logout={logout} colorized mobile />
         </div>
       )}
     </div>
