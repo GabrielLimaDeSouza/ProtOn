@@ -1,10 +1,10 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://protonbackend.onrender.com",
 });
 
-// https://protonbackend.onrender.com
+// http://localhost:3000
 
 //* Rota Login
 export const createSession = async (email, senha) => {
