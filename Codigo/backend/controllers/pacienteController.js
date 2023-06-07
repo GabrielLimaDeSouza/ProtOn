@@ -187,8 +187,6 @@ const pacienteController = {
     try {
       const { cpf, id } = req.params;
 
-      console.log(cpf, id);
-
       const paciente = await PacienteModel.findOne({ cpf });
       if (!paciente) {
         res.status(404).json({ msg: "Paciente não encontrado!" });

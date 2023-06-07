@@ -16,7 +16,7 @@ const condicaoController = {
 
       const response = await CondicaoModel.create(condicao);
       res
-        .status(200)
+        .status(201)
         .json({ response, msg: "Condicao cadastrada com sucesso!" });
     } catch (error) {
       console.log(error);

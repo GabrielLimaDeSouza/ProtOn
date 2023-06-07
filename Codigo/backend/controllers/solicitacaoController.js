@@ -25,8 +25,6 @@ const solicitacaoController = {
         ],
       });
 
-      console.log(paciente);
-
       if (!paciente) {
         res.status(404).json({ msg: "Paciente não encontrado!" });
         return;
