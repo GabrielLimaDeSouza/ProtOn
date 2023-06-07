@@ -1,13 +1,11 @@
 /* Estilos Body */
-
-.header {
+.background {
   background-color: #62a8db;
+  border-radius: 0 0 20px 20px;
 }
 
 .body {
-  background-color: #62a8db;
-  border-radius: 0 0 20px 20px;
-  padding: 7rem 2rem 10rem;
+  padding: 2rem 2rem 10rem;
 }
 
 .divScroll {

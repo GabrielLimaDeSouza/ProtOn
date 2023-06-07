@@ -106,7 +106,7 @@ const instituicaoController = {
         return;
       }
 
-      res.status(200).json(instituicao.dentistas);
+      res.status(201).json(instituicao.dentistas);
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: "Erro interno do servidor" });
@@ -123,7 +123,7 @@ const instituicaoController = {
 
       await dentistaController.deleteAll(req, res);
 
-      res.status(200).json({ msg: "Instituição excluida com sucesso!" });
+      res.status(201).json({ msg: "Instituição excluida com sucesso!" });
     } catch (error) {
       console.log(error);
       res
@@ -154,7 +154,7 @@ const instituicaoController = {
       );
 
       res
-        .status(200)
+        .status(201)
         .json({ instituicao, msg: "Instituição atualizada com sucesso!" });
     } catch (error) {
       console.log(error);

@@ -146,7 +146,6 @@ const PerfilInstituicao = () => {
                   placeholder="Senha"
                   id="password"
                   name="senha"
-                  required
                 >
                   <Button
                     type="button"

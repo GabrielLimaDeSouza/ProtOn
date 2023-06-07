@@ -75,7 +75,7 @@ const Headers = ({ user, logout, colorized, mobile }) => {
               className={`${styles.itemLink} ${styles.colorized}`}
               to="/instituicao/cadastrar"
             >
-              Sou Instituicao
+              Sou Instituição
             </Link>
           </>
         ) : (

@@ -1,10 +1,11 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://protonbackend.onrender.com",
+  baseURL: "http://localhost:3000",
 });
 
-// http://localhost:3000
+//
+// https://protonbackend.onrender.com
 
 //* Rota Login
 export const createSession = async (email, senha) => {
@@ -73,7 +74,7 @@ export const updateInstituicao = async (id, instituicao) => {
 };
 
 export const deleteInstituicao = async (id) => {
-  return api.put(`/api/instituicao?id=${id}`);
+  return api.delete(`/api/instituicao?id=${id}`);
 };
 
 export const createDentista = async (dentista) => {
@@ -94,7 +95,7 @@ export const getDentista = async (id) => {
 };
 
 export const deleteDentista = async (instituicao, dentista) => {
-  return api.delete(`/instituicao/${instituicao}/dentista/${dentista}`);
+  return api.delete(`/api/instituicao/${instituicao}/dentista/${dentista}`);
 };
 
 export const enviarSolicitacao = async (cpf, dentista) => {

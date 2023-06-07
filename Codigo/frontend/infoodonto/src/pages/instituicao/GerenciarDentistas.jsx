@@ -43,6 +43,7 @@ const GerenciarDentistas = () => {
         const { msg } = response.data;
 
         user.dentistas = dentistas.filter((_dentista) => _dentista._id !== id);
+        setDentistas(user.dentistas);
         updateUser(user);
 
         setAlert({ severity: "success", msg });

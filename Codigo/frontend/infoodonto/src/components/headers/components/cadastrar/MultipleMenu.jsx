@@ -15,13 +15,13 @@ const MultipleMenu = ({ label, className, colorized }) => {
   const cadastrar = (
     <>
       <Link
-        className={`${styles.button} ${colorized && styles.colorized}`}
+        className={`${styles.button} ${styles.colorized}`}
         to="/paciente/cadastrar"
       >
         Sou Paciente
       </Link>
       <Link
-        className={`${styles.button} ${colorized && styles.colorized}`}
+        className={`${styles.button} ${styles.colorized}`}
         to="/instituicao/cadastrar"
       >
         Sou Instituicao

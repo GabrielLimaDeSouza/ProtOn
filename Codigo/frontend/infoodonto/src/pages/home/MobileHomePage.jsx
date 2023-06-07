@@ -26,52 +26,57 @@ const MobileHomePage = () => {
   return (
     <>
       <div className={styles.main}>
-        <div className={styles.header}>
-          <Header />
-        </div>
-        <div className={styles.body}>
-          <div className={styles.logo}>
-            <img src={Logo} alt="ProtOn" />
+        <div className={styles.background}>
+          <div className={styles.header}>
+            <Header />
           </div>
-          <div className={styles.divContent}>
-            <div className={styles.icons}>
-              <AiOutlineInstagram className={styles.icon} />
-              <AiOutlineTwitter className={styles.icon} />
-              <GrFacebookOption className={styles.icon} />
+          <div className={styles.body}>
+            <div className={styles.logo}>
+              <img src={Logo} alt="ProtOn" />
             </div>
-            <div className={styles.title}>
-              <h1 className={styles.whiteTitle}>
-                O software para{" "}
-                <span className={styles.markedTitle}>
-                  gestão de protocolos odontológicos
-                </span>
-              </h1>
-            </div>
-            <div className={styles.divText}>
-              <p className={styles.text}>
-                O ProtOn auxilia na dinâmica e praticidade das consultas dos
-                dentistas ao oferecer protocolos odontológicos de atendimento de
-                acordo com as condições do paciente
-              </p>
-            </div>
-            <div className={styles.divButton}>
-              {!user && (
-                <>
-                  <MultipleMenu
-                    label="Cadastrar"
-                    className="action blue-primary-reverse home"
-                    colorized
-                  />
+            <div className={styles.divContent}>
+              <div className={styles.icons}>
+                <AiOutlineInstagram className={styles.icon} />
+                <AiOutlineTwitter className={styles.icon} />
+                <GrFacebookOption className={styles.icon} />
+              </div>
+              <div className={styles.title}>
+                <h1 className={styles.whiteTitle}>
+                  O software para{" "}
+                  <span className={styles.markedTitle}>
+                    gestão de protocolos odontológicos
+                  </span>
+                </h1>
+              </div>
+              <div className={styles.divText}>
+                <p className={styles.text}>
+                  O ProtOn auxilia na dinâmica e praticidade das consultas dos
+                  dentistas ao oferecer protocolos odontológicos de atendimento
+                  de acordo com as condições do paciente
+                </p>
+              </div>
+              <div className={styles.divButton}>
+                {!user && (
+                  <>
+                    <MultipleMenu
+                      label="Cadastrar"
+                      className="action blue-primary-reverse home"
+                      colorized
+                    />
 
-                  <p className={styles.pButton}>ou</p>
+                    <p className={styles.pButton}>ou</p>
 
-                  <Button type="button" className="action blue-primary-reverse">
-                    <Link className={styles.button} to="/login">
-                      Login
-                    </Link>
-                  </Button>
-                </>
-              )}
+                    <Button
+                      type="button"
+                      className="action blue-primary-reverse"
+                    >
+                      <Link className={styles.button} to="/login">
+                        Login
+                      </Link>
+                    </Button>
+                  </>
+                )}
+              </div>
             </div>
           </div>
         </div>

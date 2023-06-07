@@ -74,7 +74,7 @@ const FormInstituicao = () => {
         updateUser(user);
 
         setTimeout(() => {
-          navigate("/perfil");
+          navigate("/perfil/dentistas");
         }, 2000);
       }
     } catch (err) {
