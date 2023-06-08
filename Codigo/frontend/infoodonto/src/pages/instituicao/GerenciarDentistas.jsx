@@ -25,6 +25,7 @@ const GerenciarDentistas = () => {
   const [dentistas, setDentistas] = useState([]);
   const [header, setHeader] = useState([]);
   const [alert, setAlert] = useState(null);
+  const [isLoadingDelete, setIsLoadingDelete] = useState(false);
   const { user, updateUser } = useContext(LoginContext);
 
   useEffect(() => {
@@ -36,6 +37,8 @@ const GerenciarDentistas = () => {
   }, [dentistas]);
 
   const handleDeleteDentista = async (id) => {
+    setIsLoadingDelete(true);
+
     try {
       const response = await deleteDentista(user._id, id);
 
@@ -56,6 +59,8 @@ const GerenciarDentistas = () => {
         setAlert(null);
       }, 5000);
     }
+
+    setIsLoadingDelete(false);
   };
 
   return (
@@ -99,6 +104,7 @@ const GerenciarDentistas = () => {
                 rows={dentistas}
                 to={{ route: `/perfil/dentistas/:id/editar`, key: "_id" }}
                 onClick={handleDeleteDentista}
+                loading={isLoadingDelete}
                 instituicao
               />
             ) : (
@@ -107,6 +113,7 @@ const GerenciarDentistas = () => {
                 rows={dentistas}
                 to={{ route: `/perfil/dentistas/:id/editar`, key: "_id" }}
                 onClick={handleDeleteDentista}
+                loading={isLoadingDelete}
                 instituicao
               />
             )}

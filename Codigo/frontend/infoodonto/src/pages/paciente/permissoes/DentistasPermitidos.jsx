@@ -29,6 +29,8 @@ const DentistasPermitidos = () => {
   const [solicitacoes, setSolicitacoes] = useState([]);
   const [header, setHeader] = useState([]);
   const [alert, setAlert] = useState(null);
+  const [isLoadingDelete, setIsLoadingDelete] = useState(null);
+
   const { user, updateUser } = useContext(LoginContext);
 
   useEffect(() => {
@@ -41,6 +43,8 @@ const DentistasPermitidos = () => {
   }, [dentistas]);
 
   const handleDelete = async (id) => {
+    setIsLoadingDelete(true);
+
     try {
       const response = await removerPermissao(user.cpf, id);
 
@@ -61,9 +65,13 @@ const DentistasPermitidos = () => {
         setAlert(null);
       }, 5000);
     }
+
+    setIsLoadingDelete(false);
   };
 
   const handleAccept = async (solicitacao) => {
+    setIsLoadingDelete(true);
+
     try {
       const response = await aceitarSolicitacao(user.cpf, solicitacao._id);
 
@@ -80,12 +88,17 @@ const DentistasPermitidos = () => {
       }
     } catch (err) {
       const { error } = err.response.data;
-      console.log(error);
+      setAlert({ severity: "error", msg: error });
+    } finally {
+      setTimeout(() => {
+        setAlert(null);
+      }, 5000);
     }
+
+    setIsLoadingDelete(false);
   };
 
   const handleReject = async (solicitacao) => {
-    console.log(solicitacao);
     try {
       const response = await recusarSolicitacao(user.cpf, solicitacao._id);
 
@@ -99,7 +112,11 @@ const DentistasPermitidos = () => {
       }
     } catch (err) {
       const { error } = err.response.data;
-      console.log(error);
+      setAlert({ severity: "error", msg: error });
+    } finally {
+      setTimeout(() => {
+        setAlert(null);
+      }, 5000);
     }
   };
 
@@ -122,7 +139,8 @@ const DentistasPermitidos = () => {
                 />
               </div>
               <p className={styles.descripton}>
-                Gerencie aqui os dentistas que irão ter permissão para acessar seus dados
+                Gerencie aqui os dentistas que irão ter permissão para acessar
+                seus dados
               </p>
             </div>
           </div>
@@ -137,12 +155,17 @@ const DentistasPermitidos = () => {
 
           <div className={styles.tableContainer}>
             {mobileView ? (
-              <MobileTable rows={dentistas} onClick={handleDelete} />
+              <MobileTable
+                rows={dentistas}
+                onClick={handleDelete}
+                loading={isLoadingDelete}
+              />
             ) : (
               <TableDesktop
                 header={header}
                 rows={dentistas}
                 onClick={handleDelete}
+                loading={isLoadingDelete}
               />
             )}
           </div>
