@@ -23,7 +23,7 @@ import { updateInstituicao, deleteInstituicao } from "../../../services/api";
 const PerfilInstituicao = () => {
   const [isHiddenConfirmPass, setIsHiddenConfirmPass] = useState(true);
   const [isHiddenPass, setIsHiddenPass] = useState(true);
-  const [confirmPass, setConfirmPass] = useState(true);
+  const [confirmPass, setConfirmPass] = useState(null);
   const [alert, setAlert] = useState(null);
   const [isLoadingUpdate, setIsLoadingUpdate] = useState(false);
   const [isLoadingDelete, setIsLoadingDelete] = useState(false);

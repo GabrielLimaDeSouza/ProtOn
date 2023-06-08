@@ -27,7 +27,7 @@ import { BiShow, BiHide } from "react-icons/bi";
 
 const PerfilPaciente = () => {
   const { user, updateUser, logout } = useContext(LoginContext);
-  const [confirmSenha, setConfirmSenha] = useState();
+  const [confirmSenha, setConfirmSenha] = useState(null);
   const [condicoes, setCondicoes] = useState(user.condicoes);
   const [condicoesOptions, setCondicoesOptions] = useState();
   const [isHiddenPass, setIsHiddenPass] = useState(true);

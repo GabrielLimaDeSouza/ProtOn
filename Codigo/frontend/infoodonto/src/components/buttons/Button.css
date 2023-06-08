@@ -51,6 +51,13 @@ button.blue {
   color: #62a8db;
 }
 
+button.blue-primary.loading {
+  background-color: #b7defa;
+}
+button.red.loading {
+  background-color: #ff9090;
+}
+
 button.menu {
   font-size: 0.9rem;
 }
@@ -67,13 +74,15 @@ button.empty:hover {
   box-shadow: none;
 }
 
-button.mobile {
-  border: none;
-  outline: none;
-  border-radius: 100%;
-  padding: 0.5rem;
-  height: 2.5rem;
-  width: 2.5rem;
+button.loading {
+  cursor: default;
+  padding-left: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0 1rem;
+  transition: none;
+  background-color: #b7defa;
 }
 
 button[type="button"].close {
@@ -106,17 +115,6 @@ button[type="button"].tabs {
 button[type="button"].tabs.active {
   background-color: #20a0fd !important;
   color: #fff;
-}
-
-button.loading {
-  cursor: default;
-  background-color: #b7defa;
-  padding-left: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0 1rem;
-  transition: none;
 }
 
 @media (max-width: 300px) {
