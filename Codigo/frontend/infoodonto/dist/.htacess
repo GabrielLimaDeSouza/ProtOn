@@ -1,9 +1,9 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteBase /infoodonto/src/
+  RewriteBase /Codigo/frontend/infoodonto/dist/
   RewriteRule ^index\.html$ - [L]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !-l
-  RewriteRule . /infoodonto/src/index.html [L] 
+  RewriteRule . /Codigo/frontend/infoodonto/dist/index.html [L]
 </IfModule>
