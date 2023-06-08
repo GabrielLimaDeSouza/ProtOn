@@ -64,11 +64,12 @@ const DesktopHomePage = () => {
 
                   <p className={styles.pButton}>ou</p>
 
-                  <Button type="button" className="action blue-primary-reverse">
+
                     <Link className={styles.button} to="/login">
-                      Login
+                      <Button type="button" className="action blue-primary-reverse">
+                        Login
+                      </Button>
                     </Link>
-                  </Button>
                 </>
               )}
             </div>
