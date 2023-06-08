@@ -16,7 +16,7 @@ const Result = ({ paciente }) => {
         <h3 className={styles.titleContent}>Protocolos para {condicao.nome}</h3>
         <section className={styles.protocols}>
           <div>
-            <h4>Pre-atendimento</h4>
+            <h4>Pré-atendimento</h4>
             <ul>
               {condicao.preAtendimento.map((text, index) => (
                 <li key={generateKey(text, index)}>{text}</li>
@@ -24,7 +24,7 @@ const Result = ({ paciente }) => {
             </ul>
           </div>
           <div>
-            <h4>Anestesico Local</h4>
+            <h4>Anestésico Local</h4>
             <ul>
               {condicao.anestesicoLocal.map((text, index) => (
                 <li key={generateKey(text, index)}>{text}</li>
