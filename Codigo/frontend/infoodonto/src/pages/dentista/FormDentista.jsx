@@ -67,8 +67,7 @@ const FormInstituicao = () => {
               <div className={styles.divTitle}>
                 <h1 className={styles.title}>Cadastrar novo dentista</h1>
                 <p className={styles.descripton}>
-                  Adicione dentistas para que eles possam buscar por protocolos
-                  odontologicos
+                  Adicione dentistas a sua instituição para que possam acessar o sistema
                 </p>
               </div>
             </div>

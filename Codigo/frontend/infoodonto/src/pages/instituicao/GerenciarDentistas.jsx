@@ -67,9 +67,9 @@ const GerenciarDentistas = () => {
         <section className="add-dentista">
           <div className={styles.content}>
             <div className={styles.divTitle}>
-              <h1 className={styles.title}>Criar nova conta</h1>
+              <h1 className={styles.title}>Gerenciamento de dentistas</h1>
               <p className={styles.descripton}>
-                Adicione dentistas a sua instituição para que possam acessar o sistema
+                Gerencie os dentistas da sua instituição
               </p>
             </div>
           </div>
