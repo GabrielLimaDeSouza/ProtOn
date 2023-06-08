@@ -4,7 +4,6 @@ import styles from "../../css/FormPaciente.module.css";
 //* React
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useMediaQuery } from "react-responsive";
 
 //* Components
 import Input from "../../components/inputs/Input";
@@ -13,18 +12,16 @@ import Form from "../../components/forms/Form";
 import Header from "../../components/headers/Header";
 
 //* Material UI
-import { Alert, CircularProgress } from "@mui/material";
+import { Alert } from "@mui/material";
 
 //* Icons
 import { BiShow, BiHide } from "react-icons/bi";
-import { FiTrash } from "react-icons/fi";
 
 //* API
 import { updateDentista, deleteDentista } from "../../services/api";
 
 //* Context
 import { LoginContext } from "../../context/LoginContext";
-import { IoFemaleSharp } from "react-icons/io5";
 
 const FormInstituicao = () => {
   const [isHiddenPass, setIsHiddenPass] = useState(true);
@@ -32,11 +29,10 @@ const FormInstituicao = () => {
   const [confirmPass, setConfirmPass] = useState(null);
   const [alert, setAlert] = useState(null);
   const [currentDentista, setCurrentDentista] = useState(null);
-  const { user, updateUser } = useContext(LoginContext);
   const [isLoadingUpdate, setIsLoadingUpdate] = useState(false);
   const [isLoadingDelete, setIsLoadingDelete] = useState(false);
 
-  const isMobile = useMediaQuery({ maxWidth: 400 });
+  const { user, updateUser } = useContext(LoginContext);
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -50,8 +46,17 @@ const FormInstituicao = () => {
 
     const newDentista = Object.fromEntries(formData);
 
-    if (confirmPass && newDentista.senha !== confirmPass) {
+    if (
+      (confirmPass || newDentista.senha) &&
+      newDentista.senha !== confirmPass
+    ) {
       setAlert({ severity: "error", msg: "As senhas não coincidem" });
+      setIsLoadingUpdate(false);
+
+      setTimeout(() => {
+        setAlert(null);
+      }, 3000);
+
       return;
     }
 
@@ -205,7 +210,7 @@ const FormInstituicao = () => {
                     type={isHiddenConfirmPass ? "password" : "text"}
                     placeholder="Confirmar senha"
                     id="confirmUpdatePassword"
-                    onChange={(confimPass) => setConfirmPass(confimPass)}
+                    onChange={setConfirmPass}
                   >
                     <Button
                       type="button"

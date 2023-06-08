@@ -54,7 +54,7 @@ button.blue {
 button.blue-primary.loading {
   background-color: #b7defa;
 }
-button.red.loading {
+button.delete.loading {
   background-color: #ff9090;
 }
 

@@ -40,6 +40,7 @@ const PerfilInstituicao = () => {
       instituicao.senha !== confirmPass
     ) {
       setAlert({ severity: "error", msg: "As senhas não coincidem" });
+      setIsLoadingUpdate(false);
 
       setTimeout(() => {
         setAlert(null);

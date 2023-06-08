@@ -50,6 +50,7 @@ const PerfilPaciente = () => {
 
     if ((confirmSenha || paciente.senha) && paciente.senha !== confirmSenha) {
       setAlert({ severity: "error", msg: "As senhas não coincidem" });
+      setIsLoadingUpdate(false);
 
       setTimeout(() => {
         setAlert(null);
