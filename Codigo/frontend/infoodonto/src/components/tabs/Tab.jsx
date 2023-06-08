@@ -16,7 +16,7 @@ const Tab = ({ tabs, children }) => {
     tabsRef.current.children[0].classList.add("active");
   }, [tabsRef]);
 
-  const teste = ({ target }) => {
+  const handleChangeTab = ({ target }) => {
     const id = parseInt(target.id);
 
     const currTab = children.find((_children) => _children.props?.index === id);
@@ -34,7 +34,13 @@ const Tab = ({ tabs, children }) => {
     <div className={styles.body}>
       <section className={styles.tabs} ref={tabsRef}>
         {tabs.map((_tab, index) => (
-          <Button type="button" id={index} className="tabs" onClick={teste}>
+          <Button
+            key={_tab.nome + index}
+            type="button"
+            id={index}
+            className="tabs"
+            onClick={handleChangeTab}
+          >
             {_tab.nome}
           </Button>
         ))}

@@ -5,6 +5,10 @@ import styles from "./Result.module.css";
 import Tab from "../../../../components/tabs/Tab";
 import TabContent from "../../../../components/tabs/content/TabContent";
 
+const generateKey = (entrada, concat) => {
+  return entrada.split(" ")[0] + "-" + concat;
+};
+
 const Result = ({ paciente }) => {
   const ProtocolsDesktop = ({ condicao }) => {
     return (
@@ -14,32 +18,32 @@ const Result = ({ paciente }) => {
           <div>
             <h4>Pre-atendimento</h4>
             <ul>
-              {condicao.preAtendimento.map((text) => (
-                <li>{text}</li>
+              {condicao.preAtendimento.map((text, index) => (
+                <li key={generateKey(text, index)}>{text}</li>
               ))}
             </ul>
           </div>
           <div>
             <h4>Anestesico Local</h4>
             <ul>
-              {condicao.anestesicoLocal.map((text) => (
-                <li>{text}</li>
+              {condicao.anestesicoLocal.map((text, index) => (
+                <li key={generateKey(text, index)}>{text}</li>
               ))}
             </ul>
           </div>
           <div>
             <h4>Medicamentos</h4>
             <ul>
-              {condicao.medicamentos.map((text) => (
-                <li>{text}</li>
+              {condicao.medicamentos.map((text, index) => (
+                <li key={generateKey(text, index)}>{text}</li>
               ))}
             </ul>
           </div>
           <div>
             <h4>Implante</h4>
             <ul>
-              {condicao.implante.map((text) => (
-                <li>{text}</li>
+              {condicao.implante.map((text, index) => (
+                <li key={generateKey(text, index)}>{text}</li>
               ))}
             </ul>
           </div>
@@ -62,13 +66,19 @@ const Result = ({ paciente }) => {
 
       <div className={styles.protocols}>
         <h3 className={styles.condicoesTitle}>Condições</h3>
-        <Tab tabs={paciente.condicoes}>
-          {paciente.condicoes.map((condicao, index) => (
-            <TabContent index={index}>
-              <ProtocolsDesktop condicao={condicao} />
-            </TabContent>
-          ))}
-        </Tab>
+        {paciente.condicoes.length > 0 ? (
+          <Tab tabs={paciente.condicoes}>
+            {paciente.condicoes.map((condicao, index) => (
+              <TabContent key={generateKey(condicao.nome, index)} index={index}>
+                <ProtocolsDesktop condicao={condicao} />
+              </TabContent>
+            ))}
+          </Tab>
+        ) : (
+          <div className={styles.noCondicoes}>
+            <em>Este paciente não possui condições cadastradas</em>
+          </div>
+        )}
       </div>
     </section>
   );
