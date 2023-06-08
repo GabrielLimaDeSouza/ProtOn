@@ -40,14 +40,11 @@ export const LoginProvider = ({ children }) => {
       const response = await getUser(loggedUser._id);
       setUser(response.data);
 
-      setTimeout(() => {
-        navigate("/");
-      }, 600);
+      navigate("/");
 
       return response;
     } catch (err) {
-      const { status, data } = err.response;
-      return { status, msg: data.msg };
+      return err.response;
     }
   };
 

@@ -98,6 +98,12 @@ button[type="button"].tabs.active {
   color: #fff;
 }
 
+button.loading {
+  cursor: default;
+  background-color: #b7defa;
+  padding-left: 1rem;
+}
+
 @media (max-width: 300px) {
   button.submit,
   button.delete {

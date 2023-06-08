@@ -4,36 +4,41 @@ import styles from "../../css/Login.module.css";
 //* React
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { LoginContext } from "../../context/LoginContext";
 
 //* Components
 import Input from "../../components/inputs/Input";
 import Button from "../../components/buttons/Button";
 import MultipleMenu from "../../components/headers/components/cadastrar/MultipleMenu";
 import Form from "../../components/forms/Form";
+import { LoginContext } from "../../context/LoginContext";
 
 //* Meterial UI
-import { Alert } from "@mui/material";
+import { Alert, CircularProgress } from "@mui/material";
 
 //* Icons
 import { AiOutlineArrowLeft } from "react-icons/ai";
 
 const Login = () => {
   const [alert, setAlert] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { login } = useContext(LoginContext);
 
   const handleSubmit = async (formData) => {
+    setIsLoading(true);
+
     const { email, senha } = Object.fromEntries(formData);
     const resp = await login(email, senha);
 
     if (resp.status !== 201) {
-      setAlert(resp.msg);
+      setAlert(resp.data.msg);
 
       setTimeout(() => {
         setAlert(null);
       }, 4000);
     }
+
+    setIsLoading(false);
   };
 
   return (
@@ -64,21 +69,35 @@ const Login = () => {
             )}
 
             <Form className={styles.form} onSubmit={handleSubmit}>
-              <Input type="email" placeholder="Email" id="email" name="email" />
+              <Input
+                type="email"
+                placeholder="Email"
+                id="email"
+                name="email"
+                required
+              />
               <Input
                 type="password"
                 placeholder="Senha"
                 id="senha"
                 name="senha"
+                required
               />
 
               <div>
                 <Button
-                  type="submit"
+                  type={isLoading ? "button" : "submit"}
                   id="login"
-                  className="action blue-primary submit"
+                  className={`action blue-primary submit ${
+                    isLoading && " loading"
+                  } ${styles.btnSubmit}`}
                 >
-                  Entrar
+                  {isLoading && (
+                    <span className={styles.isLoading}>
+                      <CircularProgress size="1rem" />
+                    </span>
+                  )}
+                  <span className={styles.label}>Entrar</span>
                 </Button>
               </div>
             </Form>

@@ -1,9 +1,13 @@
 //* CSS
 import "./Button.css";
 
-const Button = ({ type, className, id, onClick, children }) => (
+//* React
+import { forwardRef } from "react";
+
+const Button = forwardRef(({ type, className, id, onClick, children }, ref) => (
   <button
     key={Math.random() + id}
+    ref={ref}
     type={type}
     className={className || null}
     id={id}
@@ -11,6 +15,6 @@ const Button = ({ type, className, id, onClick, children }) => (
   >
     {children}
   </button>
-);
+));
 
 export default Button;
