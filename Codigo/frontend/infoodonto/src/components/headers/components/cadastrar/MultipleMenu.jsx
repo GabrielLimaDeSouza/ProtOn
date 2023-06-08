@@ -24,7 +24,7 @@ const MultipleMenu = ({ label, className, colorized }) => {
         className={`${styles.button} ${styles.colorized}`}
         to="/instituicao/cadastrar"
       >
-        Sou Instituicao
+        Sou Instituição
       </Link>
     </>
   );

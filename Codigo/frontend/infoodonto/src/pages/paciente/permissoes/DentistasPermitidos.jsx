@@ -122,8 +122,7 @@ const DentistasPermitidos = () => {
                 />
               </div>
               <p className={styles.descripton}>
-                Aqui estão listados os dentistas que possuem permissão para
-                acessar seus dados
+                Gerencie aqui os dentistas que irão ter permissão para acessar seus dados
               </p>
             </div>
           </div>

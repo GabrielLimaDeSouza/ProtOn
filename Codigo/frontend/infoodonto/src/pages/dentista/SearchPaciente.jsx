@@ -59,8 +59,8 @@ const SearchPaciente = () => {
             <div className={styles.divTitle}>
               <h1 className={styles.title}>Buscar por pacientes</h1>
               <p className={styles.descripton}>
-                Busque por pacientes pelo CPF para acessar suas condições e
-                protocolos
+                Busque por pacientes pelo seu CPF para acessar suas condições de saúde e
+                receber recomendações de protocolos odontológicos
               </p>
             </div>
           </div>

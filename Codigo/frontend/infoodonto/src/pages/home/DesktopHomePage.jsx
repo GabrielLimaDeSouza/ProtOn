@@ -50,7 +50,7 @@ const DesktopHomePage = () => {
               <p className={styles.text}>
                 O ProtOn auxilia na dinâmica e praticidade das consultas dos
                 dentistas ao oferecer protocolos odontológicos de atendimento de
-                acordo com as condições médicas do paciente
+                acordo com as condições de saúde dos pacientes
               </p>
             </div>
             <div className={styles.divButton}>
