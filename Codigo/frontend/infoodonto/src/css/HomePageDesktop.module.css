@@ -5,6 +5,7 @@
   background-color: #62a8db !important;
   padding: 0 5rem;
   border-radius: 0 0 30px 30px;
+  max-height: 110vh;
 }
 
 .divScroll {
