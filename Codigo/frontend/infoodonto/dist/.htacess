@@ -5,5 +5,5 @@
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !-l
-  RewriteRule . /Codigo/frontend/infoodonto/dist/index.html [L]
+  RewriteRule . /Codigo/frontend/infoodonto/src/index.html [L]
 </IfModule>
