@@ -17,8 +17,8 @@ const MobileTable = ({ rows, instituicao, to, onClick }) => {
 
   return rows.length ? (
     <section className={styles.content}>
-      {rows?.map((row) => (
-        <div className={styles.body}>
+      {rows?.map((row, index) => (
+        <div key={row.name + "-" + index} className={styles.body}>
           <div className={styles.infos}>
             <div>
               <h3 className={styles.name}>{row.name}</h3>

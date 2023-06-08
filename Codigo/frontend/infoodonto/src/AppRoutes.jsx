@@ -6,11 +6,10 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import { CircularProgress } from "@mui/material";
 
 //* Components
 import { LoginContext, LoginProvider } from "./context/LoginContext";
-import Header from "./components/headers/Header";
+import Loading from "./components/loadings/Loading";
 
 //* Pages User
 import HomePage from "./pages/home/HomePage";
@@ -30,7 +29,7 @@ const AppRoutes = () => {
     const { user, loading } = useContext(LoginContext);
 
     if (loading) {
-      return <CircularProgress />;
+      return <Loading />;
     }
 
     switch (user.user.type) {
@@ -48,7 +47,7 @@ const AppRoutes = () => {
   const Private = ({ permission, children }) => {
     const { user, authenticated, loading } = useContext(LoginContext);
     if (loading) {
-      return <CircularProgress />;
+      return <Loading />;
     }
 
     if (!authenticated) {
@@ -67,7 +66,7 @@ const AppRoutes = () => {
     const { user, loading } = useContext(LoginContext);
 
     if (loading) {
-      return <CircularProgress />;
+      return <Loading />;
     }
 
     if (user) {
