@@ -2,7 +2,7 @@
 import styles from "./Notification.module.css";
 
 //* React
-import { useState } from "react";
+import { useRef, useEffect, useState } from "react";
 
 //* Components
 import Button from "../buttons/Button";
@@ -18,8 +18,20 @@ export const Notification = ({ notifs, onClickAccept, onClickReject }) => {
     setIsOpen(!isOpen);
   };
 
+  const notifsRef = useRef(null);
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutSide, true);
+  }, []);
+
+  const handleClickOutSide = ({ target }) => {
+    if (notifsRef.current && !notifsRef.current.contains(target)) {
+      setIsOpen(false);
+    }
+  };
+
   return (
-    <div className={styles.notifs}>
+    <div ref={notifsRef} className={styles.notifs}>
       <Button type="button" className="empty" onClick={handleOpenNotfs}>
         {isOpen ? (
           <BsBellFill color="#FFD600" size="1.3rem" />
@@ -33,8 +45,8 @@ export const Notification = ({ notifs, onClickAccept, onClickReject }) => {
       {isOpen && (
         <div className={styles.notification}>
           {notifs.length > 0 ? (
-            notifs.map((notify) => (
-              <div className={styles.body}>
+            notifs.map((notify, index) => (
+              <div key={notify?.name + "-" + index} className={styles.body}>
                 <div className={styles.infos}>
                   <div>
                     <h3 className={styles.name}>{notify?.name}</h3>
