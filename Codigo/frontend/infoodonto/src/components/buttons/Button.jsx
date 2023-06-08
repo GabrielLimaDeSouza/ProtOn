@@ -3,10 +3,11 @@ import "./Button.css";
 
 const Button = ({ type, className, id, onClick, children }) => (
   <button
+    key={Math.random() + id}
     type={type}
-    className={className && className}
+    className={className || null}
     id={id}
-    onClick={onClick && onClick}
+    onClick={onClick || null}
   >
     {children}
   </button>

@@ -60,7 +60,7 @@ div.alert {
 
 @media (max-width: 840px) {
   div.header {
-    padding: 0 0 5rem;
+    padding: 0 0 1rem;
   }
 
   div.main {
