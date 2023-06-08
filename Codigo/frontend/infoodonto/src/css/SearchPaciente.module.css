@@ -43,7 +43,7 @@ form.formSearch {
   flex-wrap: wrap;
   align-items: center;
   gap: 1rem 3rem;
-  max-width: 50rem;
+  max-width: 60rem;
 }
 
 form.formSearch > div:first-child {

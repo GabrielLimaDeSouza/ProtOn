@@ -76,8 +76,8 @@ const Condicoes = ({ condicoes, onChange, options, edit }) => {
         </div>
       )}
       <div className={styles.tags}>
-        {tags.map((tag) => (
-          <Tag tag={tag} />
+        {tags.map((tag, index) => (
+          <Tag key={"tag-" + index} tag={tag} />
         ))}
       </div>
     </div>

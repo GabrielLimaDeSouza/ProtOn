@@ -33,6 +33,8 @@ const PerfilPaciente = () => {
   const [isHiddenPass, setIsHiddenPass] = useState(true);
   const [isHiddenConfirmPass, setIsHiddenConfirmPass] = useState(true);
   const [alert, setAlert] = useState(null);
+  const [isLoadingUpdate, setIsLoadingUpdate] = useState(false);
+  const [isLoadingDelete, setIsLoadingDelete] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -42,6 +44,8 @@ const PerfilPaciente = () => {
   }, []);
 
   const handleUpdateUser = async (formData) => {
+    setIsLoadingUpdate(true);
+
     const paciente = Object.fromEntries(formData);
 
     if ((confirmSenha || paciente.senha) && paciente.senha !== confirmSenha) {
@@ -81,9 +85,13 @@ const PerfilPaciente = () => {
         setAlert(null);
       }, 3000);
     }
+
+    setIsLoadingUpdate(false);
   };
 
   const handleDeleteAccount = async () => {
+    setIsLoadingDelete(true);
+
     try {
       const response = await deletePaciente(user._id);
 
@@ -93,7 +101,7 @@ const PerfilPaciente = () => {
         setTimeout(() => {
           setAlert(null);
           logout();
-        }, 3000);
+        }, 1000);
       }
     } catch (err) {
       const { error } = err.response.data;
@@ -102,6 +110,8 @@ const PerfilPaciente = () => {
         setAlert(null);
       }, 5000);
     }
+
+    setIsLoadingDelete(false);
   };
 
   return (
@@ -209,11 +219,17 @@ const PerfilPaciente = () => {
               type="button"
               className="action delete"
               onClick={handleDeleteAccount}
+              loading={isLoadingDelete}
             >
               Apagar conta
             </Button>
-            <Button type="submit" className="action submit blue-primary">
-              Atualizar
+            <Button
+              type="submit"
+              id="login"
+              className="action blue-primary"
+              loading={isLoadingUpdate}
+            >
+              Atualizar dados
             </Button>
           </div>
         </Form>

@@ -35,7 +35,7 @@ const GerenciarDentistas = () => {
     setHeader(["Nome", "Email", "Matricula", ""]);
   }, [dentistas]);
 
-  const handleDelete = async (id) => {
+  const handleDeleteDentista = async (id) => {
     try {
       const response = await deleteDentista(user._id, id);
 
@@ -98,7 +98,7 @@ const GerenciarDentistas = () => {
               <MobileTable
                 rows={dentistas}
                 to={{ route: `/perfil/dentistas/:id/editar`, key: "_id" }}
-                onClick={handleDelete}
+                onClick={handleDeleteDentista}
                 instituicao
               />
             ) : (
@@ -106,7 +106,7 @@ const GerenciarDentistas = () => {
                 header={header}
                 rows={dentistas}
                 to={{ route: `/perfil/dentistas/:id/editar`, key: "_id" }}
-                onClick={handleDelete}
+                onClick={handleDeleteDentista}
                 instituicao
               />
             )}

@@ -11,6 +11,8 @@ import Button from "../../components/buttons/Button";
 import Condicoes from "../../components/condicoes/Condicoes";
 import Form from "../../components/forms/Form";
 import Header from "../../components/headers/Header";
+
+//* Material UI
 import { Alert } from "@mui/material";
 
 //* Icons
@@ -24,6 +26,7 @@ const FormPaciente = () => {
   const [condicoesPaciente, setCondicoesPaciente] = useState(null);
   const [isHiddenPass, setIsHiddenPass] = useState(true);
   const [alert, setAlert] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -35,6 +38,7 @@ const FormPaciente = () => {
   }, []);
 
   const handleCreatePaciente = async (formData) => {
+    setIsLoading(true);
     const paciente = Object.fromEntries(formData);
 
     paciente.cpf = formatarCPF(paciente.cpf);
@@ -57,6 +61,8 @@ const FormPaciente = () => {
         setAlert(null);
       }, 2000);
     }
+
+    setIsLoading(false);
   };
 
   const formatarCPF = (cpf) => {
@@ -145,8 +151,13 @@ const FormPaciente = () => {
             </section>
           </div>
           <div>
-            <Button type="submit" className="action submit blue-primary">
-              Criar Conta
+            <Button
+              type="submit"
+              id="login"
+              className="action blue-primary"
+              loading={isLoading}
+            >
+              Criar conta
             </Button>
           </div>
         </Form>

@@ -29,7 +29,7 @@ const AppRoutes = () => {
     const { user, loading } = useContext(LoginContext);
 
     if (loading) {
-      return <Loading />;
+      return <Loading fullscreen />;
     }
 
     switch (user.user.type) {
@@ -47,7 +47,7 @@ const AppRoutes = () => {
   const Private = ({ permission, children }) => {
     const { user, authenticated, loading } = useContext(LoginContext);
     if (loading) {
-      return <Loading />;
+      return <Loading fullscreen />;
     }
 
     if (!authenticated) {
@@ -66,7 +66,7 @@ const AppRoutes = () => {
     const { user, loading } = useContext(LoginContext);
 
     if (loading) {
-      return <Loading />;
+      return <Loading fullscreen />;
     }
 
     if (user) {

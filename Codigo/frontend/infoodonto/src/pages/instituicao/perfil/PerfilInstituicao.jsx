@@ -25,9 +25,14 @@ const PerfilInstituicao = () => {
   const [isHiddenPass, setIsHiddenPass] = useState(true);
   const [confirmPass, setConfirmPass] = useState(true);
   const [alert, setAlert] = useState(null);
+  const [isLoadingUpdate, setIsLoadingUpdate] = useState(false);
+  const [isLoadingDelete, setIsLoadingDelete] = useState(false);
+
   const { user, updateUser, logout } = useContext(LoginContext);
 
   const handleUpdateInstituicao = async (formData) => {
+    setIsLoadingUpdate(true);
+
     const instituicao = Object.fromEntries(formData);
 
     if (
@@ -66,9 +71,13 @@ const PerfilInstituicao = () => {
         setAlert(null);
       }, 5000);
     }
+
+    setIsLoadingUpdate(false);
   };
 
   const handleDeleteAccount = async () => {
+    setIsLoadingDelete(true);
+
     try {
       const response = await deleteInstituicao(user._id);
 
@@ -87,6 +96,8 @@ const PerfilInstituicao = () => {
         setAlert(null);
       }, 5000);
     }
+
+    setIsLoadingDelete(false);
   };
 
   return (
@@ -179,11 +190,17 @@ const PerfilInstituicao = () => {
               type="button"
               className="action delete"
               onClick={handleDeleteAccount}
+              loading={isLoadingDelete}
             >
               Apagar conta
             </Button>
-            <Button type="submit" className="action submit blue-primary">
-              Atualizar
+            <Button
+              type="submit"
+              id="login"
+              className="action blue-primary"
+              loading={isLoadingUpdate}
+            >
+              Atualizar dados
             </Button>
           </div>
         </Form>

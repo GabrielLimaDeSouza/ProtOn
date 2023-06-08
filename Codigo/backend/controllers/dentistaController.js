@@ -67,7 +67,6 @@ const dentistaController = {
     var msg = null;
     try {
       const { dentista } = req.params;
-      console.log(dentista);
 
       const dentistaResp = await DentistaModel.findByIdAndDelete(dentista);
 

@@ -4,22 +4,27 @@ import styles from "../../css/FormPaciente.module.css";
 //* React
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 
 //* Components
 import Input from "../../components/inputs/Input";
 import Button from "../../components/buttons/Button";
 import Form from "../../components/forms/Form";
 import Header from "../../components/headers/Header";
-import { Alert } from "@mui/material";
+
+//* Material UI
+import { Alert, CircularProgress } from "@mui/material";
 
 //* Icons
 import { BiShow, BiHide } from "react-icons/bi";
+import { FiTrash } from "react-icons/fi";
 
 //* API
-import { updateDentista } from "../../services/api";
+import { updateDentista, deleteDentista } from "../../services/api";
 
 //* Context
 import { LoginContext } from "../../context/LoginContext";
+import { IoFemaleSharp } from "react-icons/io5";
 
 const FormInstituicao = () => {
   const [isHiddenPass, setIsHiddenPass] = useState(true);
@@ -28,6 +33,10 @@ const FormInstituicao = () => {
   const [alert, setAlert] = useState(null);
   const [currentDentista, setCurrentDentista] = useState(null);
   const { user, updateUser } = useContext(LoginContext);
+  const [isLoadingUpdate, setIsLoadingUpdate] = useState(false);
+  const [isLoadingDelete, setIsLoadingDelete] = useState(false);
+
+  const isMobile = useMediaQuery({ maxWidth: 400 });
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -36,7 +45,9 @@ const FormInstituicao = () => {
     setCurrentDentista(user.dentistas.find((dentista) => dentista._id === id));
   }, []);
 
-  const handleCreateDentista = async (formData) => {
+  const handleUpdateDentista = async (formData) => {
+    setIsLoadingUpdate(true);
+
     const newDentista = Object.fromEntries(formData);
 
     if (confirmPass && newDentista.senha !== confirmPass) {
@@ -75,7 +86,7 @@ const FormInstituicao = () => {
 
         setTimeout(() => {
           navigate("/perfil/dentistas");
-        }, 2000);
+        }, 1000);
       }
     } catch (err) {
       const { error } = err.response.data;
@@ -85,6 +96,40 @@ const FormInstituicao = () => {
         setAlert(null);
       }, 5000);
     }
+
+    setIsLoadingUpdate(false);
+  };
+
+  const handleDeleteDentista = async () => {
+    setIsLoadingDelete(true);
+
+    try {
+      const response = await deleteDentista(user._id, id);
+
+      if (response.status === 201) {
+        const { msg } = response.data;
+
+        user.dentistas = user.dentistas.filter(
+          (_dentista) => _dentista._id !== id
+        );
+        updateUser(user);
+
+        setAlert({ severity: "success", msg });
+
+        setTimeout(() => {
+          navigate("/perfil/dentistas");
+        }, 1000);
+      }
+    } catch (err) {
+      const { error } = err.response.data;
+      setAlert({ severity: "error", msg: error });
+    } finally {
+      setTimeout(() => {
+        setAlert(null);
+      }, 5000);
+    }
+
+    setIsLoadingDelete(false);
   };
 
   return (
@@ -105,7 +150,7 @@ const FormInstituicao = () => {
               </div>
             </div>
           </section>
-          <Form className={styles.form} onSubmit={handleCreateDentista}>
+          <Form className={styles.form} onSubmit={handleUpdateDentista}>
             {alert && (
               <Alert severity={alert.severity} onClose={() => setAlert(null)}>
                 {alert.msg}
@@ -173,8 +218,20 @@ const FormInstituicao = () => {
                     </Button>
                   </Input>
                 </section>
-                <div>
-                  <Button type="submit" className="action submit blue-primary">
+                <div className={styles.hudBtn}>
+                  <Button
+                    type="button"
+                    className="action delete"
+                    onClick={handleDeleteDentista}
+                    loading={isLoadingDelete}
+                  >
+                    Remover Dentista
+                  </Button>
+                  <Button
+                    type="submit"
+                    className="action blue-primary"
+                    loading={isLoadingUpdate}
+                  >
                     Atualizar
                   </Button>
                 </div>

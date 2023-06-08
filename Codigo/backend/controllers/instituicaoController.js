@@ -45,8 +45,8 @@ const instituicaoController = {
       res
         .status(201)
         .json({ dentista, msg: "Dentista cadastrado com sucesso" });
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
       res
         .status(500)
         .json({ error: "Ocorreu um erro ao cadastrar o Dentista!" });
@@ -70,7 +70,7 @@ const instituicaoController = {
       });
     } catch (err) {
       console.log(err);
-      res.status(500).json({ error: err.message });
+      res.status(500).json({ error: err.getMessage() });
     }
   },
   get: async (req, res) => {

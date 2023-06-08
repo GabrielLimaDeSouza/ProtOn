@@ -11,6 +11,7 @@ import Form from "../../components/forms/Form";
 import Button from "../../components/buttons/Button";
 import Result from "./components/results/Result";
 import SendSolicitacao from "./components/solicitations/SendSolicitacao";
+import Loading from "../../components/loadings/Loading";
 import { LoginContext } from "../../context/LoginContext";
 
 //* Material UI
@@ -23,9 +24,13 @@ const SearchPaciente = () => {
   const [paciente, setPaciente] = useState(null);
   const [sendSolicitation, setSendSolicitation] = useState(null);
   const [alert, setAlert] = useState(null);
+  const [isLoading, setIsLoading] = useState(null);
+
   const { user } = useContext(LoginContext);
 
   const handleSearchPaciente = async (formData) => {
+    setIsLoading(true);
+
     const { cpf } = Object.fromEntries(formData);
 
     try {
@@ -46,6 +51,8 @@ const SearchPaciente = () => {
         setAlert(null);
       }, 3000);
     }
+
+    setIsLoading(false);
   };
 
   return (
@@ -59,8 +66,8 @@ const SearchPaciente = () => {
             <div className={styles.divTitle}>
               <h1 className={styles.title}>Buscar por pacientes</h1>
               <p className={styles.descripton}>
-                Busque por pacientes pelo CPF para acessar suas condições de saúde e
-                receber recomendações de protocolos odontológicos
+                Busque por pacientes pelo CPF para acessar suas condições de
+                saúde e receber recomendações de protocolos odontológicos
               </p>
             </div>
           </div>
@@ -83,7 +90,11 @@ const SearchPaciente = () => {
                 />
               </div>
               <div>
-                <Button type="submit" className="action blue-primary submit">
+                <Button
+                  type="submit"
+                  className="action blue-primary"
+                  loading={isLoading}
+                >
                   Buscar
                 </Button>
               </div>
@@ -97,7 +108,9 @@ const SearchPaciente = () => {
             </div>
           )}
           <div className={styles.results}>
-            {paciente ? (
+            {isLoading ? (
+              <Loading />
+            ) : paciente ? (
               <Result paciente={paciente} />
             ) : (
               sendSolicitation && (

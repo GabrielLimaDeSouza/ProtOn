@@ -13,7 +13,7 @@ import Form from "../../components/forms/Form";
 import { LoginContext } from "../../context/LoginContext";
 
 //* Meterial UI
-import { Alert, CircularProgress } from "@mui/material";
+import { Alert } from "@mui/material";
 
 //* Icons
 import { AiOutlineArrowLeft } from "react-icons/ai";
@@ -86,18 +86,12 @@ const Login = () => {
 
               <div>
                 <Button
-                  type={isLoading ? "button" : "submit"}
+                  type="submit"
                   id="login"
-                  className={`action blue-primary submit ${
-                    isLoading && " loading"
-                  } ${styles.btnSubmit}`}
+                  className="action blue-primary"
+                  loading={isLoading}
                 >
-                  {isLoading && (
-                    <span className={styles.isLoading}>
-                      <CircularProgress size="1rem" />
-                    </span>
-                  )}
-                  <span className={styles.label}>Entrar</span>
+                  Entrar
                 </Button>
               </div>
             </Form>

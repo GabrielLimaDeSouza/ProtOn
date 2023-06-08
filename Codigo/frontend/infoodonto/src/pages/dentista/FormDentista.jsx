@@ -24,11 +24,15 @@ import { LoginContext } from "../../context/LoginContext";
 const FormInstituicao = () => {
   const [isHiddenPass, setIsHiddenPass] = useState(true);
   const [alert, setAlert] = useState(null);
+  const [isLoading, setIsLoading] = useState(null);
+
   const { user, updateUser } = useContext(LoginContext);
 
   const navigate = useNavigate();
 
   const handleCreateDentista = async (formData) => {
+    setIsLoading(true);
+
     const dentista = Object.fromEntries(formData);
     dentista.instituicao = user._id;
 
@@ -53,6 +57,8 @@ const FormInstituicao = () => {
         setAlert(null);
       }, 5000);
     }
+
+    setIsLoading(false);
   };
 
   return (
@@ -67,7 +73,8 @@ const FormInstituicao = () => {
               <div className={styles.divTitle}>
                 <h1 className={styles.title}>Cadastrar novo dentista</h1>
                 <p className={styles.descripton}>
-                  Adicione dentistas a sua instituição para que possam acessar o sistema
+                  Adicione dentistas a sua instituição para que possam acessar o
+                  sistema
                 </p>
               </div>
             </div>
@@ -122,8 +129,12 @@ const FormInstituicao = () => {
                   </Input>
                 </section>
                 <div>
-                  <Button type="submit" className="action submit blue-primary">
-                    Criar Conta
+                  <Button
+                    type="submit"
+                    className="action blue-primary"
+                    loading={isLoading}
+                  >
+                    Cadastrar Dentista
                   </Button>
                 </div>
               </section>

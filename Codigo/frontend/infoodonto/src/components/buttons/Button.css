@@ -1,5 +1,6 @@
 button {
-  transition: all 0.2s;
+  transition-property: color, background-color, transform, box-shadow;
+  transition-duration: 0.2s;
 }
 button:hover {
   transform: translateY(-3px);
@@ -66,6 +67,15 @@ button.empty:hover {
   box-shadow: none;
 }
 
+button.mobile {
+  border: none;
+  outline: none;
+  border-radius: 100%;
+  padding: 0.5rem;
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
 button[type="button"].close {
   background: none;
   border: none;
@@ -102,10 +112,14 @@ button.loading {
   cursor: default;
   background-color: #b7defa;
   padding-left: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0 1rem;
+  transition: none;
 }
 
 @media (max-width: 300px) {
-  button.submit,
   button.delete {
     width: 100%;
   }

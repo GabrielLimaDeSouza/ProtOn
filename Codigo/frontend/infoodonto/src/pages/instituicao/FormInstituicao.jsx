@@ -11,6 +11,8 @@ import Select from "../../components/selects/Select";
 import Button from "../../components/buttons/Button";
 import Form from "../../components/forms/Form";
 import Header from "../../components/headers/Header";
+
+//* Material UI
 import { Alert } from "@mui/material";
 
 //* Icons
@@ -22,17 +24,18 @@ import { createInstituicao } from "../../services/api";
 const FormInstituicao = () => {
   const [isHiddenPass, setIsHiddenPass] = useState(true);
   const [alert, setAlert] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const handleCreateInstituicao = async (formData) => {
+    setIsLoading(true);
     const instituicao = Object.fromEntries(formData);
 
     if (instituicao.tipo === "0") {
       setAlert({ severity: "error", msg: "Selecione um tipo" });
       return;
     }
-    console.log(instituicao);
 
     try {
       const response = await createInstituicao(instituicao);
@@ -51,6 +54,8 @@ const FormInstituicao = () => {
         setAlert(null);
       }, 5000);
     }
+
+    setIsLoading(false);
   };
 
   return (
@@ -122,8 +127,13 @@ const FormInstituicao = () => {
             </section>
           </div>
           <div>
-            <Button type="submit" className="action submit blue-primary">
-              Criar Conta
+            <Button
+              type="submit"
+              id="login"
+              className="action blue-primary"
+              loading={isLoading}
+            >
+              Criar conta
             </Button>
           </div>
         </Form>

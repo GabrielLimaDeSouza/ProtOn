@@ -1,5 +1,7 @@
-import React from "react";
+//* Material UI
 import { useMediaQuery } from "react-responsive";
+
+//* Components
 import MobileHomePage from "./MobileHomePage";
 import DesktopHomePage from "./DesktopHomePage";
 
