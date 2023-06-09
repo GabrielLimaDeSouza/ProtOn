@@ -10,7 +10,7 @@ import Input from "../../components/inputs/Input";
 import Button from "../../components/buttons/Button";
 import Form from "../../components/forms/Form";
 import Header from "../../components/headers/Header";
-import { Alert } from "@mui/material";
+import AlertComp from "../../components/alerts/AlertComp";
 
 //* Icons
 import { BiShow, BiHide } from "react-icons/bi";
@@ -52,10 +52,6 @@ const FormInstituicao = () => {
     } catch (err) {
       const { error } = err.response.data;
       setAlert({ severity: "error", msg: error });
-    } finally {
-      setTimeout(() => {
-        setAlert(null);
-      }, 5000);
     }
 
     setIsLoading(false);
@@ -81,9 +77,13 @@ const FormInstituicao = () => {
           </section>
           <Form className={styles.form} onSubmit={handleCreateDentista}>
             {alert && (
-              <Alert severity={alert.severity} onClose={() => setAlert(null)}>
+              <AlertComp
+                severity={alert.severity}
+                onClose={setAlert}
+                timeToClose={4000}
+              >
                 {alert.msg}
-              </Alert>
+              </AlertComp>
             )}
             <div className={styles.formData}>
               <section className={styles.section1}>

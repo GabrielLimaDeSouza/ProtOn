@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://protonbackend.onrender.com",
+  baseURL: "http://localhost:3000",
 });
 
 // http://localhost:3000
@@ -14,6 +14,14 @@ export const createSession = async (email, senha) => {
 
 export const getUser = async (id) => {
   return api.get(`/api/usuario?id=${id}`);
+};
+
+export const enviarEmail = async (email) => {
+  return api.post(`/api/recuperar-senha`, { email });
+};
+
+export const recuperarSenha = async (email, senha) => {
+  return api.put(`/api/recuperar-senha`, { email, senha });
 };
 
 //* Rota Paciente

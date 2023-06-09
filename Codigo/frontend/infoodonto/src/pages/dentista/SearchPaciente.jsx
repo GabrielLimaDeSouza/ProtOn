@@ -12,13 +12,13 @@ import Button from "../../components/buttons/Button";
 import Result from "./components/results/Result";
 import SendSolicitacao from "./components/solicitations/SendSolicitacao";
 import Loading from "../../components/loadings/Loading";
-import { LoginContext } from "../../context/LoginContext";
-
-//* Material UI
-import { Alert } from "@mui/material";
+import AlertComp from "../../components/alerts/AlertComp";
 
 //* API
 import { buscarPaciente } from "../../services/api";
+
+//* Context
+import { LoginContext } from "../../context/LoginContext";
 
 const SearchPaciente = () => {
   const [paciente, setPaciente] = useState(null);
@@ -46,10 +46,6 @@ const SearchPaciente = () => {
       if (status === 401) {
         setSendSolicitation({ cpf, dentista: user._id });
       }
-    } finally {
-      setTimeout(() => {
-        setAlert(null);
-      }, 3000);
     }
 
     setIsLoading(false);
@@ -102,9 +98,13 @@ const SearchPaciente = () => {
           </div>
           {alert && (
             <div className={styles.alert}>
-              <Alert severity={alert.severity} onClose={() => setAlert(null)}>
+              <AlertComp
+                severity={alert.severity}
+                onClose={setAlert}
+                timeToClose={4000}
+              >
                 {alert.msg}
-              </Alert>
+              </AlertComp>
             </div>
           )}
           <div className={styles.results}>

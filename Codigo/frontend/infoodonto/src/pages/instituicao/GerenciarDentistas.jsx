@@ -6,18 +6,18 @@ import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 
-//* Material UI
-import { Alert } from "@mui/material";
-
 //* API
 import { deleteDentista } from "../../services/api";
 
 //* Components
-import { LoginContext } from "../../context/LoginContext";
 import Header from "../../components/headers/Header";
 import Button from "../../components/buttons/Button";
 import TableDesktop from "../../components/tables/desktop/TableDesktop";
 import MobileTable from "../../components/tables/mobile/MobileTable";
+import AlertComp from "../../components/alerts/AlertComp";
+
+//* Context
+import { LoginContext } from "../../context/LoginContext";
 
 const GerenciarDentistas = () => {
   const mobileView = useMediaQuery({ maxWidth: 1100 });
@@ -54,10 +54,6 @@ const GerenciarDentistas = () => {
     } catch (err) {
       const { error } = err.response.data;
       setAlert({ severity: "error", msg: error });
-    } finally {
-      setTimeout(() => {
-        setAlert(null);
-      }, 5000);
     }
 
     setIsLoadingDelete(false);
@@ -82,9 +78,13 @@ const GerenciarDentistas = () => {
 
         <section className={styles.dentistaMenagement}>
           {alert && (
-            <Alert severity={alert.severity} onClose={() => setAlert(null)}>
+            <AlertComp
+              severity={alert.severity}
+              onClose={setAlert}
+              timeToClose={4000}
+            >
               {alert.msg}
-            </Alert>
+            </AlertComp>
           )}
           <div className={styles.btnAddDentista}>
             <Link to={"/perfil/dentistas/cadastrar"}>

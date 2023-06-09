@@ -10,10 +10,8 @@ import Input from "../../components/inputs/Input";
 import Button from "../../components/buttons/Button";
 import MultipleMenu from "../../components/headers/components/cadastrar/MultipleMenu";
 import Form from "../../components/forms/Form";
+import AlertComp from "../../components/alerts/AlertComp";
 import { LoginContext } from "../../context/LoginContext";
-
-//* Meterial UI
-import { Alert } from "@mui/material";
 
 //* Icons
 import { AiOutlineArrowLeft } from "react-icons/ai";
@@ -31,11 +29,7 @@ const Login = () => {
     const resp = await login(email, senha);
 
     if (resp.status !== 201) {
-      setAlert(resp.data.msg);
-
-      setTimeout(() => {
-        setAlert(null);
-      }, 4000);
+      setAlert(resp.data.error);
     }
 
     setIsLoading(false);
@@ -63,26 +57,31 @@ const Login = () => {
           </div>
           <div className={styles.divForm}>
             {alert && (
-              <Alert severity="error" onClose={() => setAlert(null)}>
+              <AlertComp severity="error" onClose={setAlert} timeToClose={4000}>
                 {alert}
-              </Alert>
+              </AlertComp>
             )}
 
             <Form className={styles.form} onSubmit={handleSubmit}>
-              <Input
-                type="email"
-                placeholder="Email"
-                id="email"
-                name="email"
-                required
-              />
-              <Input
-                type="password"
-                placeholder="Senha"
-                id="senha"
-                name="senha"
-                required
-              />
+              <div className={styles.inputs}>
+                <Input
+                  type="email"
+                  placeholder="Email"
+                  id="email"
+                  name="email"
+                  required
+                />
+                <Input
+                  type="password"
+                  placeholder="Senha"
+                  id="senha"
+                  name="senha"
+                  required
+                />
+                <span className={styles.esqueceuSenha}>
+                  <Link to="/login/recuperar-senha/1">Esqueceu senha?</Link>
+                </span>
+              </div>
 
               <div>
                 <Button
@@ -95,10 +94,10 @@ const Login = () => {
                 </Button>
               </div>
             </Form>
-            <p className={styles.signUp}>
+            <div className={styles.signUp}>
               Não possui conta?
               <MultipleMenu label="Cadastrar" className="empty" colorized />
-            </p>
+            </div>
           </div>
         </div>
       </section>

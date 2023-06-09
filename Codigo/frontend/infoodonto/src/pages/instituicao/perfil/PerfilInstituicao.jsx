@@ -9,16 +9,16 @@ import Input from "../../../components/inputs/Input";
 import Button from "../../../components/buttons/Button";
 import Form from "../../../components/forms/Form";
 import Header from "../../../components/headers/Header";
-import { LoginContext } from "../../../context/LoginContext";
-
-//* Material UI
-import { Alert } from "@mui/material";
+import AlertComp from "../../../components/alerts/AlertComp";
 
 //* Icons
 import { BiShow, BiHide } from "react-icons/bi";
 
 //* API
 import { updateInstituicao, deleteInstituicao } from "../../../services/api";
+
+//* Context
+import { LoginContext } from "../../../context/LoginContext";
 
 const PerfilInstituicao = () => {
   const [isHiddenConfirmPass, setIsHiddenConfirmPass] = useState(true);
@@ -42,10 +42,6 @@ const PerfilInstituicao = () => {
       setAlert({ severity: "error", msg: "As senhas não coincidem" });
       setIsLoadingUpdate(false);
 
-      setTimeout(() => {
-        setAlert(null);
-      }, 3000);
-
       return;
     }
 
@@ -67,10 +63,6 @@ const PerfilInstituicao = () => {
     } catch (err) {
       const { error } = err.response.data;
       setAlert({ severity: "error", msg: error });
-    } finally {
-      setTimeout(() => {
-        setAlert(null);
-      }, 5000);
     }
 
     setIsLoadingUpdate(false);
@@ -86,16 +78,12 @@ const PerfilInstituicao = () => {
         setAlert({ severity: "success", msg: response.data.msg });
 
         setTimeout(() => {
-          setAlert(null);
           logout();
-        }, 3000);
+        }, 2000);
       }
     } catch (err) {
       const { error } = err.response.data;
       setAlert({ severity: "error", msg: error });
-      setTimeout(() => {
-        setAlert(null);
-      }, 5000);
     }
 
     setIsLoadingDelete(false);
@@ -119,9 +107,13 @@ const PerfilInstituicao = () => {
         </section>
         <Form className={styles.form} onSubmit={handleUpdateInstituicao}>
           {alert && (
-            <Alert severity={alert.severity} onClose={() => setAlert(null)}>
+            <AlertComp
+              severity={alert.severity}
+              onClose={setAlert}
+              timeToClose={4000}
+            >
               {alert.msg}
-            </Alert>
+            </AlertComp>
           )}
           <div className={styles.formData}>
             <section className={styles.section1}>

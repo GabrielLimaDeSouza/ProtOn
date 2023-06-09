@@ -5,9 +5,6 @@ import styles from "./DentistasPermitidos.module.css";
 import { useState, useEffect, useContext } from "react";
 import { useMediaQuery } from "react-responsive";
 
-//* Material UI
-import { Alert } from "@mui/material";
-
 //* API
 import {
   removerPermissao,
@@ -16,11 +13,14 @@ import {
 } from "../../../services/api";
 
 //* Components
-import { LoginContext } from "../../../context/LoginContext";
 import Header from "../../../components/headers/Header";
 import TableDesktop from "../../../components/tables/desktop/TableDesktop";
 import MobileTable from "../../../components/tables/mobile/MobileTable";
 import { Notification } from "../../../components/notifs/Notification";
+import AlertComp from "../../../components/alerts/AlertComp";
+
+//* Context
+import { LoginContext } from "../../../context/LoginContext";
 
 const DentistasPermitidos = () => {
   const mobileView = useMediaQuery({ maxWidth: 1100 });
@@ -60,10 +60,6 @@ const DentistasPermitidos = () => {
     } catch (err) {
       const { error } = err.response.data;
       setAlert({ severity: "error", msg: error });
-    } finally {
-      setTimeout(() => {
-        setAlert(null);
-      }, 5000);
     }
 
     setIsLoadingDelete(false);
@@ -89,10 +85,6 @@ const DentistasPermitidos = () => {
     } catch (err) {
       const { error } = err.response.data;
       setAlert({ severity: "error", msg: error });
-    } finally {
-      setTimeout(() => {
-        setAlert(null);
-      }, 5000);
     }
 
     setIsLoadingDelete(false);
@@ -113,10 +105,6 @@ const DentistasPermitidos = () => {
     } catch (err) {
       const { error } = err.response.data;
       setAlert({ severity: "error", msg: error });
-    } finally {
-      setTimeout(() => {
-        setAlert(null);
-      }, 5000);
     }
   };
 
@@ -148,9 +136,13 @@ const DentistasPermitidos = () => {
 
         <section className={styles.dentistaMenagement}>
           {alert && (
-            <Alert severity={alert.severity} onClose={() => setAlert(null)}>
+            <AlertComp
+              severity={alert.severity}
+              onClose={setAlert}
+              timeToClose={4000}
+            >
               {alert.msg}
-            </Alert>
+            </AlertComp>
           )}
 
           <div className={styles.tableContainer}>

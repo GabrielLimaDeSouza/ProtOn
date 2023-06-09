@@ -42,7 +42,37 @@ form.form {
   margin: 2rem auto 1rem;
 }
 
-p.signUp {
+div.inputs {
+  display: inherit;
+  flex-direction: inherit;
+  row-gap: inherit;
+}
+
+span.esqueceuSenha {
+  text-align: left;
+  font-size: 0.9rem;
+  padding-left: 1rem;
+}
+span.esqueceuSenha a {
+  text-decoration: none;
+  color: #20a0fd;
+}
+
+div.enviarNovamente {
+  display: flex;
+  justify-content: flex-start;
+  gap: 0 0.5rem;
+  font-size: 14px;
+  padding-left: 1rem;
+}
+
+a.anotherEmail {
+  text-decoration: none;
+  color: #20a0fd;
+  font-size: 14px;
+}
+
+div.signUp {
   font-size: 13px;
   display: flex;
   column-gap: 0.7rem;
@@ -62,6 +92,11 @@ p.signUp {
 
   div.divForm {
     margin: 0 auto;
+  }
+
+  div.enviarNovamente {
+    justify-content: center;
+    padding-left: 0;
   }
 }
 

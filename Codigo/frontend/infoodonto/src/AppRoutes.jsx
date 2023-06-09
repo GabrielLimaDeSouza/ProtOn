@@ -23,6 +23,7 @@ import EditDentista from "./pages/dentista/EditDentista";
 import PerfilPaciente from "./pages/paciente/perfil/PerfilPaciente";
 import PerfilInstituicao from "./pages/instituicao/perfil/PerfilInstituicao";
 import DentistasPermitidos from "./pages/paciente/permissoes/DentistasPermitidos";
+import EsqueceuSenha from "./pages/login/forgotPass/EsqueceuSenha";
 
 const AppRoutes = () => {
   const Perfil = () => {
@@ -146,6 +147,15 @@ const AppRoutes = () => {
             element={
               <NotLoggedUser>
                 <Login />
+              </NotLoggedUser>
+            }
+          />
+          <Route
+            exact
+            path="/login/recuperar-senha/:page"
+            element={
+              <NotLoggedUser>
+                <EsqueceuSenha />
               </NotLoggedUser>
             }
           />

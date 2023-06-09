@@ -10,9 +10,7 @@ import Input from "../../components/inputs/Input";
 import Button from "../../components/buttons/Button";
 import Form from "../../components/forms/Form";
 import Header from "../../components/headers/Header";
-
-//* Material UI
-import { Alert } from "@mui/material";
+import AlertComp from "../../components/alerts/AlertComp";
 
 //* Icons
 import { BiShow, BiHide } from "react-icons/bi";
@@ -53,10 +51,6 @@ const FormInstituicao = () => {
       setAlert({ severity: "error", msg: "As senhas não coincidem" });
       setIsLoadingUpdate(false);
 
-      setTimeout(() => {
-        setAlert(null);
-      }, 3000);
-
       return;
     }
 
@@ -91,15 +85,11 @@ const FormInstituicao = () => {
 
         setTimeout(() => {
           navigate("/perfil/dentistas");
-        }, 1000);
+        }, 2000);
       }
     } catch (err) {
       const { error } = err.response.data;
       setAlert({ severity: "error", msg: error });
-    } finally {
-      setTimeout(() => {
-        setAlert(null);
-      }, 5000);
     }
 
     setIsLoadingUpdate(false);
@@ -123,15 +113,11 @@ const FormInstituicao = () => {
 
         setTimeout(() => {
           navigate("/perfil/dentistas");
-        }, 1000);
+        }, 2000);
       }
     } catch (err) {
       const { error } = err.response.data;
       setAlert({ severity: "error", msg: error });
-    } finally {
-      setTimeout(() => {
-        setAlert(null);
-      }, 5000);
     }
 
     setIsLoadingDelete(false);
@@ -157,9 +143,13 @@ const FormInstituicao = () => {
           </section>
           <Form className={styles.form} onSubmit={handleUpdateDentista}>
             {alert && (
-              <Alert severity={alert.severity} onClose={() => setAlert(null)}>
+              <AlertComp
+                severity={alert.severity}
+                onClose={setAlert}
+                timeToClose={4000}
+              >
                 {alert.msg}
-              </Alert>
+              </AlertComp>
             )}
             <div className={styles.formData}>
               <section className={styles.section1}>

@@ -10,10 +10,7 @@ import Input from "../../../components/inputs/Input";
 import Button from "../../../components/buttons/Button";
 import Header from "../../../components/headers/Header";
 import Form from "../../../components/forms/Form";
-import { LoginContext } from "../../../context/LoginContext";
-
-//* Material UI
-import { Alert } from "@mui/material";
+import AlertComp from "../../../components/alerts/AlertComp";
 
 //* API
 import {
@@ -24,6 +21,9 @@ import {
 
 //* Icons
 import { BiShow, BiHide } from "react-icons/bi";
+
+//* Context
+import { LoginContext } from "../../../context/LoginContext";
 
 const PerfilPaciente = () => {
   const { user, updateUser, logout } = useContext(LoginContext);
@@ -52,10 +52,6 @@ const PerfilPaciente = () => {
       setAlert({ severity: "error", msg: "As senhas não coincidem" });
       setIsLoadingUpdate(false);
 
-      setTimeout(() => {
-        setAlert(null);
-      }, 3000);
-
       return;
     }
 
@@ -81,10 +77,6 @@ const PerfilPaciente = () => {
     } catch (err) {
       const { error } = err.response.data;
       setAlert({ severity: "error", msg: error });
-    } finally {
-      setTimeout(() => {
-        setAlert(null);
-      }, 3000);
     }
 
     setIsLoadingUpdate(false);
@@ -100,16 +92,12 @@ const PerfilPaciente = () => {
         setAlert({ severity: "success", msg: response.data.msg });
 
         setTimeout(() => {
-          setAlert(null);
           logout();
         }, 1000);
       }
     } catch (err) {
       const { error } = err.response.data;
       setAlert({ severity: "error", msg: error });
-      setTimeout(() => {
-        setAlert(null);
-      }, 5000);
     }
 
     setIsLoadingDelete(false);
@@ -135,9 +123,13 @@ const PerfilPaciente = () => {
 
         <Form className={styles.form} onSubmit={handleUpdateUser}>
           {alert && (
-            <Alert severity={alert.severity} onClose={() => setAlert(null)}>
+            <AlertComp
+              severity={alert.severity}
+              onClose={setAlert}
+              timeToClose={3000}
+            >
               {alert.msg}
-            </Alert>
+            </AlertComp>
           )}
 
           <div className={styles.formData}>

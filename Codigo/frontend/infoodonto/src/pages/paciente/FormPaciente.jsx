@@ -11,9 +11,7 @@ import Button from "../../components/buttons/Button";
 import Condicoes from "../../components/condicoes/Condicoes";
 import Form from "../../components/forms/Form";
 import Header from "../../components/headers/Header";
-
-//* Material UI
-import { Alert } from "@mui/material";
+import AlertComp from "../../components/alerts/AlertComp";
 
 //* Icons
 import { BiShow, BiHide } from "react-icons/bi";
@@ -49,6 +47,7 @@ const FormPaciente = () => {
 
       if (response.status === 201) {
         setAlert({ severity: "success", msg: response.data.msg });
+
         setTimeout(() => {
           navigate("/login");
         }, 2000);
@@ -56,10 +55,6 @@ const FormPaciente = () => {
     } catch (err) {
       const { error } = err.response.data;
       setAlert({ severity: "error", msg: error });
-    } finally {
-      setTimeout(() => {
-        setAlert(null);
-      }, 2000);
     }
 
     setIsLoading(false);
@@ -88,9 +83,13 @@ const FormPaciente = () => {
         </section>
         <Form className={styles.form} onSubmit={handleCreatePaciente}>
           {alert && (
-            <Alert severity={alert.severity} onClose={() => setAlert(null)}>
+            <AlertComp
+              severity={alert.severity}
+              onClose={setAlert}
+              timeToClose={4000}
+            >
               {alert.msg}
-            </Alert>
+            </AlertComp>
           )}
           <div className={styles.formData}>
             <section className={styles.section1}>

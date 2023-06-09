@@ -117,6 +117,12 @@ button[type="button"].tabs.active {
   color: #fff;
 }
 
+@media (max-width: 600px) {
+  button[type="submit"] {
+    width: 100%;
+  }
+}
+
 @media (max-width: 300px) {
   button.delete {
     width: 100%;
