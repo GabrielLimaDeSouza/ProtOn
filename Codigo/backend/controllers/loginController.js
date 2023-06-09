@@ -60,7 +60,7 @@ const loginController = {
 
       const code = generateCode();
 
-      //await mailer.sendEmail(email, code);
+      await mailer.sendEmail(email, code);
 
       res.status(201).json({ code });
     } catch (err) {
