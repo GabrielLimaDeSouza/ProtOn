@@ -29,10 +29,6 @@ const VerificarCodigo = ({ code, email }) => {
     }
   }, []);
 
-  useEffect(() => {
-    console.log(_code);
-  }, [_code]);
-
   const navigate = useNavigate();
 
   const handleSubmit = async (formData) => {
