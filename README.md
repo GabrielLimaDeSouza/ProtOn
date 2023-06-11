@@ -1,8 +1,10 @@
 # ProtOn
 
-![logo](https://github.com/ICEI-PUC-Minas-PPLES-TI/plf-es-2023-1-ti4-0648100-odontologia/assets/90854484/e2006291-813c-4116-aa4f-9a4ce2878a47)
+<p align="center">
+  <img src="https://github.com/ICEI-PUC-Minas-PPLES-TI/plf-es-2023-1-ti4-0648100-odontologia/assets/90854484/e2006291-813c-4116-aa4f-9a4ce2878a47" alt="ProtOn">
+</p>
 
-A area de odontologia requer como qualquer outra área da saúde, segurança ao paciente, pois envolve intervenções que podem afetar diretamente a sua saúde. O presente trabalho tem como objetivo auxiliar os profissionais da área no atendimento aos pacientes, por meio da criação de um sistema de recomendação de protocolos odontológicos, voltado as condições individuais de cada paciente.
+A área de odontologia requer como qualquer outra área da saúde, segurança ao paciente, pois envolve intervenções que podem afetar diretamente a sua saúde. O presente trabalho tem como objetivo auxiliar os profissionais da área no atendimento aos pacientes, por meio da criação de um sistema de recomendação de protocolos odontológicos, voltado as condições individuais de cada paciente.
 
 ## Alunos integrantes da equipe
 
