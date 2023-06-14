@@ -134,7 +134,7 @@ const instituicaoController = {
   update: async (req, res) => {
     try {
       const { id } = req.query;
-      const { name, email, senha } = req.body;
+      const { name, email, senha } = req.body.instituicao;
 
       const updatedInstituicao = await InstituicaoModel.findByIdAndUpdate(
         id,

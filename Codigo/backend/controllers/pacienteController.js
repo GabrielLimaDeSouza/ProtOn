@@ -13,7 +13,7 @@ const pacienteController = {
         senha,
         type: "paciente",
       };
-      const pacienteUser = await UsuarioModel.create(user);
+      pacienteUser = await UsuarioModel.create(user);
 
       const pacienteObject = {
         name,
@@ -21,6 +21,7 @@ const pacienteController = {
         condicoes,
         user: pacienteUser._id,
       };
+      await PacienteModel.init();
       const paciente = await PacienteModel.create(pacienteObject);
 
       res

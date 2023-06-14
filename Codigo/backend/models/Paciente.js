@@ -9,6 +9,7 @@ const pacienteSchema = new Schema(
     },
     cpf: {
       type: String,
+      unique: true,
       required: true,
     },
     dentistas: [
