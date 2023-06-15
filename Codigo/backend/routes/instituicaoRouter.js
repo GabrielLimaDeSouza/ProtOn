@@ -8,7 +8,7 @@ router
   .post((req, res) => instituicaoController.create(req, res));
 
 //! Middleware
-//router.use(authenticationMiddleware)
+router.use(authenticationMiddleware);
 
 // CREATE Dentista
 router
