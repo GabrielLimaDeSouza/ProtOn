@@ -56,7 +56,7 @@ const instituicaoController = {
     try {
       const { id, dentista } = req.params;
 
-      const dentistaResp = await dentistaController.delete(req, res);
+      await dentistaController.delete(req, res);
 
       const instituicao = await InstituicaoModel.findById(id);
       instituicao.dentistas.filter(
@@ -65,7 +65,6 @@ const instituicaoController = {
       await instituicao.save();
 
       res.status(201).json({
-        dentista: dentistaResp,
         msg: "Dentista excluido com sucesso!",
       });
     } catch (err) {

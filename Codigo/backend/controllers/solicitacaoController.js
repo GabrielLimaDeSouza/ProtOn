@@ -41,36 +41,30 @@ const solicitacaoController = {
       const { cpf } = req.params;
       const { dentista } = req.body;
 
-      const updatedPaciente = await PacienteModel.findOne({ cpf });
-      if (!updatedPaciente) {
-        res.status(404).json({ error: "Paciente não encontrado!" });
+      const paciente = await PacienteModel.findOne({ cpf });
+      if (!paciente) {
+        res.status(404).json({ msg: "Paciente não encontrado!" });
         return;
       }
 
-      const dentistaObj = await DentistaModel.findById(dentista);
-      if (!dentistaObj) {
-        res.status(404).json({ error: "Dentista não encontrado!" });
-        return;
-      }
-
-      const solicitacaoFound = updatedPaciente.solicitacoes.find(
+      const solicitacaoFound = paciente.solicitacoes.find(
         (solicitacao) => solicitacao.toString() === dentista
       );
       if (solicitacaoFound) {
-        res.status(404).json({ error: "Solicitação já enviada!" });
+        res.status(404).json({ msg: "Solicitação já enviada!" });
         return;
       }
 
-      const dentistaFound = updatedPaciente.dentistas.find(
+      const dentistaFound = paciente.dentistas.find(
         (dentistaA) => dentistaA.toString() === dentista
       );
       if (dentistaFound) {
-        res.status(404).json({ error: "Solicitação já aceita!" });
+        res.status(404).json({ msg: "Solicitação já aceita!" });
         return;
       }
 
-      updatedPaciente.solicitacoes.push(dentista);
-      updatedPaciente.save();
+      paciente.solicitacoes.push(dentista);
+      paciente.save();
 
       res.status(201).json({ msg: "Solicitação enviada" });
     } catch (error) {
@@ -84,13 +78,13 @@ const solicitacaoController = {
 
       const paciente = await PacienteModel.findOne({ cpf });
       if (!paciente) {
-        res.status(404).json({ error: "Paciente não encontrado!" });
+        res.status(404).json({ msg: "Paciente não encontrado!" });
         return;
       }
 
       const _dentista = await DentistaModel.findById(dentista);
       if (!_dentista) {
-        res.status(404).json({ error: "Dentista não encontrado!" });
+        res.status(404).json({ msg: "Dentista não encontrado!" });
         return;
       }
 
@@ -98,7 +92,7 @@ const solicitacaoController = {
         (solicitacao) => solicitacao.toString() === dentista
       );
       if (!solicitacaoFound) {
-        res.status(404).json({ error: "Solicitação não encontrada!" });
+        res.status(404).json({ msg: "Solicitação não encontrada!" });
         return;
       }
 
@@ -106,7 +100,7 @@ const solicitacaoController = {
         (dentistaA) => dentistaA.toString() === dentista
       );
       if (dentistaFound) {
-        res.status(404).json({ error: "Solicitação de dentista já aceita!" });
+        res.status(404).json({ msg: "Solicitação de dentista já aceita!" });
         return;
       }
 
@@ -129,13 +123,13 @@ const solicitacaoController = {
 
       const paciente = await PacienteModel.findOne({ cpf });
       if (!paciente) {
-        res.status(404).json({ error: "Paciente não encontrado!" });
+        res.status(404).json({ msg: "Paciente não encontrado!" });
         return;
       }
 
       const dentistaObj = await DentistaModel.findById(dentista);
       if (!dentistaObj) {
-        res.status(404).json({ error: "Dentista não encontrado!" });
+        res.status(404).json({ msg: "Dentista não encontrado!" });
         return;
       }
 
@@ -143,7 +137,7 @@ const solicitacaoController = {
         (solicitacao) => solicitacao.toString() === dentista
       );
       if (!solicitacaoFound) {
-        res.status(404).json({ error: "Solicitação não encontrada!" });
+        res.status(404).json({ msg: "Solicitação não encontrada!" });
         return;
       }
 

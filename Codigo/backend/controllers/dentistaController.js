@@ -76,8 +76,7 @@ const dentistaController = {
       }
 
       await UsuarioModel.findByIdAndDelete(dentistaResp.user);
-
-      return dentistaResp;
+      return;
     } catch (error) {
       console.log(error);
       throw new Error(msg || "Erro interno do servidor");

@@ -51,7 +51,7 @@ const pacienteController = {
         });
 
       if (!paciente) {
-        res.status(404).json({ msg: `Paciente não encontrado!` });
+        res.status(404).json({ msg: "Paciente não encontrado!" });
         return;
       }
 
@@ -77,7 +77,7 @@ const pacienteController = {
       if (!paciente) {
         res
           .status(404)
-          .json({ error: `Paciente com cpf ${cpf} não encontrado!` });
+          .json({ msg: `Paciente com cpf ${cpf} não encontrado!` });
         return;
       }
 
@@ -85,7 +85,7 @@ const pacienteController = {
         (dentista1) => dentista1.toString() === dentista
       );
       if (!acesso) {
-        res.status(401).json({ error: "Dentista sem permissão" });
+        res.status(401).json({ msg: "Dentista sem permissão" });
         return;
       }
 
