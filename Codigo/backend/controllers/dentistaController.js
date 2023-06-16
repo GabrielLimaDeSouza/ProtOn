@@ -76,8 +76,7 @@ const dentistaController = {
       }
 
       await UsuarioModel.findByIdAndDelete(dentistaResp.user);
-
-      return dentistaResp;
+      return;
     } catch (error) {
       console.log(error);
       throw new Error(msg || "Erro interno do servidor");
@@ -122,11 +121,15 @@ const dentistaController = {
   deleteAll: async (req, res) => {
     try {
       const { id } = req.query;
-      const dentistas = await DentistaModel.deleteMany({ instituicao: id });
 
-      if (dentistas) {
-        return;
-      }
+      const dentistas = await DentistaModel.find({ instituicao: id });
+      dentistas.forEach(async (dentista) => {
+        await UsuarioModel.deleteOne({ _id: dentista.user });
+      });
+
+      await DentistaModel.deleteMany({ instituicao: id });
+
+      return;
     } catch (error) {
       console.log(error);
       throw new Error();

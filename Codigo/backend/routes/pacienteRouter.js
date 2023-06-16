@@ -9,7 +9,7 @@ router
   .post((req, res) => pacienteController.create(req, res));
 
 //! Middleware
-//router.use(authenticationMiddleware)
+router.use(authenticationMiddleware);
 
 // GET Paciente
 router.route("/paciente").get((req, res) => pacienteController.get(req, res));

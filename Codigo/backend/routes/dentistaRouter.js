@@ -4,7 +4,7 @@ const solicitacaoController = require("../controllers/solicitacaoController");
 const authenticationMiddleware = require("../middlewares/auth");
 
 //! Middleware
-//router.use(authenticationMiddleware)
+router.use(authenticationMiddleware);
 
 // GET ALL Dentista
 router

@@ -23,12 +23,12 @@ const loginController = {
       const user = await UsuarioModel.findOne({ email });
 
       if (!user) {
-        res.status(404).json({ error: `Usuário não encontrado!` });
+        res.status(404).json({ error: "Usuário não encontrado!" });
         return;
       }
 
       if (senha !== user.senha) {
-        res.status(401).json({ error: `Senha incorreta` });
+        res.status(401).json({ error: "Senha incorreta" });
         return;
       }
 
@@ -54,7 +54,7 @@ const loginController = {
 
       const user = await UsuarioModel.findOne({ email });
       if (!user) {
-        res.status(404).json({ error: `Usuário não encontrado!` });
+        res.status(404).json({ error: "Usuário não encontrado!" });
         return;
       }
 
@@ -75,7 +75,7 @@ const loginController = {
 
       const user = await UsuarioModel.findOneAndUpdate({ email }, { senha });
       if (!user) {
-        res.status(404).json({ error: `Usuário não encontrado!` });
+        res.status(404).json({ error: "Usuário não encontrado!" });
         return;
       }
 

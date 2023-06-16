@@ -1,8 +1,10 @@
 # ProtOn
 
-![logo](https://github.com/ICEI-PUC-Minas-PPLES-TI/plf-es-2023-1-ti4-0648100-odontologia/assets/90854484/18ba0e1b-7496-4f88-9535-869d4f71f75d)
+<p align="center">
+  <img src="https://github.com/ICEI-PUC-Minas-PPLES-TI/plf-es-2023-1-ti4-0648100-odontologia/assets/90854484/e2006291-813c-4116-aa4f-9a4ce2878a47" alt="ProtOn">
+</p>
 
-A area de odontologia requer como qualquer outra área da saúde, segurança ao paciente, pois envolve intervenções que podem afetar diretamente a sua saúde. O presente trabalho tem como objetivo auxiliar os profissionais da área no atendimento aos pacientes, por meio da criação de um sistema de recomendação de protocolos odontológicos, voltado as condições individuais de cada paciente.
+A área de odontologia requer como qualquer outra área da saúde, segurança ao paciente, pois envolve intervenções que podem afetar diretamente a sua saúde. O presente trabalho tem como objetivo auxiliar os profissionais da área no atendimento aos pacientes, por meio da criação de um sistema de recomendação de protocolos odontológicos, voltado as condições individuais de cada paciente.
 
 ## Alunos integrantes da equipe
 
@@ -19,6 +21,17 @@ A area de odontologia requer como qualquer outra área da saúde, segurança ao 
 ## Link para o projeto hospedado
 
 https://protonodontologia.onrender.com/
+
+## Tecnologias
+
+<div style="display: inline_block"><br>
+  <img align="center" alt="HTML" height="40" width="50" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg">
+  <img align="center" alt="CSS" height="40" width="50" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg">
+  <img align="center" alt="JS" height="40" width="50" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-plain.svg">
+  <img align="center" alt="NodeJS" height="40" width="50" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg">
+  <img align="center" alt="React" height="40" width="50" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg">
+  <img align="center" alt="MongoDB" height="40" width="50" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg">
+</div>
 
 ## Instruções de utilização
 

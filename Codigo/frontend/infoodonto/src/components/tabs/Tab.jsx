@@ -2,44 +2,33 @@
 import styles from "./Tab.module.css";
 
 //* React
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 //* Components
 import Button from "../buttons/Button";
 
 const Tab = ({ tabs, children }) => {
   const [currentTab, setCurrentTab] = useState(children[0]);
+  const [indexButton, setIndexButton] = useState(0);
 
-  const tabsRef = useRef(null);
-
-  useEffect(() => {
-    tabsRef.current.children[0].classList.add("active");
-  }, [tabsRef]);
-
-  const handleChangeTab = ({ target }) => {
-    const id = parseInt(target.id);
-
-    const currTab = children.find((_children) => _children.props?.index === id);
+  const handleChangeTab = (index) => {
+    const currTab = children.find(
+      (_children) => _children.props?.index === index
+    );
     setCurrentTab(currTab);
-
-    const btns = [...tabsRef.current.children];
-    btns.map((btn) => {
-      btn.classList.remove("active");
-    });
-
-    target.classList.add("active");
+    setIndexButton(index);
   };
 
   return (
     <div className={styles.body}>
-      <section className={styles.tabs} ref={tabsRef}>
+      <section className={styles.tabs}>
         {tabs.map((_tab, index) => (
           <Button
             key={_tab.nome + index}
             type="button"
             id={index}
-            className="tabs"
-            onClick={handleChangeTab}
+            className={`tabs ${indexButton === index && "active"}`}
+            onClick={() => handleChangeTab(index)}
           >
             {_tab.nome}
           </Button>

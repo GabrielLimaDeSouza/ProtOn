@@ -90,7 +90,7 @@ const Login = () => {
                   className="action blue-primary"
                   loading={isLoading}
                 >
-                  Entrar
+                  {isLoading ? "Entrando" : "Entrar"}
                 </Button>
               </div>
             </Form>
