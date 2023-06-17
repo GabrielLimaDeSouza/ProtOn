@@ -62,7 +62,9 @@ const FormInstituicao = () => {
         <section className="create-account">
           <div className={styles.content}>
             <div className={styles.divTitle}>
-              <h1 className={styles.title}>Criar nova conta</h1>
+              <h1 className={styles.title}>
+                Criar nova conta como Instituição
+              </h1>
               <p className={styles.descripton}>
                 Crie uma nova conta no ProtOn para tornar as consultas de seus
                 dentistas mais dinâmicas
