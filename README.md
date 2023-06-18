@@ -22,6 +22,10 @@ A área de odontologia requer como qualquer outra área da saúde, segurança ao
 
 https://protonodontologia.onrender.com/
 
+## Vídeo de divulgação do ProtOn
+
+https://www.youtube.com/watch?v=SZQNfXn3XfM&t=2s&ab_channel=ProtOnOdontologia
+
 ## Tecnologias
 
 <div style="display: inline_block"><br>
