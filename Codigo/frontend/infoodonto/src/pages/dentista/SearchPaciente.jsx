@@ -41,7 +41,7 @@ const SearchPaciente = () => {
       }
     } catch (err) {
       const { status, data } = err.response;
-      setAlert({ severity: "error", msg: data.error });
+      setAlert({ severity: "error", msg: data.msg });
 
       if (status === 401) {
         setSendSolicitation({ cpf, dentista: user._id });

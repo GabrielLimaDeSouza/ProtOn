@@ -3,15 +3,16 @@ const { SECRET_KEY } = require("../auth/configs");
 
 const authenticationMiddleware = async (req, res, next) => {
   const authHeader = req.headers.authorization;
+  console.log(authHeader);
 
   if (!authHeader) {
-    return res.status(401).json({ error: "Token was not provided" });
+    return res.status(401).json({ msg: "Token was not provided" });
   }
 
   const [, token] = authHeader.split(" ");
 
   JWT.verify(token, SECRET_KEY, (err, decoded) => {
-    if (err) res.status(401).json({ error: "Token invalido" });
+    if (err) res.status(401).json({ msg: "Token invalido" });
 
     req.userId = decoded.id;
     next();

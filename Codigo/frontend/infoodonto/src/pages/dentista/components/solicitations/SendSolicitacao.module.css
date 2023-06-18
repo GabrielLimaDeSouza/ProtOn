@@ -1,8 +1,10 @@
-.solicitacao {
+.solicitacao,
+.solicitacao > span {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 11rem;
+  max-width: 15rem;
   font-size: 15px;
   margin: 0 auto;
+  gap: 0 1rem;
 }

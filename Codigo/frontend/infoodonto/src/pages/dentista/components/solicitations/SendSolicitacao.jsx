@@ -20,11 +20,7 @@ const SendSolicitacao = ({ cpf, dentista, alert }) => {
       }
     } catch (err) {
       const { data } = err.response;
-      alert({ severity: "error", msg: data.error });
-    } finally {
-      setTimeout(() => {
-        alert(null);
-      }, 3000);
+      alert({ severity: "error", msg: data.msg });
     }
   };
 

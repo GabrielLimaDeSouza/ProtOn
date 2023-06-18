@@ -55,7 +55,7 @@ div.alert {
   position: absolute;
   top: 5rem;
   left: 50%;
-  transform: translate(-50%, 0);
+  transform: translate(-50%, 1rem);
 }
 
 @media (max-width: 840px) {
@@ -74,10 +74,19 @@ div.alert {
   form.formSearch {
     column-gap: 1rem;
   }
+
+  div.alert {
+    width: 100%;
+    transform: translate(-50%, 3rem);
+  }
 }
 
 @media (max-width: 300px) {
   div.body {
     padding: 0 1rem 4rem;
+  }
+
+  div.alert {
+    transform: translate(-50%, 3rem);
   }
 }
