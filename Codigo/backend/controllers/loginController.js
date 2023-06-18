@@ -2,32 +2,35 @@ const Token = require("../auth/token.auth");
 const { LOGIN_EXPIRATION_TIME } = require("../auth/configs");
 const { Usuario: UsuarioModel } = require("../models/Usuario");
 const mailer = require("../auth/mailer");
+const { compare } = require("../services/authService");
 
 const generateCode = () => {
-  var pass = "";
+  var recoveryCode = "";
   var str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789";
 
   for (i = 1; i <= 10; i++) {
     var char = Math.floor(Math.random() * str.length);
 
-    pass += str.charAt(char);
+    recoveryCode += str.charAt(char);
   }
 
-  return pass;
+  return recoveryCode;
 };
 
 const loginController = {
   login: async (req, res) => {
     try {
       const { email, senha } = req.body;
-      const user = await UsuarioModel.findOne({ email });
+      const user = await UsuarioModel.findOne({ email }).select("+senha");
 
       if (!user) {
         res.status(404).json({ error: "Usuário não encontrado!" });
         return;
       }
 
-      if (senha !== user.senha) {
+      const validPass = await compare(senha, user.senha);
+
+      if (!validPass) {
         res.status(401).json({ error: "Senha incorreta" });
         return;
       }
@@ -44,8 +47,9 @@ const loginController = {
       const token = await Token.generate(JWTData);
 
       res.status(201).json({ user: { _id: user._id, email }, token });
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
+      res.status(500).send(err.message);
     }
   },
   createCode: async (req, res) => {

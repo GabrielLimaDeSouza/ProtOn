@@ -30,21 +30,15 @@ export const getCondicoes = async () => {
 };
 
 export const createPaciente = async (paciente) => {
-  return api.post(`/api/paciente`, {
-    paciente,
-  });
+  return api.post(`/api/paciente`, paciente);
 };
 
 export const updatePaciente = async (id, paciente) => {
-  return api.put(`/api/paciente?id=${id}`, {
-    paciente,
-  });
+  return api.put(`/api/paciente?id=${id}`, paciente);
 };
 
 export const buscarPaciente = async (cpf, dentista) => {
-  return api.post(`/api/paciente/cpf/${cpf}`, {
-    dentista,
-  });
+  return api.post(`/api/paciente/cpf/${cpf}`, dentista);
 };
 
 export const deletePaciente = async (id) => {
@@ -70,15 +64,11 @@ export const recusarSolicitacao = async (cpf, dentista) => {
 
 //* Rotas Instituicao
 export const createInstituicao = async (instituicao) => {
-  return api.post(`/api/instituicao`, {
-    instituicao,
-  });
+  return api.post(`/api/instituicao`, instituicao);
 };
 
 export const updateInstituicao = async (id, instituicao) => {
-  return api.put(`/api/instituicao?id=${id}`, {
-    instituicao,
-  });
+  return api.put(`/api/instituicao?id=${id}`, instituicao);
 };
 
 export const deleteInstituicao = async (id) => {
@@ -86,15 +76,14 @@ export const deleteInstituicao = async (id) => {
 };
 
 export const createDentista = async (dentista) => {
-  return api.post(`/api/instituicao/${dentista.instituicao}/dentista`, {
-    dentista,
-  });
+  return api.post(
+    `/api/instituicao/${dentista.instituicao}/dentista`,
+    dentista
+  );
 };
 
 export const updateDentista = async (dentista) => {
-  return api.put(`/api/dentista?id=${dentista._id}`, {
-    dentista,
-  });
+  return api.put(`/api/dentista?id=${dentista._id}`, dentista);
 };
 
 //* Rotas Detista
@@ -107,5 +96,5 @@ export const deleteDentista = async (instituicao, dentista) => {
 };
 
 export const enviarSolicitacao = async (cpf, dentista) => {
-  return await api.put(`/api/dentista/enviar-solicitacao/${cpf}`, { dentista });
+  return await api.put(`/api/dentista/enviar-solicitacao/${cpf}`, dentista);
 };

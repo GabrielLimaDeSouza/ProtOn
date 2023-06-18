@@ -3,7 +3,6 @@ const { SECRET_KEY } = require("../auth/configs");
 
 const authenticationMiddleware = async (req, res, next) => {
   const authHeader = req.headers.authorization;
-  console.log(authHeader);
 
   if (!authHeader) {
     return res.status(401).json({ msg: "Token was not provided" });

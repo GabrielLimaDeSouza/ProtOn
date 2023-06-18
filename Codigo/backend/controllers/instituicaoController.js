@@ -1,17 +1,20 @@
 const dentistaController = require("./dentistaController");
 const { Instituicao: InstituicaoModel } = require("../models/Instituicao");
 const { Usuario: UsuarioModel } = require("../models/Usuario");
+const { hash } = require("../services/authService");
 
 const instituicaoController = {
   create: async (req, res) => {
     var instituicaoUser = null;
 
     try {
-      const { name, email, senha, tipo } = req.body.instituicao;
+      const { name, email, senha, tipo } = req.body;
+
+      const hashedPass = await hash(senha);
 
       const user = {
         email,
-        senha,
+        senha: hashedPass,
         type: "instituicao",
       };
       instituicaoUser = await UsuarioModel.create(user);
@@ -133,7 +136,7 @@ const instituicaoController = {
   update: async (req, res) => {
     try {
       const { id } = req.query;
-      const { name, email, senha } = req.body.instituicao;
+      const { name, email, senha } = req.body;
 
       const updatedInstituicao = await InstituicaoModel.findByIdAndUpdate(
         id,
@@ -146,17 +149,19 @@ const instituicaoController = {
         return;
       }
 
+      const hashedPass = await hash(senha);
+
       const instituicao = await UsuarioModel.findByIdAndUpdate(
         updatedInstituicao.user._id,
-        { email, senha },
+        { email, senha: hashedPass },
         { new: true }
       );
 
       res
         .status(201)
         .json({ instituicao, msg: "Instituição atualizada com sucesso!" });
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
       res.status(500).json({
         error: "Ocorreu um erro ao atualizar os dados da Instituição",
       });

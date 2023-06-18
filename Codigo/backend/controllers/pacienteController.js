@@ -1,16 +1,19 @@
-const { Paciente: PacienteModel } = require("../models/Paciente");
-const { Usuario: UsuarioModel } = require("../models/Usuario");
+const { Paciente: PacienteModel } = require("../models/Paciente.js");
+const { Usuario: UsuarioModel } = require("../models/Usuario.js");
+const { hash } = require("../services/authService.js");
 
 const pacienteController = {
   create: async (req, res) => {
     var pacienteUser = null;
 
     try {
-      const { name, cpf, email, senha, condicoes } = req.body.paciente;
+      const { name, cpf, email, senha, condicoes } = req.body;
+
+      const hashedPass = await hash(senha);
 
       const user = {
         email,
-        senha,
+        senha: hashedPass,
         type: "paciente",
       };
       pacienteUser = await UsuarioModel.create(user);
@@ -123,7 +126,7 @@ const pacienteController = {
   update: async (req, res) => {
     try {
       const { id } = req.query;
-      const { name, email, senha, condicoes } = req.body.paciente;
+      const { name, email, senha, condicoes } = req.body;
 
       const updatedPaciente = await PacienteModel.findByIdAndUpdate(
         id,
@@ -139,11 +142,13 @@ const pacienteController = {
         return;
       }
 
+      const hashedPass = await hash(senha);
+
       const updateUser = await UsuarioModel.findByIdAndUpdate(
         updatedPaciente.user._id,
         {
           email,
-          senha,
+          senha: hashedPass,
         }
       );
 

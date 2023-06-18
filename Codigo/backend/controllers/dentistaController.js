@@ -1,16 +1,19 @@
 const { Dentista: DentistaModel } = require("../models/Dentista");
 const { Usuario: UsuarioModel } = require("../models/Usuario");
+const { hash } = require("../services/authService");
 
 const dentistaController = {
   create: async (req, res) => {
     var dentistaUser = null;
 
     try {
-      const { name, email, senha, matricula, instituicao } = req.body.dentista;
+      const { name, email, senha, matricula, instituicao } = req.body;
+
+      const hashedPass = await hash(senha);
 
       const user = {
         email,
-        senha,
+        senha: hashedPass,
         type: "dentista",
       };
       dentistaUser = await UsuarioModel.create(user);
@@ -24,9 +27,8 @@ const dentistaController = {
       const dentista = await DentistaModel.create(dentistaObject);
 
       return dentista.populate("user");
-    } catch (error) {
-      console.log(error);
-
+    } catch (err) {
+      console.log(err);
       await UsuarioModel.findByIdAndDelete(dentistaUser._id);
 
       throw new Error();
@@ -85,7 +87,10 @@ const dentistaController = {
   update: async (req, res) => {
     try {
       const { id } = req.query;
-      const { name, email, senha } = req.body.dentista;
+      const { name, email, senha } = req.body;
+
+      console.log(id);
+      console.log(req.body);
 
       const updatedDentista = await DentistaModel.findByIdAndUpdate(
         id,
@@ -98,11 +103,14 @@ const dentistaController = {
         return;
       }
 
+      const hashedPass = await hash(senha);
+      console.log(hashedPass);
+
       const dentista = await UsuarioModel.findByIdAndUpdate(
         updatedDentista.user._id,
         {
           email,
-          senha,
+          senha: hashedPass,
         },
         { new: true }
       );

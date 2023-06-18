@@ -1,7 +1,7 @@
-const { Usuario: UsuarioModel } = require("../models/Usuario");
-const { Dentista: DentistaModel } = require("../models/Dentista");
-const { Paciente: PacienteModel } = require("../models/Paciente");
-const { Instituicao: InstituicaoModel } = require("../models/Instituicao");
+const { Usuario: UsuarioModel } = require("../models/Usuario.js");
+const { Dentista: DentistaModel } = require("../models/Dentista.js");
+const { Paciente: PacienteModel } = require("../models/Paciente.js");
+const { Instituicao: InstituicaoModel } = require("../models/Instituicao.js");
 
 const usuarioController = {
   get: async (req, res) => {
