@@ -16,20 +16,20 @@ span.numNotifs {
 div.notification {
   position: absolute;
   right: 0;
-  width: auto;
   top: 2rem;
-  background-color: #fff;
   border-radius: 10px;
-  width: 17rem;
+  min-width: 15rem;
+  background-color: #fff;
+  box-shadow: 0 0 1.3rem rgba(32, 32, 32, 0.1);
 }
 
 div.body {
-  background-color: #fff;
   border-radius: 0.6rem;
   padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 0 1rem;
 }
 
 div.infos {
@@ -47,8 +47,12 @@ h3.name {
   color: #20a0fd;
 }
 
+div.infos > p {
+  font-size: 0.8rem;
+}
+
 span.matricula {
-  font-size: 0.9rem;
+  font-size: 0.7rem;
 }
 
 div.edit {
@@ -56,7 +60,7 @@ div.edit {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 4rem;
+  gap: 2rem;
 }
 
 div.noNotifs {

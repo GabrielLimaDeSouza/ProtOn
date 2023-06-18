@@ -11,7 +11,8 @@ div.contentMenu {
   row-gap: 1rem;
   justify-content: center;
   align-items: flex-end;
-  background-color: #fff;
   padding: 1rem 2rem;
   border-radius: 15px;
+  background-color: #fff;
+  box-shadow: 0 0 1rem rgba(32, 32, 32, 0.1);
 }

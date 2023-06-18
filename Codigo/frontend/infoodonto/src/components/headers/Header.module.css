@@ -67,3 +67,9 @@
     font-size: 0.8rem !important;
   }
 }
+
+@media (max-width: 300px) {
+  .navHeader {
+    padding: 2rem 1rem 5rem;
+  }
+}
