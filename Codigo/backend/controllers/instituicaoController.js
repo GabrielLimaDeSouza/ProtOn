@@ -149,11 +149,15 @@ const instituicaoController = {
         return;
       }
 
-      const hashedPass = await hash(senha);
+      const instituicaoAtualizada = {
+        email,
+      };
+
+      if (senha) instituicaoAtualizada.senha = await hash(senha);
 
       const instituicao = await UsuarioModel.findByIdAndUpdate(
         updatedInstituicao.user._id,
-        { email, senha: hashedPass },
+        instituicaoAtualizada,
         { new: true }
       );
 

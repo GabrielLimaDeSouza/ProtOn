@@ -103,15 +103,15 @@ const dentistaController = {
         return;
       }
 
-      const hashedPass = await hash(senha);
-      console.log(hashedPass);
+      const dentistaAtualizado = {
+        email,
+      };
+
+      if (senha) dentistaAtualizado.senha = await hash(senha);
 
       const dentista = await UsuarioModel.findByIdAndUpdate(
         updatedDentista.user._id,
-        {
-          email,
-          senha: hashedPass,
-        },
+        dentistaAtualizado,
         { new: true }
       );
 

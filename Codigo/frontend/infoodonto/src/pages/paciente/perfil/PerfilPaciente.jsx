@@ -54,11 +54,6 @@ const PerfilPaciente = () => {
 
       return;
     }
-
-    if (paciente.senha === "") {
-      paciente.senha = user.user.senha;
-    }
-
     paciente.condicoes = condicoes;
 
     try {

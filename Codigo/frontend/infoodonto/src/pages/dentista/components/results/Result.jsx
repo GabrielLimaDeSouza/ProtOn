@@ -57,30 +57,35 @@ const Result = ({ paciente }) => {
   };
 
   return (
-    <section className={styles.result}>
-      <div className={styles.user}>
-        <h3 className={styles.name}>{paciente.name}</h3>
-        <span className={styles.cpf}>{formatarCPF(paciente.cpf)}</span>
-        <p className={styles.email}>{paciente.user.email}</p>
-      </div>
+    paciente && (
+      <section className={styles.result}>
+        <div className={styles.user}>
+          <h3 className={styles.name}>{paciente.name}</h3>
+          <span className={styles.cpf}>{formatarCPF(paciente.cpf)}</span>
+          <p className={styles.email}>{paciente.user.email}</p>
+        </div>
 
-      <div className={styles.protocols}>
-        <h3 className={styles.condicoesTitle}>Condições</h3>
-        {paciente.condicoes.length > 0 ? (
-          <Tab tabs={paciente.condicoes}>
-            {paciente.condicoes.map((condicao, index) => (
-              <TabContent key={generateKey(condicao.nome, index)} index={index}>
-                <ProtocolsDesktop condicao={condicao} />
-              </TabContent>
-            ))}
-          </Tab>
-        ) : (
-          <div className={styles.noCondicoes}>
-            <em>Este paciente não possui condições cadastradas</em>
-          </div>
-        )}
-      </div>
-    </section>
+        <div className={styles.protocols}>
+          <h3 className={styles.condicoesTitle}>Condições</h3>
+          {paciente.condicoes.length > 0 ? (
+            <Tab tabs={paciente.condicoes}>
+              {paciente.condicoes.map((condicao, index) => (
+                <TabContent
+                  key={generateKey(condicao.nome, index)}
+                  index={index}
+                >
+                  <ProtocolsDesktop condicao={condicao} />
+                </TabContent>
+              ))}
+            </Tab>
+          ) : (
+            <div className={styles.noCondicoes}>
+              <em>Este paciente não possui condições cadastradas</em>
+            </div>
+          )}
+        </div>
+      </section>
+    )
   );
 };
 

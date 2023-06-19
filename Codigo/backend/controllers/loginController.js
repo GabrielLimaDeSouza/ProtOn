@@ -2,7 +2,7 @@ const Token = require("../auth/token.auth");
 const { LOGIN_EXPIRATION_TIME } = require("../auth/configs");
 const { Usuario: UsuarioModel } = require("../models/Usuario");
 const mailer = require("../auth/mailer");
-const { compare } = require("../services/authService");
+const { compare, hash } = require("../services/authService");
 
 const generateCode = () => {
   var recoveryCode = "";
@@ -77,7 +77,12 @@ const loginController = {
     try {
       const { email, senha } = req.body;
 
-      const user = await UsuarioModel.findOneAndUpdate({ email }, { senha });
+      const hashedPass = await hash(senha);
+
+      const user = await UsuarioModel.findOneAndUpdate(
+        { email },
+        { senha: hashedPass }
+      );
       if (!user) {
         res.status(404).json({ error: "Usuário não encontrado!" });
         return;

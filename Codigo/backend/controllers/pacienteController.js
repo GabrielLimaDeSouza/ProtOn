@@ -127,6 +127,7 @@ const pacienteController = {
     try {
       const { id } = req.query;
       const { name, email, senha, condicoes } = req.body;
+      console.log(name, email, senha, condicoes);
 
       const updatedPaciente = await PacienteModel.findByIdAndUpdate(
         id,
@@ -142,14 +143,15 @@ const pacienteController = {
         return;
       }
 
-      const hashedPass = await hash(senha);
+      const pacienteAtualizado = {
+        email,
+      };
+
+      if (senha) pacienteAtualizado.senha = await hash(senha);
 
       const updateUser = await UsuarioModel.findByIdAndUpdate(
         updatedPaciente.user._id,
-        {
-          email,
-          senha: hashedPass,
-        }
+        pacienteAtualizado
       );
 
       if (!updateUser) {

@@ -73,7 +73,6 @@ const DentistasPermitidos = () => {
 
       if (response.status === 201) {
         user.dentistas.push(solicitacao);
-        console.log(user.dentistas);
         user.solicitacoes = solicitacoes.filter(
           (_solicitacao) => _solicitacao._id !== solicitacao._id
         );

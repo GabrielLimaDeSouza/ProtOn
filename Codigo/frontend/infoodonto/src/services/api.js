@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://protonbackend.onrender.com",
+  baseURL: "http://localhost:3000",
 });
 
 // http://localhost:3000
@@ -38,7 +38,7 @@ export const updatePaciente = async (id, paciente) => {
 };
 
 export const buscarPaciente = async (cpf, dentista) => {
-  return api.post(`/api/paciente/cpf/${cpf}`, dentista);
+  return api.post(`/api/paciente/cpf/${cpf}`, { dentista });
 };
 
 export const deletePaciente = async (id) => {
@@ -96,5 +96,5 @@ export const deleteDentista = async (instituicao, dentista) => {
 };
 
 export const enviarSolicitacao = async (cpf, dentista) => {
-  return await api.put(`/api/dentista/enviar-solicitacao/${cpf}`, dentista);
+  return await api.put(`/api/dentista/enviar-solicitacao/${cpf}`, { dentista });
 };

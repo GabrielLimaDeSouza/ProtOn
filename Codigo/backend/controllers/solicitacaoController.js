@@ -41,6 +41,9 @@ const solicitacaoController = {
       const { cpf } = req.params;
       const { dentista } = req.body;
 
+      console.log(dentista);
+      console.log(cpf);
+
       const paciente = await PacienteModel.findOne({ cpf });
       if (!paciente) {
         res.status(404).json({ msg: "Paciente não encontrado!" });

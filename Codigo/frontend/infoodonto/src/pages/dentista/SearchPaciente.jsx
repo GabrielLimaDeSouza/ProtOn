@@ -23,6 +23,7 @@ import { LoginContext } from "../../context/LoginContext";
 const SearchPaciente = () => {
   const [paciente, setPaciente] = useState(null);
   const [sendSolicitation, setSendSolicitation] = useState(null);
+  const [cpf, setCpf] = useState(null);
   const [alert, setAlert] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
 
@@ -32,6 +33,7 @@ const SearchPaciente = () => {
     setIsLoading(true);
 
     const { cpf } = Object.fromEntries(formData);
+    setCpf(cpf);
 
     try {
       const { status, data } = await buscarPaciente(cpf, user._id);
@@ -43,8 +45,10 @@ const SearchPaciente = () => {
       const { status, data } = err.response;
       setAlert({ severity: "error", msg: data.msg });
 
+      setPaciente(null);
+
       if (status === 401) {
-        setSendSolicitation({ cpf, dentista: user._id });
+        setSendSolicitation(true);
       }
     }
 
@@ -115,8 +119,8 @@ const SearchPaciente = () => {
             ) : (
               sendSolicitation && (
                 <SendSolicitacao
-                  cpf={sendSolicitation.cpf}
-                  dentista={sendSolicitation.dentista}
+                  cpf={cpf}
+                  dentista={user._id}
                   alert={setAlert}
                 />
               )
