@@ -6,6 +6,7 @@ import Header from "../../components/headers/Header";
 import Button from "../../components/buttons/Button";
 import MultipleMenu from "../../components/headers/components/cadastrar/MultipleMenu";
 import { LoginContext } from "../../context/LoginContext";
+import Footer from "../../components/footers/Footer"
 
 //* CSS
 import styles from "../../css/HomePageDesktop.module.css";
