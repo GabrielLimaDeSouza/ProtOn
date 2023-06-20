@@ -121,10 +121,8 @@ const DesktopHomePage = ({ quantPacientes, quantInsituicoes, quantDentistas }) =
               <h3>Sobre nós</h3>
             </div>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+            No ProtOn sabemos que cada paciente é único, por isso nossas recomendações de protocolos se baseiam nas melhores práticas odontológicas, 
+oferecendo protocolos eficazes que se adequam às necessidades de cada paciente.
             </p>
           </div>
         </div>
