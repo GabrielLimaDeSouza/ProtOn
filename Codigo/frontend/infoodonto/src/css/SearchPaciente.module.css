@@ -10,7 +10,7 @@ div.body {
   max-width: 80rem;
   width: 100%;
   margin: 0 auto;
-  padding: 0 0 4rem;
+  padding: 0 0 7rem;
   min-height: 100vh;
 }
 
@@ -68,7 +68,7 @@ div.alert {
   }
 
   div.body {
-    padding: 0 2rem 4rem;
+    padding: 0 2rem 7rem;
   }
 
   form.formSearch {
@@ -83,7 +83,7 @@ div.alert {
 
 @media (max-width: 300px) {
   div.body {
-    padding: 0 1rem 4rem;
+    padding: 0 1rem 7rem;
   }
 
   div.alert {

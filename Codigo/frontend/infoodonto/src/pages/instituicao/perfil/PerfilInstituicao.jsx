@@ -10,6 +10,7 @@ import Button from "../../../components/buttons/Button";
 import Form from "../../../components/forms/Form";
 import Header from "../../../components/headers/Header";
 import AlertComp from "../../../components/alerts/AlertComp";
+import Footer from "../../../components/footers/Footer";
 
 //* Icons
 import { BiShow, BiHide } from "react-icons/bi";
@@ -90,115 +91,120 @@ const PerfilInstituicao = () => {
   };
 
   return (
-    <div className={styles.main}>
-      <div className={styles.header}>
-        <Header colorized />
-      </div>
-      <div className={styles.body}>
-        <section className="update-account">
-          <div className={styles.content}>
-            <div className={styles.divTitle}>
-              <h1 className={styles.title}>Editar dados</h1>
-              <p className={styles.descripton}>
-                Mantenha seus dados sempre atualizados
-              </p>
+    <>
+      <div className={styles.main}>
+        <div className={styles.header}>
+          <Header colorized />
+        </div>
+        <div className={styles.body}>
+          <section className="update-account">
+            <div className={styles.content}>
+              <div className={styles.divTitle}>
+                <h1 className={styles.title}>Editar dados</h1>
+                <p className={styles.descripton}>
+                  Mantenha seus dados sempre atualizados
+                </p>
+              </div>
             </div>
-          </div>
-        </section>
-        <Form className={styles.form} onSubmit={handleUpdateInstituicao}>
-          {alert && (
-            <AlertComp
-              severity={alert.severity}
-              onClose={setAlert}
-              timeToClose={4000}
-            >
-              {alert.msg}
-            </AlertComp>
-          )}
-          <div className={styles.formData}>
-            <section className={styles.section1}>
-              <section className={styles.sectionEdit}>
-                <h4 className={styles.titleSection}>Dados institucionais</h4>
-                <Input
-                  type="text"
-                  name="name"
-                  id="name"
-                  placeholder="Nome"
-                  initialValue={user?.name}
-                  required
-                />
-                <Input
-                  type="text"
-                  id="selectTipo"
-                  name="tipo"
-                  initialValue={user?.tipo}
-                  disabled
-                />
-              </section>
-              <section className={styles.sectionEdit}>
-                <h4 className={styles.titleSection}>Login</h4>
-                <Input
-                  type="text"
-                  name="email"
-                  id="email"
-                  placeholder="Email"
-                  initialValue={user?.user.email}
-                  required
-                />
-                <Input
-                  type={isHiddenPass ? "password" : "text"}
-                  placeholder="Senha"
-                  id="password"
-                  name="senha"
-                >
-                  <Button
-                    type="button"
-                    className="empty"
-                    id="btn-hidden-pass"
-                    onClick={() => setIsHiddenPass(!isHiddenPass)}
+          </section>
+          <Form className={styles.form} onSubmit={handleUpdateInstituicao}>
+            {alert && (
+              <AlertComp
+                severity={alert.severity}
+                onClose={setAlert}
+                timeToClose={4000}
+              >
+                {alert.msg}
+              </AlertComp>
+            )}
+            <div className={styles.formData}>
+              <section className={styles.section1}>
+                <section className={styles.sectionEdit}>
+                  <h4 className={styles.titleSection}>Dados institucionais</h4>
+                  <Input
+                    type="text"
+                    name="name"
+                    id="name"
+                    placeholder="Nome"
+                    initialValue={user?.name}
+                    required
+                  />
+                  <Input
+                    type="text"
+                    id="selectTipo"
+                    name="tipo"
+                    initialValue={user?.tipo}
+                    disabled
+                  />
+                </section>
+                <section className={styles.sectionEdit}>
+                  <h4 className={styles.titleSection}>Login</h4>
+                  <Input
+                    type="text"
+                    name="email"
+                    id="email"
+                    placeholder="Email"
+                    initialValue={user?.user.email}
+                    required
+                  />
+                  <Input
+                    type={isHiddenPass ? "password" : "text"}
+                    placeholder="Senha"
+                    id="password"
+                    name="senha"
                   >
-                    {isHiddenPass ? <BiShow /> : <BiHide />}
-                  </Button>
-                </Input>
-                <Input
-                  type={isHiddenConfirmPass ? "password" : "text"}
-                  placeholder="Confirmar senha"
-                  id="confirmUpdatePassword"
-                  onChange={setConfirmPass}
-                >
-                  <Button
-                    type="button"
-                    className="empty"
-                    id="btn-hidden-cfmPass"
-                    onClick={() => setIsHiddenConfirmPass(!isHiddenConfirmPass)}
+                    <Button
+                      type="button"
+                      className="empty"
+                      id="btn-hidden-pass"
+                      onClick={() => setIsHiddenPass(!isHiddenPass)}
+                    >
+                      {isHiddenPass ? <BiShow /> : <BiHide />}
+                    </Button>
+                  </Input>
+                  <Input
+                    type={isHiddenConfirmPass ? "password" : "text"}
+                    placeholder="Confirmar senha"
+                    id="confirmUpdatePassword"
+                    onChange={setConfirmPass}
                   >
-                    {isHiddenConfirmPass ? <BiShow /> : <BiHide />}
-                  </Button>
-                </Input>
+                    <Button
+                      type="button"
+                      className="empty"
+                      id="btn-hidden-cfmPass"
+                      onClick={() =>
+                        setIsHiddenConfirmPass(!isHiddenConfirmPass)
+                      }
+                    >
+                      {isHiddenConfirmPass ? <BiShow /> : <BiHide />}
+                    </Button>
+                  </Input>
+                </section>
               </section>
-            </section>
-          </div>
-          <div className={styles.hudBtn}>
-            <Button
-              type="button"
-              className="action delete"
-              onClick={handleDeleteAccount}
-              loading={isLoadingDelete}
-            >
-              Apagar conta
-            </Button>
-            <Button
-              type="submit"
-              id="login"
-              className="action blue-primary"
-              loading={isLoadingUpdate}
-            >
-              Atualizar dados
-            </Button>
-          </div>
-        </Form>
+            </div>
+            <div className={styles.hudBtn}>
+              <Button
+                type="button"
+                className="action delete"
+                onClick={handleDeleteAccount}
+                loading={isLoadingDelete}
+              >
+                Apagar conta
+              </Button>
+              <Button
+                type="submit"
+                id="login"
+                className="action blue-primary"
+                loading={isLoadingUpdate}
+              >
+                Atualizar dados
+              </Button>
+            </div>
+          </Form>
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

@@ -10,7 +10,7 @@ div.body {
   max-width: 90rem;
   width: 100%;
   margin: 0 auto;
-  padding: 0 5rem 4rem;
+  padding: 0 5rem 7rem;
 }
 
 section.section1 {
@@ -64,6 +64,6 @@ div.btnAddDentista {
 
 @media (max-width: 300px) {
   div.body {
-    padding: 0 1rem 4rem;
+    padding: 0 1rem 7rem;
   }
 }

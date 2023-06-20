@@ -12,6 +12,7 @@ import Condicoes from "../../components/condicoes/Condicoes";
 import Form from "../../components/forms/Form";
 import Header from "../../components/headers/Header";
 import AlertComp from "../../components/alerts/AlertComp";
+import Footer from "../../components/footers/Footer";
 
 //* Icons
 import { BiShow, BiHide } from "react-icons/bi";
@@ -65,103 +66,106 @@ const FormPaciente = () => {
   };
 
   return (
-    <div className={styles.main}>
-      <div className={styles.header}>
-        <Header colorized />
-      </div>
-      <div className={styles.body}>
-        <section className="create-account">
-          <div className={styles.content}>
-            <div className={styles.divTitle}>
-              <h1 className={styles.title}>Criar nova conta como Paciente</h1>
-              <p className={styles.descripton}>
-                Crie uma nova conta no ProtOn para obter uma melhor experiência
-                nas suas consultas com o dentista
-              </p>
+    <>
+      <div className={styles.main}>
+        <div className={styles.header}>
+          <Header colorized />
+        </div>
+        <div className={styles.body}>
+          <section className="create-account">
+            <div className={styles.content}>
+              <div className={styles.divTitle}>
+                <h1 className={styles.title}>Criar nova conta como Paciente</h1>
+                <p className={styles.descripton}>
+                  Crie uma nova conta no ProtOn para obter uma melhor
+                  experiência nas suas consultas com o dentista
+                </p>
+              </div>
             </div>
-          </div>
-        </section>
-        <Form className={styles.form} onSubmit={handleCreatePaciente}>
-          {alert && (
-            <AlertComp
-              severity={alert.severity}
-              onClose={setAlert}
-              timeToClose={4000}
-            >
-              {alert.msg}
-            </AlertComp>
-          )}
-          <div className={styles.formData}>
-            <section className={styles.section1}>
-              <section className={styles.sectionEdit}>
-                <h4 className={styles.titleSection}>Dados pessoais</h4>
-                <Input
-                  type="text"
-                  name="name"
-                  id="name"
-                  placeholder="Nome"
-                  required
-                />
-                <Input
-                  type="text"
-                  name="cpf"
-                  id="cpf"
-                  placeholder="CPF (Somente números)"
-                  maxLength="11"
-                  minLength="11"
-                  pattern="[0-9]+([,\.][0-9]+)?"
-                  title="Insira somente números"
-                  required
-                />
-              </section>
-              <section className={styles.sectionEdit}>
-                <h4 className={styles.titleSection}>Login</h4>
-                <Input
-                  type="text"
-                  name="email"
-                  id="email"
-                  placeholder="Email"
-                  required
-                />
-                <Input
-                  type={isHiddenPass ? "password" : "text"}
-                  placeholder="Senha"
-                  id="password"
-                  name="senha"
-                  required
-                >
-                  <Button
-                    type="button"
-                    className="empty"
-                    onClick={() => setIsHiddenPass(!isHiddenPass)}
+          </section>
+          <Form className={styles.form} onSubmit={handleCreatePaciente}>
+            {alert && (
+              <AlertComp
+                severity={alert.severity}
+                onClose={setAlert}
+                timeToClose={4000}
+              >
+                {alert.msg}
+              </AlertComp>
+            )}
+            <div className={styles.formData}>
+              <section className={styles.section1}>
+                <section className={styles.sectionEdit}>
+                  <h4 className={styles.titleSection}>Dados pessoais</h4>
+                  <Input
+                    type="text"
+                    name="name"
+                    id="name"
+                    placeholder="Nome"
+                    required
+                  />
+                  <Input
+                    type="text"
+                    name="cpf"
+                    id="cpf"
+                    placeholder="CPF (Somente números)"
+                    maxLength="11"
+                    minLength="11"
+                    pattern="[0-9]+([,\.][0-9]+)?"
+                    title="Insira somente números"
+                    required
+                  />
+                </section>
+                <section className={styles.sectionEdit}>
+                  <h4 className={styles.titleSection}>Login</h4>
+                  <Input
+                    type="text"
+                    name="email"
+                    id="email"
+                    placeholder="Email"
+                    required
+                  />
+                  <Input
+                    type={isHiddenPass ? "password" : "text"}
+                    placeholder="Senha"
+                    id="password"
+                    name="senha"
+                    required
                   >
-                    {isHiddenPass ? <BiShow /> : <BiHide />}
-                  </Button>
-                </Input>
+                    <Button
+                      type="button"
+                      className="empty"
+                      onClick={() => setIsHiddenPass(!isHiddenPass)}
+                    >
+                      {isHiddenPass ? <BiShow /> : <BiHide />}
+                    </Button>
+                  </Input>
+                </section>
               </section>
-            </section>
-            <section className={styles.sectionEdit}>
-              <h4 className={styles.titleSection}>Condições</h4>
-              <Condicoes
-                options={condicoes}
-                onChange={setCondicoesPaciente}
-                edit
-              />
-            </section>
-          </div>
-          <div>
-            <Button
-              type="submit"
-              id="login"
-              className="action blue-primary"
-              loading={isLoading}
-            >
-              Criar conta
-            </Button>
-          </div>
-        </Form>
+              <section className={styles.sectionEdit}>
+                <h4 className={styles.titleSection}>Condições</h4>
+                <Condicoes
+                  options={condicoes}
+                  onChange={setCondicoesPaciente}
+                  edit
+                />
+              </section>
+            </div>
+            <div>
+              <Button
+                type="submit"
+                id="login"
+                className="action blue-primary"
+                loading={isLoading}
+              >
+                Criar conta
+              </Button>
+            </div>
+          </Form>
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

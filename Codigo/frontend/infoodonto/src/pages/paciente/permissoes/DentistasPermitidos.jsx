@@ -18,6 +18,7 @@ import TableDesktop from "../../../components/tables/desktop/TableDesktop";
 import MobileTable from "../../../components/tables/mobile/MobileTable";
 import { Notification } from "../../../components/notifs/Notification";
 import AlertComp from "../../../components/alerts/AlertComp";
+import Footer from "../../../components/footers/Footer";
 
 //* Context
 import { LoginContext } from "../../../context/LoginContext";
@@ -108,61 +109,64 @@ const DentistasPermitidos = () => {
   };
 
   return (
-    <div className={styles.main}>
-      <div className={styles.header}>
-        <Header colorized />
-      </div>
+    <>
+      <div className={styles.main}>
+        <div className={styles.header}>
+          <Header colorized />
+        </div>
 
-      <div className={styles.body}>
-        <section className="add-dentista">
-          <div className={styles.content}>
-            <div className={styles.divTitle}>
-              <div className={styles.notifs}>
-                <h1 className={styles.title}>Dentistas</h1>
-                <Notification
-                  notifs={solicitacoes}
-                  onClickAccept={handleAccept}
-                  onClickReject={handleReject}
-                />
+        <div className={styles.body}>
+          <section className="add-dentista">
+            <div className={styles.content}>
+              <div className={styles.divTitle}>
+                <div className={styles.notifs}>
+                  <h1 className={styles.title}>Dentistas</h1>
+                  <Notification
+                    notifs={solicitacoes}
+                    onClickAccept={handleAccept}
+                    onClickReject={handleReject}
+                  />
+                </div>
+                <p className={styles.descripton}>
+                  Gerencie aqui os dentistas que irão ter permissão para acessar
+                  seus dados
+                </p>
               </div>
-              <p className={styles.descripton}>
-                Gerencie aqui os dentistas que irão ter permissão para acessar
-                seus dados
-              </p>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section className={styles.dentistaMenagement}>
-          {alert && (
-            <AlertComp
-              severity={alert.severity}
-              onClose={setAlert}
-              timeToClose={4000}
-            >
-              {alert.msg}
-            </AlertComp>
-          )}
-
-          <div className={styles.tableContainer}>
-            {mobileView ? (
-              <MobileTable
-                rows={dentistas}
-                onClick={handleDelete}
-                loading={isLoadingDelete}
-              />
-            ) : (
-              <TableDesktop
-                header={header}
-                rows={dentistas}
-                onClick={handleDelete}
-                loading={isLoadingDelete}
-              />
+          <section className={styles.dentistaMenagement}>
+            {alert && (
+              <AlertComp
+                severity={alert.severity}
+                onClose={setAlert}
+                timeToClose={4000}
+              >
+                {alert.msg}
+              </AlertComp>
             )}
-          </div>
-        </section>
+
+            <div className={styles.tableContainer}>
+              {mobileView ? (
+                <MobileTable
+                  rows={dentistas}
+                  onClick={handleDelete}
+                  loading={isLoadingDelete}
+                />
+              ) : (
+                <TableDesktop
+                  header={header}
+                  rows={dentistas}
+                  onClick={handleDelete}
+                  loading={isLoadingDelete}
+                />
+              )}
+            </div>
+          </section>
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

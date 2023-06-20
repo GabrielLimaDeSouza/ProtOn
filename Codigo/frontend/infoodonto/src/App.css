@@ -4,6 +4,10 @@
   font-family: "Montserrat", sans-serif !important;
 }
 
+div.AppBodyWebsite {
+  min-height: 100vh;
+}
+
 .divArrow {
   padding: 20px 0px 0px 20px;
 }

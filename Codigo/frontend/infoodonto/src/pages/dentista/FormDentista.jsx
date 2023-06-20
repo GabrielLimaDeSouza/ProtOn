@@ -11,6 +11,7 @@ import Button from "../../components/buttons/Button";
 import Form from "../../components/forms/Form";
 import Header from "../../components/headers/Header";
 import AlertComp from "../../components/alerts/AlertComp";
+import Footer from "../../components/footers/Footer";
 
 //* Icons
 import { BiShow, BiHide } from "react-icons/bi";
@@ -142,6 +143,7 @@ const FormInstituicao = () => {
           </Form>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

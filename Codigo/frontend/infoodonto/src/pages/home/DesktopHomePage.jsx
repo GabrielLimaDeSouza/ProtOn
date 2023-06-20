@@ -6,6 +6,7 @@ import Header from "../../components/headers/Header";
 import Button from "../../components/buttons/Button";
 import MultipleMenu from "../../components/headers/components/cadastrar/MultipleMenu";
 import { LoginContext } from "../../context/LoginContext";
+import Footer from "../../components/footers/Footer";
 
 //* CSS
 import styles from "../../css/HomePageDesktop.module.css";
@@ -64,12 +65,14 @@ const DesktopHomePage = () => {
 
                   <p className={styles.pButton}>ou</p>
 
-
-                    <Link className={styles.button} to="/login">
-                      <Button type="button" className="action blue-primary-reverse">
-                        Login
-                      </Button>
-                    </Link>
+                  <Link className={styles.button} to="/login">
+                    <Button
+                      type="button"
+                      className="action blue-primary-reverse"
+                    >
+                      Login
+                    </Button>
+                  </Link>
                 </>
               )}
             </div>
@@ -129,6 +132,7 @@ const DesktopHomePage = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

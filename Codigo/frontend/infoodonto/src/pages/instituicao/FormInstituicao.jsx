@@ -12,6 +12,7 @@ import Button from "../../components/buttons/Button";
 import Form from "../../components/forms/Form";
 import Header from "../../components/headers/Header";
 import AlertComp from "../../components/alerts/AlertComp";
+import Footer from "../../components/footers/Footer";
 
 //* Icons
 import { BiShow, BiHide } from "react-icons/bi";
@@ -54,92 +55,95 @@ const FormInstituicao = () => {
   };
 
   return (
-    <div className={styles.main}>
-      <div className={styles.header}>
-        <Header colorized />
-      </div>
-      <div className={styles.body}>
-        <section className="create-account">
-          <div className={styles.content}>
-            <div className={styles.divTitle}>
-              <h1 className={styles.title}>
-                Criar nova conta como Instituição
-              </h1>
-              <p className={styles.descripton}>
-                Crie uma nova conta no ProtOn para tornar as consultas de seus
-                dentistas mais dinâmicas
-              </p>
+    <>
+      <div className={styles.main}>
+        <div className={styles.header}>
+          <Header colorized />
+        </div>
+        <div className={styles.body}>
+          <section className="create-account">
+            <div className={styles.content}>
+              <div className={styles.divTitle}>
+                <h1 className={styles.title}>
+                  Criar nova conta como Instituição
+                </h1>
+                <p className={styles.descripton}>
+                  Crie uma nova conta no ProtOn para tornar as consultas de seus
+                  dentistas mais dinâmicas
+                </p>
+              </div>
             </div>
-          </div>
-        </section>
-        <Form className={styles.form} onSubmit={handleCreateInstituicao}>
-          {alert && (
-            <AlertComp
-              severity={alert.severity}
-              onClose={setAlert}
-              timeToClose={4000}
-            >
-              {alert.msg}
-            </AlertComp>
-          )}
-          <div className={styles.formData}>
-            <section className={styles.section1}>
-              <section className={styles.sectionEdit}>
-                <h4 className={styles.titleSection}>Dados institucionais</h4>
-                <Input
-                  type="text"
-                  name="name"
-                  id="name"
-                  placeholder="Nome"
-                  required
-                />
-                <Select
-                  id="selectTipo"
-                  name="tipo"
-                  options={["Clinica", "Hospital", "Universidade"]}
-                  required
-                />
-              </section>
-              <section className={styles.sectionEdit}>
-                <h4 className={styles.titleSection}>Login</h4>
-                <Input
-                  type="text"
-                  name="email"
-                  id="email"
-                  placeholder="Email"
-                  required
-                />
-                <Input
-                  type={isHiddenPass ? "password" : "text"}
-                  placeholder="Senha"
-                  id="password"
-                  name="senha"
-                  required
-                >
-                  <Button
-                    type="button"
-                    className="empty"
-                    onClick={() => setIsHiddenPass(!isHiddenPass)}
+          </section>
+          <Form className={styles.form} onSubmit={handleCreateInstituicao}>
+            {alert && (
+              <AlertComp
+                severity={alert.severity}
+                onClose={setAlert}
+                timeToClose={4000}
+              >
+                {alert.msg}
+              </AlertComp>
+            )}
+            <div className={styles.formData}>
+              <section className={styles.section1}>
+                <section className={styles.sectionEdit}>
+                  <h4 className={styles.titleSection}>Dados institucionais</h4>
+                  <Input
+                    type="text"
+                    name="name"
+                    id="name"
+                    placeholder="Nome"
+                    required
+                  />
+                  <Select
+                    id="selectTipo"
+                    name="tipo"
+                    options={["Clinica", "Hospital", "Universidade"]}
+                    required
+                  />
+                </section>
+                <section className={styles.sectionEdit}>
+                  <h4 className={styles.titleSection}>Login</h4>
+                  <Input
+                    type="text"
+                    name="email"
+                    id="email"
+                    placeholder="Email"
+                    required
+                  />
+                  <Input
+                    type={isHiddenPass ? "password" : "text"}
+                    placeholder="Senha"
+                    id="password"
+                    name="senha"
+                    required
                   >
-                    {isHiddenPass ? <BiShow /> : <BiHide />}
-                  </Button>
-                </Input>
+                    <Button
+                      type="button"
+                      className="empty"
+                      onClick={() => setIsHiddenPass(!isHiddenPass)}
+                    >
+                      {isHiddenPass ? <BiShow /> : <BiHide />}
+                    </Button>
+                  </Input>
+                </section>
               </section>
-            </section>
-          </div>
-          <div>
-            <Button
-              type="submit"
-              id="login"
-              className="action blue-primary"
-              loading={isLoading}
-            >
-              Criar conta
-            </Button>
-          </div>
-        </Form>
+            </div>
+            <div>
+              <Button
+                type="submit"
+                id="login"
+                className="action blue-primary"
+                loading={isLoading}
+              >
+                Criar conta
+              </Button>
+            </div>
+          </Form>
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

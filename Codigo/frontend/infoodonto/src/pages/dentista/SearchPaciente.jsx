@@ -13,6 +13,7 @@ import Result from "./components/results/Result";
 import SendSolicitacao from "./components/solicitations/SendSolicitacao";
 import Loading from "../../components/loadings/Loading";
 import AlertComp from "../../components/alerts/AlertComp";
+import Footer from "../../components/footers/Footer";
 
 //* API
 import { buscarPaciente } from "../../services/api";
@@ -56,79 +57,85 @@ const SearchPaciente = () => {
   };
 
   return (
-    <div className={styles.main}>
-      <div className={styles.header}>
-        <Header colorized />
-      </div>
-      <div className={styles.body}>
-        <section className="title">
-          <div className={styles.content}>
-            <div className={styles.divTitle}>
-              <h1 className={styles.title}>Buscar por pacientes</h1>
-              <p className={styles.descripton}>
-                Busque por pacientes pelo CPF para acessar suas condições de
-                saúde e receber recomendações de protocolos odontológicos
-              </p>
+    <>
+      <div className={styles.main}>
+        <div className={styles.header}>
+          <Header colorized />
+        </div>
+        <div className={styles.body}>
+          <section className="title">
+            <div className={styles.content}>
+              <div className={styles.divTitle}>
+                <h1 className={styles.title}>Buscar por pacientes</h1>
+                <p className={styles.descripton}>
+                  Busque por pacientes pelo CPF para acessar suas condições de
+                  saúde e receber recomendações de protocolos odontológicos
+                </p>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section className={styles.buscarPaciente}>
-          <div className={styles.search}>
-            <Form className={styles.formSearch} onSubmit={handleSearchPaciente}>
-              <div>
-                <Input
-                  type="search"
-                  id="search-cpf"
-                  name="cpf"
-                  placeholder="Buscar por CPF"
-                  maxLength="11"
-                  minLength="11"
-                  pattern="[0-9]+([,\.][0-9]+)?"
-                  title="Insira somente números"
-                  required
-                />
-              </div>
-              <div>
-                <Button
-                  type="submit"
-                  className="action blue-primary"
-                  loading={isLoading}
-                >
-                  Buscar
-                </Button>
-              </div>
-            </Form>
-          </div>
-          {alert && (
-            <div className={styles.alert}>
-              <AlertComp
-                severity={alert.severity}
-                onClose={setAlert}
-                timeToClose={4000}
+          <section className={styles.buscarPaciente}>
+            <div className={styles.search}>
+              <Form
+                className={styles.formSearch}
+                onSubmit={handleSearchPaciente}
               >
-                {alert.msg}
-              </AlertComp>
+                <div>
+                  <Input
+                    type="search"
+                    id="search-cpf"
+                    name="cpf"
+                    placeholder="Buscar por CPF"
+                    maxLength="11"
+                    minLength="11"
+                    pattern="[0-9]+([,\.][0-9]+)?"
+                    title="Insira somente números"
+                    required
+                  />
+                </div>
+                <div>
+                  <Button
+                    type="submit"
+                    className="action blue-primary"
+                    loading={isLoading}
+                  >
+                    Buscar
+                  </Button>
+                </div>
+              </Form>
             </div>
-          )}
-          <div className={styles.results}>
-            {isLoading ? (
-              <Loading />
-            ) : paciente ? (
-              <Result paciente={paciente} />
-            ) : (
-              sendSolicitation && (
-                <SendSolicitacao
-                  cpf={cpf}
-                  dentista={user._id}
-                  alert={setAlert}
-                />
-              )
+            {alert && (
+              <div className={styles.alert}>
+                <AlertComp
+                  severity={alert.severity}
+                  onClose={setAlert}
+                  timeToClose={4000}
+                >
+                  {alert.msg}
+                </AlertComp>
+              </div>
             )}
-          </div>
-        </section>
+            <div className={styles.results}>
+              {isLoading ? (
+                <Loading />
+              ) : paciente ? (
+                <Result paciente={paciente} />
+              ) : (
+                sendSolicitation && (
+                  <SendSolicitacao
+                    cpf={cpf}
+                    dentista={user._id}
+                    alert={setAlert}
+                  />
+                )
+              )}
+            </div>
+          </section>
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

@@ -10,6 +10,7 @@ import Header from "../../components/headers/Header";
 import MultipleMenu from "../../components/headers/components/cadastrar/MultipleMenu";
 import Button from "../../components/buttons/Button";
 import { LoginContext } from "../../context/LoginContext";
+import Footer from "../../components/footers/Footer";
 
 //* SVG's
 import Logo from "../../img/logo.svg";
@@ -115,6 +116,7 @@ const MobileHomePage = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

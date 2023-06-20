@@ -1,5 +1,6 @@
 div.main {
-  padding: 0 10rem;
+  min-height: 100vh;
+  padding: 0 10rem 7rem;
 }
 
 div.body {
@@ -74,13 +75,13 @@ div.hudBtn {
     padding: 0 0 5rem;
   }
   div.body {
-    padding: 0 2rem 4rem;
+    padding: 0 2rem 7rem;
   }
 }
 
 @media (max-width: 300px) {
   div.body {
-    padding: 0 1rem 4rem;
+    padding: 0 1rem 7rem;
   }
   div.hudBtn {
     flex-direction: column-reverse;

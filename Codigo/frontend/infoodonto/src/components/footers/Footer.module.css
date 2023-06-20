@@ -1,0 +1,50 @@
+footer.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #62a8db;
+  color: white;
+  font-size: 0.8rem;
+  padding: 1.5rem 5rem;
+}
+
+div.logoNameLocal {
+  display: inherit;
+  flex-direction: inherit;
+  align-items: inherit;
+  justify-content: inherit;
+  gap: 0 5rem;
+}
+
+img.logo {
+  width: 5rem;
+}
+
+p.copyright {
+  display: inherit;
+  flex-direction: inherit;
+  justify-content: inherit;
+  gap: 0.5rem 1rem;
+}
+
+div.icons {
+  display: inherit;
+  justify-content: inherit;
+  align-items: inherit;
+  gap: 0 1rem;
+}
+
+@media (max-width: 800px) {
+  footer.footer {
+    flex-direction: column;
+    gap: 2rem 0;
+    padding: 1.5rem 2rem;
+  }
+
+  div.logoNameLocal {
+    align-items: flex-start;
+    width: 100%;
+    gap: 1.3rem 0;
+  }
+}

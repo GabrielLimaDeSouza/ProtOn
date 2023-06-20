@@ -15,6 +15,7 @@ import Button from "../../components/buttons/Button";
 import TableDesktop from "../../components/tables/desktop/TableDesktop";
 import MobileTable from "../../components/tables/mobile/MobileTable";
 import AlertComp from "../../components/alerts/AlertComp";
+import Footer from "../../components/footers/Footer";
 
 //* Context
 import { LoginContext } from "../../context/LoginContext";
@@ -60,67 +61,70 @@ const GerenciarDentistas = () => {
   };
 
   return (
-    <div className={styles.main}>
-      <div className={styles.header}>
-        <Header colorized />
-      </div>
-      <div className={styles.body}>
-        <section className="add-dentista">
-          <div className={styles.content}>
-            <div className={styles.divTitle}>
-              <h1 className={styles.title}>Gerenciamento de dentistas</h1>
-              <p className={styles.descripton}>
-                Gerencie os dentistas da sua instituição
-              </p>
+    <>
+      <div className={styles.main}>
+        <div className={styles.header}>
+          <Header colorized />
+        </div>
+        <div className={styles.body}>
+          <section className="add-dentista">
+            <div className={styles.content}>
+              <div className={styles.divTitle}>
+                <h1 className={styles.title}>Gerenciamento de dentistas</h1>
+                <p className={styles.descripton}>
+                  Gerencie os dentistas da sua instituição
+                </p>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section className={styles.dentistaMenagement}>
-          {alert && (
-            <AlertComp
-              severity={alert.severity}
-              onClose={setAlert}
-              timeToClose={4000}
-            >
-              {alert.msg}
-            </AlertComp>
-          )}
-          <div className={styles.btnAddDentista}>
-            <Link to={"/perfil/dentistas/cadastrar"}>
-              <Button
-                type="button"
-                id="add-dentista"
-                className="add blue-primary"
+          <section className={styles.dentistaMenagement}>
+            {alert && (
+              <AlertComp
+                severity={alert.severity}
+                onClose={setAlert}
+                timeToClose={4000}
               >
-                Adicionar dentista
-              </Button>
-            </Link>
-          </div>
-
-          <div className={styles.tableContainer}>
-            {mobileView ? (
-              <MobileTable
-                rows={dentistas}
-                to={{ route: `/perfil/dentistas/:id/editar`, key: "_id" }}
-                onClick={handleDeleteDentista}
-                loading={isLoadingDelete}
-                instituicao
-              />
-            ) : (
-              <TableDesktop
-                header={header}
-                rows={dentistas}
-                to={{ route: `/perfil/dentistas/:id/editar`, key: "_id" }}
-                onClick={handleDeleteDentista}
-                loading={isLoadingDelete}
-                instituicao
-              />
+                {alert.msg}
+              </AlertComp>
             )}
-          </div>
-        </section>
+            <div className={styles.btnAddDentista}>
+              <Link to={"/perfil/dentistas/cadastrar"}>
+                <Button
+                  type="button"
+                  id="add-dentista"
+                  className="add blue-primary"
+                >
+                  Adicionar dentista
+                </Button>
+              </Link>
+            </div>
+
+            <div className={styles.tableContainer}>
+              {mobileView ? (
+                <MobileTable
+                  rows={dentistas}
+                  to={{ route: `/perfil/dentistas/:id/editar`, key: "_id" }}
+                  onClick={handleDeleteDentista}
+                  loading={isLoadingDelete}
+                  instituicao
+                />
+              ) : (
+                <TableDesktop
+                  header={header}
+                  rows={dentistas}
+                  to={{ route: `/perfil/dentistas/:id/editar`, key: "_id" }}
+                  onClick={handleDeleteDentista}
+                  loading={isLoadingDelete}
+                  instituicao
+                />
+              )}
+            </div>
+          </section>
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 
