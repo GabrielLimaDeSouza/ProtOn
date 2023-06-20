@@ -29,6 +29,11 @@ router.get("/instituicao", authenticationMiddleware, (req, res) =>
   instituicaoController.get(req, res)
 );
 
+//* GET ALL Instituicao
+router.get("/instituicoes", (req, res) =>
+  instituicaoController.getAll(req, res)
+);
+
 //* DELETE Instituicao
 router.delete("/instituicao", authenticationMiddleware, (req, res) =>
   instituicaoController.delete(req, res)

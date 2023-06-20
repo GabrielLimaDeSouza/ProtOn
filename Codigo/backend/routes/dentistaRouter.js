@@ -4,7 +4,7 @@ const solicitacaoController = require("../controllers/solicitacaoController");
 const authenticationMiddleware = require("../middlewares/auth");
 
 //* GET ALL Dentista
-router.get("/dentistas", authenticationMiddleware, (req, res) =>
+router.get("/dentistas", (req, res) =>
   dentistaController.getAll(req, res)
 );
 

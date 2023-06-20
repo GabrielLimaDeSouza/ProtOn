@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 //* Componentes
@@ -6,7 +6,6 @@ import Header from "../../components/headers/Header";
 import Button from "../../components/buttons/Button";
 import MultipleMenu from "../../components/headers/components/cadastrar/MultipleMenu";
 import { LoginContext } from "../../context/LoginContext";
-import Footer from "../../components/footers/Footer";
 
 //* CSS
 import styles from "../../css/HomePageDesktop.module.css";
@@ -21,7 +20,7 @@ import { AiOutlineInstagram } from "react-icons/ai";
 import { GrFacebookOption } from "react-icons/gr";
 import { BiMenuAltLeft } from "react-icons/bi";
 
-const DesktopHomePage = () => {
+const DesktopHomePage = ({ quantPacientes, quantInsituicoes, quantDentistas }) => {
   const { user } = useContext(LoginContext);
 
   return (
@@ -65,14 +64,12 @@ const DesktopHomePage = () => {
 
                   <p className={styles.pButton}>ou</p>
 
-                  <Link className={styles.button} to="/login">
-                    <Button
-                      type="button"
-                      className="action blue-primary-reverse"
-                    >
-                      Login
-                    </Button>
-                  </Link>
+
+                    <Link className={styles.button} to="/login">
+                      <Button type="button" className="action blue-primary-reverse">
+                        Login
+                      </Button>
+                    </Link>
                 </>
               )}
             </div>
@@ -93,21 +90,21 @@ const DesktopHomePage = () => {
         </div>
         <div className={styles.divInformations}>
           <div className={styles.divInformationColumn}>
-            <h3>+200</h3>
+            <h3>{quantInsituicoes}</h3>
             <p>
-              Clínicas utilizam o <br />
+              Intituições utilizam o <br />
               ProtOn
             </p>
           </div>
           <div className={styles.divInformationColumn}>
-            <h3>+10</h3>
+            <h3>{quantPacientes}</h3>
             <p>
-              Universidades cadastradas <br />
+              Pacientes cadastrados <br />
               em todo o Brasil
             </p>
           </div>
           <div className={styles.divInformationColumn}>
-            <h3>+350</h3>
+            <h3>{quantDentistas}</h3>
             <p>
               Dentistas se beneficiam da <br />
               plataforma
@@ -132,7 +129,6 @@ const DesktopHomePage = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

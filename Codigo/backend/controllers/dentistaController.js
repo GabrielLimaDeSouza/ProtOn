@@ -36,9 +36,9 @@ const dentistaController = {
   },
   getAll: async (req, res) => {
     try {
-      const dentistas = await DentistaModel.find().populate("user");
+      const dentistas = await DentistaModel.find();
 
-      res.status(201).json({ dentistas });
+      res.status(201).json(dentistas);
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: "Erro interno do servidor" });

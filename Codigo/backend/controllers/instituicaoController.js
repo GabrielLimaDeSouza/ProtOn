@@ -96,6 +96,17 @@ const instituicaoController = {
       res.status(500).json({ error: "Erro interno do servidor" });
     }
   },
+  getAll: async (req, res) => {
+    try {
+      const instituicao = await InstituicaoModel.find()
+
+
+      res.status(201).json(instituicao);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: "Erro interno do servidor" });
+    }
+  },
   getAllDentistas: async (req, res) => {
     try {
       const { id } = req.params;

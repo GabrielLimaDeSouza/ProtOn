@@ -19,7 +19,7 @@ router.get("/paciente/:id/dentistas", authenticationMiddleware, (req, res) =>
 );
 
 //* GET ALL Paciente
-router.get("/pacientes", authenticationMiddleware, (req, res) =>
+router.get("/pacientes", (req, res) =>
   pacienteController.getAll(req, res)
 );
 

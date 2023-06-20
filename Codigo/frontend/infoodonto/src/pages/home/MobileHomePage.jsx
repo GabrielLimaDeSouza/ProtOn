@@ -21,7 +21,7 @@ import { AiOutlineInstagram } from "react-icons/ai";
 import { GrFacebookOption } from "react-icons/gr";
 import { BiMenuAltLeft } from "react-icons/bi";
 
-const MobileHomePage = () => {
+const MobileHomePage = ({ quantPacientes, quantInsituicoes, quantDentistas }) => {
   const { user } = useContext(LoginContext);
 
   return (
@@ -90,15 +90,15 @@ const MobileHomePage = () => {
           </div>
           <div className={styles.divInformations}>
             <div>
-              <h3>+200</h3>
-              <p>Clínicas utilizam o ProtOn</p>
+              <h3>{quantInsituicoes}</h3>
+              <p>Instituições utilizam o ProtOn</p>
             </div>
             <div>
-              <h3>+10</h3>
-              <p>Universidades cadastradas em todo o Brasil</p>
+              <h3>{quantPacientes}</h3>
+              <p>Pacientes cadastradas em todo o Brasil</p>
             </div>
             <div>
-              <h3>+350</h3>
+              <h3>{quantDentistas}</h3>
               <p>Dentistas se beneficiam da plataforma</p>
             </div>
           </div>
