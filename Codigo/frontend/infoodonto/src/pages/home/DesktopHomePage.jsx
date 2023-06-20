@@ -127,6 +127,7 @@ oferecendo protocolos eficazes que se adequam às necessidades de cada paciente.
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
