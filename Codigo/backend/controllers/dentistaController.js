@@ -89,9 +89,6 @@ const dentistaController = {
       const { id } = req.query;
       const { name, email, senha } = req.body;
 
-      console.log(id);
-      console.log(req.body);
-
       const updatedDentista = await DentistaModel.findByIdAndUpdate(
         id,
         { name },

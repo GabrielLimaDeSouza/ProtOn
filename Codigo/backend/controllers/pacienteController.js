@@ -127,7 +127,6 @@ const pacienteController = {
     try {
       const { id } = req.query;
       const { name, email, senha, condicoes } = req.body;
-      console.log(name, email, senha, condicoes);
 
       const updatedPaciente = await PacienteModel.findByIdAndUpdate(
         id,
