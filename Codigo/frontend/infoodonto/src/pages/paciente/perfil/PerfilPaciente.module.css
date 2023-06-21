@@ -1,6 +1,6 @@
 div.main {
   min-height: 100vh;
-  padding: 0 10rem 7rem;
+  padding: 0;
 }
 
 div.body {
@@ -11,6 +11,7 @@ div.body {
   max-width: 70rem;
   width: 100%;
   margin: 0 auto;
+  padding: 0 10rem 7rem;
 }
 
 div.formData {

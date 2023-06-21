@@ -164,8 +164,8 @@ const DentistasPermitidos = () => {
             </div>
           </section>
         </div>
+        <Footer />
       </div>
-      <Footer />
     </>
   );
 };

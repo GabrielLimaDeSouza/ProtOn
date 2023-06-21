@@ -3,9 +3,9 @@
 .body {
   height: 105vh;
   background-color: #62a8db !important;
-  padding: 0 5rem;
+  padding: 0;
   border-radius: 0 0 30px 30px;
-  max-height: 110vh;
+  max-height: 1100vh;
 }
 
 .divScroll {
@@ -92,6 +92,7 @@ img {
 
 .divContent {
   display: flex;
+  padding: 0 5rem;
 }
 
 .content {

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 
 //* Componentes
@@ -6,7 +6,7 @@ import Header from "../../components/headers/Header";
 import Button from "../../components/buttons/Button";
 import MultipleMenu from "../../components/headers/components/cadastrar/MultipleMenu";
 import { LoginContext } from "../../context/LoginContext";
-import Footer from "../../components/footers/Footer"
+import Footer from "../../components/footers/Footer";
 
 //* CSS
 import styles from "../../css/HomePageDesktop.module.css";
@@ -21,7 +21,11 @@ import { AiOutlineInstagram } from "react-icons/ai";
 import { GrFacebookOption } from "react-icons/gr";
 import { BiMenuAltLeft } from "react-icons/bi";
 
-const DesktopHomePage = ({ quantPacientes, quantInsituicoes, quantDentistas }) => {
+const DesktopHomePage = ({
+  quantPacientes,
+  quantInsituicoes,
+  quantDentistas,
+}) => {
   const { user } = useContext(LoginContext);
 
   return (
@@ -65,12 +69,14 @@ const DesktopHomePage = ({ quantPacientes, quantInsituicoes, quantDentistas }) =
 
                   <p className={styles.pButton}>ou</p>
 
-
-                    <Link className={styles.button} to="/login">
-                      <Button type="button" className="action blue-primary-reverse">
-                        Login
-                      </Button>
-                    </Link>
+                  <Link className={styles.button} to="/login">
+                    <Button
+                      type="button"
+                      className="action blue-primary-reverse"
+                    >
+                      Login
+                    </Button>
+                  </Link>
                 </>
               )}
             </div>
@@ -122,8 +128,10 @@ const DesktopHomePage = ({ quantPacientes, quantInsituicoes, quantDentistas }) =
               <h3>Sobre nós</h3>
             </div>
             <p>
-            No ProtOn sabemos que cada paciente é único, por isso nossas recomendações de protocolos se baseiam nas melhores práticas odontológicas, 
-oferecendo protocolos eficazes que se adequam às necessidades de cada paciente.
+              No ProtOn sabemos que cada paciente é único, por isso nossas
+              recomendações de protocolos se baseiam nas melhores práticas
+              odontológicas, oferecendo protocolos eficazes que se adequam às
+              necessidades de cada paciente.
             </p>
           </div>
         </div>

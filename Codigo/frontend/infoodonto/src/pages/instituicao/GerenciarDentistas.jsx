@@ -122,8 +122,8 @@ const GerenciarDentistas = () => {
             </div>
           </section>
         </div>
+        <Footer />
       </div>
-      <Footer />
     </>
   );
 };

@@ -163,8 +163,8 @@ const FormPaciente = () => {
             </div>
           </Form>
         </div>
+        <Footer />
       </div>
-      <Footer />
     </>
   );
 };

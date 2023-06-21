@@ -226,8 +226,8 @@ const PerfilPaciente = () => {
             </div>
           </Form>
         </div>
+        <Footer />
       </div>
-      <Footer />
     </>
   );
 };

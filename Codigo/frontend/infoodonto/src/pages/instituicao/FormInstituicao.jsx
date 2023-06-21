@@ -141,8 +141,8 @@ const FormInstituicao = () => {
             </div>
           </Form>
         </div>
+        <Footer />
       </div>
-      <Footer />
     </>
   );
 };

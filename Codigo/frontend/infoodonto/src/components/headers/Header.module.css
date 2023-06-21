@@ -1,6 +1,6 @@
 .navHeader {
   display: flex;
-  padding: 30px 0 5rem;
+  padding: 30px 10rem 5rem;
   justify-content: space-between;
   align-items: center;
 }

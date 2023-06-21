@@ -133,8 +133,8 @@ const SearchPaciente = () => {
             </div>
           </section>
         </div>
+        <Footer />
       </div>
-      <Footer />
     </>
   );
 };
