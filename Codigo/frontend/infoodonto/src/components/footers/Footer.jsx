@@ -22,7 +22,7 @@ const Footer = () => {
         <p className={styles.copyright}>
           <span className={styles.name}>&copy; {year} ProtOn Odontologia</span>
           <span className={styles.local}> Belo Horizonte, Brasil</span>
-          <span className={styles.allRights}> Todos diretos reservados</span>
+          <span className={styles.allRights}> Todos direitos reservados</span>
         </p>
       </div>
       <div className={styles.icons}>
