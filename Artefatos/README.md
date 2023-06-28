@@ -20,7 +20,18 @@ Diretório do diagrama de componentes
 * `/diagrama-componentes`
 	* **diagrama-componentes.png**: Diagrama de componentes do sistema.
  
-Diretório do diagrama de componentes
+Diretório do diagrama de classes
 * `/diagrama-de-classe`
-	* **diagrama-componentes.png**: Diagrama de componentes do sistema.
+	* **diagrama-de-classes.png**: Diagrama de componentes do sistema.
 
+Diretório dos diagramas de comunicação
+* `/diagrama-de-comunicacao`
+	* **DC - UCX **: Pasta contendo os o diagrama de componentes referentes ao caso de uso X.
+
+Diretório do diagrama de ER
+* `/diagrama-er`
+	* **der-infoodonto-v1**: Diagrama de entidade Entidade e Relacionamento do sistema.
+
+Diretório do diagrama de implantação
+* `/diagrama-implantacao`
+	* **diagrama-implantacao**: Diagrama de implantação do sistema.
