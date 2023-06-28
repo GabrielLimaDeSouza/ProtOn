@@ -26,12 +26,33 @@ Diretório do diagrama de classes
 
 Diretório dos diagramas de comunicação
 * `/diagrama-de-comunicacao`
-	* **DC - UCX **: Pasta contendo os o diagrama de componentes referentes ao caso de uso X.
+	* **DC - UCX **: Pasta contendo os o diagrama de comunicação referentes ao caso de uso X.
+
+Diretório dos diagramas de sequência
+* `/diagrama-de-comunicacao`
+	* **DC - UCX **: Pasta contendo os o diagrama de sequência referentes ao caso de uso X.
 
 Diretório do diagrama de ER
 * `/diagrama-er`
-	* **der-infoodonto-v1**: Diagrama de entidade Entidade e Relacionamento do sistema.
+	* **der-infoodonto-v1.png**: Diagrama de entidade Entidade e Relacionamento do sistema.
 
 Diretório do diagrama de implantação
 * `/diagrama-implantacao`
-	* **diagrama-implantacao**: Diagrama de implantação do sistema.
+	* **diagrama-implantacao.png**: Diagrama de implantação do sistema.
+
+Diretório do diagrama de pacotes
+* `/diagrama-pacotes`
+	* **diagrama-pacotes.png**: Diagrama de pacotes do sistema.
+
+Diretório do teste de usabilidade
+* `/teste-de-usabilidade`
+	* **teste-de-usabilidade.pdf**: Teste de usabilidade realizado com a cliente.
+ 
+Diretório do documento de requisitos do sistema
+* `/documento-de-requisitos`
+	* **requisitos.pdf**: Documento com os requisitos propostos para o sistema.
+
+Diretório do documento de requisitos do sistema
+* `/questionario-pesquisa-final`
+	* **questionario-pesquisa-final.pdf**: Documento com os requisitos propostos para o sistema.
+ 
