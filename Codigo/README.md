@@ -1,3 +1,3 @@
 # Código do Projeto
 
-Mantenha neste diretório todo o código do projeto. Se necessário, descreva neste arquivo aspectos relevantes da estrutura de diretórios criada para organização do código.
+Diretório contendo todo o código-fonte do sistema ProtOn dividido em duas pastas, a pasta "backend" contém os arquivos necessários para o funcionamento do servidor e a pasta "frontend" todos os arquivos necessários para o funcionamento do lado do cliente. 

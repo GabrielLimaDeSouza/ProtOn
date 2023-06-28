@@ -1,3 +1,3 @@
 # Documentação do Projeto
 
-Inclua documentação do projeto, como relatórios da PROEX.
+Essa pasta contém a documentação produzida para o sistema ProtOn.
